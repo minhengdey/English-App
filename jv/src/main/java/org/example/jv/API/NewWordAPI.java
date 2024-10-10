@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @RestController
 public class NewWordAPI {
 
@@ -39,5 +41,10 @@ public class NewWordAPI {
     @DeleteMapping (value = "new_word/{id}")
     public void delete (@PathVariable("id") Long id) {
         newWordService.deleteById(id);
+    }
+
+    @GetMapping (value = "/new_word")
+    public List<NewWordEntity> getAll () {
+        return newWordService.getAll();
     }
 }
