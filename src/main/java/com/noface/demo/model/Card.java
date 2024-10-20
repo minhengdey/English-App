@@ -12,7 +12,7 @@ public class Card{
     private String id;
     private ArrayList<String> fields;
     private LocalDate dueDate;
-
+    
     public Card(String id, ArrayList<String> fields, LocalDate dueDate) {
         this.id = id;
         this.fields = fields;
