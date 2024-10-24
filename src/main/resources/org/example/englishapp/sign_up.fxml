@@ -18,12 +18,12 @@
             <Font name="Times New Roman" size="21.0" />
          </font>
       </Text>
-      <TextField layoutX="77.0" layoutY="122.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên">
+      <TextField fx:id="fullNameField" layoutX="77.0" layoutY="122.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextField layoutX="77.0" layoutY="173.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập">
+      <TextField fx:id="registerNameField" layoutX="77.0" layoutY="173.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
@@ -33,12 +33,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <PasswordField layoutX="77.0" layoutY="222.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu">
+      <PasswordField fx:id="registerPasswordField" layoutX="77.0" layoutY="222.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
-      <PasswordField layoutX="77.0" layoutY="271.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu">
+      <PasswordField fx:id="confirmPasswordField" layoutX="77.0" layoutY="271.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,7 +20,11 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import org.example.englishapp.HelloApplication;
 
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -28,6 +33,17 @@ public class LoginController implements Initializable {
     TextField usernameField;
     @FXML
     PasswordField passwordField;
+
+    @FXML
+    TextField fullNameField;
+    @FXML
+    TextField registerNameField;
+    @FXML
+    PasswordField registerPasswordField;
+    @FXML
+    PasswordField confirmPasswordField;
+
+    private HttpClient httpClient = HttpClient.newHttpClient();
 
     @FXML
     private void handleLogin() {
@@ -73,8 +89,52 @@ public class LoginController implements Initializable {
     }
     @FXML
     protected void handleRegisterButton(javafx.event.ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        try
+        {
+            String fullName = fullNameField.getText();
+            String username = registerNameField.getText();
+            String password = registerPasswordField.getText();
+            String confirmPassword = confirmPasswordField.getText();
+
+            if (!password.equals(confirmPassword)) showAlert("Mật khẩu không khớp!", Alert.AlertType.ERROR);
+            else
+            {
+                String requestBody = String.format ("{\"username\":\"%s\",\"password\":\"%s\"}", username, password);
+                try
+                {
+                    HttpRequest request = HttpRequest.newBuilder()
+                            .uri(new URI("http://localhost:8080/user"))
+                            .header("Content-Type", "application/json")
+                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                            .build();
+
+                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    if (response.statusCode() == 200)
+                    {
+                        showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.close();
+                    }
+                    else showAlert("Đăng ký thất bại!", Alert.AlertType.ERROR);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();;
+        }
+    }
+    
+    private void showAlert(String message, Alert.AlertType alertType)
+    {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @Override

@@ -10,6 +10,7 @@ module org.example.englishapp {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.net.http;
 
     opens org.example.englishapp to javafx.fxml;
     exports org.example.englishapp;
