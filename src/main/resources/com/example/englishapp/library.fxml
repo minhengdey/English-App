@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.englishapp.LibraryScreen">
+   <children>
+      <BorderPane prefHeight="810.0" prefWidth="1315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox prefHeight="600.0" prefWidth="360.0" styleClass="right-bar" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="49.0" prefWidth="137.0" text="Topic: " textFill="#878787">
+                           <font>
+                              <Font name="Cambria Bold" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="58.0" prefWidth="197.0" text="Something" textFill="#878787">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="310.0" stylesheets="@style.css">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <TextField fx:id="searchBox" prefHeight="39.0" prefWidth="219.0" promptText="Type here to search" styleClass="transparent" stylesheets="@style.css">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="70.0" styleClass="search-button" stylesheets="@style.css" text="Search" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="395.0" prefWidth="319.0" stylesheets="@style.css">
+                     <children>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@style.css" text="DELETE" textFill="#828282">
+                           <font>
+                              <Font name="Cambria Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="220.0" />
+                           </VBox.margin>
+                        </Button>
+                        <ImageView fx:id="imageVocab" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets left="50.0" right="50.0" top="20.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@../../../../../../../../Pictures/z5420124529716_9f8a9f970a54247cc905e4fdb420ddbe.jpg" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="englishBox" prefHeight="35.0" prefWidth="150.0" promptText="English" styleClass="search-box" stylesheets="@style.css">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Cambria" size="15.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="vietnameseBox" prefHeight="35.0" prefWidth="150.0" promptText="Vietnamese" styleClass="search-box" stylesheets="@style.css">
+                           <font>
+                              <Font name="Cambria" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" styleClass="add-btn" stylesheets="@style.css" text="SAVE" textFill="#828282">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="25.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="comboBox" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </VBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgb(238, 238, 238);" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="557.0" styleClass="transparent" stylesheets="@style.css">
+                     <children>
+                        <Label fx:id="username" alignment="CENTER" prefHeight="40.0" prefWidth="80.0" text="username" textFill="#878787">
+                           <font>
+                              <Font name="Cambria" size="17.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="400.0" right="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="avata" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../Pictures/z5420124529716_9f8a9f970a54247cc905e4fdb420ddbe.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets right="12.0" top="12.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <AnchorPane fx:id="add" onMouseClicked="#ADD" prefHeight="50.0" prefWidth="130.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="56.0" prefWidth="158.0" style="-fx-background-color: rgb(212, 190, 228); -fx-background-radius: 70;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="6.0" prefWidth="97.0" style="-fx-background-radius: 30; -fx-background-color: rgb(212, 190, 228);" text="Add" textFill="#828282">
+                                       <font>
+                                          <Font name="Cambria Bold" size="25.0" />
+                                       </font>
+                                    </Button>
+                                    <ImageView fitHeight="60.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imgage/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="80.0" />
+                           </HBox.margin>
+                        </AnchorPane>
+                        <AnchorPane fx:id="deleteAll" prefHeight="56.0" prefWidth="203.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="203.0" style="-fx-background-color: rgb(212, 190, 228); -fx-background-radius: 70;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="167.0" style="-fx-background-color: rgb(212, 190, 228); -fx-background-radius: 30;" text="Delete All" textFill="#828282">
+                                       <font>
+                                          <Font name="Cambria Bold" size="25.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                    <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@imgage/full-trash-64.png" />
+                                       </image>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <ScrollPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(238, 238, 238);">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                     <content>
+                        <GridPane fx:id="gridPaneVocab" prefHeight="0.0" prefWidth="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

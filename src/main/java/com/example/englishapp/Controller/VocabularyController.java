@@ -1,5 +1,6 @@
-package com.example.englishapp;
+package com.example.englishapp.Controller;
 
+import com.example.englishapp.Vocabulary;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import javafx.collections.FXCollections;
@@ -100,7 +101,7 @@ public class VocabularyController
         }
     }
 
-    private void addWord()
+    public void addWord()
     {
         Dialog<Vocabulary> dialog = new Dialog<>();
         dialog.setTitle("Thêm từ mới");
@@ -239,5 +240,13 @@ public class VocabularyController
                 e.printStackTrace();
             }
         }
+    }
+
+    public ObservableList<Vocabulary> getList() {
+        return list;
+    }
+
+    public void setList(ObservableList<Vocabulary> list) {
+        this.list = list;
     }
 }

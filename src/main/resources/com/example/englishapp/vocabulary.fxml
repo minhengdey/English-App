@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="180.0" prefWidth="120.0" style="-fx-background-radius: 30;" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.englishapp.Controller.VocabController">
+   <children>
+      <VBox alignment="CENTER" layoutX="2.0" layoutY="-10.0" prefHeight="200.0" prefWidth="120.0">
+         <children>
+            <ImageView fx:id="imageVocab" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Pictures/z5420124529716_9f8a9f970a54247cc905e4fdb420ddbe.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
+            <Label fx:id="english" prefHeight="20.0" prefWidth="100.0" style="-fx-background-color: rgb(255, 225, 255); -fx-background-radius: 100;" text="English" textAlignment="CENTER" textFill="#878787">
+               <font>
+                  <Font name="Cambria" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Label fx:id="vietnamese" prefHeight="20.0" prefWidth="100.0" style="-fx-background-color: rgb(255, 225, 255); -fx-background-radius: 100;" text="Vietnamese" textAlignment="CENTER" textFill="#878787">
+               <font>
+                  <Font name="Cambria" size="12.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

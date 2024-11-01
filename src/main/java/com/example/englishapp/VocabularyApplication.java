@@ -1,9 +1,13 @@
 package com.example.englishapp;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class VocabularyApplication extends Application
 {
@@ -15,12 +19,14 @@ public class VocabularyApplication extends Application
     @Override
     public void start(Stage primaryStage)
     {
-        primaryStage.setTitle("English App");
-
-        VocabularyController vocabularyController = new VocabularyController();
-        VBox layout = vocabularyController.getRoot();
-
-        primaryStage.setScene(new Scene(layout, 600, 400));
-        primaryStage.show();
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("library.fxml")));
+            Scene scene = new Scene(root, 1000, 600);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("English App");
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
