@@ -31,9 +31,6 @@ public class UserEntity {
     @Column (name = "password")
     String password;
 
-    @Column (name = "avatar")
-    String avatar;
-
     @Column (name = "name")
     String name;
 

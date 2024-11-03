@@ -14,8 +14,6 @@ public class UserCreationRequest {
 
     String password;
 
-    String avatar;
-
     String name;
 
     int day;

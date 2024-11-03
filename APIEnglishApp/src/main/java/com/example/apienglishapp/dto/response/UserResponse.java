@@ -15,8 +15,6 @@ public class UserResponse {
 
     String username;
 
-    String avatar;
-
     String name;
 
     int day;

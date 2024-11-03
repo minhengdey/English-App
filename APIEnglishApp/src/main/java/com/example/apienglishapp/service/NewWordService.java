@@ -24,7 +24,6 @@ public class NewWordService {
             newWordEntity.setEnglish(newWord.getEnglish());
             newWordEntity.setVietnamese(newWord.getVietnamese());
             newWordEntity.setTopic(newWord.getTopic());
-            newWordEntity.setImage(newWord.getImage());
         }
         return newWordRepository.save(newWord);
     }

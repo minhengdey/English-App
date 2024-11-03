@@ -11,8 +11,6 @@ import lombok.experimental.FieldDefaults;
 public class UserUpdateRequest {
     String password;
 
-    String avatar;
-
     String name;
 
     int day;
