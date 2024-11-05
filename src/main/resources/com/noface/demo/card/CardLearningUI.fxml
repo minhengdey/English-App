@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<VBox fx:id="root" alignment="BOTTOM_CENTER" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.noface.demo.card.CardLearningUI">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Home">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <VBox fx:id="cardViewContainer" alignment="TOP_CENTER" prefHeight="326.0" prefWidth="600.0">
+               <children>
+                  <WebView fx:id="frontView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <WebView fx:id="backView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <TextArea prefHeight="326.0" prefWidth="523.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Button fx:id="cardEditButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Edit" />
+            <HBox fx:id="bottomButtonBar" alignment="CENTER" prefHeight="25.0" prefWidth="600.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

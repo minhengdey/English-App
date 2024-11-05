@@ -4,4 +4,5 @@ module com.noface.demo{
    requires spring.web;
 
    opens com.noface.demo;
+   opens com.noface.demo.card to javafx.fxml;
 }

@@ -1,20 +1,9 @@
 package com.noface.demo;
 
-import javax.swing.Spring;
-
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.noface.demo.controller.CardController;
-import com.noface.demo.view.BrowseUI;
-import com.noface.demo.view.CardView;
+import com.noface.demo.card.CardController;
+import com.noface.demo.card.CardLearningUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,20 +20,17 @@ public class FXMain extends Application{
     }
     public void start(Stage stage) throws Exception {
         System.out.println("Hello world");
-        FXMLLoader loader = new FXMLLoader(CardView.class.getResource("CardView.fxml"));
+        FXMLLoader loader = new FXMLLoader(CardLearningUI.class.getResource("CardLearningUI.fxml"));
         // FXMLLoader loader = new FXMLLoader(BrowseUI.class.getResource("BrowseUI.fxml"));
-
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        CardController cardController = new CardController(loader);
 
-        // BrowseUI browseUI = loader.getController();
-        // CardController cardController = new CardController(browseUI);
-        // cardController.updateViewCard();
     }
     public static void main(String[] args) {
         launch(args);
-
+//        System.out.println(LocalDateTime.now());
     }
 }
