@@ -45,11 +45,48 @@ public class LoginController implements Initializable {
 
     private HttpClient httpClient = HttpClient.newHttpClient();
 
+    private String normalize_name(String name)
+    {
+        String[] k = name.trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String i : k)
+        {
+            sb.append(i.substring(0, 1).toUpperCase())
+                    .append(i.substring(1).toLowerCase())
+                    .append(" ");
+        }
+        return sb.toString().trim();
+    }
+
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        System.out.println("Username: " + username + ", Password: " + password);
+
+        try
+        {
+            String requestBody = String.format (
+                    "{" +
+                            "\"username\":\"%s\"," +
+                            "\"password\":\"%s\"" +
+                    "}",
+                    username,
+                    password);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            //System.out.println (response.statusCode());
+            if (response.statusCode() == 200) System.out.println ("OK");
+            else System.out.println ("Failed");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     @FXML
     protected void handleCreateAccount() {
@@ -91,7 +128,7 @@ public class LoginController implements Initializable {
     protected void handleRegisterButton(javafx.event.ActionEvent event) {
         try
         {
-            String fullName = fullNameField.getText();
+            String fullName = normalize_name(fullNameField.getText());
             String username = registerNameField.getText();
             String password = registerPasswordField.getText();
             String confirmPassword = confirmPasswordField.getText();
@@ -99,16 +136,34 @@ public class LoginController implements Initializable {
             if (!password.equals(confirmPassword)) showAlert("Mật khẩu không khớp!", Alert.AlertType.ERROR);
             else
             {
-                String requestBody = String.format ("{\"username\":\"%s\",\"password\":\"%s\"}", username, password);
+                String requestBody = String.format (
+                        "{" +
+                                "\"username\":\"%s\"," +
+                                "\"password\":\"%s\"," +
+                                "\"name\":\"%s\"," +
+                                "\"day\":22," +
+                                "\"month\":12," +
+                                "\"year\":2004," +
+                                "\"gender\":\"Nam\"," +
+                                "\"email\":\"nguyenduyanh221204@gmail.com\"," +
+                                "\"phone\":\"0901752586\"" +
+                        "}",
+                        username,
+                        password,
+                        fullName
+                );
+                System.out.println (requestBody);
                 try
                 {
                     HttpRequest request = HttpRequest.newBuilder()
-                            .uri(new URI("http://localhost:8080/user"))
+                            .uri(new URI("http://localhost:8080/users"))
                             .header("Content-Type", "application/json")
                             .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                             .build();
 
                     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    //System.out.println (response.statusCode());
+                    //System.out.println (response.body());
                     if (response.statusCode() == 200)
                     {
                         showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
