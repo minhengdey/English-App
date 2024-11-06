@@ -5,12 +5,15 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 
@@ -55,6 +58,9 @@ public class CardEditingUI {
         contentEditor.setHtmlText(frontContent.get());
         contentEditor.setOnKeyReleased(getContentEditorEventHandler());
         backButton.setOnAction(getBackButtonEventHandler());
+        for(Node node : contentEditor.lookupAll("ToolBar")){
+            node.setOnMouseExited(onContenEditorMouseExitHandler());
+        }
     }
     public void updateCardContent(){
         String content = contentEditor.getHtmlText();
@@ -80,6 +86,14 @@ public class CardEditingUI {
         return new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                updateCardContent();
+            }
+        };
+    }
+    public EventHandler<MouseEvent> onContenEditorMouseExitHandler(){
+        return new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
                 updateCardContent();
             }
         };

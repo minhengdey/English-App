@@ -61,10 +61,10 @@ public class CardLearningUI {
     }
 
     public void bindProperty(Card card) {
-        backCardShowed.bind(card.backCardShowedProperty());
         frontContent.bind(card.frontContentProperty());
         backContent.bind(card.backContentProperty());
 
+        backCardShowed.set(true);
         backCardShowed.addListener((observable, oldValue, newValue) -> {
             if (backCardShowed.get()) {
                 frontView.getEngine().loadContent(frontContent.get());
@@ -74,6 +74,7 @@ public class CardLearningUI {
                 backView.getEngine().loadContent("");
             }
         });
+        backCardShowed.set(false);
 
         frontContent.addListener((observable, oldValue, newValue) -> {
             frontView.getEngine().loadContent(frontContent.get());
@@ -145,7 +146,7 @@ public class CardLearningUI {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                interactor.showBackSide();
+                backCardShowed.set(true);
             }
         };
     }

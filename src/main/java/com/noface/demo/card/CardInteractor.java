@@ -27,18 +27,15 @@ public class CardInteractor {
         this.card = card;
         if(card == null) {
             cardAvailabled.set(false);
+            // controller se listen false sau do thay doi card cho phu hop
         }else{
-            cardAvailabled.set(true);
             cardLearningUI.connect(card, this);
         }
-
-    }
-    public void showBackSide(){
-        card.setBackCardShowed(true);
+        System.out.println("card available " + cardAvailabled.get());
     }
     public void plusCardDueTime(Long seconds){
-        card.setDueTime((LocalDateTime.parse(card.getDueTime()).plusSeconds(seconds)).toString());
-        System.out.println("In add card time" + card);
+        card.setDueTime((LocalDateTime.now().plusSeconds(seconds)).toString());
+        System.out.println("In add card time " + card);
     }
     public void changeToEditCardUI(Scene currentScene) throws IOException, InterruptedException {
         if(card != null) {
@@ -47,7 +44,7 @@ public class CardInteractor {
             FXMLLoader loader = new FXMLLoader(CardEditingUI.class.getResource("CardEditingUI.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
-            CardEditingUI cardEditingUI = (CardEditingUI) loader.getController();
+            CardEditingUI cardEditingUI = loader.getController();
             cardEditingUI.connect(card,this);
         }
 
@@ -66,4 +63,5 @@ public class CardInteractor {
     public BooleanProperty cardAvailabledProperty() {
         return cardAvailabled;
     }
+
 }

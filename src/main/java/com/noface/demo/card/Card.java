@@ -1,6 +1,7 @@
 package com.noface.demo.card;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -12,13 +13,13 @@ public class Card{
     private StringProperty dueTime;
     private final StringProperty frontContent;
     private final StringProperty backContent;
-    private final BooleanProperty backCardShowed;
+
     
     public Card(String id, String frontContent, String backContent){
         this.frontContent = new SimpleStringProperty(frontContent);
         this.backContent = new SimpleStringProperty(backContent);
         this.dueTime = new SimpleStringProperty();
-        this.backCardShowed = new SimpleBooleanProperty(false);
+
         this.id = new SimpleStringProperty(id);
         this.dueTime = new SimpleStringProperty(LocalDateTime.now().toString());
     }
@@ -35,13 +36,6 @@ public class Card{
         return backContent;
     }
 
-    public BooleanProperty backCardShowedProperty() {
-        return backCardShowed;
-    }
-
-    public void setBackCardShowed(boolean backCardShowed) {
-        this.backCardShowed.set(backCardShowed);
-    }
 
     public void setDueTime(String dueTime) {
         this.dueTime.set(dueTime);
@@ -54,7 +48,15 @@ public class Card{
                 ", dueTime=" + dueTime +
                 ", frontContent=" + frontContent +
                 ", backContent=" + backContent +
-                ", backCardShowed=" + backCardShowed +
                 '}';
+    }
+    public static Comparator<Card> comparatorByDueTime(){
+        return new Comparator<Card>() {
+            @Override
+            public int compare(Card o1, Card o2) {
+                return LocalDateTime.parse(
+                        o1.dueTime.get()).compareTo(LocalDateTime.parse(o2.dueTime.get()));
+            }
+        };
     }
 }
