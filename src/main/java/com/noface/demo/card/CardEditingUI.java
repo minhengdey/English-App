@@ -48,32 +48,13 @@ public class CardEditingUI {
             }
         });
     }
-    public void setup(Card card, CardInteractor interactor) {
+    public void connect(Card card, CardInteractor interactor) {
         this.interactor = interactor;
         frontContent.bindBidirectional(card.frontContentProperty());
         backContent.bindBidirectional(card.backContentProperty());
         contentEditor.setHtmlText(frontContent.get());
-        contentEditor.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                updateCardContent();
-            }
-        });
-        contentEditor.setOnInputMethodTextChanged(new EventHandler<InputEvent>() {
-            @Override
-            public void handle(InputEvent event) {
-                updateCardContent();
-            }
-        });
-
-
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage stage = (Stage) backButton.getScene().getWindow();
-                stage.setScene(interactor.changeToPreviousScene(backButton.getScene()));
-            }
-        });
+        contentEditor.setOnKeyReleased(getContentEditorEventHandler());
+        backButton.setOnAction(getBackButtonEventHandler());
     }
     public void updateCardContent(){
         String content = contentEditor.getHtmlText();
@@ -84,5 +65,23 @@ public class CardEditingUI {
         }else{
             backContent.set(content);
         }
+    }
+    public EventHandler getBackButtonEventHandler(){
+        return new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) backButton.getScene().getWindow();
+                interactor.changeToPreviousScene(backButton.getScene());
+            }
+        };
+    }
+    public EventHandler getContentEditorEventHandler(){
+        return new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                updateCardContent();
+            }
+        };
     }
 }

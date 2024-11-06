@@ -2,7 +2,7 @@ package com.noface.demo;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.noface.demo.card.CardController;
+import com.noface.demo.card.CardLearningController;
 import com.noface.demo.card.CardLearningUI;
 
 import javafx.application.Application;
@@ -26,11 +26,10 @@ public class FXMain extends Application{
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        CardController cardController = new CardController(loader);
+        CardLearningController cardLearningController = new CardLearningController(loader);
 
     }
     public static void main(String[] args) {
         launch(args);
-//        System.out.println(LocalDateTime.now());
     }
 }

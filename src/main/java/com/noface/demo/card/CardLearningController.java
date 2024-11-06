@@ -1,26 +1,25 @@
 package com.noface.demo.card;
 
 import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardController {
+public class CardLearningController {
     private List<Card> cards;
     private Card card;
     private CardLearningUI cardLearningUI;
     private CardInteractor interactor;
 
-    public CardController(FXMLLoader loader) {
+    public CardLearningController(FXMLLoader loader) {
         cards = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 2; i++){
             Card card = new Card(String.valueOf(i + 1), "Front side" + i, "Back side" + i);
             cards.add(card);
         }
         this.card = cards.get(0);
-        this.cardLearningUI = (CardLearningUI) loader.getController();
+        this.cardLearningUI =  loader.getController();
         interactor = new CardInteractor(card, cardLearningUI);
         interactor.setCard(card);
         interactor.cardAvailabledProperty().addListener((observable, oldValue, newValue) -> {
@@ -44,7 +43,6 @@ public class CardController {
             interactor.setCard(card);
             return true;
         }catch(IndexOutOfBoundsException e){
-            cardLearningUI.clearContentUI();
             return false;
         }
     }
