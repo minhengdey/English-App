@@ -94,7 +94,6 @@ public class LoginController implements Initializable {
 
             Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("sign_up.fxml")));
 
-
             Stage signUpStage = new Stage();
             signUpStage.setTitle("Đăng ký");
 
@@ -112,7 +111,7 @@ public class LoginController implements Initializable {
 
 
             signUpStage.setWidth(400);
-            signUpStage.setHeight(500);
+            signUpStage.setHeight(600);
 
 
             signUpStage.setX((screenWidth - signUpStage.getWidth()) / 2);
