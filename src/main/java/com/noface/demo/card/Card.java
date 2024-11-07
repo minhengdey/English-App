@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
 
 public class Card{
     private final StringProperty id;
-    private StringProperty dueTime;
+    private final StringProperty dueTime;
     private final StringProperty frontContent;
     private final StringProperty backContent;
 
@@ -18,10 +18,8 @@ public class Card{
     public Card(String id, String frontContent, String backContent){
         this.frontContent = new SimpleStringProperty(frontContent);
         this.backContent = new SimpleStringProperty(backContent);
-        this.dueTime = new SimpleStringProperty();
-
-        this.id = new SimpleStringProperty(id);
         this.dueTime = new SimpleStringProperty(LocalDateTime.now().toString());
+        this.id = new SimpleStringProperty(id);
     }
 
     public String getDueTime(){

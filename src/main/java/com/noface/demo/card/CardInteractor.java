@@ -21,6 +21,7 @@ public class CardInteractor {
     public CardInteractor(Card card, CardLearningUI cardLearningUI) {
         this.card = card;
         this.cardLearningUI = cardLearningUI;
+        cardLearningUI.bindInteractorProperty(this);
     }
 
     public void setCard(Card card) {

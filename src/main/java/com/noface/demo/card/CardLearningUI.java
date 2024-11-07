@@ -5,17 +5,13 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
@@ -56,11 +52,23 @@ public class CardLearningUI {
 
     public void connect(Card card, CardInteractor interactor) {
         this.interactor = interactor;
-        bindProperty(card);
+        bindCardProperty(card);
         loadInitializeContent();
     }
+    public void bindInteractorProperty(CardInteractor interactor){
+        showAnswerButton.visibleProperty().bind(Bindings.createBooleanBinding(()->{
+            return !backCardShowed.get() && interactor.getCardAvailabled();
+        }, backCardShowed, interactor.cardAvailabledProperty()));
 
-    public void bindProperty(Card card) {
+        doneButtonBar.visibleProperty().bind(Bindings.createBooleanBinding(()->{
+            return backCardShowed.get() && interactor.getCardAvailabled();
+        }, backCardShowed, interactor.cardAvailabledProperty()));
+
+        cardEditButton.visibleProperty().bind(interactor.cardAvailabledProperty());
+        mainLearningArea.visibleProperty().bind(interactor.cardAvailabledProperty());
+        doneLearningLabel.visibleProperty().bind(interactor.cardAvailabledProperty().not());
+    }
+    public void bindCardProperty(Card card) {
         frontContent.bind(card.frontContentProperty());
         backContent.bind(card.backContentProperty());
 
@@ -88,17 +96,7 @@ public class CardLearningUI {
             }
         });
 
-        showAnswerButton.visibleProperty().bind(Bindings.createBooleanBinding(()->{
-            return !backCardShowed.get() && interactor.getCardAvailabled();
-        }, backCardShowed, interactor.cardAvailabledProperty()));
 
-        doneButtonBar.visibleProperty().bind(Bindings.createBooleanBinding(()->{
-            return backCardShowed.get() && interactor.getCardAvailabled();
-        }, backCardShowed, interactor.cardAvailabledProperty()));
-
-        cardEditButton.visibleProperty().bind(interactor.cardAvailabledProperty());
-        mainLearningArea.visibleProperty().bind(interactor.cardAvailabledProperty());
-        doneLearningLabel.visibleProperty().bind(interactor.cardAvailabledProperty().not());
     }
 
     public void loadInitializeContent() {
@@ -156,7 +154,6 @@ public class CardLearningUI {
             @Override
             public void handle(ActionEvent event) {
                 interactor.plusCardDueTime(repetitionTimes[selectRepetitionButtons.indexOf(event.getSource())]);
-                clearContentUI();
                 interactor.setCard(null);
             }
 

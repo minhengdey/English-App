@@ -5,13 +5,11 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
@@ -56,10 +54,10 @@ public class CardEditingUI {
         frontContent.bindBidirectional(card.frontContentProperty());
         backContent.bindBidirectional(card.backContentProperty());
         contentEditor.setHtmlText(frontContent.get());
-        contentEditor.setOnKeyReleased(getContentEditorEventHandler());
-        backButton.setOnAction(getBackButtonEventHandler());
+        contentEditor.setOnKeyReleased(ContentEditorEventHandler());
+        backButton.setOnAction(backButtonEventHandler());
         for(Node node : contentEditor.lookupAll("ToolBar")){
-            node.setOnMouseExited(onContenEditorMouseExitHandler());
+            node.setOnMouseExited(contenEditorMouseExitHandler());
         }
     }
     public void updateCardContent(){
@@ -72,7 +70,7 @@ public class CardEditingUI {
             backContent.set(content);
         }
     }
-    public EventHandler getBackButtonEventHandler(){
+    public EventHandler<ActionEvent> backButtonEventHandler(){
         return new EventHandler<ActionEvent>() {
 
             @Override
@@ -82,7 +80,7 @@ public class CardEditingUI {
             }
         };
     }
-    public EventHandler getContentEditorEventHandler(){
+    public EventHandler<KeyEvent> ContentEditorEventHandler(){
         return new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -90,7 +88,7 @@ public class CardEditingUI {
             }
         };
     }
-    public EventHandler<MouseEvent> onContenEditorMouseExitHandler(){
+    public EventHandler<MouseEvent> contenEditorMouseExitHandler(){
         return new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

@@ -1,5 +1,6 @@
 package com.noface.demo.card;
 
+import com.noface.demo.resource.ResourceLoader;
 import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 
@@ -8,21 +9,18 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class CardLearningController {
-    private Queue<Card> cards = new PriorityQueue<>();
+    private Queue<Card> cards = new PriorityQueue<>(Card.comparatorByDueTime());
     private Card card;
     private CardLearningUI cardLearningUI;
     private CardInteractor interactor;
 
     public CardLearningController(FXMLLoader loader) {
-        cards = new PriorityQueue<>(Card.comparatorByDueTime());
-        // Tự tạo tạm data để test
-        for(int i = 0; i < 10; i++){
-            Card card = new Card(String.valueOf(i + 1), "Front side " + i, "Back side " + i);
-            cards.add(card);
-        }
+        scrapeData();
         this.card = cards.poll();
         this.cardLearningUI =  loader.getController();
+
         interactor = new CardInteractor(card, cardLearningUI);
+
         interactor.setCard(card);
         interactor.cardAvailabledProperty().addListener((observable, oldValue, newValue) -> {
             handleCardAvailabledPropertyChange(observable, oldValue, newValue);
@@ -38,10 +36,10 @@ public class CardLearningController {
     }
     public boolean changeToNextCard() {
         System.out.println("In change card " + card);
-        Card previouseCard = this.card;
+        Card previousCard = this.card;
         this.card = cards.poll();
-        if(LocalDateTime.parse(previouseCard.getDueTime()).compareTo(LocalDate.now().atStartOfDay().plusDays(1l)) < 0){
-            cards.add(previouseCard);
+        if(previousCard != null && LocalDateTime.parse(previousCard.getDueTime()).compareTo(LocalDate.now().atStartOfDay().plusDays(1l)) < 0){
+            cards.add(previousCard);
         }
         if(this.card == null){
             if(cards.peek() != null){
@@ -53,5 +51,9 @@ public class CardLearningController {
         }
         interactor.setCard(card);
         return true;
+    }
+    public void scrapeData(){
+        // Tự tạo tạm data để test
+        cards.addAll(ResourceLoader.getInstance().getCardsSampleData());
     }
 }
