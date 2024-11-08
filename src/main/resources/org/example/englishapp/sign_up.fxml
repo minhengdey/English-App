@@ -7,78 +7,100 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.RegisterController">
+<AnchorPane id="side_signup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #9b7ebd;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.RegisterController">
    <children>
-      <Text layoutX="133.0" layoutY="47.0" strokeWidth="0.0" text="Đăng ký" textAlignment="CENTER" wrappingWidth="106.60003662109375">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <font>
-            <Font name="Times New Roman" size="21.0" />
-         </font>
-      </Text>
-      <TextField fx:id="name" layoutX="77.0" layoutY="65.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên">
+      <Pane id="side_signup" layoutX="440.0" prefHeight="600.0" prefWidth="566.0" style="-fx-background-color: WHITE;" styleClass="side_signup" stylesheets="@Style.css">
+         <children>
+            <Text layoutX="216.0" layoutY="65.0" strokeWidth="0.0" text="Đăng ký" textAlignment="CENTER" wrappingWidth="133.00006103515625">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <font>
+                  <Font name="Times New Roman Bold" size="34.0" />
+               </font>
+            </Text>
+            <Button id=".button_signup" layoutX="239.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="35.0" prefWidth="89.0" styleClass="button_signup" stylesheets="@Style.css" text="Đăng ký" textAlignment="CENTER" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <TextField id="input_text" fx:id="name" layoutX="617.0" layoutY="99.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextField fx:id="username" layoutX="77.0" layoutY="108.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập">
+      <TextField id="input_text" fx:id="username" layoutX="617.0" layoutY="150.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <Button layoutX="153.0" layoutY="493.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="66.0" style="-fx-background-color: #3ab0ff;" text="Đăng ký" textAlignment="CENTER" textFill="WHITE" onAction="#handleRegisterButton">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <PasswordField fx:id="password" layoutX="77.0" layoutY="154.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu">
+      <PasswordField id="input_text" fx:id="password" layoutX="617.0" layoutY="202.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu" styleClass="text_input">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
-      <PasswordField fx:id="confirmPassword" layoutX="77.0" layoutY="204.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu">
+      <PasswordField id="input_text" fx:id="confirmPassword" layoutX="617.0" layoutY="254.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
-      <VBox layoutX="77.0" layoutY="254.0" prefHeight="47.0" prefWidth="218.0" spacing="5.0">
+      <VBox layoutX="617.0" layoutY="300.0" prefHeight="47.0" prefWidth="218.0" spacing="5.0">
          <children>
             <Label prefHeight="18.0" prefWidth="70.0" text="Ngày sinh" textFill="#878787" />
             <HBox prefHeight="35.0" prefWidth="218.0" spacing="5.0">
                <children>
-                  <TextField fx:id="day" promptText="Ngày">
+                  <TextField id="input_text" fx:id="day" promptText="Ngày" styleClass="text_input">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <TextField fx:id="month" promptText="Tháng" />
-                  <TextField fx:id="year" promptText="Năm" />
+                  <TextField id="input_text" fx:id="month" promptText="Tháng" styleClass="text_input" />
+                  <TextField id="input_text" fx:id="year" promptText="Năm" styleClass="text_input" stylesheets="@Style.css" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="77.0" layoutY="324.0" prefHeight="27.0" prefWidth="218.0" spacing="5.0">
+      <HBox layoutX="617.0" layoutY="416.0" prefHeight="27.0" prefWidth="218.0" spacing="5.0">
          <children>
-            <Label prefHeight="27.0" prefWidth="67.0" text="Giới tính" />
-            <ChoiceBox fx:id="gender" prefWidth="150.0" />
+            <Label prefHeight="27.0" prefWidth="60.0" text="Giới tính" />
+            <ChoiceBox fx:id="gender" prefHeight="26.0" prefWidth="152.0" />
          </children>
       </HBox>
-      <TextField fx:id="email" layoutX="77.0" layoutY="365.0" prefHeight="35.0" prefWidth="218.0" promptText="Email">
+      <TextField id="input_text" fx:id="email" layoutX="617.0" layoutY="363.0" prefHeight="35.0" prefWidth="218.0" promptText="Email" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextField fx:id="phone" layoutX="77.0" layoutY="416.0" prefHeight="35.0" prefWidth="218.0" promptText="Số điện thoại">
+      <TextField id="input_text" fx:id="phone" layoutX="617.0" layoutY="457.0" prefHeight="35.0" prefWidth="218.0" promptText="Số điện thoại" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
+      <ImageView id="image_signup" fitHeight="366.0" fitWidth="374.0" layoutX="49.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" styleClass="button_signup">
+         <image>
+            <Image url="@login_image/rb_4782.png" />
+         </image>
+      </ImageView>
+      <Text fill="#fafafa" layoutX="74.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," wrappingWidth="205.33668518066406">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="74.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are glad to see you:)" wrappingWidth="327.73670959472656">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="30.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

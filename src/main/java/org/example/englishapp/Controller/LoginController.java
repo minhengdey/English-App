@@ -102,8 +102,8 @@ public class LoginController implements Initializable {
             double screenHeight = screenBounds.getHeight();
 
 
-            signUpStage.setWidth(400);
-            signUpStage.setHeight(600);
+            signUpStage.setWidth(1000);
+            signUpStage.setHeight(637);
 
 
             signUpStage.setX((screenWidth - signUpStage.getWidth()) / 2);
