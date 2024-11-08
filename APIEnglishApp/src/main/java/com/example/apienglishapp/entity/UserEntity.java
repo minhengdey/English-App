@@ -55,4 +55,8 @@ public class UserEntity {
     @ElementCollection
     @Column (name = "roles")
     Set<String> roles;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Set<NewWordEntity> newWords = new HashSet<>();
 }

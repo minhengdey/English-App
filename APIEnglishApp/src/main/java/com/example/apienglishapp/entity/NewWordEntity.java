@@ -31,4 +31,9 @@ public class NewWordEntity {
 
     @Column (name = "date")
     String date;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    UserEntity user;
 }

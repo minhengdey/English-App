@@ -64,7 +64,7 @@ public class AuthenticationService {
     private String generateToken(UserEntity userEntity) {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(userEntity.getUsername())
+                .subject(String.valueOf(userEntity.getId()))
                 .issuer("Minh Anh")
                 .issueTime(new Date())
                 .expirationTime(new Date(

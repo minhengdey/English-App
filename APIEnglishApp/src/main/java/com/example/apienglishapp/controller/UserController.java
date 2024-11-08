@@ -8,6 +8,8 @@ import com.example.apienglishapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostAuthorize("returnObject.result.username == authentication.name or hasRole('ADMIN')")
+    @PostAuthorize("#id.toString() == authentication.token.claims['sub'] or hasRole('ADMIN')")
     @GetMapping (value = "/users/{id}")
     public ApiResponse<UserResponse> getUserById (@PathVariable Long id) {
         return ApiResponse.<UserResponse>builder()
@@ -41,7 +43,7 @@ public class UserController {
                 .build();
     }
 
-    @PostAuthorize("returnObject.username == authentication.name or hasRole('ADMIN')")
+    @PostAuthorize("#id.toString() == authentication.token.claims['sub'] or hasRole('ADMIN')")
     @PutMapping (value = "/users/{id}")
     public UserResponse updateUser (@PathVariable Long id, @RequestBody UserUpdateRequest request) {
         return userService.updateRequest(id, request);

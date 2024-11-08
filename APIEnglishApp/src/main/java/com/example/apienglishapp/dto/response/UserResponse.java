@@ -1,5 +1,6 @@
 package com.example.apienglishapp.dto.response;
 
+import com.example.apienglishapp.entity.NewWordEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -30,4 +31,6 @@ public class UserResponse {
     String phone;
 
     Set<String> roles;
+
+    Set<NewWordEntity> newWords;
 }
