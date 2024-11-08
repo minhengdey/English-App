@@ -25,7 +25,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/introspect"};
+    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/introspect", "/new_word", "/new_word/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

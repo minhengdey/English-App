@@ -1,5 +1,7 @@
 package com.example.apienglishapp.controller;
 
+import com.example.apienglishapp.dto.request.NewWordRequest;
+import com.example.apienglishapp.dto.response.NewWordResponse;
 import com.example.apienglishapp.entity.NewWordEntity;
 import com.example.apienglishapp.service.NewWordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,24 +25,23 @@ public class NewWordController {
     private NewWordService newWordService;
 
     @GetMapping (value = "/new_word/{id}")
-    public NewWordEntity getNewWordById (@PathVariable("id") Long id) {
+    public NewWordResponse getNewWordById (@PathVariable("id") Long id) {
         return newWordService.findById(id);
     }
 
-    @GetMapping (value = "/new_word/topic")
-    public List<NewWordEntity> getAllByTopic (@PathVariable("topic") String topic) {
+    @GetMapping (value = "/new_word/topic/{topic}")
+    public List<NewWordResponse> getAllByTopic (@PathVariable("topic") String topic) {
         return newWordService.getAllByTopic(topic);
     }
 
     @PostMapping (value = "/new_word")
-    public NewWordEntity create (@Valid @RequestBody NewWordEntity newWord) {
-        return newWordService.save(newWord);
+    public NewWordResponse create (@Valid @RequestBody NewWordRequest newWord) {
+        return newWordService.create(newWord);
     }
 
     @PutMapping (value = "new_word/{id}")
-    public NewWordEntity update (@RequestBody NewWordEntity newWord, @PathVariable("id") Long id) {
-        newWord.setId(id);
-        return newWordService.save(newWord);
+    public NewWordResponse update (@RequestBody NewWordRequest newWord, @PathVariable("id") Long id) {
+        return newWordService.update(id, newWord);
     }
 
     @DeleteMapping (value = "new_word/{id}")
@@ -49,7 +50,7 @@ public class NewWordController {
     }
 
     @GetMapping (value = "/new_word")
-    public List<NewWordEntity> getAll () {
+    public List<NewWordResponse> getAll () {
         return newWordService.getAll();
     }
 }

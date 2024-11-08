@@ -28,4 +28,7 @@ public class NewWordEntity {
 
     @Column (name = "topic")
     String topic;
+
+    @Column (name = "date")
+    String date;
 }
