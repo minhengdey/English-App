@@ -94,12 +94,12 @@
       </ImageView>
       <Text fill="#fafafa" layoutX="74.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," wrappingWidth="205.33668518066406">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="36.0" />
+            <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="74.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are glad to see you:)" wrappingWidth="327.73670959472656">
          <font>
-            <Font name="Berlin Sans FB Demi Bold" size="30.0" />
+            <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Text>
    </children>
