@@ -33,7 +33,7 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <Button layoutX="153.0" layoutY="493.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="66.0" style="-fx-background-color: #3ab0ff;" text="Đăng ký" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="153.0" layoutY="493.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="66.0" style="-fx-background-color: #3ab0ff;" text="Đăng ký" textAlignment="CENTER" textFill="WHITE" onAction="#handleRegisterButton">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

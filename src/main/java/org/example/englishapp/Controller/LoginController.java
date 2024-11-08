@@ -1,5 +1,7 @@
 package org.example.englishapp.Controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,29 +36,8 @@ public class LoginController implements Initializable {
     @FXML
     PasswordField passwordField;
 
-    @FXML
-    TextField fullNameField;
-    @FXML
-    TextField registerNameField;
-    @FXML
-    PasswordField registerPasswordField;
-    @FXML
-    PasswordField confirmPasswordField;
-
     private HttpClient httpClient = HttpClient.newHttpClient();
-
-    private String normalize_name(String name)
-    {
-        String[] k = name.trim().split("\\s+");
-        StringBuilder sb = new StringBuilder();
-        for (String i : k)
-        {
-            sb.append(i.substring(0, 1).toUpperCase())
-                    .append(i.substring(1).toLowerCase())
-                    .append(" ");
-        }
-        return sb.toString().trim();
-    }
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @FXML
     private void handleLogin() {
@@ -71,7 +52,9 @@ public class LoginController implements Initializable {
                             "\"password\":\"%s\"" +
                     "}",
                     username,
-                    password);
+                    password
+            );
+
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI("http://localhost:8080/auth/login"))
                     .header("Content-Type", "application/json")
@@ -79,13 +62,22 @@ public class LoginController implements Initializable {
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            //System.out.println (response.statusCode());
+            System.out.println (response.statusCode());
+
             if (response.statusCode() == 200) System.out.println ("OK");
-            else System.out.println ("Failed");
+            else
+            {
+                String jsonResponse = response.body();
+                JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                int code = jsonNode.get("code").asInt();
+                if (code == 1007) showAlert("Thông tin đăng nhập không hợp lệ, vui lòng kiểm tra lại!", Alert.AlertType.ERROR);
+                else showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
+            }
         }
         catch (Exception e)
         {
             e.printStackTrace();
+            showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
         }
     }
     @FXML
@@ -123,67 +115,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    protected void handleRegisterButton(javafx.event.ActionEvent event) {
-        try
-        {
-            String fullName = normalize_name(fullNameField.getText());
-            String username = registerNameField.getText();
-            String password = registerPasswordField.getText();
-            String confirmPassword = confirmPasswordField.getText();
 
-            if (!password.equals(confirmPassword)) showAlert("Mật khẩu không khớp!", Alert.AlertType.ERROR);
-            else
-            {
-                String requestBody = String.format (
-                        "{" +
-                                "\"username\":\"%s\"," +
-                                "\"password\":\"%s\"," +
-                                "\"name\":\"%s\"," +
-                                "\"day\":22," +
-                                "\"month\":12," +
-                                "\"year\":2004," +
-                                "\"gender\":\"Nam\"," +
-                                "\"email\":\"nguyenduyanh221204@gmail.com\"," +
-                                "\"phone\":\"0901752586\"" +
-                        "}",
-                        username,
-                        password,
-                        fullName
-                );
-                System.out.println (requestBody);
-                try
-                {
-                    HttpRequest request = HttpRequest.newBuilder()
-                            .uri(new URI("http://localhost:8080/users"))
-                            .header("Content-Type", "application/json")
-                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                            .build();
-
-                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                    //System.out.println (response.statusCode());
-                    //System.out.println (response.body());
-                    if (response.statusCode() == 200)
-                    {
-                        showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.close();
-                    }
-                    else showAlert("Đăng ký thất bại!", Alert.AlertType.ERROR);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                    showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();;
-        }
-    }
-    
     private void showAlert(String message, Alert.AlertType alertType)
     {
         Alert alert = new Alert(alertType);

@@ -11,6 +11,7 @@ module org.example.englishapp {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
     opens org.example.englishapp to javafx.fxml;
     exports org.example.englishapp;
