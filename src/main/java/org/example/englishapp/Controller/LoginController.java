@@ -1,5 +1,7 @@
 package org.example.englishapp.Controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,29 +36,55 @@ public class LoginController implements Initializable {
     @FXML
     PasswordField passwordField;
 
-    @FXML
-    TextField fullNameField;
-    @FXML
-    TextField registerNameField;
-    @FXML
-    PasswordField registerPasswordField;
-    @FXML
-    PasswordField confirmPasswordField;
-
     private HttpClient httpClient = HttpClient.newHttpClient();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        System.out.println("Username: " + username + ", Password: " + password);
+
+        try
+        {
+            String requestBody = String.format (
+                    "{" +
+                            "\"username\":\"%s\"," +
+                            "\"password\":\"%s\"" +
+                    "}",
+                    username,
+                    password
+            );
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println (response.statusCode());
+
+            if (response.statusCode() == 200) System.out.println ("OK");
+            else
+            {
+                String jsonResponse = response.body();
+                JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                int code = jsonNode.get("code").asInt();
+                if (code == 1007) showAlert("Thông tin đăng nhập không hợp lệ, vui lòng kiểm tra lại!", Alert.AlertType.ERROR);
+                else showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
+        }
     }
     @FXML
     protected void handleCreateAccount() {
         try {
 
             Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("sign_up.fxml")));
-
 
             Stage signUpStage = new Stage();
             signUpStage.setTitle("Đăng ký");
@@ -75,7 +103,7 @@ public class LoginController implements Initializable {
 
 
             signUpStage.setWidth(400);
-            signUpStage.setHeight(500);
+            signUpStage.setHeight(600);
 
 
             signUpStage.setX((screenWidth - signUpStage.getWidth()) / 2);
@@ -87,49 +115,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    protected void handleRegisterButton(javafx.event.ActionEvent event) {
-        try
-        {
-            String fullName = fullNameField.getText();
-            String username = registerNameField.getText();
-            String password = registerPasswordField.getText();
-            String confirmPassword = confirmPasswordField.getText();
 
-            if (!password.equals(confirmPassword)) showAlert("Mật khẩu không khớp!", Alert.AlertType.ERROR);
-            else
-            {
-                String requestBody = String.format ("{\"username\":\"%s\",\"password\":\"%s\"}", username, password);
-                try
-                {
-                    HttpRequest request = HttpRequest.newBuilder()
-                            .uri(new URI("http://localhost:8080/user"))
-                            .header("Content-Type", "application/json")
-                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                            .build();
-
-                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                    if (response.statusCode() == 200)
-                    {
-                        showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.close();
-                    }
-                    else showAlert("Đăng ký thất bại!", Alert.AlertType.ERROR);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                    showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();;
-        }
-    }
-    
     private void showAlert(String message, Alert.AlertType alertType)
     {
         Alert alert = new Alert(alertType);
