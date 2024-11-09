@@ -26,11 +26,13 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableMethodSecurity
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/introspect", "/new_word", "/new_word/**"};
+    private final String[] PUBLIC_ENDPOINTS_GET = {"/vietnamese_to_english", "/vietnamese_to_english/**", "/english_to_vietnamese", "/english_to_vietnamese/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_GET).permitAll()
                 .anyRequest().authenticated()
         );
         http.oauth2ResourceServer(oauth2 ->
