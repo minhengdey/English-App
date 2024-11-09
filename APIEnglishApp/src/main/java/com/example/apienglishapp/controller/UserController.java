@@ -5,7 +5,9 @@ import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
 import com.example.apienglishapp.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping (value = "/users")
-    public ApiResponse<UserResponse> createUser (@RequestBody UserCreationRequest request) {
+    public ApiResponse<UserResponse> createUser (@Valid @RequestBody UserCreationRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
                 .build();
@@ -43,7 +45,7 @@ public class UserController {
 
     @PostAuthorize("#id.toString() == authentication.token.claims['sub'] or hasRole('ADMIN')")
     @PutMapping (value = "/users/{id}")
-    public UserResponse updateUser (@PathVariable Long id, @RequestBody UserUpdateRequest request) {
+    public UserResponse updateUser (@PathVariable Long id, @Valid @RequestBody UserUpdateRequest request) {
         return userService.updateRequest(id, request);
     }
 
