@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
     <children>
         <VBox prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: white;">
             <children>
@@ -35,77 +35,83 @@
                                 </ImageView>
                             </children>
                         </Pane>
-                        <Pane id="button_pane" layoutX="27.0" layoutY="123.0" prefHeight="49.0" prefWidth="188.0" />
-                        <Button id="button_home" layoutX="93.0" layoutY="133.0" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Profile" textFill="WHITE">
-                            <font>
-                                <Font name="Century Gothic Bold" size="15.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Button>
-                        <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="61.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/user.png" />
-                            </image>
-                        </ImageView>
-                        <Button id="button_home" layoutX="97.0" layoutY="187.0" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Topic" textFill="WHITE">
-                            <font>
-                                <Font name="Century Gothic Bold" size="14.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Button>
-                        <ImageView fitHeight="33.0" fitWidth="37.0" layoutX="61.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/book.png" />
-                            </image>
-                        </ImageView>
-                        <Button id="button_home" layoutX="97.0" layoutY="241.0" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Assignment" textFill="WHITE">
-                            <font>
-                                <Font name="Century Gothic Bold" size="14.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Button>
-                        <ImageView fitHeight="33.0" fitWidth="37.0" layoutX="61.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/to-do-list.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="33.0" fitWidth="37.0" layoutX="61.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/grammar.png" />
-                            </image>
-                        </ImageView>
-                        <Button id="button_home" layoutX="97.0" layoutY="295.0" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Translate" textFill="WHITE">
-                            <font>
-                                <Font name="Century Gothic Bold" size="14.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Button>
-                        <ImageView fitHeight="33.0" fitWidth="37.0" layoutX="61.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/log-out.png" />
-                            </image>
-                        </ImageView>
-                        <Button id="button_home" layoutX="97.0" layoutY="346.0" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
-                            <font>
-                                <Font name="Century Gothic Bold" size="14.0" />
-                            </font>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </Button>
                         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@login_image/keep.png" />
                             </image>
                         </ImageView>
+                        <VBox layoutX="53.0" layoutY="121.0" prefHeight="184.0" prefWidth="140.0" spacing="40.0">
+                            <children>
+                                <HBox prefHeight="45.0" prefWidth="100.0">
+                                    <children>
+                                        <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@login_image/user.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Profile" textFill="WHITE">
+                                            <font>
+                                                <Font name="Century Gothic Bold" size="15.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="46.0" prefWidth="100.0">
+                                    <children>
+                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@login_image/to-do-list.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Topic" textFill="WHITE">
+                                            <font>
+                                                <Font name="Century Gothic Bold" size="14.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="43.0" prefWidth="100.0">
+                                    <children>
+                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@login_image/grammar.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Translate" textFill="WHITE">
+                                            <font>
+                                                <Font name="Century Gothic Bold" size="14.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@login_image/log-out.png" />
+                                            </image>
+                                        </ImageView>
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false"  onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
+                                            <font>
+                                                <Font name="Century Gothic Bold" size="14.0" />
+                                            </font>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
                     </children>
                 </AnchorPane>
             </children>
