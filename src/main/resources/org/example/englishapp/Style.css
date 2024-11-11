@@ -91,3 +91,14 @@
 .button_edit:hover{
     -fx-background-color: #9b7ebd;
 }
+
+.button_save{
+    -fx-background-color: #9b7ebd;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.button_save:hover{
+    -fx-background-color: #d4bee4;
+    -fx-text-fill: white;
+}
