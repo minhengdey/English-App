@@ -195,7 +195,7 @@
                               </Text>
                               <ImageView fitHeight="31.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@login_image/back_2028158.png" />
+                                    <Image url="@login_image/back_1522196.png" />
                                  </image>
                               </ImageView>
                            </children>
