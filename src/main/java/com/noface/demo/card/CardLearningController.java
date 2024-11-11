@@ -53,7 +53,6 @@ public class CardLearningController {
         return true;
     }
     public void scrapeData(){
-        // Tự tạo tạm data để test
         cards.addAll(ResourceLoader.getInstance().getCardsSampleData());
     }
 }

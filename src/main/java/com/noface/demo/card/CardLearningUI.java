@@ -44,7 +44,8 @@ public class CardLearningUI {
     @FXML
     private HBox doneButtonBar;
     private List<Button> selectRepetitionButtons = new ArrayList<>();
-
+    @FXML
+    private Label cardNameLabel;
     private StringProperty frontContent = new SimpleStringProperty();
     private StringProperty backContent = new SimpleStringProperty();
     private BooleanProperty backCardShowed = new SimpleBooleanProperty();
@@ -71,6 +72,7 @@ public class CardLearningUI {
     public void bindCardProperty(Card card) {
         frontContent.bind(card.frontContentProperty());
         backContent.bind(card.backContentProperty());
+        cardNameLabel.textProperty().bind(card.nameProperty());
 
         backCardShowed.set(true);
         backCardShowed.addListener((observable, oldValue, newValue) -> {
@@ -102,6 +104,7 @@ public class CardLearningUI {
     public void loadInitializeContent() {
         frontView.getEngine().loadContent(frontContent.get());
         backView.getEngine().loadContent("");
+
     }
 
     public void configureScreenComponent() {
@@ -110,13 +113,12 @@ public class CardLearningUI {
             String label = repetitionLabels[i];
             Button selectRepetitionButton = new Button(label);
             selectRepetitionButtons.add(selectRepetitionButton);
-            selectRepetitionButton.setOnAction(getSelectRepetitionButtonEventHandler());
+            selectRepetitionButton.setOnAction(selectRepetitionButtonEventHandler());
             doneButtonBar.getChildren().add(selectRepetitionButton);
             HBox.setMargin(selectRepetitionButton, new Insets(0, 5, 0, 5));
         }
-
-        cardEditButton.setOnAction(getCardEditButtonEventHandler());
-        showAnswerButton.setOnAction(getShowAnswerButtonEventHandler());
+        cardEditButton.setOnAction(cardEditButtonEventHandler());
+        showAnswerButton.setOnAction(showAnswerButtonEventHandler());
     }
 
 
@@ -125,7 +127,7 @@ public class CardLearningUI {
         backView.getEngine().loadContent("");
     }
 
-    public EventHandler getCardEditButtonEventHandler() {
+    public EventHandler cardEditButtonEventHandler() {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -140,7 +142,7 @@ public class CardLearningUI {
         };
     }
 
-    public EventHandler getShowAnswerButtonEventHandler() {
+    public EventHandler showAnswerButtonEventHandler() {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -149,7 +151,7 @@ public class CardLearningUI {
         };
     }
 
-    public EventHandler getSelectRepetitionButtonEventHandler() {
+    public EventHandler selectRepetitionButtonEventHandler() {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

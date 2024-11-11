@@ -19,7 +19,7 @@ public class ResourceLoader {
     private ResourceLoader(){
         cards = new ArrayList<>();
         for(int i = 0; i < 10; i++){
-            Card card = new Card(String.valueOf(i + 1), "Front side " + i, "Back side " + i);
+            Card card = new Card(String.format("Name %d", i + 1), "Front side " + i, "Back side " + i, "Topic 1");
             cards.add(card);
         }
 

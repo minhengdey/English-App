@@ -9,20 +9,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 
 public class CardInteractor {
     private Scene previousScene;
     private Parent currentRoot;
     private Card card;
     private CardLearningUI cardLearningUI;
-    private BooleanProperty cardAvailabled = new SimpleBooleanProperty();
+    private final BooleanProperty cardAvailabled = new SimpleBooleanProperty();
     public CardInteractor(Card card, CardLearningUI cardLearningUI) {
         this.card = card;
         this.cardLearningUI = cardLearningUI;
         cardLearningUI.bindInteractorProperty(this);
     }
+    public CardInteractor(Card card){
+        this.card = card;
+    }
+
 
     public void setCard(Card card) {
         this.card = card;
@@ -42,10 +44,10 @@ public class CardInteractor {
         if(card != null) {
             this.previousScene = currentScene;
             Stage stage = (Stage) currentScene.getWindow();
-            FXMLLoader loader = new FXMLLoader(CardEditingUI.class.getResource("CardEditingUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(CardEditingScreen.class.getResource("CardEditingUI.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
-            CardEditingUI cardEditingUI = loader.getController();
+            CardEditingScreen cardEditingUI = loader.getController();
             cardEditingUI.connect(card,this);
         }
 
@@ -55,6 +57,7 @@ public class CardInteractor {
         stage.setScene(previousScene);
         this.previousScene = currentScene;
     }
+
 
 
     public boolean getCardAvailabled() {
