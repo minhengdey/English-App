@@ -64,3 +64,14 @@
 .button_login:hover{
     -fx-underline: true;
 }
+
+.area{
+    -fx-border-color: white;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+
+.text_trans {
+    -fx-background-color: #9b7ebd;
+    -fx-text-fill: white;
+}

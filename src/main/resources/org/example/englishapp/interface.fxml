@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
     <children>
@@ -40,7 +42,7 @@
                                 <Image url="@login_image/keep.png" />
                             </image>
                         </ImageView>
-                        <VBox layoutX="53.0" layoutY="121.0" prefHeight="184.0" prefWidth="140.0" spacing="40.0">
+                        <VBox layoutX="53.0" layoutY="121.0" prefHeight="240.0" prefWidth="140.0" spacing="25.0">
                             <children>
                                 <HBox prefHeight="45.0" prefWidth="100.0">
                                     <children>
@@ -95,12 +97,12 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@login_image/log-out.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false"  onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
+                              <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@login_image/magnifying-glass.png" />
+                                 </image>
+                              </ImageView>
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Search" textFill="WHITE">
                                             <font>
                                                 <Font name="Century Gothic Bold" size="14.0" />
                                             </font>
@@ -110,6 +112,23 @@
                                         </Button>
                                     </children>
                                 </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@login_image/log-out.png" />
+                                 </image>
+                              </ImageView>
+                              <Button id="button_home" minWidth="0.0" mnemonicParsing="false" onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
+                                 <font>
+                                    <Font name="Century Gothic Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
                             </children>
                         </VBox>
                     </children>
@@ -118,20 +137,43 @@
         </VBox>
         <Pane prefHeight="600.0" prefWidth="760.0" style="-fx-background-color: white;">
             <children>
-                <Pane layoutY="3.0" prefHeight="60.0" prefWidth="758.0">
-                    <children>
-                        <TextField layoutX="577.0" layoutY="16.0" prefHeight="28.0" prefWidth="150.0" promptText="Search">
-                            <cursor>
-                                <Cursor fx:constant="TEXT" />
-                            </cursor>
-                        </TextField>
-                        <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/magnifying-glass.png" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </Pane>
+            <TextArea id="input_area" layoutX="87.0" layoutY="243.0" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: white;" styleClass="area" stylesheets="@Style.css" />
+            <TextArea id="output_area" layoutX="445.0" layoutY="243.0" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: white;" styleClass="area" stylesheets="@Style.css" />
+            <Button id="trans_button" layoutX="343.0" layoutY="493.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="89.0" styleClass="button_signup" stylesheets="@Style.css" text="Translate" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField id="text_english" alignment="CENTER" layoutX="164.0" layoutY="176.0" prefHeight="43.0" prefWidth="79.0" styleClass="text_trans" stylesheets="@Style.css" text="English">
+                set.
+            </TextField>
+            <TextField id="text_vietnam" layoutX="523.0" layoutY="177.0" prefHeight="43.0" prefWidth="79.0" styleClass="text_trans" text="Vietnamese">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </TextField>
+            <Button id="share_button" layoutX="328.0" layoutY="177.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="89.0" style="-fx-background-color: white;" stylesheets="@Style.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text layoutX="86.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Số từ đã học:">
+               <font>
+                  <Font name="Times New Roman" size="18.0" />
+               </font>
+            </Text>
+            <TextField layoutX="204.0" layoutY="84.0" prefHeight="27.0" prefWidth="168.0" styleClass="area" stylesheets="@Style.css" />
+            <ImageView fitHeight="34.0" fitWidth="39.0" layoutX="370.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@login_image/arrow_4094584.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
             </children>
         </Pane>
     </children>
