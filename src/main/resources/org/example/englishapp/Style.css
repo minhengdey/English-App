@@ -75,3 +75,19 @@
     -fx-background-color: #9b7ebd;
     -fx-text-fill: white;
 }
+
+.text_profile{
+    -fx-border-color: white;
+    -fx-background-color: #e5ddea;
+}
+
+.button_edit {
+    -fx-background-color: #d4bee4;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+
+.button_edit:hover{
+    -fx-background-color: #9b7ebd;
+}
