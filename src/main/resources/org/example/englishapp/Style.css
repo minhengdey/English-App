@@ -102,3 +102,9 @@
     -fx-background-color: #d4bee4;
     -fx-text-fill: white;
 }
+
+.side_cf_pass{
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
