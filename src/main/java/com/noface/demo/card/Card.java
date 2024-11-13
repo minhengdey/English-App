@@ -3,30 +3,31 @@ package com.noface.demo.card;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Card{
-    private final StringProperty name;
-    private final StringProperty id;
-    private final StringProperty dueTime;
-    private final StringProperty frontContent;
-    private final StringProperty backContent;
-    private final StringProperty topic;
+    private final StringProperty name = new SimpleStringProperty();
+    private final StringProperty id = new SimpleStringProperty();
+    private final StringProperty dueTime = new SimpleStringProperty();
+    private final StringProperty frontContent = new SimpleStringProperty();
+    private final StringProperty backContent = new SimpleStringProperty();
+    private final StringProperty topic = new SimpleStringProperty();
 
 
 
     
     public Card(String name, String frontContent, String backContent, String topic){
-        this.name = new SimpleStringProperty(name);
-        this.frontContent = new SimpleStringProperty(frontContent);
-        this.backContent = new SimpleStringProperty(backContent);
-        this.dueTime = new SimpleStringProperty(LocalDateTime.now().toString());
-        this.id = new SimpleStringProperty();
-        this.topic = new SimpleStringProperty(topic);
+        this.name.set(name);
+        this.frontContent.set(frontContent);
+        this.backContent.set(backContent);
+        this.dueTime.set(LocalDateTime.now().toString());
+        this.topic.set(topic);
     }
+
+    public Card() {
+    }
+
     public void unbind(){
         name.unbind();
         dueTime.unbind();
@@ -47,7 +48,7 @@ public class Card{
                 '}';
     }
 
-    public static Comparator<Card> comparatorByDueTime(){
+    public static Comparator<Card> comparatorByDueTimeNearest(){
         return new Comparator<Card>() {
             @Override
             public int compare(Card o1, Card o2) {

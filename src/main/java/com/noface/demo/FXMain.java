@@ -1,11 +1,10 @@
 package com.noface.demo;
 
+import com.noface.demo.Controller.MainController;
 import com.noface.demo.card.Card;
-import com.noface.demo.card.CardEditingScreen;
-import com.noface.demo.card.CardLearningController;
-import com.noface.demo.card.CardLearningUI;
-import com.noface.demo.resource.ResourceLoader;
-import com.noface.demo.topic.CardTopicScreen;
+import com.noface.demo.Controller.CardLearningController;
+import com.noface.demo.screen.CardEditingScreen;
+import com.noface.demo.screen.CardLearningScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
@@ -13,8 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.HTMLEditor;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class FXMain extends Application{
-    private ConfigurableApplicationContext context;
 
     @Override
     public void init(){
@@ -33,9 +29,9 @@ public class FXMain extends Application{
     }
     public void start(Stage stage) throws Exception {
 //        testRandom1(stage);
-//        testCardLearningUI(stage);
-        testTopicScreen(stage);
-
+//        testCardLearningScreen(stage);
+//        testTopicScreen(stage);
+            testMainScreen(stage);
 //        testCardEditingScreen(stage);
 //        testRandom3(stage);
     }
@@ -67,31 +63,38 @@ public class FXMain extends Application{
         root.getChildren().add(tableView);
     }
     public void testRandom2(Stage stage) throws IOException {
-        FXMLLoader loader1 = new FXMLLoader(CardLearningUI.class.getResource("CardLearningUI.fxml"));
-        FXMLLoader loader2 = new FXMLLoader(CardLearningUI.class.getResource("CardLearningUI.fxml"));
+        FXMLLoader loader1 = new FXMLLoader(CardLearningScreen.class.getResource("CardLearningScreen.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(CardLearningScreen.class.getResource("CardLearningScreen.fxml"));
 //        stage.setScene(new Scene((Parent) loader1.load()));
         Stage stage1 = new Stage();
 //        stage1.setScene(new Scene((Parent) loader2.load()));
         loader1.load();
-        System.out.println((CardLearningUI) loader1.getController());
+        System.out.println((CardLearningScreen) loader1.getController());
         System.out.println(loader1.getRoot().hashCode());
 
         loader1.load();
-        System.out.println((CardLearningUI) loader1.getController());
+        System.out.println((CardLearningScreen) loader1.getController());
         System.out.println(loader1.getRoot().hashCode());
     }
     public void testRandom3(Stage stage) throws IOException {
     }
-    public static void testCardLearningUI(Stage stage) throws IOException {
-        HTMLEditor htmlEditor = new HTMLEditor();
-        System.out.println(htmlEditor.getChildrenUnmodifiable());
+    public static void testCardLearningScreen(Stage stage) throws IOException {
+        CardLearningController cardLearningController = new CardLearningController();
+        stage.setScene(new Scene(cardLearningController.getCardLearningScreen().getRoot()));
+        stage.show();
     }
     public void testTopicScreen(Stage stage) throws IOException {
-        CardTopicScreen screen = new CardTopicScreen(ResourceLoader.getInstance().getCardsSampleData());
+//        CardTopicScreen screen = new CardTopicScreen(ResourceLoader.getInstance().getCardsSampleData());
 //        CardEditingScreen screen = new CardEditingScreen();
-        stage.setScene(new Scene(screen.getRoot()));
-        stage.show();
+//        stage.setScene(new Scene(screen.getRoot()));
+//        stage.show();
 
+    }
+    public void testMainScreen(Stage stage) throws IOException {
+        MainController mainController = new MainController();
+
+        stage.setScene(new Scene(mainController.getMainScreen().getRoot()));
+        stage.show();
     }
     public static void main(String[] args) {
         launch(args);
