@@ -1,3 +1,6 @@
+.node{
+    -fx-background-color: #ffffff;
+}
 .side_ankerpane{
     -fx-background-color: #9b7ebd;
     -fx-border-color: rgb(255, 255, 255);

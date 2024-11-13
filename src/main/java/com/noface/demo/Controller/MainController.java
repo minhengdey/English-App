@@ -15,12 +15,26 @@ import java.util.List;
 public class MainController {
     private ListProperty<String> topics = new SimpleListProperty<>(FXCollections.observableArrayList());
     private ListProperty<Card> cards = new SimpleListProperty<>(FXCollections.observableArrayList());
-    private Card card;
     private MainScreen mainScreen;
+    private TopicScreenController topicScreenController;
+    private CardLearningController cardLearningController;
     public MainController() throws IOException {
         getData();
-        mainScreen =  new MainScreen(this);
+        topicScreenController = new TopicScreenController();
+        cardLearningController = new CardLearningController();
+
+        mainScreen =  new MainScreen(this, topicScreenController.getTopicScreen().getRoot(),
+                topicScreenController.getCardScreen().getRoot(),
+                cardLearningController.getCardLearningScreen().getRoot());
+        setMainScreenForSubScreen(mainScreen);
     }
+
+    private void setMainScreenForSubScreen(MainScreen mainScreen) {
+        topicScreenController.getTopicScreen().setMainScreen(mainScreen);
+        topicScreenController.getCardScreen().setMainScreen(mainScreen);
+        cardLearningController.getCardLearningScreen().setMainScreen(mainScreen);
+    }
+
     public void getData(){
         List<String> topicTitle = new ArrayList<>();
         for(int i = 0; i < 10; i++){

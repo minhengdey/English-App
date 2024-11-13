@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.List;
 
 import com.noface.demo.card.Card;
-import com.noface.demo.Controller.CardInteractor;
-import javafx.beans.binding.Bindings;
+import com.noface.demo.Controller.CardLearningInteractor;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,9 +20,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 
 public class CardLearningScreen {
@@ -44,6 +47,12 @@ public class CardLearningScreen {
     private HBox doneButtonBar;
     @FXML
     private Label cardNameLabel;
+    private MainScreen mainScreen;
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
+    }
+
     private FXMLLoader loader;
     public <T> T getRoot(){
         return loader.getRoot();
@@ -54,73 +63,48 @@ public class CardLearningScreen {
         loader.setController(this);
         loader.load();
     }
+    private final StringProperty frontContent = new SimpleStringProperty();
+    private final StringProperty backContent = new SimpleStringProperty();
+    private final BooleanProperty cardToLearnAvailabled = new SimpleBooleanProperty();
+    public CardLearningScreen(CardLearningInteractor interactor) throws IOException {
+        this();
+        this.interactor = interactor;
+        backContent.bind(interactor.backContentPropertyProperty());
+        frontContent.bind(interactor.frontContentPropertyProperty());
+        cardToLearnAvailabled.bind(interactor.cardAvailabledProperty());
+        cardToLearnAvailabled.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                handleCardToLearnAvailabledStatusChange(observable, oldValue, newValue);
+            }
+        });
+        handleBackCardShowedChange(cardToLearnAvailabled, true, true);
+    }
+
+    private void handleCardToLearnAvailabledStatusChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        if(newValue == true){
+            mainLearningArea.setVisible(true);
+            doneLearningLabel.setVisible(false);
+        }else{
+            mainLearningArea.setVisible(false);
+            doneLearningLabel.setVisible(true);
+        }
+    }
+
     @FXML
     public void initialize(){
         addCustomScreenComponent();
-    }
-
-    public void connect(Card card, CardInteractor interactor) {
-        this.interactor = interactor;
-        configureScreenComponentEvent(card, interactor);
-        loadInitializeContent();
+        configureScreenComponentEvent();
     }
 
 
-    private final BooleanProperty backCardShowed = new SimpleBooleanProperty();
-    private CardInteractor interactor;
-    public void bindInteractorProperty(CardInteractor interactor){
-        showAnswerButton.visibleProperty().bind(Bindings.createBooleanBinding(()->{
-            return !backCardShowed.get() && interactor.getCardAvailabled();
-        }, backCardShowed, interactor.cardAvailabledProperty()));
 
-        doneButtonBar.visibleProperty().bind(Bindings.createBooleanBinding(()->{
-            return backCardShowed.get() && interactor.getCardAvailabled();
-        }, backCardShowed, interactor.cardAvailabledProperty()));
+    private CardLearningInteractor interactor;
 
-        cardEditButton.visibleProperty().bind(interactor.cardAvailabledProperty());
-        mainLearningArea.visibleProperty().bind(interactor.cardAvailabledProperty());
-        doneLearningLabel.visibleProperty().bind(interactor.cardAvailabledProperty().not());
-    }
-
-    private final StringProperty frontContent = new SimpleStringProperty();
-    private final StringProperty backContent = new SimpleStringProperty();
-    public void bindCardProperty(Card card) {
-        frontContent.bind(card.frontContentProperty());
-        backContent.bind(card.backContentProperty());
-        cardNameLabel.textProperty().bind(card.nameProperty());
-
-        backCardShowed.set(true);
-        backCardShowed.addListener((observable, oldValue, newValue) -> {
-            if (backCardShowed.get()) {
-                frontView.getEngine().loadContent(frontContent.get());
-                backView.getEngine().loadContent(backContent.get());
-            } else {
-                frontView.getEngine().loadContent(frontContent.get());
-                backView.getEngine().loadContent("");
-            }
-        });
-        backCardShowed.set(false);
-
-        frontContent.addListener((observable, oldValue, newValue) -> {
-            frontView.getEngine().loadContent(frontContent.get());
-        });
-
-        backContent.addListener((observable, oldValue, newValue) -> {
-            if (backCardShowed.get()) {
-                backView.getEngine().loadContent(backContent.get());
-            } else {
-                backView.getEngine().loadContent("");
-            }
-        });
+    private Queue<Card> cards = new PriorityQueue<>(Card.comparatorByDueTimeNearest());
+    private ListProperty<Card> cardListProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
 
 
-    }
-
-    public void loadInitializeContent() {
-        frontView.getEngine().loadContent(frontContent.get());
-        backView.getEngine().loadContent("");
-
-    }
 
     private List<Button> selectRepetitionButtons = new ArrayList<>();
     public final String[] repetitionLabels = {"Again - 1 minutes", "Hard - 6 minutes", "Good - 10 minutes", "Easy - 3 days"};
@@ -133,53 +117,72 @@ public class CardLearningScreen {
             HBox.setMargin(selectRepetitionButton, new Insets(0, 5, 0, 5));
         }
     }
-
+    private final BooleanProperty backCardShowed = new SimpleBooleanProperty();
     public final long[] repetitionTimes = {60, 360, 600, 3 * 24 * 60 * 60};
-    public void configureScreenComponentEvent(Card card, CardInteractor interactor) {
-        bindInteractorProperty(interactor);
-        bindCardProperty(card);
+    public void configureScreenComponentEvent() {
         for (int i = 0; i < repetitionTimes.length; i++) {
             Button button = selectRepetitionButtons.get(i);
-            button.setOnAction(selectRepetitionButtonEventHandler());
-        }
-        cardEditButton.setOnAction(cardEditButtonEventHandler());
-        showAnswerButton.setOnAction(showAnswerButtonEventHandler());
-    }
-
-
-    public EventHandler<ActionEvent> cardEditButtonEventHandler() {
-        return new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Stage stage = (Stage) cardEditButton.getScene().getWindow();
-
-                    Stage editStage = interactor.openEditingStage(stage);
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    handleRepititionSelectButtonClicked(event);
                 }
-            }
-        };
-    }
-
-    public EventHandler<ActionEvent> showAnswerButtonEventHandler() {
-        return new EventHandler<ActionEvent>() {
+            });
+        }
+        cardEditButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                backCardShowed.set(true);
+                handleEditButtonClicked(event);
             }
-        };
-    }
-
-    public EventHandler<ActionEvent> selectRepetitionButtonEventHandler() {
-        return new EventHandler<ActionEvent>() {
+        });
+        showAnswerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                interactor.plusCardDueTime(repetitionTimes[selectRepetitionButtons.indexOf(event.getSource())]);
-                interactor.setCard(null);
+                handleShowAnswerButtonClicked(event);
             }
-        };
+        });
+        backCardShowed.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                handleBackCardShowedChange(observable, oldValue, newValue);
+            }
+        });
+        backCardShowed.set(true);
+    }
+    public void startShowing(){
+        if(cardToLearnAvailabled.get() == false){
+            handleCardToLearnAvailabledStatusChange(cardToLearnAvailabled, false, false);
+        }else{
+            backCardShowed.set(false);
+            handleCardToLearnAvailabledStatusChange(cardToLearnAvailabled, true, true);
+            handleBackCardShowedChange(backCardShowed, false, false);
+        }
+    }
+    public void handleBackCardShowedChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue){
+        if(newValue.equals(true)){
+            showAnswerButton.setVisible(false);
+            doneButtonBar.setVisible(true);
+            System.out.println(frontContent.get() + " " + backContent.get());
+            frontView.getEngine().loadContent(frontContent.get());
+            backView.getEngine().loadContent(backContent.get());
+        }else{
+            showAnswerButton.setVisible(true);
+            doneButtonBar.setVisible(false);
+            System.out.println(frontContent.get() + " " + backContent.get());
+            frontView.getEngine().loadContent(frontContent.get());
+            backView.getEngine().loadContent("");
+        }
+    }
+    public void handleEditButtonClicked(ActionEvent event){
+
+    }
+    public void handleShowAnswerButtonClicked(ActionEvent event) {
+        backCardShowed.set(true);
+    }
+    public void handleRepititionSelectButtonClicked(ActionEvent event) {
+        interactor.plusCardDueTime(repetitionTimes[selectRepetitionButtons.indexOf(event.getSource())]);
+        interactor.changeToNextCard();
+        backCardShowed.set(false);
     }
 
 }

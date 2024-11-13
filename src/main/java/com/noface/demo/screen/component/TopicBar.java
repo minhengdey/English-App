@@ -5,18 +5,21 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.geometry.Pos;
-import javafx.scene.layout.Priority;
 
-public class TopicBar extends HBox {
+public class TopicBar extends StackPane {
     private Button editButton;
     private Button learnButton;
+    private HBox aboveLayer;
+
     public TopicBar(String topicName) {
-        VBox.setMargin(this, new Insets(20, 20, 20, 20));
+        final int arcValue = 25;
+        final String fillColor = "#d4bee4";
+        VBox.setMargin(this, new Insets(5, 5, 5, 5));
         Label label = new Label(topicName);
         label.setFont(new Font("Arial", 18)); // Đặt kích thước font cho tiêu đề
 
@@ -30,14 +33,24 @@ public class TopicBar extends HBox {
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
+        aboveLayer = new HBox();
+        aboveLayer.getChildren().addAll(label, spacer, editButton, learnButton);
+        aboveLayer.setPadding(new Insets(30, 30, 30, 30));
+        aboveLayer.setSpacing(10);
+        aboveLayer.setAlignment(Pos.CENTER_LEFT);
 
-        this.getChildren().addAll(label, spacer, editButton, learnButton);
+        aboveLayer.setPrefSize(400, 50);
 
-        this.setSpacing(10);
-        this.setAlignment(Pos.CENTER_LEFT);
+        Rectangle back = new Rectangle();
+        back.heightProperty().bind(aboveLayer.heightProperty());
+        back.widthProperty().bind(aboveLayer.widthProperty());
+        back.setFill(Color.valueOf(fillColor));
+        back.setArcHeight(arcValue);
+        back.setArcWidth(arcValue);
 
-        this.setPrefSize(400, 50);
+        this.getChildren().addAll(back, aboveLayer);
     }
+
 
     public void setOnLearnButtonClicked(EventHandler<ActionEvent> evt){
         learnButton.setOnAction(evt);

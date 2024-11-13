@@ -1,13 +1,17 @@
 package com.noface.demo.screen;
 
+import com.noface.demo.Controller.TopicScreenController;
 import com.noface.demo.card.Card;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -16,37 +20,32 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 
-public class CardTopicScreen extends Screen {
-    private String topic;
+public class CardTopicScreen {
+    private StringProperty topic = new SimpleStringProperty();
     private MainScreen mainScreen;
+    private FXMLLoader loader;
 
-    public CardTopicScreen(MainScreen mainScreen) throws IOException {
+    public CardTopicScreen(TopicScreenController topicScreenController) throws IOException {
         this.mainScreen = mainScreen;
         loader = new FXMLLoader(this.getClass().getResource("CardTopicScreen.fxml"));
         loader.setController(this);
         loader.load();
+        configureBinding(topicScreenController);
         configureScreenComponentEventHandler();
     }
-    @Override
+    private final ListProperty<Card> cardData = new SimpleListProperty<>(FXCollections.observableArrayList());
+
+    private void configureBinding(TopicScreenController controller) {
+        cardData.bindBidirectional(controller.cardsProperty());
+        topic.bind(controller.topicProperty());
+    }
+
     public <T> T getRoot() {
         return loader.getRoot();
     }
-
-    public CardTopicScreen(MainScreen mainScreen, List<Card> cards) throws IOException {
-        this(mainScreen);
-        connect(cards);
-        configureScreenComponentEventHandler();
-    }
-    public void connect(List<Card> cards){
-        this.topic = cards.get(0).getTopic();
-        cardData.clear();
-        cardData.addAll(cards);
-    }
-
-
-    private final ListProperty<Card> cardData = new SimpleListProperty<>(FXCollections.observableArrayList());
 
 
     @FXML
@@ -65,12 +64,15 @@ public class CardTopicScreen extends Screen {
     private Button backButton;
     private CardEditingScreen cardEditingScreen;
 
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
+    }
 
     @FXML
     void initialize() throws IOException {
 
         cardEditingScreen = new CardEditingScreen();
-        cardEditingScreen.setCardTopicEditable(true);
+        cardEditingScreen.setCardTopicEditable(false);
 
         HBox.setHgrow(cardSearchBox, Priority.ALWAYS);
         cardSearchBox.setMaxWidth(Double.MAX_VALUE);
@@ -107,7 +109,7 @@ public class CardTopicScreen extends Screen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mainScreen.changeToListTopicScreen();
+                mainScreen.changeToListTopicPane();
             }
         };
     }
@@ -116,7 +118,7 @@ public class CardTopicScreen extends Screen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Card card = new Card("new card", "This is front content", "This is back content", topic);
+                Card card = new Card("new card", "This is front content", "This is back content", topic.get());
                 cardData.add(card);
                 cardsTable.getSelectionModel().select(cardData.getSize() - 1);
                 System.out.println(cardData.get().size());

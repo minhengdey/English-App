@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="760.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="760.0" stylesheets="@ListTopicScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="760.0">
+            <HBox fx:id="topHBox" alignment="CENTER" prefHeight="100.0" prefWidth="760.0" spacing="10.0">
                <children>
-                  <ComboBox editable="true" prefHeight="60.0" prefWidth="570.0" />
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Search" />
+                  <HBox fx:id="searchHBox" alignment="CENTER" prefHeight="41.0" prefWidth="525.0" spacing="10.0">
+                     <children>
+                        <TextField prefHeight="25.0" prefWidth="464.0" promptText="Type your topic" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="123.0" text="Search" />
+                     </children>
+                  </HBox>
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Add" />
                </children>
             </HBox>

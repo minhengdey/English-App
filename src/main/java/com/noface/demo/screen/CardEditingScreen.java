@@ -1,7 +1,7 @@
 package com.noface.demo.screen;
 
 import com.noface.demo.card.Card;
-import com.noface.demo.Controller.CardInteractor;
+import com.noface.demo.Controller.CardLearningInteractor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -19,8 +19,7 @@ import javafx.scene.web.HTMLEditor;
 import java.io.IOException;
 
 public class CardEditingScreen {
-    private CardInteractor interactor;
-
+    private MainScreen mainScreen;
     private StringProperty frontContent;
     private StringProperty backContent;
     private StringProperty cardNameProperty;
@@ -101,15 +100,8 @@ public class CardEditingScreen {
             }
         });
     }
-    public void connect(Card card , CardInteractor interactor){
-        connect(interactor);
-        connect(card);
-    }
     public void setCardTopicEditable(Boolean b){
         cardTopicTextField.setEditable(b);
-    }
-    public void connect(CardInteractor interactor){
-        this.interactor = interactor;
     }
     public void updateCardContent(){
         String content = contentEditor.getHtmlText();
@@ -136,5 +128,9 @@ public class CardEditingScreen {
                 updateCardContent();
             }
         };
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
     }
 }

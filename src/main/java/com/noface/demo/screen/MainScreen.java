@@ -1,6 +1,7 @@
 package com.noface.demo.screen;
 
 import com.noface.demo.Controller.MainController;
+import com.noface.demo.card.Card;
 import com.noface.demo.resource.ResourceLoader;
 import javafx.beans.property.ListProperty;
 import javafx.event.ActionEvent;
@@ -12,8 +13,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MainScreen {
     private final FXMLLoader loader;
@@ -21,13 +26,17 @@ public class MainScreen {
 
 
 
-    public MainScreen(MainController mainController) throws IOException {
+    public MainScreen(MainController mainController, Pane listTopicPane, Pane cardTopicPane, Pane cardLearningPane) throws IOException {
         this.mainController = mainController;
         loader = new FXMLLoader(this.getClass().getResource("MainScreen.fxml"));
         loader.setController(this);
+        this.listTopicPane = listTopicPane;
+        this.cardTopicPane = cardTopicPane;
+        this.cardLearningPane = cardLearningPane;
         loader.load();
     }
 
+    private Pane listTopicPane, cardLearningPane, cardTopicPane;
     public <T> T getRoot(){
         return loader.getRoot();
     }
@@ -51,7 +60,6 @@ public class MainScreen {
     @FXML
     public void initialize() throws IOException {
         initSubScreen();
-        connect();
         configureScreenComponentEvent();
     }
     public void configureScreenComponentEvent(){
@@ -65,8 +73,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                rightPane.getChildren().clear();
-                rightPane.getChildren().add(profileScreen.getRoot());
+
             }
         };
     }
@@ -76,8 +83,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                rightPane.getChildren().clear();
-                rightPane.getChildren().add(listTopicScreen.getRoot());
+                changeToListTopicPane();
             }
         };
     }
@@ -88,15 +94,8 @@ public class MainScreen {
     private CardTopicScreen cardTopicScreen;
     private CardLearningScreen cardLearningScreen;
     public void initSubScreen() throws IOException {
-        translateScreen = (new TranslateScreen());
-        listTopicScreen = (new ListTopicScreen(this, mainController));
-        profileScreen = (new ProfileScreen());
-        cardTopicScreen = (new CardTopicScreen(this));
-        cardLearningScreen = new CardLearningScreen();
     }
-    public void connect(){
-        listTopicScreen.connect(mainController.topicsProperty());
-    }
+
 
     private EventHandler<ActionEvent> translateButtonClickedEventHandler() {
         return new EventHandler<ActionEvent>() {
@@ -106,27 +105,18 @@ public class MainScreen {
             }
         };
     }
+    public void changeToListTopicPane(){
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(listTopicPane);
+    }
+    public void changeToCardTopicPane(){
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(cardTopicPane);
+    }
 
     private void changeToTranslatePane() {
-        rightPane.getChildren().clear();
-        rightPane.getChildren().add(translateScreen.getRoot());
+
     }
 
-    public void setFitPane(Pane pane){
-        AnchorPane.setBottomAnchor(pane, 0.0);
-        AnchorPane.setLeftAnchor(pane, 0.0);
-        AnchorPane.setRightAnchor(pane, 0.0);
-        AnchorPane.setTopAnchor(pane, 0.0);
-    }
 
-    public void changeToEditCardTopicScreen(){
-        rightPane.getChildren().clear();
-        rightPane.getChildren().add(cardTopicScreen.getRoot());
-        cardTopicScreen.connect(ResourceLoader.getInstance().getCardsSampleData());
-    }
-
-    public void changeToListTopicScreen() {
-        rightPane.getChildren().clear();
-        rightPane.getChildren().add(listTopicScreen.getRoot());
-    }
 }

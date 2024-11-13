@@ -23,6 +23,13 @@ public class ResourceLoader {
         }
 
     }
+    public List<String> getTopicTitles(){
+        List<String> titles = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            titles.add(String.format("Topic %d", i + 1));
+        }
+        return titles;
+    }
     public List<Card> getCardsSampleData(){
 
         return cards;
