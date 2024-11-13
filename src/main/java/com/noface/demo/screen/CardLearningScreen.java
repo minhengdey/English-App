@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.noface.demo.card.Card;
-import com.noface.demo.Controller.CardLearningInteractor;
+import com.noface.demo.controller.CardLearningInteractor;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

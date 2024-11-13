@@ -6,4 +6,5 @@ module com.noface.demo{
    opens com.noface.demo;
    opens com.noface.demo.card;
    opens com.noface.demo.topic;
+   opens com.noface.demo.controller;
 }

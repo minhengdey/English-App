@@ -1,4 +1,4 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.noface.demo.HelloApplication;
@@ -39,7 +39,7 @@ public class InterfaceController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("login.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("LoginScreen.fxml")));
 
             Stage logOutStage = new Stage();
             logOutStage.setTitle("English App");

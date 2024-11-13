@@ -1,4 +1,4 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.noface.demo.card.Card;
 import com.noface.demo.resource.ResourceLoader;
@@ -18,21 +18,29 @@ public class MainController {
     private MainScreen mainScreen;
     private TopicScreenController topicScreenController;
     private CardLearningController cardLearningController;
+    private TranslateScreenController translateScreenController;
+    private ProfileScreenController profileScreenController;
     public MainController() throws IOException {
         getData();
         topicScreenController = new TopicScreenController();
         cardLearningController = new CardLearningController();
-
+        translateScreenController = new TranslateScreenController();
+        profileScreenController = new ProfileScreenController();
         mainScreen =  new MainScreen(this, topicScreenController.getTopicScreen().getRoot(),
-                topicScreenController.getCardScreen().getRoot(),
-                cardLearningController.getCardLearningScreen().getRoot());
+                topicScreenController.getScreen().getRoot(),
+                cardLearningController.getScreen().getRoot(),
+                translateScreenController.getScreen().getRoot(),
+                profileScreenController.getScreen().getRoot());
         setMainScreenForSubScreen(mainScreen);
+        mainScreen.changeToProfilePane();
     }
 
     private void setMainScreenForSubScreen(MainScreen mainScreen) {
         topicScreenController.getTopicScreen().setMainScreen(mainScreen);
-        topicScreenController.getCardScreen().setMainScreen(mainScreen);
-        cardLearningController.getCardLearningScreen().setMainScreen(mainScreen);
+        topicScreenController.getScreen().setMainScreen(mainScreen);
+        cardLearningController.getScreen().setMainScreen(mainScreen);
+        translateScreenController.getScreen().setMainScreen(mainScreen);
+        profileScreenController.getScreen().setMainScreen(mainScreen);
     }
 
     public void getData(){

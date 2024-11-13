@@ -1,4 +1,4 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.noface.demo.card.Card;
 import javafx.beans.property.ListProperty;

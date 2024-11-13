@@ -1,42 +1,46 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.fxml.FXML;
+import com.noface.demo.HelloApplication;
+import com.noface.demo.screen.LoginScreen;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import com.noface.demo.HelloApplication;
 
+import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
-    @FXML
-    TextField usernameField;
-    @FXML
-    PasswordField passwordField;
+public class LoginScreenController {
+    private LoginScreen screen;
+    private StringProperty username = new SimpleStringProperty();
+    private StringProperty password =  new SimpleStringProperty();
+    public LoginScreenController() throws IOException {
+        screen = new LoginScreen(this);
+        username.bind(screen.getUsernameField().textProperty());
+        password.bind(screen.getPasswordField().textProperty());
+    }
+
+    public LoginScreen getScreen() {
+        return screen;
+    }
 
     private HttpClient httpClient = HttpClient.newHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @FXML
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+    public void handleLogin() {
+
 
         try
         {
@@ -45,8 +49,8 @@ public class LoginController implements Initializable {
                             "\"username\":\"%s\"," +
                             "\"password\":\"%s\"" +
                     "}",
-                    username,
-                    password
+                    username.get(),
+                    password.get()
             );
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -77,11 +81,10 @@ public class LoginController implements Initializable {
             showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
         }
     }
-    @FXML
-    protected void handleCreateAccount() {
+    public void handleSignUp() {
         try {
-
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("sign_up.fxml")));
+            SignUpScreenController controller = new SignUpScreenController();
+            Parent root = controller.getScreen().getRoot();
 
             Stage signUpStage = new Stage();
             signUpStage.setTitle("Đăng ký");
@@ -113,7 +116,6 @@ public class LoginController implements Initializable {
         }
     }
 
-    @FXML
     protected void handleLoginInterface() {
         try {
 
@@ -148,17 +150,17 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
-
+//
     private void showAlert(String message, Alert.AlertType alertType)
     {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
+//
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+//    }
 }
 
 

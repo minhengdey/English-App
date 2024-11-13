@@ -1,4 +1,4 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.noface.demo.card.Card;
 import com.noface.demo.screen.CardLearningScreen;
@@ -25,7 +25,7 @@ public class CardLearningController {
         interactor.load();
         cardLearningScreen.startShowing();
     }
-    public CardLearningScreen getCardLearningScreen() {
+    public CardLearningScreen getScreen() {
         return cardLearningScreen;
     }
 }
