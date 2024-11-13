@@ -1,4 +1,4 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.noface.demo.card.Card;
 import com.noface.demo.resource.ResourceLoader;
@@ -34,7 +34,7 @@ public class TopicScreenController {
         getData();
     }
     public void handleTopicChange(ObservableValue<? extends String> observable, String oldValue, String newValue){
-        // get card value by topic titles
+        // SU DUNG DE LAY DATA TU DATABASE VOI TOPIC TITLES CHO TRUOC
 
     }
 
@@ -49,7 +49,7 @@ public class TopicScreenController {
         return topic;
     }
 
-    public CardTopicScreen getCardScreen() {
+    public CardTopicScreen getScreen() {
         return cardScreen;
     }
 
@@ -58,6 +58,7 @@ public class TopicScreenController {
     }
 
     public void getData(){
+        // METHOD DUOC SU DUNG DE LAY DATA TU DATABASE
         topicTitles.setAll(ResourceLoader.getInstance().getTopicTitles());
         cards.addAll(ResourceLoader.getInstance().getCardsSampleData());
     }
@@ -76,5 +77,15 @@ public class TopicScreenController {
 
     public ListProperty<Card> cardsProperty() {
         return cards;
+    }
+
+    public void saveDataToDatabase() {
+        // METHOD DUOC SU DUNG DE LUU ListProperty<Card> VAO DATABASE
+    }
+    public void removeCardInDatabase(Card cardToRemove){
+
+    }
+    public void addCardToDatabase(Card card){
+
     }
 }

@@ -1,7 +1,6 @@
 package com.noface.demo.screen;
 
 import com.noface.demo.card.Card;
-import com.noface.demo.Controller.CardLearningInteractor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;

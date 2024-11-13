@@ -1,7 +1,7 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.Controller.TopicScreenController;
-import com.noface.demo.Controller.CardLearningController;
+import com.noface.demo.controller.TopicScreenController;
+import com.noface.demo.controller.CardLearningController;
 import com.noface.demo.screen.component.TopicBar;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -68,7 +68,7 @@ public class ListTopicScreen {
                     CardLearningController controller = new CardLearningController();
 
                     Stage stage = new Stage();
-                    stage.setScene(new Scene(controller.getCardLearningScreen().getRoot()));
+                    stage.setScene(new Scene(controller.getScreen().getRoot()));
                     controller.load();
                     stage.show();
 

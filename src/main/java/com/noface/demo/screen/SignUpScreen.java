@@ -1,15 +1,21 @@
-package com.noface.demo.Controller;
+package com.noface.demo.screen;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noface.demo.controller.SignUpScreenController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -18,7 +24,25 @@ import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable {
+public class SignUpScreen implements Initializable {
+    private FXMLLoader loader;
+
+    public SignUpScreen(SignUpScreenController controller) throws IOException {
+        loader = new FXMLLoader(this.getClass().getResource("SignUpScreen.fxml"));
+        loader.setController(this);
+        loader.load();
+        registerButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleRegisterButton(event);
+            }
+        });
+    }
+
+    public <T> T getRoot() {
+        return loader.getRoot();
+    }
+
     @FXML
     TextField name;
     @FXML
@@ -34,7 +58,9 @@ public class RegisterController implements Initializable {
     @FXML
     TextField year;
     @FXML
-    ChoiceBox<String> gender = new ChoiceBox<>();;
+    ChoiceBox<String> gender = new ChoiceBox<>();
+    @FXML
+    Button registerButton;
     @FXML
     TextField email;
     @FXML
@@ -43,12 +69,10 @@ public class RegisterController implements Initializable {
     private HttpClient httpClient = HttpClient.newHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    private String normalize_name(String name)
-    {
+    private String normalize_name(String name) {
         String[] k = name.trim().split("\\s+");
         StringBuilder sb = new StringBuilder();
-        for (String i : k)
-        {
+        for (String i : k) {
             sb.append(i.substring(0, 1).toUpperCase())
                     .append(i.substring(1).toLowerCase())
                     .append(" ");
@@ -64,8 +88,7 @@ public class RegisterController implements Initializable {
     @FXML
     protected void handleRegisterButton(javafx.event.ActionEvent event) {
         String fullName = "", user = "", pass = "", confirmPass = "", d = "", m = "", y = "", userGender = "", mail = "", phoneNumber = "";
-        try
-        {
+        try {
             fullName = name.getText();
             user = username.getText().trim();
             pass = password.getText();
@@ -79,35 +102,26 @@ public class RegisterController implements Initializable {
 
             if (fullName.isEmpty()) showAlert("Vui lòng điền họ tên đầy đủ!", Alert.AlertType.WARNING);
             else if (user.isEmpty()) showAlert("Vui lòng điền username!", Alert.AlertType.WARNING);
-            else if (user.length() < 3)
-            {
+            else if (user.length() < 3) {
                 showAlert("Username phải chứa ít nhất 3 ký tự!", Alert.AlertType.WARNING);
                 username.clear();
-            }
-            else if (pass.length() < 8)
-            {
+            } else if (pass.length() < 8) {
                 showAlert("Mật khẩu phải chứa ít nhất 8 ký tự!", Alert.AlertType.WARNING);
                 password.clear();
                 confirmPassword.clear();
-            }
-            else if (!pass.equals(confirmPass))
-            {
+            } else if (!pass.equals(confirmPass)) {
                 showAlert("Mật khẩu không khớp!", Alert.AlertType.WARNING);
                 password.clear();
                 confirmPassword.clear();
-            }
-            else if (d.isEmpty() || m.isEmpty() || y.isEmpty()) showAlert("Vui lòng điền đầy đủ ngày sinh!", Alert.AlertType.WARNING);
+            } else if (d.isEmpty() || m.isEmpty() || y.isEmpty())
+                showAlert("Vui lòng điền đầy đủ ngày sinh!", Alert.AlertType.WARNING);
             else if (userGender == null) showAlert("Vui lòng chọn giới tính!", Alert.AlertType.WARNING);
             else if (mail.isEmpty()) showAlert("Vui lòng điền email!", Alert.AlertType.WARNING);
             else if (phoneNumber.isEmpty()) showAlert("Vui lòng điền số điện thoại!", Alert.AlertType.WARNING);
-            else
-            {
-                try
-                {
+            else {
+                try {
                     LocalDate.of(Integer.parseInt(y), Integer.parseInt(m), Integer.parseInt(d));
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     showAlert("Vui lòng điền ngày sinh hợp lệ!", Alert.AlertType.ERROR);
                     day.clear();
                     month.clear();
@@ -115,7 +129,7 @@ public class RegisterController implements Initializable {
                     return;
                 }
 
-                String requestBody = String.format (
+                String requestBody = String.format(
                         "{" +
                                 "\"username\":\"%s\"," +
                                 "\"password\":\"%s\"," +
@@ -138,9 +152,8 @@ public class RegisterController implements Initializable {
                         phoneNumber
                 );
 
-                System.out.println (requestBody);
-                try
-                {
+                System.out.println(requestBody);
+                try {
                     HttpRequest request = HttpRequest.newBuilder()
                             .uri(new URI("http://localhost:8080/users"))
                             .header("Content-Type", "application/json")
@@ -148,45 +161,36 @@ public class RegisterController implements Initializable {
                             .build();
 
                     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                    System.out.println (response.statusCode());
-                    System.out.println (response.body());
+                    System.out.println(response.statusCode());
+                    System.out.println(response.body());
 
-                    if (response.statusCode() == 200)
-                    {
+                    if (response.statusCode() == 200) {
                         showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.close();
-                    }
-                    else
-                    {
+                    } else {
                         String jsonResponse = response.body();
                         JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                         int code = jsonNode.get("code").asInt();
-                        if (code == 1000)
-                        {
+                        if (code == 1000) {
                             showAlert("Username đã tồn tại, vui lòng đổi username!", Alert.AlertType.ERROR);
                             username.clear();
-                        }
-                        else showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
+                        } else showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
                     }
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                     showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
                 }
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void showAlert(String message, Alert.AlertType alertType)
-    {
+    private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
     }
 }
+

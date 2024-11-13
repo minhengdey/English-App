@@ -1,8 +1,7 @@
-package com.noface.demo.Controller;
+package com.noface.demo.controller;
 
 import com.noface.demo.card.Card;
 import com.noface.demo.resource.ResourceLoader;
-import com.noface.demo.screen.CardLearningScreen;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,37 +74,6 @@ public class CardLearningInteractor {
         currentCard.setDueTime((LocalDateTime.now().plusSeconds(seconds)).toString());
         System.out.println("In add card time " + currentCard);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public ObservableList<Card> getCardListProperty() {
         return cardListProperty.get();
