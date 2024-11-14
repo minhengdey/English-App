@@ -87,18 +87,17 @@ public class SignUpScreen implements Initializable {
 
     @FXML
     protected void handleRegisterButton(javafx.event.ActionEvent event) {
-        String fullName = "", user = "", pass = "", confirmPass = "", d = "", m = "", y = "", userGender = "", mail = "", phoneNumber = "";
         try {
-            fullName = name.getText();
-            user = username.getText().trim();
-            pass = password.getText();
-            confirmPass = confirmPassword.getText();
-            d = day.getText();
-            m = month.getText();
-            y = year.getText();
-            userGender = gender.getValue();
-            mail = email.getText();
-            phoneNumber = phone.getText();
+            String fullName = name.getText();
+            String user = username.getText().trim();
+            String pass = password.getText();
+            String confirmPass = confirmPassword.getText();
+            String d = day.getText();
+            String m = month.getText();
+            String y = year.getText();
+            String userGender = gender.getValue();
+            String mail = email.getText();
+            String phoneNumber = phone.getText();
 
             if (fullName.isEmpty()) showAlert("Vui lòng điền họ tên đầy đủ!", Alert.AlertType.WARNING);
             else if (user.isEmpty()) showAlert("Vui lòng điền username!", Alert.AlertType.WARNING);
@@ -140,7 +139,7 @@ public class SignUpScreen implements Initializable {
                                 "\"gender\":\"%s\"," +
                                 "\"email\":\"%s\"," +
                                 "\"phone\":\"%s\"" +
-                                "}",
+                        "}",
                         user,
                         pass,
                         normalize_name(fullName),

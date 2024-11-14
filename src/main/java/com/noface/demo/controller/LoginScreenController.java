@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.noface.demo.HelloApplication;
 import com.noface.demo.screen.LoginScreen;
+import com.noface.demo.utils.TokenManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +65,11 @@ public class LoginScreenController {
 
             if (response.statusCode() == 200)
             {
+                String jsonResponse = response.body();
+                JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                String token = jsonNode.path("result").path("token").asText();
+                System.out.println (token);
+                TokenManager.getInstance().setToken(token);
                 handleLoginInterface();
             }
             else
@@ -71,7 +77,7 @@ public class LoginScreenController {
                 String jsonResponse = response.body();
                 JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                 int code = jsonNode.get("code").asInt();
-                if (code == 1007) showAlert("Thông tin đăng nhập không hợp lệ, vui lòng kiểm tra lại!", Alert.AlertType.ERROR);
+                if (code == 1002 || code == 1007) showAlert("Thông tin đăng nhập không hợp lệ, vui lòng kiểm tra lại!", Alert.AlertType.ERROR);
                 else showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
             }
         }
@@ -119,7 +125,7 @@ public class LoginScreenController {
     protected void handleLoginInterface() {
         try {
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("MainScreen.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("/com/noface/demo/screen/MainScreen.fxml")));
 
             Stage signUpStage = new Stage();
             signUpStage.setTitle("Trang chủ");
