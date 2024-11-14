@@ -18,7 +18,7 @@ public class TopicBar extends StackPane {
 
     public TopicBar(String topicName) {
         final int arcValue = 25;
-        final String fillColor = "#d4bee4";
+        final String fillColor = "#FFE6A5";
         VBox.setMargin(this, new Insets(5, 5, 5, 5));
         Label label = new Label(topicName);
         label.setFont(new Font("Arial", 18)); // Đặt kích thước font cho tiêu đề

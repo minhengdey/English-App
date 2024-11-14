@@ -1,5 +1,6 @@
 package com.noface.demo.screen;
 
+import com.noface.demo.card.Card;
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.CardLearningController;
 import com.noface.demo.screen.component.TopicBar;
@@ -13,7 +14,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,12 +38,31 @@ public class ListTopicScreen {
         configureScreenComponent();
     }
     public void configureScreenComponent(){
+        addTopicButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    handleAddTopicButtonClicked(actionEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         topicTitles.addListener(new ChangeListener<ObservableList<String>>() {
             @Override
             public void changed(ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) {
                 addTopicBarToScreen();
             }
         });
+    }
+
+    private void handleAddTopicButtonClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Card card = new Card("new name", "new name", "new name", "new name");
+        CardEditingScreen screen = new CardEditingScreen();
+        stage.setScene(new Scene(screen.getRoot()));
+        stage.show();
     }
 
     public <T> T getRoot() {
@@ -68,6 +90,7 @@ public class ListTopicScreen {
                     CardLearningController controller = new CardLearningController();
 
                     Stage stage = new Stage();
+                    stage.initModality(Modality.APPLICATION_MODAL);
                     stage.setScene(new Scene(controller.getScreen().getRoot()));
                     controller.load();
                     stage.show();
@@ -87,4 +110,6 @@ public class ListTopicScreen {
             }
         };
     }
+    @FXML
+    private Button addTopicButton;
 }

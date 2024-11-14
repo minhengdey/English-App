@@ -98,6 +98,7 @@ public class CardEditingScreen {
                 }
             }
         });
+
     }
     public void setCardTopicEditable(Boolean b){
         cardTopicTextField.setEditable(b);

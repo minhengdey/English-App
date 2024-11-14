@@ -107,4 +107,8 @@ public class CardLearningInteractor {
     public BooleanProperty cardAvailabledProperty() {
         return cardAvailabled;
     }
+
+    public Card getCurrentCard() {
+        return currentCard;
+    }
 }

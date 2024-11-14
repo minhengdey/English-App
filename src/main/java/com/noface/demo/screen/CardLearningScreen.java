@@ -15,11 +15,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -79,6 +82,7 @@ public class CardLearningScreen {
             }
         });
         handleBackCardShowedChange(cardToLearnAvailabled, true, true);
+
     }
 
     private void handleCardToLearnAvailabledStatusChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -129,18 +133,16 @@ public class CardLearningScreen {
                 }
             });
         }
-        cardEditButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                handleEditButtonClicked(event);
-            }
-        });
+
+
         showAnswerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 handleShowAnswerButtonClicked(event);
             }
         });
+
+
         backCardShowed.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -148,6 +150,13 @@ public class CardLearningScreen {
             }
         });
         backCardShowed.set(true);
+
+        cardEditButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                handleEditButtonClicked(actionEvent);
+            }
+        });
     }
     public void startShowing(){
         if(cardToLearnAvailabled.get() == false){
@@ -174,6 +183,16 @@ public class CardLearningScreen {
         }
     }
     public void handleEditButtonClicked(ActionEvent event){
+        Stage stage = new Stage();
+        try {
+            CardEditingScreen screen = new CardEditingScreen();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(screen.getRoot()));
+            screen.connect(interactor.getCurrentCard());
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
     public void handleShowAnswerButtonClicked(ActionEvent event) {

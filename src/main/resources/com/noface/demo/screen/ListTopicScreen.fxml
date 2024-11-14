@@ -19,7 +19,7 @@
                         <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="29.0" prefWidth="123.0" text="Search" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <Button fx:id="addTopicButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" text="Add" />
                </children>
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
