@@ -54,7 +54,14 @@ public class NewWordService {
     }
 
     public void deleteByUserIdAndId (Long userId, Long id) {
-        newWordRepository.deleteByUserIdAndId(userId, id);
+        NewWordEntity newWordEntity = newWordRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.NEW_WORD_NOT_FOUND));
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
+        set.remove(newWordEntity);
+        user.setNewWords(set);
+        newWordRepository.deleteById(id);
     }
 
     public Set<NewWordResponse> getAllNewWordByUserId (Long userId) {
