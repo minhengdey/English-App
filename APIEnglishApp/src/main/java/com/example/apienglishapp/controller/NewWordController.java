@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class NewWordController {
@@ -93,12 +94,24 @@ public class NewWordController {
 
     @GetMapping (value = "/new_word")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public List<NewWordResponse> getAllNewWordByUserId () {
+    public Set<NewWordResponse> getAllNewWordByUserId () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof JwtAuthenticationToken) {
             JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
             Jwt jwt = jwtToken.getToken();
             return newWordService.getAllNewWordByUserId(Long.parseLong(jwt.getSubject()));
+        }
+        throw new AppException(ErrorCode.UNAUTHENTICATED);
+    }
+
+    @GetMapping (value = "/topic")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public Set<String> getAllTopic () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+            Jwt jwt = jwtToken.getToken();
+            return newWordService.getAllTopic(Long.parseLong(jwt.getSubject()));
         }
         throw new AppException(ErrorCode.UNAUTHENTICATED);
     }

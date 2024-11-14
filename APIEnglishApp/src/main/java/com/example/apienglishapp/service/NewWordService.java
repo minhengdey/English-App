@@ -3,6 +3,7 @@ package com.example.apienglishapp.service;
 import com.example.apienglishapp.dto.request.NewWordRequest;
 import com.example.apienglishapp.dto.response.NewWordResponse;
 import com.example.apienglishapp.entity.NewWordEntity;
+import com.example.apienglishapp.entity.UserEntity;
 import com.example.apienglishapp.exception.AppException;
 import com.example.apienglishapp.exception.ErrorCode;
 import com.example.apienglishapp.mapper.NewWordMapper;
@@ -11,9 +12,8 @@ import com.example.apienglishapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class NewWordService {
@@ -54,25 +54,31 @@ public class NewWordService {
         newWordRepository.deleteByUserIdAndId(userId, id);
     }
 
-    public List<NewWordResponse> getAllNewWordByUserId (Long userId) {
+    public Set<NewWordResponse> getAllNewWordByUserId (Long userId) {
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
+        return set.stream().map(newWordMapper::toNewWordResponse).collect(Collectors.toSet());
+    }
+
+    public List<NewWordResponse> getAllByTopicAndUserId (String topic, Long userId) {
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
         List<NewWordEntity> list = new ArrayList<>();
-        List<NewWordEntity> listAll = newWordRepository.findAll();
-        for (NewWordEntity newWord : listAll) {
-            if (newWord.getUser() != null && newWord.getUser().getId().equals(userId)) {
+        for (NewWordEntity newWord : set) {
+            if (newWord.getTopic().equals(topic)) {
                 list.add(newWord);
             }
         }
         return list.stream().map(newWordMapper::toNewWordResponse).toList();
     }
 
-    public List<NewWordResponse> getAllByTopicAndUserId (String topic, Long userId) {
-        List<NewWordEntity> list = new ArrayList<>();
-        List<NewWordEntity> listAll = newWordRepository.findAll();
-        for (NewWordEntity newWord : listAll) {
-            if (newWord.getTopic().equals(topic) && newWord.getUser() != null && newWord.getUser().getId().equals(userId)) {
-                list.add(newWord);
-            }
+    public Set<String> getAllTopic (Long userId) {
+        Set<String> setTopic = new TreeSet<>();
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
+        for (NewWordEntity newWord : set) {
+            setTopic.add(newWord.getTopic());
         }
-        return list.stream().map(newWordMapper::toNewWordResponse).toList();
+        return setTopic;
     }
 }
