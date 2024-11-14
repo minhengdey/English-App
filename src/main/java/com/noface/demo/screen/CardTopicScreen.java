@@ -18,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 public class CardTopicScreen {
@@ -128,7 +129,7 @@ public class CardTopicScreen {
 
 
     public void handleAddCardButtonClicked(ActionEvent event) {
-        Card card = new Card("new card", "This is front content", "This is back content", topic.get());
+        Card card = new Card(0, "new card", "This is front content", "This is back content", topic.get(), LocalDateTime.now().toString());
         cardData.add(card);
         cardsTable.getSelectionModel().select(cardData.getSize() - 1);
         System.out.println(cardData.get().size());

@@ -2,6 +2,7 @@ package com.noface.demo.resource;
 
 import com.noface.demo.model.Card;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ResourceLoader {
     private ResourceLoader(){
         cards = new ArrayList<>();
         for(int i = 0; i < 3; i++){
-            Card card = new Card(String.format("Name %d", i + 1), "Front side " + i, "Back side " + i, "Topic 1");
+            Card card = new Card(i, String.format("Name %d", i + 1), "Front side " + i, "Back side " + i, "Topic 1", LocalDateTime.now().toString());
             cards.add(card);
         }
 

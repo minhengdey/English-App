@@ -1,6 +1,6 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.model.Card;
+import com.noface.demo.card.Card;
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.CardLearningController;
 import com.noface.demo.screen.component.TopicBar;
@@ -23,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class ListTopicScreen {
     private  FXMLLoader loader;
@@ -62,8 +63,7 @@ public class ListTopicScreen {
     private void handleAddTopicButtonClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-
-        Card card = new Card("new name", "new name", "new name", "new name");
+        Card card = new Card(0, "new name", "new name", "new name", "new name", LocalDateTime.now().toString());
         CardEditingScreen screen = new CardEditingScreen();
         VBox root = screen.getRoot();
         HBox bottomBar = new HBox();
