@@ -24,15 +24,6 @@
 
   <repositories>
     <repository>
-      <id>jitpack.io</id>
-      <url>https://jitpack.io</url>
-    </repository>
-
-    <repository>
-      <id>jpro - sandec repository</id>
-      <url>https://sandec.jfrog.io/artifactory/repo/</url>
-    </repository>
-    <repository>
       <id>central</id>
       <name>Maven Central</name>
       <url>https://repo1.maven.org/maven2/</url>
@@ -77,10 +68,10 @@
 
   <build>
     <plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+          <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+          </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

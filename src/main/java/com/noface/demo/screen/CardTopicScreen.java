@@ -47,7 +47,7 @@ public class CardTopicScreen {
 
 
     @FXML
-    private ComboBox cardSearchBox;
+    private TextField cardSearchBox;
     @FXML
     private TableView<Card> cardsTable;
     @FXML

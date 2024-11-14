@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.web.HTMLEditorSkin;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,13 +19,15 @@ public class FXMain extends Application{
         // context = new SpringApplicationBuilder(SpringMain.class).run();
     }
     public void start(Stage stage) throws Exception {
-//            testMainScreen(stage);
-        testLogin(stage);
+        stage.resizableProperty().set(false);
+        testMainScreen(stage);
+//        testLogin(stage);
     }
     public void testLogin(Stage stage) throws IOException {
         LoginScreenController loginScreenController = new LoginScreenController();
         Scene scene = new Scene(loginScreenController.getScreen().getRoot());
         stage.setScene(scene);
+
         stage.show();
     }
 

@@ -3,8 +3,9 @@
 }
 .button{
     -fx-text-fill: "white";
-    -fx-background-color: #9b7ebd;
+    -fx-background-color: #8ABFA3;
     -fx-background-radius: 15;
+
 }
 
 .button:hover{
@@ -19,15 +20,28 @@
     -fx-padding: 30;
     -fx-background-color: #d4bee4;
 }
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 5px;
+}
+
+.text-field:focused {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b7ebd;
+}
+
 
 #searchHBox{
     -fx-background-color: #d4bee4;  /* Màu nền của HBox */
-    -fx-background-radius: 15;      /* Bo tròn các góc của HBox */
+    -fx-background-radius: 25;      /* Bo tròn các góc của HBox */
     -fx-border-radius: 15;
     -fx-padding: 10px;
     -fx-pref-height: 30px;
 }
 #topHBox{
-    -fx-padding: 20px;
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
 }
 

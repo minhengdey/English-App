@@ -1,74 +1,33 @@
-/*!* Background for main container *!*/
-/*#root {*/
-/*    -fx-background-color: #FEF9F2;*/
-/*    -fx-padding: 10;*/
-/*    -fx-spacing: 10;*/
-/*}*/
+.node{
+    -fx-background-color: #ffffff;
+}
+.button{
+    -fx-text-fill: "white";
+    -fx-background-color: #9b7ebd;
+    -fx-background-radius: 15;
+}
 
-/*!* Styling for the StackPane *!*/
-/*.stack-pane {*/
-/*    -fx-background-color: #FEF9F2;*/
-/*}*/
+.button:hover{
+    -fx-background-color: #876ca1;
+}
+.button:selected{
+    -fx-background-color: #1a1620;
+}
+.hbox{
+    -fx-spacing: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 30;
+    -fx-background-color: #d4bee4;
+}
 
-/*!* Label styling *!*/
-/*#doneLearningLabel {*/
-/*    -fx-text-fill: #789DBC;*/
-/*    -fx-font-size: 16px;*/
-/*    -fx-font-weight: bold;*/
-/*}*/
+#searchHBox{
+    -fx-background-color: #d4bee4;  /* Màu nền của HBox */
+    -fx-background-radius: 15;      /* Bo tròn các góc của HBox */
+    -fx-border-radius: 15;
+    -fx-padding: 10px;
+    -fx-pref-height: 30px;
+}
+#topHBox{
+    -fx-padding: 20px;
+}
 
-/*#cardNameLabel {*/
-/*    -fx-background-color: #FFE3E3;*/
-/*    -fx-border-color: #789DBC;*/
-/*    -fx-border-width: 1px;*/
-/*    -fx-text-fill: #789DBC;*/
-/*    -fx-padding: 10;*/
-/*    -fx-font-size: 14px;*/
-/*}*/
-
-/*!* SplitPane styling *!*/
-/*.split-pane {*/
-/*    -fx-background-color: #C9E9D2;*/
-/*}*/
-
-/*!* WebView styling *!*/
-/*.web-view {*/
-/*    -fx-background-color: #FEF9F2;*/
-/*    -fx-border-color: #789DBC;*/
-/*    -fx-border-width: 1px;*/
-/*}*/
-
-/*!* TextArea styling *!*/
-/*.text-area {*/
-/*    -fx-background-color: #FFE3E3;*/
-/*    -fx-text-fill: #789DBC;*/
-/*    -fx-border-color: #789DBC;*/
-/*    -fx-border-width: 1px;*/
-/*}*/
-
-/*!* Button styling *!*/
-/*#cardEditButton, #showAnswerButton {*/
-/*    -fx-background-color: #789DBC;*/
-/*    -fx-text-fill: #FEF9F2;*/
-/*    -fx-border-color: #FFE3E3;*/
-/*    -fx-border-width: 1px;*/
-/*}*/
-
-/*#cardEditButton:hover, #showAnswerButton:hover {*/
-/*    -fx-background-color: #FFE3E3;*/
-/*    -fx-text-fill: #789DBC;*/
-/*    -fx-border-color: #789DBC;*/
-/*}*/
-
-/*!* Bottom button bar styling *!*/
-/*#bottomButtonBar {*/
-/*    -fx-background-color: #C9E9D2;*/
-/*    -fx-padding: 5;*/
-/*    -fx-alignment: center;*/
-/*}*/
-
-/*!* HBox for button alignment *!*/
-/*.hbox {*/
-/*    -fx-spacing: 10;*/
-/*    -fx-padding: 5;*/
-/*}*/

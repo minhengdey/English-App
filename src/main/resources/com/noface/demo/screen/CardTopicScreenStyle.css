@@ -1,0 +1,100 @@
+/* Đặt nền cho AnchorPane */
+
+.split-pane{
+    -fx-background-color: #ffffff;
+}
+.button{
+    -fx-pref-height: 30px;
+    -fx-pref-width: 70px;
+    -fx-background-color: #8ABFA3;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Work Sans SemiBold";
+    -fx-background-radius: 20px;
+}
+.nobackground-button{
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-font-family: "Work Sans SemiBold";
+    -fx-padding: 0px;
+}
+.custom-hbox-2{
+    -fx-pref-height: 40px;
+    -fx-spacing: 10px;
+}
+/* VBox */
+.custom-vbox {
+    -fx-padding: 5;
+
+}
+.combo-box .list-cell:hover{
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+
+}
+.combo-box .list-cell{
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+}
+
+
+/* HBox */
+.custom-hbox {
+    -fx-alignment: center;
+    -fx-spacing: 5;
+    -fx-background-radius: 20;
+    -fx-background-color: #605678;
+    -fx-padding: 10;
+}
+
+/* ComboBox */
+#cardSideChoiceBox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-padding: 5px;
+    -fx-border-color: #624b6f;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+}
+
+/* TextField chung */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 5px;
+}
+.table-view{
+    -fx-border-color: #FFBF61;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2px;
+    -fx-background-color: #FFE6A5;
+    -fx-background-radius: 20px;
+    -fx-padding: 8, 8, 8, 8;
+}
+.table-view .column-header {
+    -fx-font-size: 12px; /* Kích thước chữ của tiêu đề */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: white; /* Màu chữ của tiêu đề */
+    -fx-background-color: #FFE6A5;
+}
+
+
+
+/* Tùy chỉnh màu cuộn của TableView */
+.table-view .scroll-bar {
+    -fx-background-color: transparent; /* Nền cuộn */
+}
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #9b7ebd; /* Màu thanh cuộn */
+}
+.table-view .table-row-cell{
+    -fx-padding: 5, 5, 5, 5;
+}
+/* Tùy chỉnh đường viền giữa các hàng */
+.table-view .table-row-cell:selected {
+    -fx-background-radius: #FFBF61;
+    -fx-background-color: #FFBF61; /* Màu đường viền giữa các hàng */
+    -fx-border-color: #FFE6A5;
+    -fx-border-width: 0 0 1px 0; /* Đường viền dưới cho mỗi hàng */
+}
