@@ -46,7 +46,10 @@ public class NewWordService {
     public NewWordResponse update (Long id, NewWordRequest newWord, Long userId) {
         NewWordEntity newWordEntity = newWordRepository.findByUserIdAndId(userId, id)
                 .orElseThrow(() -> new AppException(ErrorCode.NEW_WORD_NOT_FOUND));
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         newWordMapper.updateNewWord(newWordEntity, newWord);
+        newWordEntity.setUser(userEntity);
         return newWordMapper.toNewWordResponse(newWordRepository.save(newWordEntity));
     }
 
