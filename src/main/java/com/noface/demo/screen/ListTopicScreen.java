@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class ListTopicScreen {
     private  FXMLLoader loader;
@@ -59,7 +60,7 @@ public class ListTopicScreen {
     private void handleAddTopicButtonClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        Card card = new Card("new name", "new name", "new name", "new name");
+        Card card = new Card(0, "new name", "new name", "new name", "new name", LocalDateTime.now().toString());
         CardEditingScreen screen = new CardEditingScreen();
         stage.setScene(new Scene(screen.getRoot()));
         stage.show();
