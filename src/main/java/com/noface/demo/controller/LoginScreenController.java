@@ -41,8 +41,6 @@ public class LoginScreenController {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     public void handleLogin() {
-
-
         try
         {
             String requestBody = String.format (
@@ -124,34 +122,10 @@ public class LoginScreenController {
 
     protected void handleLoginInterface() {
         try {
-
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("/com/noface/demo/screen/MainScreen.fxml")));
-
-            Stage signUpStage = new Stage();
-            signUpStage.setTitle("Trang chủ");
-
-
-            Scene scene = new Scene(root);
-            signUpStage.setScene(scene);
-
-
-            signUpStage.initModality(Modality.APPLICATION_MODAL);
-
-
-            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            double screenWidth = screenBounds.getWidth();
-            double screenHeight = screenBounds.getHeight();
-
-
-            signUpStage.setWidth(1000);
-            signUpStage.setHeight(637);
-
-
-            signUpStage.setX((screenWidth - signUpStage.getWidth()) / 2);
-            signUpStage.setY((screenHeight - signUpStage.getHeight()) / 2);
-
-            signUpStage.setResizable(false);
-            signUpStage.show();
+            MainController mainController = new MainController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(mainController.getMainScreen().getRoot()));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

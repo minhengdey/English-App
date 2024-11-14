@@ -17,11 +17,12 @@ public class Card{
 
 
     
-    public Card(String name, String frontContent, String backContent, String topic){
+    public Card(long id, String name, String frontContent, String backContent, String topic, String dueTime){
+        this.id.set(Long.toString(id));
         this.name.set(name);
         this.frontContent.set(frontContent);
         this.backContent.set(backContent);
-        this.dueTime.set(LocalDateTime.now().toString());
+        this.dueTime.set(dueTime);
         this.topic.set(topic);
     }
 
