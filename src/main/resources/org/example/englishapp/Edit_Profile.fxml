@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
     <children>
         <VBox prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: white;">
             <children>
@@ -137,14 +137,14 @@
         </VBox>
       <Pane prefHeight="600.0" prefWidth="822.0" style="-fx-background-color: white;">
          <children>
-            <Pane layoutX="102.0" layoutY="34.0" prefHeight="531.0" prefWidth="565.0" style="-fx-background-color: #E8E8E8;">
+            <Pane layoutX="102.0" layoutY="34.0" prefHeight="531.0" prefWidth="565.0" style="-fx-background-color: EEEEEE;" styleClass="side_ankerpane">
                <children>
                   <Text layoutX="35.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FULL NAME" wrappingWidth="82.048828125">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="47.0" layoutY="62.0" prefHeight="25.0" prefWidth="472.0" />
+                  <TextField layoutX="47.0" layoutY="62.0" prefHeight="25.0" prefWidth="472.0" styleClass="word_input" />
                   <Text layoutX="35.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE OF BIRTH">
                      <font>
                         <Font size="14.0" />
@@ -152,14 +152,14 @@
                   </Text>
                   <HBox layoutX="47.0" layoutY="122.0" prefHeight="26.0" prefWidth="472.0" spacing="40.0">
                      <children>
-                        <TextField prefHeight="26.0" prefWidth="130.0" />
-                        <TextField prefHeight="26.0" prefWidth="130.0" />
-                        <TextField prefWidth="130.0" />
+                        <TextField prefHeight="26.0" prefWidth="130.0" styleClass="word_input" />
+                        <TextField prefHeight="26.0" prefWidth="130.0" styleClass="word_input" />
+                        <TextField prefWidth="130.0" styleClass="word_input" />
                      </children>
                   </HBox>
                   <ChoiceBox layoutX="47.0" layoutY="242.0" prefWidth="150.0" />
                   <Text layoutX="35.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEX" />
-                  <TextField layoutX="47.0" layoutY="182.0" prefHeight="25.0" prefWidth="472.0" />
+                  <TextField layoutX="47.0" layoutY="182.0" prefHeight="25.0" prefWidth="472.0" styleClass="word_input" />
                   <Text layoutX="35.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONE">
                      <font>
                         <Font size="14.0" />
@@ -170,20 +170,19 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="47.0" layoutY="302.0" prefHeight="25.0" prefWidth="472.0" />
+                  <TextField layoutX="47.0" layoutY="302.0" prefHeight="25.0" prefWidth="472.0" styleClass="word_input" />
                   <Text layoutX="35.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW PASSWORD">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="47.0" layoutY="422.0" prefHeight="25.0" prefWidth="472.0" />
+                  <TextField layoutX="47.0" layoutY="422.0" prefHeight="25.0" prefWidth="472.0" styleClass="word_input" />
                   <Text layoutX="35.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIRM PASSWORD">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="47.0" layoutY="362.0" prefHeight="25.0" prefWidth="472.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <TextField layoutX="47.0" layoutY="362.0" prefHeight="25.0" prefWidth="472.0" styleClass="word_input" />
                   <Button layoutX="305.0" layoutY="468.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="79.0" styleClass="button_save">
                      <graphic>
                         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="77.0" spacing="5.0">

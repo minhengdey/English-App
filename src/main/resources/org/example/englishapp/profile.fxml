@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
     <children>
         <VBox prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: white;">
             <children>
@@ -196,16 +196,16 @@
                   </VBox>
                </children>
             </VBox>
-            <Button layoutX="338.0" layoutY="497.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="79.0" styleClass="button_edit">
+            <Button layoutX="331.0" layoutY="495.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="96.0" styleClass="button_signup">
                <graphic>
-                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="33.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="41.0" prefWidth="33.0" spacing="5.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit" textAlignment="CENTER">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EDIT" textAlignment="CENTER">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Times New Roman Bold" size="16.0" />
                            </font>
                         </Text>
-                        <ImageView fitHeight="39.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="29.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@login_image/edit_1159633.png" />
                            </image>
