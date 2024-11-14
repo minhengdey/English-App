@@ -11,9 +11,10 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewWordResponse {
     Long id;
-    String english;
-    String vietnamese;
+    String frontSide;
+    String backSide;
     String topic;
     String date;
+    String name;
     UserEntity user;
 }

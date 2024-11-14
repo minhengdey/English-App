@@ -33,7 +33,7 @@ public class NewWordService {
     }
 
     public NewWordResponse create (NewWordRequest newWordRequest, Long userId) {
-        if (newWordRepository.existsByEnglishAndVietnamese(newWordRequest.getEnglish(), newWordRequest.getVietnamese())) {
+        if (newWordRepository.existsByFrontSideAndBackSide(newWordRequest.getFrontSide(), newWordRequest.getBackSide())) {
             throw new AppException(ErrorCode.NEW_WORD_EXISTED);
         }
         return newWordMapper.toNewWordResponse(userRepository.findById(userId)
