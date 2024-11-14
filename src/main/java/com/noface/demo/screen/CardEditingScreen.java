@@ -1,6 +1,7 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
+import com.noface.demo.controller.TopicScreenController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -46,6 +47,9 @@ public class CardEditingScreen {
         loader.setController(this);
         loader.load();
     }
+    public CardEditingScreen(TopicScreenController controller){
+
+    }
     public <T> T getRoot() {
         return loader.getRoot();
     }
@@ -59,7 +63,6 @@ public class CardEditingScreen {
     public void initScreenComponent(){
         cardSideChoiceBox.getItems().addAll("Front", "Back");
         cardSideChoiceBox.setValue("Front");
-
     }
     public void connect(Card card) {
 

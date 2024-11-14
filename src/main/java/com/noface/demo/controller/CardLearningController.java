@@ -1,6 +1,6 @@
 package com.noface.demo.controller;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 import com.noface.demo.screen.CardLearningScreen;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;

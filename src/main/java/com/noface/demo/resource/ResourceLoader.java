@@ -1,6 +1,6 @@
 package com.noface.demo.resource;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 
 import java.util.ArrayList;
 import java.util.List;

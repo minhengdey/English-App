@@ -20,6 +20,10 @@
     -fx-padding: 30;
     -fx-background-color: #d4bee4;
 }
+.custom-vbox{
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+}
 .text-field {
     -fx-background-color: #ffffff;
     -fx-background-radius: 15;
@@ -31,7 +35,39 @@
     -fx-background-color: #ffffff;
     -fx-border-color: #9b7ebd;
 }
+.scroll-pane{
+    -fx-background-color: #ffffff;
 
+}
+/* Styling the ScrollPane border and background */
+.scroll-pane {
+
+    -fx-border-color: #FFBF61;     /* Border color */
+    -fx-border-width: 4px;         /* Border width */
+    -fx-border-radius: 5px;        /* Rounded border corners */
+    -fx-background-color: #F0F0F0; /* Background color */
+    -fx-background-radius: 5px;    /* Rounded background corners */
+}
+
+/* Styling the vertical scrollbar */
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #8ABFA3; /* Thumb color */
+    -fx-background-radius: 5px;    /* Rounded thumb */
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #ffffff; /* Track color */
+}
+
+/* Styling the horizontal scrollbar */
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #8ABFA3; /* Thumb color */
+    -fx-background-radius: 5px;    /* Rounded thumb */
+}
+
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: #ffffff; /* Track color */
+}
 
 #searchHBox{
     -fx-background-color: #d4bee4;  /* Màu nền của HBox */

@@ -80,6 +80,20 @@
     -fx-border-width: 2px;
     -fx-padding: 5;
 }
+.button {
+    -fx-font-size: 16px;
+    -fx-background-color: #cba4f8;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5px 10px;
+}
+
+.button:hover {
+    -fx-background-color: #876ca1;
+}
+.button:selected {
+    -fx-background-color: #1a1620;
+}
 
 /* Các nút bên trong HTMLEditor */
 .html-editor .button {

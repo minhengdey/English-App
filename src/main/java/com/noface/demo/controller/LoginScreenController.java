@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -125,17 +126,15 @@ public class LoginScreenController {
     protected void handleLoginInterface() {
         try {
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("/com/noface/demo/screen/MainScreen.fxml")));
+            MainController controller = new MainController();
 
-            Stage signUpStage = new Stage();
-            signUpStage.setTitle("Trang chủ");
-
-
-            Scene scene = new Scene(root);
-            signUpStage.setScene(scene);
+            Stage stage = (Stage) ((Node) screen.getRoot()).getScene().getWindow();
+            stage.setTitle("Trang chủ");
 
 
-            signUpStage.initModality(Modality.APPLICATION_MODAL);
+            Scene scene = new Scene(controller.getMainScreen().getRoot());
+            stage.setScene(scene);
+
 
 
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -143,15 +142,15 @@ public class LoginScreenController {
             double screenHeight = screenBounds.getHeight();
 
 
-            signUpStage.setWidth(1000);
-            signUpStage.setHeight(637);
+            stage.setWidth(1000);
+            stage.setHeight(637);
 
 
-            signUpStage.setX((screenWidth - signUpStage.getWidth()) / 2);
-            signUpStage.setY((screenHeight - signUpStage.getHeight()) / 2);
+            stage.setX((screenWidth - stage.getWidth()) / 2);
+            stage.setY((screenHeight - stage.getHeight()) / 2);
 
-            signUpStage.setResizable(false);
-            signUpStage.show();
+            stage.setResizable(false);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

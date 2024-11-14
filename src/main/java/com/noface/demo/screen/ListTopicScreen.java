@@ -1,6 +1,6 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.CardLearningController;
 import com.noface.demo.screen.component.TopicBar;
@@ -13,8 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -59,8 +62,33 @@ public class ListTopicScreen {
     private void handleAddTopicButtonClicked(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
+
         Card card = new Card("new name", "new name", "new name", "new name");
         CardEditingScreen screen = new CardEditingScreen();
+        VBox root = screen.getRoot();
+        HBox bottomBar = new HBox();
+        Button saveButton = new Button("Save");
+        Button cancelButton = new Button("Cancel");
+;
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.close();
+            }
+        });
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // SAVE TO DATABASE
+            }
+        });
+
+        bottomBar.getChildren().addAll(saveButton, cancelButton);
+        bottomBar.setAlignment(Pos.CENTER);
+        bottomBar.setSpacing(10);
+        root.getChildren().add(bottomBar);
+
+        screen.connect(card);
         stage.setScene(new Scene(screen.getRoot()));
         stage.show();
     }

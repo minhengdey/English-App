@@ -1,6 +1,6 @@
 package com.noface.demo.controller;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.screen.MainScreen;
 import javafx.beans.property.ListProperty;
@@ -32,7 +32,7 @@ public class MainController {
                 translateScreenController.getScreen().getRoot(),
                 profileScreenController.getScreen().getRoot());
         setMainScreenForSubScreen(mainScreen);
-        mainScreen.changeToProfilePane();
+        mainScreen.changeToListTopicPane();
     }
 
     private void setMainScreenForSubScreen(MainScreen mainScreen) {

@@ -1,6 +1,6 @@
 package com.noface.demo.controller;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.screen.CardTopicScreen;
 import com.noface.demo.screen.ListTopicScreen;

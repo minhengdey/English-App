@@ -3,6 +3,8 @@ package com.noface.demo;
 import com.noface.demo.controller.LoginScreenController;
 import com.noface.demo.controller.MainController;
 
+import com.noface.demo.controller.UserEditScreenController;
+import com.noface.demo.screen.MainScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +22,35 @@ public class FXMain extends Application{
     }
     public void start(Stage stage) throws Exception {
         stage.resizableProperty().set(false);
-        testMainScreen(stage);
+//        testMainScreen(stage);
 //        testLogin(stage);
+//        testEditProfile(stage);
+//        testListTopicScreen(stage);
+        testTranslateMainScreen(stage);
     }
+
+    private void testTranslateMainScreen(Stage stage) throws IOException {
+        MainController controller = new MainController();
+        MainScreen screen = controller.getMainScreen();
+        screen.changeToTranslatePane();
+        stage.setScene(new Scene(screen.getRoot()));
+        stage.show();
+    }
+
+    private void testListTopicScreen(Stage stage) throws IOException {
+        MainController controller = new MainController();
+        MainScreen screen = controller.getMainScreen();
+        screen.changeToListTopicPane();
+        stage.setScene(new Scene(screen.getRoot()));
+        stage.show();
+    }
+
+    private void testEditProfile(Stage stage) throws IOException {
+        UserEditScreenController controller = new UserEditScreenController();
+        stage.setScene(new Scene(controller.getScreen().getRoot()));
+        stage.show();
+    }
+
     public void testLogin(Stage stage) throws IOException {
         LoginScreenController loginScreenController = new LoginScreenController();
         Scene scene = new Scene(loginScreenController.getScreen().getRoot());

@@ -2,24 +2,19 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" stylesheets="@CardEditingScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="600.0" prefWidth="600.0" styleClass="custom-vbox" stylesheets="@CardEditingScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" styleClass="custom-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="19.0" prefWidth="600.0" styleClass="custom-hbox">
          <children>
-            <HBox alignment="CENTER" prefHeight="19.0" prefWidth="600.0" styleClass="custom-hbox">
-               <children>
-                  <ComboBox fx:id="cardSideChoiceBox" prefHeight="25.0" prefWidth="169.0" />
-                  <TextField fx:id="cardNameEditor" prefHeight="48.0" prefWidth="314.0" promptText="Enter your card name" HBox.hgrow="ALWAYS" />
-                  <TextField fx:id="cardTopicTextField" promptText="Enter your topic here" />
-               </children>
-            </HBox>
-            <HTMLEditor fx:id="contentEditor" prefHeight="600.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
+            <ComboBox fx:id="cardSideChoiceBox" prefHeight="25.0" prefWidth="169.0" />
+            <TextField fx:id="cardNameEditor" prefHeight="48.0" prefWidth="314.0" promptText="Enter your card name" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="cardTopicTextField" promptText="Enter your topic here" />
          </children>
-      </VBox>
+      </HBox>
+      <HTMLEditor fx:id="contentEditor" prefHeight="600.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
    </children>
-</AnchorPane>
+</VBox>

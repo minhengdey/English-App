@@ -1,4 +1,4 @@
-package com.noface.demo.card;
+package com.noface.demo.model;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;

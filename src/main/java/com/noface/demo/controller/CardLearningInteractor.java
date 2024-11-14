@@ -1,6 +1,6 @@
 package com.noface.demo.controller;
 
-import com.noface.demo.card.Card;
+import com.noface.demo.model.Card;
 import com.noface.demo.resource.ResourceLoader;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@screen/Style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp.Controller.InterfaceController">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@screen/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" >
     <children>
         <VBox prefHeight="600.0" prefWidth="245.0" style="-fx-background-color: white;">
             <children>
@@ -102,7 +102,7 @@
                                                 <Image url="@screen/login_image/magnifying-glass.png" />
                                             </image>
                                         </ImageView>
-                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Search" textFill="WHITE">
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Search" textFill="WHITE">
                                             <font>
                                                 <Font name="Century Gothic Bold" size="14.0" />
                                             </font>
@@ -119,7 +119,7 @@
                                                 <Image url="@screen/login_image/log-out.png" />
                                             </image>
                                         </ImageView>
-                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false" onAction="#handleLogoutInterface" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
+                                        <Button id="button_home" minWidth="0.0" mnemonicParsing="false"  prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
                                             <font>
                                                 <Font name="Century Gothic Bold" size="14.0" />
                                             </font>
@@ -193,11 +193,6 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="31.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@screen/login_image/back_1522196.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </HBox>
                      </graphic>
@@ -214,11 +209,6 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Text>
-                              <ImageView fitHeight="31.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@screen/login_image/save_4598496.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </HBox>
                      </graphic>

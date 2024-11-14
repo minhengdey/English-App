@@ -16,6 +16,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -64,62 +66,73 @@ public class TranslateScreen implements Initializable {
             }
         });
     }
-
-    private String sendApiRequest(String prompt) throws IOException {
-        URL url = new URL(API_URL + "?key=" + API_KEY);
-        HttpURLConnection connection = getHttpURLConnection(prompt, url);
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
+    public static List<String> splitTextBySentences(String text) {
+        List<String> sentences = new ArrayList<>();
+        int start = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '.') {
+                sentences.add(text.substring(start, i + 1).trim());
+                start = i + 1;
             }
-            return response.toString();
+        }
+        if (start < text.length()) {
+            sentences.add(text.substring(start).trim());
+        }
+        return sentences;
+    }
+
+    private String sendApiRequest(String text, String sourceLang, String targetLang) throws Exception {
+        String urlStr = String.format(
+                "https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&q=%s",
+                sourceLang, targetLang, java.net.URLEncoder.encode(text, StandardCharsets.UTF_8)
+        );
+
+        URL url = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                response.append(line.trim());
+            }
+            return parseResponse(response.toString());
         }
     }
 
-    private static HttpURLConnection getHttpURLConnection(String prompt, URL url) throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
-
-        String jsonInputString = "{ \"contents\": [{ \"parts\": [{ \"text\": \"" + prompt + "\" }] }] }";
-        try (OutputStream os = connection.getOutputStream()) {
-            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        }
-        return connection;
-    }
-    private String parseResponse(String response) throws IOException {
-        int startIndex = response.indexOf("\"text\": \"") + 9;
-        int endIndex = response.indexOf("\"", startIndex);
-        return response.substring(startIndex, endIndex - 3);
-
+    private String parseResponse(String response) {
+        response = response.substring(4, response.indexOf("\",\""));
+        return response;
     }
 
+    @FXML
     private void generateContent(ActionEvent actionEvent) {
         String prompt = inputTextArea.getText();
-        if (comboBox.getValue().equals("English To Vietnamese")) {
-            prompt = "Dịch sang Tiếng Việt " + prompt;
-        } else {
-            prompt = "Dịch sang Tiếng Anh " + prompt;
-        }
-        String finalPrompt = prompt;
-        System.out.println(finalPrompt);
-        executorService.submit(() -> {
-            try {
-                String response = sendApiRequest(finalPrompt);
+        List<String> sentences = splitTextBySentences(prompt);
 
-                String generatedText = parseResponse(response);
-                javafx.application.Platform.runLater(() -> outputTextArea.setText(generatedText));
-                System.out.println(generatedText);
-            } catch (Exception e) {
-                e.printStackTrace();
+        String sourceLang, targetLang;
+        if (comboBox.getValue().equals("English To Vietnamese")) {
+            sourceLang = "en";
+            targetLang = "vi";
+        } else {
+            sourceLang = "vi";
+            targetLang = "en";
+        }
+
+        executorService.submit(() -> {
+            StringBuilder translatedText = new StringBuilder();
+            for (String sentence : sentences) {
+                try {
+                    String translatedSentence = sendApiRequest(sentence, sourceLang, targetLang);
+                    translatedText.append(translatedSentence).append(" ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            String finalTranslatedText = translatedText.toString().trim();
+            javafx.application.Platform.runLater(() -> outputTextArea.setText(finalTranslatedText));
         });
 
     }
-
 }
