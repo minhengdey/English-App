@@ -108,3 +108,19 @@
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
 }
+
+.text-area {
+    -fx-border-radius: 5;
+    -fx-border-color: #9b7ebd;
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-background-radius: 150;
+    -fx-background-color: white;
+}
+
+.word_input {
+    -fx-border-color: #9b7ebd;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+}
