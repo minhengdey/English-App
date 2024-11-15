@@ -10,13 +10,12 @@ import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import com.noface.demo.model.Card;
 import com.noface.demo.resource.TokenManager;
 import org.json.*;
 
 public class CardCRUD
 {
-    public static final int CARD_IS_AVAIALABLED = 1;
+    public static final int CARD_IS_AVAILABLED = 1;
     public static final int ERROR = 2;
     public static final int CARD_ADDED_SUCCESS = 3;
     public static final int CARD_DELETED_SUCCESS = 4;
@@ -66,7 +65,7 @@ public class CardCRUD
                 JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                 int code = jsonNode.get("code").asInt();
                 if (code == 1009) {
-                    return CardCRUD.CARD_IS_AVAIALABLED;
+                    return CardCRUD.CARD_IS_AVAILABLED;
                 }
                 else {
                     System.out.println ("Có lỗi xảy ra");
@@ -93,12 +92,15 @@ public class CardCRUD
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Delete status code " + response.statusCode());
+
             if (response.statusCode() == 200)
             {
                 // Xóa thành công
                 System.out.println ("Thành công");
                 return CARD_DELETED_SUCCESS;
             }
+            System.out.println("Delete status code " + response.statusCode());
 
         }
         catch (Exception e)

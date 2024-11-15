@@ -98,6 +98,7 @@ public class MainScreen {
     }
 
     public void changeToListTopicPane(){
+        mainController.getTopicScreenController().refreshListTopicTitlesList();
         rightPane.getChildren().clear();
         rightPane.getChildren().add(listTopicPane);
     }

@@ -1,7 +1,9 @@
 package com.noface.demo.controller;
 
 import com.noface.demo.model.Card;
+import com.noface.demo.model.CardCRUD;
 import com.noface.demo.resource.ResourceLoader;
+import com.noface.demo.resource.Utilities;
 import com.noface.demo.screen.CardTopicScreen;
 import com.noface.demo.screen.ListTopicScreen;
 import javafx.beans.property.ListProperty;
@@ -12,6 +14,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
@@ -77,12 +80,17 @@ public class TopicScreenController {
     public void saveDataToDatabase() {
         // METHOD DUOC SU DUNG DE LUU ListProperty<Card> VAO DATABASE
     }
-    public void removeCardInDatabase(Card cardToRemove){
-
+    public void removeCardFromDatabase(Card card){
+        System.out.println(card);
+        ResourceLoader.getInstance().getCardCRUD().deleteCard(card);
     }
     public int addCardToDatabase(Card card){
-        System.out.println(card);
+
         int status = ResourceLoader.getInstance().getCardCRUD().addCard(card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName());
+        if(status == CardCRUD.CARD_ADDED_SUCCESS){
+            loadCardByTopic(topic.get());
+            System.out.println(cards);
+        }
         return status;
     }
     public void refreshListTopicTitlesList(){
@@ -90,7 +98,16 @@ public class TopicScreenController {
         topicTitles.addAll(ResourceLoader.getInstance().getCardCRUD().getAllTopics());
     }
     public void loadCardByTopic(String topic){
+        this.topic.set(topic);
         cards.clear();
         cards.setAll(ResourceLoader.getInstance().getCardCRUD().getAllCardsByTopic(topic));
+    }
+
+    public void saveEditedCardToDatabse(Card card) {
+        int status = ResourceLoader.getInstance().getCardCRUD().editCard(card,
+                card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName(), card.getDueTime());
+        if(status == CardCRUD.ERROR){
+            Utilities.getInstance().showAlert("Lỗi xảy ra", Alert.AlertType.WARNING);
+        }
     }
 }

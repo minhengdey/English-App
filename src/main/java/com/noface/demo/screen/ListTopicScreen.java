@@ -4,7 +4,6 @@ import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.CardLearningController;
 import com.noface.demo.model.Card;
 import com.noface.demo.model.CardCRUD;
-import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.resource.Utilities;
 import com.noface.demo.screen.component.TopicBar;
 import javafx.beans.property.ListProperty;
@@ -21,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -85,7 +83,7 @@ public class ListTopicScreen {
             @Override
             public void handle(ActionEvent event) {
                 int status = controller.addCardToDatabase(newCard);
-                if(status == CardCRUD.CARD_IS_AVAIALABLED){
+                if(status == CardCRUD.CARD_IS_AVAILABLED){
                     Utilities.getInstance().showAlert("Card đã tồn tại", Alert.AlertType.WARNING);
                 }
                 if(status == CardCRUD.CARD_ADDED_SUCCESS){

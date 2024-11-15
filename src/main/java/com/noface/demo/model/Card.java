@@ -38,6 +38,8 @@ public class Card{
         dueTime.unbind();
         frontContent.unbind();
         backContent.unbind();
+        topic.unbind();
+
     }
 
 

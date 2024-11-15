@@ -3,7 +3,6 @@ package com.noface.demo.screen;
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.model.Card;
 import com.noface.demo.model.CardCRUD;
-import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.resource.Utilities;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -14,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
@@ -40,7 +40,7 @@ public class CardTopicScreen {
     private final ListProperty<Card> cardData = new SimpleListProperty<>(FXCollections.observableArrayList());
 
     private void configureBinding(TopicScreenController controller) {
-        cardData.bindBidirectional(controller.cardsProperty());
+        cardData.bind(controller.cardsProperty());
         topic.bind(controller.topicProperty());
     }
 
@@ -94,20 +94,21 @@ public class CardTopicScreen {
         addCardButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                handleAddCardButtonClicked(event);
+                System.out.println("Add card button clicked");
+                handleAddCardButtonClicked(event, topicScreenController);
             }
         });
         removeCardButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Card cardToRemove = handleRemoveCardButtonClicked(event);
-                topicScreenController.removeCardInDatabase(cardToRemove);
+                handleRemoveCardButtonClicked(event, topicScreenController);
             }
         });
         backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                handleBackButtonClicked(event);
+                handleBackButtonClicked(event, topicScreenController);
+                topicScreenController.refreshListTopicTitlesList();
                 topicScreenController.saveDataToDatabase();
             }
         });
@@ -115,41 +116,87 @@ public class CardTopicScreen {
 
         cardsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if(oldSelection != null){
-                int status = ResourceLoader.getInstance().getCardCRUD().addCard(oldSelection.getFrontContent(), oldSelection.getBackContent(), oldSelection.getTopic(), oldSelection.getName());
-                if(status == CardCRUD.CARD_IS_AVAIALABLED){
-                    Utilities.getInstance().showAlert("Card đã tồn tại", Alert.AlertType.WARNING);
-                    cardData.remove(oldSelection);
+                if(oldSelection.getId() != null){
+                    topicScreenController.saveEditedCardToDatabse(oldSelection);
                 }
+
             }
             if (newSelection != null) {
                 if (oldSelection != null){
                     oldSelection.unbind();
                 }
-                    System.out.println("Connected card to editing screen");
+                System.out.println("Connected card to editing screen");
                 cardEditingScreen.connect(newSelection);
             }
         });
     }
 
-
-    public void handleBackButtonClicked(ActionEvent event)  {
+    public void handleBackButtonClicked(ActionEvent event, TopicScreenController topicScreenController)  {
+        Card selectCard = cardsTable.getSelectionModel().getSelectedItem();
+        if(selectCard != null){
+            topicScreenController.saveEditedCardToDatabse(selectCard);
+        }
         mainScreen.changeToListTopicPane();
 
     }
 
 
-    public void handleAddCardButtonClicked(ActionEvent event) {
-        Card card = new Card(0, "new card", "This is front content", "This is back content", topic.get(), LocalDateTime.now().toString());
-        cardData.add(card);
-        cardsTable.getSelectionModel().select(cardData.getSize() - 1);
+    public void handleAddCardButtonClicked(ActionEvent event, TopicScreenController topicScreenController) {
+        Card card = new Card("new card", "This is front content", "This is back content", topic.get(), LocalDateTime.now().toString());
+        cardEditingScreen.connect(card);
+
+        addCardButton.setMouseTransparent(true);
+        cardsTable.setMouseTransparent(true);
+        backButton.setMouseTransparent(true);
+        removeCardButton.setMouseTransparent(true);
+
+        VBox pane = ((VBox) cardEditingScreen.getRoot());
+        Button saveButton = new Button("Save");
+        Button cancelButton = new Button("Cancel");
+        HBox bottomBar = new HBox();
+        bottomBar.setSpacing(10);
+        bottomBar.setAlignment(Pos.CENTER);
+        pane.getChildren().add(bottomBar);
+        bottomBar.getChildren().add(saveButton);
+        bottomBar.getChildren().add(cancelButton);
+
+        saveButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int status = topicScreenController.addCardToDatabase(card);
+                if(status == CardCRUD.CARD_IS_AVAILABLED){
+                    Utilities.getInstance().showAlert("card đã tồn tại", Alert.AlertType.WARNING);
+
+                }else if(status == CardCRUD.CARD_ADDED_SUCCESS){
+                    pane.getChildren().remove(bottomBar);
+                    addCardButton.setMouseTransparent(false);
+                    cardsTable.setMouseTransparent(false);
+                    backButton.setMouseTransparent(false);
+                    removeCardButton.setMouseTransparent(false);
+                }
+            }
+        });
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                pane.getChildren().remove(bottomBar);
+                addCardButton.setMouseTransparent(false);
+                cardsTable.setMouseTransparent(false);
+                backButton.setMouseTransparent(false);
+                removeCardButton.setMouseTransparent(false);
+            }
+        });
+
         System.out.println(cardData.get().size());
     }
 
 
-    public Card handleRemoveCardButtonClicked(ActionEvent event) {
+    public Card handleRemoveCardButtonClicked(ActionEvent event, TopicScreenController topicScreenController) {
         Card selectedCard = cardsTable.getSelectionModel().getSelectedItem();
-        cardData.remove(selectedCard);
-        ResourceLoader.getInstance().getCardCRUD().deleteCard(selectedCard);
+        if(selectedCard != null){
+            topicScreenController.removeCardFromDatabase(selectedCard);
+            topicScreenController.loadCardByTopic(topic.get());
+        }
         return selectedCard;
     }
 
