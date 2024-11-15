@@ -115,11 +115,11 @@ public class CardTopicScreen {
 
 
         cardsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            System.out.println("selection model change");
             if(oldSelection != null){
                 if(oldSelection.getId() != null){
                     topicScreenController.saveEditedCardToDatabse(oldSelection);
                 }
-
             }
             if (newSelection != null) {
                 if (oldSelection != null){
@@ -165,8 +165,7 @@ public class CardTopicScreen {
             public void handle(ActionEvent event) {
                 int status = topicScreenController.addCardToDatabase(card);
                 if(status == CardCRUD.CARD_IS_AVAILABLED){
-                    Utilities.getInstance().showAlert("card đã tồn tại", Alert.AlertType.WARNING);
-
+                    Utilities.getInstance().showAlert("Thẻ đã tồn tại, vui lòng nhập lại", Alert.AlertType.WARNING);
                 }else if(status == CardCRUD.CARD_ADDED_SUCCESS){
                     pane.getChildren().remove(bottomBar);
                     addCardButton.setMouseTransparent(false);
@@ -186,16 +185,17 @@ public class CardTopicScreen {
                 removeCardButton.setMouseTransparent(false);
             }
         });
-
-        System.out.println(cardData.get().size());
     }
 
 
     public Card handleRemoveCardButtonClicked(ActionEvent event, TopicScreenController topicScreenController) {
+        event.consume();
         Card selectedCard = cardsTable.getSelectionModel().getSelectedItem();
         if(selectedCard != null){
+            cardsTable.getSelectionModel().select(null);
             topicScreenController.removeCardFromDatabase(selectedCard);
             topicScreenController.loadCardByTopic(topic.get());
+            cardsTable.getSelectionModel().select(cardData.size() - 1);
         }
         return selectedCard;
     }

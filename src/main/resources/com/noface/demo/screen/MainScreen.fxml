@@ -12,7 +12,7 @@
 
 <HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox prefHeight="2000.0" prefWidth="245.0" style="-fx-background-color: white;">
+        <VBox style="-fx-background-color: white;">
             <children>
                 <AnchorPane id="side_ankerpane" prefHeight="626.0" prefWidth="246.0" styleClass="side_ankerpane" stylesheets="@Style.css">
                     <children>
@@ -132,6 +132,6 @@
                 </AnchorPane>
             </children>
         </VBox>
-      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="494.0" HBox.hgrow="ALWAYS" />
+      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
     </children>
 </HBox>

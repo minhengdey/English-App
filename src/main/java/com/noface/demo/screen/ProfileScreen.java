@@ -55,11 +55,9 @@ public class ProfileScreen {
         dialog.setTitle("Login");
         dialog.setHeaderText("Enter your credentials");
 
-        // Set the button types
         ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        // Create the username and password labels and fields
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -96,7 +94,7 @@ public class ProfileScreen {
 
         result.ifPresent(credentials -> {
             System.out.println("Username=" + credentials.getKey() + ", Password=" + credentials.getValue());
-            if(credentials.getKey().equals("lehiep2004.lh") && credentials.getValue().equals("Hh852124")){
+            if(credentials.getKey().equals("1") && credentials.getValue().equals("1")){
                 try {
                     showEditUserScreen();
                 } catch (IOException e) {

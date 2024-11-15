@@ -87,10 +87,7 @@ public class TopicScreenController {
     public int addCardToDatabase(Card card){
 
         int status = ResourceLoader.getInstance().getCardCRUD().addCard(card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName());
-        if(status == CardCRUD.CARD_ADDED_SUCCESS){
-            loadCardByTopic(topic.get());
-            System.out.println(cards);
-        }
+        loadCardByTopic(topic.get());
         return status;
     }
     public void refreshListTopicTitlesList(){
@@ -107,7 +104,7 @@ public class TopicScreenController {
         int status = ResourceLoader.getInstance().getCardCRUD().editCard(card,
                 card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName(), card.getDueTime());
         if(status == CardCRUD.ERROR){
-            Utilities.getInstance().showAlert("Lỗi xảy ra", Alert.AlertType.WARNING);
+            Utilities.getInstance().showAlert("Lỗi xảy ra khi lưu", Alert.AlertType.WARNING);
         }
     }
 }

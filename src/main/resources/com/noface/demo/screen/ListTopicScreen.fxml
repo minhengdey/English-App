@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="760.0" stylesheets="@ListTopicScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="754.0" stylesheets="@ListTopicScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="custom-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="topHBox" alignment="CENTER" prefHeight="100.0" prefWidth="760.0" spacing="10.0">
+            <HBox fx:id="topHBox" alignment="CENTER" prefHeight="100.0" prefWidth="754.0" spacing="10.0">
                <children>
                   <HBox fx:id="searchHBox" alignment="CENTER" prefHeight="41.0" prefWidth="525.0" spacing="10.0">
                      <children>
