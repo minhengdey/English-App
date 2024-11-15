@@ -39,7 +39,7 @@ public class HelloController implements Initializable {
         comboBox.getItems().addAll("English To Vietnamese", "Vietnamese To English");
         executorService = Executors.newSingleThreadExecutor();
     }
-    public static List<String> splitTextBySentences(String text) {
+    public List<String> splitTextBySentences(String text) {
         List<String> sentences = new ArrayList<>();
         int start = 0;
         for (int i = 0; i < text.length(); i++) {
