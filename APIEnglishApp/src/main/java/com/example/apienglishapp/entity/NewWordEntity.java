@@ -20,10 +20,10 @@ public class NewWordEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column (name = "front_side")
+    @Column (name = "front_side", columnDefinition = "TEXT")
     String frontSide;
 
-    @Column (name = "back_side")
+    @Column (name = "back_side", columnDefinition = "TEXT")
     String backSide;
 
     @Column (name = "topic")

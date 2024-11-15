@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 
@@ -46,11 +49,12 @@ public class NewWordController {
     @GetMapping (value = "/new_word/topic/{topic}")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public List<NewWordResponse> getAllByTopicAndUserId (@PathVariable("topic") String topic) {
+        System.out.println(topic + " " + URLDecoder.decode(topic, StandardCharsets.UTF_8));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof JwtAuthenticationToken) {
             JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
             Jwt jwt = jwtToken.getToken();
-            return newWordService.getAllByTopicAndUserId(topic, Long.parseLong(jwt.getSubject()));
+            return newWordService.getAllByTopicAndUserId(URLDecoder.decode(topic, StandardCharsets.UTF_8), Long.parseLong(jwt.getSubject()));
         }
         throw new AppException(ErrorCode.UNAUTHENTICATED);
     }
