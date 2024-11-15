@@ -18,7 +18,11 @@ public class Card{
 
     
     public Card(long id, String name, String frontContent, String backContent, String topic, String dueTime){
+        this(name, frontContent, backContent, topic, dueTime);
         this.id.set(Long.toString(id));
+    }
+
+    public Card(String name, String frontContent, String backContent, String topic, String dueTime){
         this.name.set(name);
         this.frontContent.set(frontContent);
         this.backContent.set(backContent);

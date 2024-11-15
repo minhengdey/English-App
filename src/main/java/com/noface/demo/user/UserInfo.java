@@ -8,7 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import com.noface.demo.utils.TokenManager;
+import com.noface.demo.resource.TokenManager;
 
 public class UserInfo
 {

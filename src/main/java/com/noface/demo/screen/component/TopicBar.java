@@ -15,9 +15,11 @@ public class TopicBar extends StackPane {
     private Button editButton;
     private Button learnButton;
     private HBox aboveLayer;
+    private String topicName;
 
     public TopicBar(String topicName) {
         final int arcValue = 25;
+        this.topicName = topicName;
         final String fillColor = "#FFE6A5";
         VBox.setMargin(this, new Insets(5, 5, 5, 5));
         Label label = new Label(topicName);
@@ -60,5 +62,7 @@ public class TopicBar extends StackPane {
         editButton.setOnAction(evt);
     }
 
-
+    public String getTopicName() {
+        return topicName;
+    }
 }

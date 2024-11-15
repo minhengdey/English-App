@@ -1,4 +1,4 @@
-package com.noface.demo.utils;
+package com.noface.demo.resource;
 
 public class TokenManager
 {

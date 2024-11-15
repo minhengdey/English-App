@@ -101,7 +101,8 @@ public class MainScreen {
         rightPane.getChildren().clear();
         rightPane.getChildren().add(listTopicPane);
     }
-    public void changeToCardTopicPane(){
+    public void changeToCardTopicPane(String topic){
+        mainController.getTopicScreenController().loadCardByTopic(topic);
         rightPane.getChildren().clear();
         rightPane.getChildren().add(cardTopicPane);
     }

@@ -20,12 +20,10 @@ public class CardLearningInteractor {
     private Card currentCard;
     public CardLearningInteractor() {
     }
-    public void getDataFromDatabase(){
-        cardListProperty.addAll(ResourceLoader.getInstance().getCardsSampleData());
-    }
 
-    public void load(){
-        getDataFromDatabase();
+    public void loadByTopicTitle(String topicTitle){
+        cardListProperty.clear();
+        cardListProperty.setAll(ResourceLoader.getInstance().getCardCRUD().getAllCardsByTopic(topicTitle));
         cards.addAll(cardListProperty.get());
         changeToNextCard();
     }
@@ -72,6 +70,8 @@ public class CardLearningInteractor {
     }
     public void plusCardDueTime(Long seconds){
         currentCard.setDueTime((LocalDateTime.now().plusSeconds(seconds)).toString());
+        ResourceLoader.getInstance().getCardCRUD().editCard(currentCard, currentCard.getFrontContent(), currentCard.getBackContent(),
+                currentCard.getTopic(), currentCard.getName(), currentCard.getDueTime());
         System.out.println("In add card time " + currentCard);
     }
 

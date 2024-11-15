@@ -7,11 +7,9 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 
 import java.io.IOException;
-import java.util.*;
 
 public class CardLearningController {
     private ListProperty<Card> cardListProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
-    private Queue<Card> cards = new PriorityQueue<>(Card.comparatorByDueTimeNearest());
     private Card card;
     private CardLearningScreen cardLearningScreen;
     private CardLearningInteractor interactor;
@@ -21,8 +19,8 @@ public class CardLearningController {
         cardLearningScreen = new CardLearningScreen(interactor);
 
     }
-    public void load(){
-        interactor.load();
+    public void loadCardByTopic(String topicTitle){
+        interactor.loadByTopicTitle(topicTitle);
         cardLearningScreen.startShowing();
     }
     public CardLearningScreen getScreen() {

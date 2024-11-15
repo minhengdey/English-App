@@ -31,7 +31,7 @@ public class TopicScreenController {
                 handleTopicChange(observable, oldValue, newValue);
             }
         });
-        getData();
+
     }
     public void handleTopicChange(ObservableValue<? extends String> observable, String oldValue, String newValue){
         // SU DUNG DE LAY DATA TU DATABASE VOI TOPIC TITLES CHO TRUOC
@@ -57,11 +57,6 @@ public class TopicScreenController {
         return topicScreen;
     }
 
-    public void getData(){
-        // METHOD DUOC SU DUNG DE LAY DATA TU DATABASE
-        topicTitles.setAll(ResourceLoader.getInstance().getTopicTitles());
-        cards.addAll(ResourceLoader.getInstance().getCardsSampleData());
-    }
 
     public ObservableList<String> getTopicTitles() {
         return topicTitles.get();
@@ -85,7 +80,17 @@ public class TopicScreenController {
     public void removeCardInDatabase(Card cardToRemove){
 
     }
-    public void addCardToDatabase(Card card){
-
+    public int addCardToDatabase(Card card){
+        System.out.println(card);
+        int status = ResourceLoader.getInstance().getCardCRUD().addCard(card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName());
+        return status;
+    }
+    public void refreshListTopicTitlesList(){
+        topicTitles.clear();
+        topicTitles.addAll(ResourceLoader.getInstance().getCardCRUD().getAllTopics());
+    }
+    public void loadCardByTopic(String topic){
+        cards.clear();
+        cards.setAll(ResourceLoader.getInstance().getCardCRUD().getAllCardsByTopic(topic));
     }
 }

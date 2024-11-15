@@ -1,8 +1,11 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.card.Card;
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.CardLearningController;
+import com.noface.demo.model.Card;
+import com.noface.demo.model.CardCRUD;
+import com.noface.demo.resource.ResourceLoader;
+import com.noface.demo.resource.Utilities;
 import com.noface.demo.screen.component.TopicBar;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -15,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,7 +33,6 @@ public class ListTopicScreen {
     private  FXMLLoader loader;
     private MainScreen mainScreen;
     private ListProperty<String> topicTitles =  new SimpleListProperty<>();
-
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
@@ -39,14 +42,15 @@ public class ListTopicScreen {
         loader.setController(this);
         loader.load();
         topicTitles.bind(controller.topicTitlesProperty());
-        configureScreenComponent();
+        configureScreenComponent(controller);
+        controller.refreshListTopicTitlesList();
     }
-    public void configureScreenComponent(){
+    public void configureScreenComponent(TopicScreenController controller){
         addTopicButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    handleAddTopicButtonClicked(actionEvent);
+                    handleAddTopicButtonClicked(actionEvent, controller);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -60,11 +64,12 @@ public class ListTopicScreen {
         });
     }
 
-    private void handleAddTopicButtonClicked(ActionEvent actionEvent) throws IOException {
+    private void handleAddTopicButtonClicked(ActionEvent actionEvent, TopicScreenController controller) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        Card card = new Card(0, "new name", "new name", "new name", "new name", LocalDateTime.now().toString());
+        Card newCard = new Card(0, "new name", "new name", "new name", "new name", LocalDateTime.now().toString());
         CardEditingScreen screen = new CardEditingScreen();
+        screen.connect(newCard);
         VBox root = screen.getRoot();
         HBox bottomBar = new HBox();
         Button saveButton = new Button("Save");
@@ -79,7 +84,15 @@ public class ListTopicScreen {
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // SAVE TO DATABASE
+                int status = controller.addCardToDatabase(newCard);
+                if(status == CardCRUD.CARD_IS_AVAIALABLED){
+                    Utilities.getInstance().showAlert("Card đã tồn tại", Alert.AlertType.WARNING);
+                }
+                if(status == CardCRUD.CARD_ADDED_SUCCESS){
+                    controller.refreshListTopicTitlesList();
+                    stage.close();
+                }
+
             }
         });
 
@@ -88,7 +101,7 @@ public class ListTopicScreen {
         bottomBar.setSpacing(10);
         root.getChildren().add(bottomBar);
 
-        screen.connect(card);
+
         stage.setScene(new Scene(screen.getRoot()));
         stage.show();
     }
@@ -106,21 +119,21 @@ public class ListTopicScreen {
         for(String title : topicTitles.get()){
             TopicBar topicBar = new TopicBar(title);
             topicBarPane.getChildren().add(topicBar);
-            topicBar.setOnEditButtonClicked(editButtonClickedEventHandler());
-            topicBar.setOnLearnButtonClicked(learnButtonClickedEventHandler());
+            topicBar.setOnEditButtonClicked(editButtonClickedEventHandler(topicBar));
+            topicBar.setOnLearnButtonClicked(learnButtonClickedEventHandler(topicBar));
         }
     }
-    private EventHandler<ActionEvent> learnButtonClickedEventHandler() {
+    private EventHandler<ActionEvent> learnButtonClickedEventHandler(TopicBar topicBar) {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     CardLearningController controller = new CardLearningController();
-
+                    controller.loadCardByTopic(topicBar.getTopicName());
                     Stage stage = new Stage();
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.setScene(new Scene(controller.getScreen().getRoot()));
-                    controller.load();
+
                     stage.show();
 
                 } catch (IOException e) {
@@ -130,11 +143,11 @@ public class ListTopicScreen {
         };
     }
 
-    private EventHandler<ActionEvent> editButtonClickedEventHandler() {
+    private EventHandler<ActionEvent> editButtonClickedEventHandler(TopicBar topicBar) {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                mainScreen.changeToCardTopicPane();
+                mainScreen.changeToCardTopicPane(topicBar.getTopicName());
             }
         };
     }

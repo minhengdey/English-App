@@ -23,10 +23,10 @@ public class FXMain extends Application{
     public void start(Stage stage) throws Exception {
         stage.resizableProperty().set(false);
 //        testMainScreen(stage);
-//        testLogin(stage);
+        testLogin(stage);
 //        testEditProfile(stage);
 //        testListTopicScreen(stage);
-        testTranslateMainScreen(stage);
+//        testTranslateMainScreen(stage);
     }
 
     private void testTranslateMainScreen(Stage stage) throws IOException {

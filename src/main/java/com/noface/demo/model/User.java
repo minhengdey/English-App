@@ -77,23 +77,5 @@ public class User {
         return email;
     }
 
-    public void bind(User o){
-        username.bind(o.username);
-        password.bind(o.password);
-        gender.bind(o.gender);
-        name.bind(o.name);
-        phone.bind(o.phone);
-        dob.bind(dob);
-        email.bind(dob);
-    }
-    public void unbind(User o){
-        username.unbind();
-        password.unbind();
-        gender.unbind();
-        name.unbind();
-        phone.unbind();
-        dob.unbind();
-        email.unbind();
-    }
 
 }

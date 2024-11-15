@@ -2,6 +2,9 @@ package com.noface.demo.screen;
 
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.model.Card;
+import com.noface.demo.model.CardCRUD;
+import com.noface.demo.resource.ResourceLoader;
+import com.noface.demo.resource.Utilities;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -111,6 +114,13 @@ public class CardTopicScreen {
 
 
         cardsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if(oldSelection != null){
+                int status = ResourceLoader.getInstance().getCardCRUD().addCard(oldSelection.getFrontContent(), oldSelection.getBackContent(), oldSelection.getTopic(), oldSelection.getName());
+                if(status == CardCRUD.CARD_IS_AVAIALABLED){
+                    Utilities.getInstance().showAlert("Card đã tồn tại", Alert.AlertType.WARNING);
+                    cardData.remove(oldSelection);
+                }
+            }
             if (newSelection != null) {
                 if (oldSelection != null){
                     oldSelection.unbind();
@@ -139,6 +149,7 @@ public class CardTopicScreen {
     public Card handleRemoveCardButtonClicked(ActionEvent event) {
         Card selectedCard = cardsTable.getSelectionModel().getSelectedItem();
         cardData.remove(selectedCard);
+        ResourceLoader.getInstance().getCardCRUD().deleteCard(selectedCard);
         return selectedCard;
     }
 

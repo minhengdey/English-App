@@ -21,7 +21,6 @@ public class MainController {
     private TranslateScreenController translateScreenController;
     private ProfileScreenController profileScreenController;
     public MainController() throws IOException {
-        getData();
         topicScreenController = new TopicScreenController();
         cardLearningController = new CardLearningController();
         translateScreenController = new TranslateScreenController();
@@ -43,15 +42,22 @@ public class MainController {
         profileScreenController.getScreen().setMainScreen(mainScreen);
     }
 
-    public void getData(){
-        List<String> topicTitle = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            topicTitle.add(String.format("Topic %d", i));
-
-        }
-        topics.addAll(topicTitle);
-        cards.addAll(ResourceLoader.getInstance().getCardsSampleData());
+    public TopicScreenController getTopicScreenController() {
+        return topicScreenController;
     }
+
+    public CardLearningController getCardLearningController() {
+        return cardLearningController;
+    }
+
+    public TranslateScreenController getTranslateScreenController() {
+        return translateScreenController;
+    }
+
+    public ProfileScreenController getProfileScreenController() {
+        return profileScreenController;
+    }
+
     public MainScreen getMainScreen() {
         return mainScreen;
     }

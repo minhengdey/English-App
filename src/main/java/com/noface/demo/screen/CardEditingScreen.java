@@ -71,11 +71,9 @@ public class CardEditingScreen {
         cardNameProperty = new SimpleStringProperty();
         cardTopicProperty = new SimpleStringProperty();
 
-        cardNameProperty.bindBidirectional(card.nameProperty());
+
         cardNameEditor.setText(card.nameProperty().get());
-        cardNameEditor.textProperty().addListener((observable, oldValue, newValue) -> {
-            cardNameProperty.set(newValue);
-        });
+
 
         cardTopicProperty.bindBidirectional(card.topicProperty());
         cardTopicTextField.setText(cardTopicProperty.get());
@@ -83,7 +81,10 @@ public class CardEditingScreen {
             cardTopicProperty.set(cardTopicTextField.getText());
         });
 
-
+        cardNameEditor.textProperty().addListener((observable, oldValue, newValue) -> {
+            cardNameProperty.set(newValue);
+        });
+        cardNameProperty.bindBidirectional(card.nameProperty());
         frontContent.bindBidirectional(card.frontContentProperty());
         backContent.bindBidirectional(card.backContentProperty());
         contentEditor.setHtmlText(card.frontContentProperty().get());
