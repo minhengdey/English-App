@@ -93,7 +93,7 @@
 }
 /* Tùy chỉnh đường viền giữa các hàng */
 .table-view .table-row-cell:selected {
-    -fx-background-radius: #FFBF61;
+    -fx-background-radius: 10;
     -fx-background-color: #FFBF61; /* Màu đường viền giữa các hàng */
     -fx-border-color: #FFE6A5;
     -fx-border-width: 0 0 1px 0; /* Đường viền dưới cho mỗi hàng */

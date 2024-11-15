@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -24,6 +26,17 @@ public class CardCRUD
     private ObjectMapper objectMapper;
     private String token, apiUri = "http://localhost:8080/";
 
+    private String normalize_name(String s)
+    {
+        String[] k = s.trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String i : k)
+        {
+            sb.append(i.substring(0, 1).toUpperCase()).append(i.substring(1).toLowerCase()).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
     public CardCRUD()
     {
         httpClient = HttpClient.newHttpClient();
@@ -36,7 +49,7 @@ public class CardCRUD
         Card card = new Card();
         try
         {
-            com.noface.demo.card.CardRequest cardRequest = new com.noface.demo.card.CardRequest(frontSide, backSide, topic, LocalDateTime.now().toString(), name);
+            CardRequest cardRequest = new CardRequest(frontSide, backSide, topic, LocalDateTime.now().toString(), name);
             String requestBody = objectMapper.writeValueAsString(cardRequest);
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -52,12 +65,8 @@ public class CardCRUD
                 String jsonResponse = response.body();
                 JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                 long id = jsonNode.get("id").asLong();
-                String front_side = jsonNode.get("frontSide").asText();
-                String back_side = jsonNode.get("backSide").asText();
-                String Topic = jsonNode.get("topic").asText();
                 String date = jsonNode.get("date").asText();
-                String Name = jsonNode.get("name").asText();
-                card = new Card(id, Name, front_side, back_side, Topic, date);
+                card = new Card(id, name, frontSide, backSide, topic, date);
             }
             else
             {
@@ -88,6 +97,7 @@ public class CardCRUD
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiUri + "new_word/" + id))
+                    .header("Authorization", "Bearer " + token)
                     .DELETE()
                     .build();
 
@@ -114,7 +124,7 @@ public class CardCRUD
     {
         try
         {
-            com.noface.demo.card.CardRequest cardRequest = new com.noface.demo.card.CardRequest(frontSide, backSide, topic, date, name);
+            CardRequest cardRequest = new CardRequest(frontSide, backSide, topic, date, name);
             long id = Long.parseLong(card.getId());
             String requestBody = objectMapper.writeValueAsString(cardRequest);
 
@@ -174,8 +184,9 @@ public class CardCRUD
         List<Card> cards = new ArrayList<>();
         try
         {
+            String encodedTopic = URLEncoder.encode(normalize_name(topic), StandardCharsets.UTF_8);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(apiUri + "new_word/topic/" + topic))
+                    .uri(new URI(apiUri + "new_word/topic/" + encodedTopic))
                     .header("Authorization", "Bearer " + token)
                     .GET()
                     .build();

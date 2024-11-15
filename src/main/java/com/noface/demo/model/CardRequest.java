@@ -1,4 +1,4 @@
-package com.noface.demo.card;
+package com.noface.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,13 +18,24 @@ public class CardRequest
         this.name = new SimpleStringProperty();
     }
 
+    private String normalize_name(String s)
+    {
+        String[] k = s.trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String i : k)
+        {
+            sb.append(i.substring(0, 1).toUpperCase()).append(i.substring(1).toLowerCase()).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
     public CardRequest(String frontSide, String backSide, String topic, String date, String name)
     {
         this.frontSide = new SimpleStringProperty(frontSide);
         this.backSide = new SimpleStringProperty(backSide);
-        this.topic = new SimpleStringProperty(topic);
-        this.date = new SimpleStringProperty(date);
-        this.name = new SimpleStringProperty(name);
+        this.topic = new SimpleStringProperty(normalize_name(topic));
+        this.date = new SimpleStringProperty(normalize_name(date));
+        this.name = new SimpleStringProperty(normalize_name(name));
     }
 
     public String getfrontSide()
