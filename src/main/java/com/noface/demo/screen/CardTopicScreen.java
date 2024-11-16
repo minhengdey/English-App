@@ -78,7 +78,7 @@ public class CardTopicScreen {
         HBox.setHgrow(cardSearchBox, Priority.ALWAYS);
         cardSearchBox.setMaxWidth(Double.MAX_VALUE);
         rightPane.getChildren().add(cardEditingScreen.getRoot());
-
+        cardsTable.getColumns().clear();
         TableColumn<Card, String> cardNameColumn = new TableColumn("Card name");
         cardNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 

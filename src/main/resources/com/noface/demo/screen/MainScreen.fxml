@@ -10,22 +10,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #eeeeee;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F5EBFF;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox style="-fx-background-color: white;">
+        <VBox style="-fx-background-color: #E5E5FF;">
             <children>
-                <AnchorPane id="side_ankerpane" prefHeight="626.0" prefWidth="246.0" styleClass="side_ankerpane" stylesheets="@Style.css">
+                <AnchorPane id="side_ankerpane" prefHeight="600.0" prefWidth="222.0" styleClass="side_ankerpane" stylesheets="@Style.css">
                     <children>
-                        <Pane id="inner_pane" layoutX="19.0" layoutY="21.0" prefHeight="60.0" prefWidth="207.0" styleClass="inner_pane" stylesheets="@Style.css">
+                        <Pane id="inner_pane" layoutX="19.0" layoutY="21.0" prefHeight="60.0" prefWidth="207.0" styleClass="inner_pane" stylesheets="@Style.css" AnchorPane.bottomAnchor="519.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="19.0">
                             <children>
-                                <Pane id="most_inner_pane" layoutX="163.0" prefHeight="60.0" prefWidth="37.0" styleClass="most_inner_pane">
-                                    <children>
-                                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="3.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                <Pane id="most_inner_pane" layoutX="117.0" layoutY="6.0" prefHeight="47.0" prefWidth="49.0" styleClass="most_inner_pane">
+                           <children>
+                                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
                                                 <Image url="@login_image/menu.png" />
                                             </image>
                                         </ImageView>
-                                    </children>
+                           </children>
                                 </Pane>
                                 <ImageView fitHeight="49.0" fitWidth="50.0" layoutX="24.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -34,12 +34,12 @@
                                 </ImageView>
                             </children>
                         </Pane>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="406.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@login_image/keep.png" />
                             </image>
                         </ImageView>
-                        <VBox layoutX="53.0" layoutY="121.0" prefHeight="240.0" prefWidth="140.0" spacing="25.0">
+                        <VBox alignment="CENTER" layoutX="53.0" layoutY="121.0" prefHeight="240.0" prefWidth="140.0" spacing="25.0">
                             <children>
                                 <HBox prefHeight="45.0" prefWidth="100.0">
                                     <children>
@@ -132,6 +132,6 @@
                 </AnchorPane>
             </children>
         </VBox>
-      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
+      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #E5E5FF;" HBox.hgrow="ALWAYS" />
     </children>
 </HBox>

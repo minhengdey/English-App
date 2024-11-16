@@ -19,11 +19,11 @@ import javafx.scene.control.Alert;
 import java.io.IOException;
 
 public class TopicScreenController {
-    private StringProperty topic = new SimpleStringProperty();
-    private ListTopicScreen topicScreen;
-    private CardTopicScreen cardScreen;
-    private ListProperty<String> topicTitles = new SimpleListProperty(FXCollections.observableArrayList());
-    private ListProperty<Card> cards = new SimpleListProperty<>(FXCollections.observableArrayList());
+    private final StringProperty topic = new SimpleStringProperty();
+    private final ListTopicScreen topicScreen;
+    private final CardTopicScreen cardScreen;
+    private final ListProperty<String> topicTitles = new SimpleListProperty(FXCollections.observableArrayList());
+    private final ListProperty<Card> cards = new SimpleListProperty<>(FXCollections.observableArrayList());
     public TopicScreenController() throws IOException {
 
         topicScreen = new ListTopicScreen(this);

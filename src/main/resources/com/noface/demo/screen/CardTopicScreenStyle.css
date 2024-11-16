@@ -3,6 +3,11 @@
 .split-pane{
     -fx-background-color: #ffffff;
 }
+.split-pane > .split-pane-divider {
+    -fx-background-color: #9659D3; /* Màu nền của thanh phân tách */
+    -fx-border-width: 1px; /* Độ dày viền cho thanh phân tách */
+    -fx-background-radius: 15px;
+}
 .button{
     -fx-pref-height: 30px;
     -fx-pref-width: 70px;
@@ -57,44 +62,110 @@
     -fx-border-radius: 15;
 }
 
-/* TextField chung */
 .text-field {
     -fx-background-color: #ffffff;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-padding: 5px;
 }
+
 .table-view{
-    -fx-border-color: #FFBF61;
+    -fx-border-color: #C492F5;
     -fx-border-radius: 20px;
-    -fx-border-width: 2px;
-    -fx-background-color: #FFE6A5;
+    -fx-border-width: 1px;
+    -fx-background-color: #E1CDF4;
     -fx-background-radius: 20px;
-    -fx-padding: 8, 8, 8, 8;
+    -fx-padding: 15 10 10 10;
 }
+
 .table-view .column-header {
-    -fx-font-size: 12px; /* Kích thước chữ của tiêu đề */
-    -fx-font-weight: bold; /* Chữ in đậm */
-    -fx-text-fill: white; /* Màu chữ của tiêu đề */
-    -fx-background-color: #FFE6A5;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F5EBFF;
+    -fx-background-color: #9659D3  ;
+}
+.table-view .column-header-background {
+    -fx-background-color: #9659D3;   ;
 }
 
-
-
-/* Tùy chỉnh màu cuộn của TableView */
-.table-view .scroll-bar {
-    -fx-background-color: transparent; /* Nền cuộn */
+.table-view .column-header .label {
+    -fx-text-fill: #F5EBFF;
 }
-.table-view .scroll-bar .thumb {
-    -fx-background-color: #9b7ebd; /* Màu thanh cuộn */
-}
+
 .table-view .table-row-cell{
-    -fx-padding: 5, 5, 5, 5;
+    -fx-background-color: #F5EBFF;
 }
-/* Tùy chỉnh đường viền giữa các hàng */
+.table-view .table-cell {
+    -fx-border-color: #C492F5;  /* Màu viền */
+    -fx-border-width: 0 1 1 0;    /* Độ dày viền */
+    -fx-border-style: solid;  /* Kiểu viền (solid, dotted, dashed, etc.) */
+    -fx-padding: 5;
+}
 .table-view .table-row-cell:selected {
+    -fx-background-color: #C492F5;
+    -fx-text-fill: #F5EBFF;
+}
+
+.table-view .table-cell:empty {
+    -fx-border-color: transparent;
+}
+
+.table-view .scroll-bar {
+    -fx-background-color: transparent;
+    -fx-border-width: 0.5px;
+}
+
+.table-view .scroll-bar .track {
+    -fx-background-color: transparent; /* Màu nền track */
+    -fx-background-radius: 10px;  /* Bo cong góc track */
+}
+
+/* Phần kéo (thumb) của thanh cuộn */
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 10px;  /* Bo cong góc thumb */
+}
+
+.search-hbox{
+    -fx-spacing: 10;
     -fx-background-radius: 10;
-    -fx-background-color: #FFBF61; /* Màu đường viền giữa các hàng */
-    -fx-border-color: #FFE6A5;
-    -fx-border-width: 0 0 1px 0; /* Đường viền dưới cho mỗi hàng */
+    -fx-padding: 5;
+    -fx-background-color: #F5EBFF;
+    -fx-background-radius: 25;      /* Bo tròn các góc của HBox */
+    -fx-border-radius: 15;
+    -fx-border-color: #C492F5;
+    -fx-border-width: 2px;
+}
+.search-hbox {
+    -fx-background-color: transparent;
+}
+.search-hbox .button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+.search-hbox .button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
+}
+.search-hbox .button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+.button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
 }
