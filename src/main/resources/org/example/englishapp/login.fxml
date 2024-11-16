@@ -47,7 +47,7 @@
             </Button>
             <Text layoutX="218.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bạn chưa có tài khoản?" wrappingWidth="154.45573425292963" />
             <Text layoutX="158.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hoặc đăng nhập bằng:" />
-            <ImageView fitHeight="40.0" fitWidth="38.0" layoutX="295.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="38.0" layoutX="294.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@login_image/google_720255.png" />
                </image>
