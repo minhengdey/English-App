@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,5 +62,21 @@ public class UserController {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getMyInfo())
                 .build();
+    }
+
+    @PostMapping(value = "/auth/google-login")
+    public UserResponse googleLogin() {
+        // Lấy thông tin người dùng từ OAuth2AuthenticationToken
+        OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken)
+                SecurityContextHolder.getContext().getAuthentication();
+
+        // Lấy đối tượng OAuth2User chứa thông tin người dùng
+        OAuth2User user = authentication.getPrincipal();
+        UserCreationRequest userCreationRequest = UserCreationRequest
+                .builder()
+                .email(user.getAttribute("email"))
+                .name(user.getAttribute("name"))
+                .build();
+        return userService.createUser(userCreationRequest);
     }
 }
