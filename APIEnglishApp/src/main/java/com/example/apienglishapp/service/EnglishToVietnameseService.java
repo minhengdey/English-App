@@ -15,11 +15,12 @@ public class EnglishToVietnameseService {
     public List<EnglishToVietnameseEntity> getEnglishToVietnamese () {
         return englishToVietnameseRepository.findAll();
     }
-    public EnglishToVietnameseEntity getEnglishToVietnameseByWord(Integer id) {
-        return englishToVietnameseRepository.findById(String.valueOf(id)).orElseThrow(() -> new RuntimeException("Tu nay khong co trong tu dien"));
-    }
-    public EnglishToVietnameseEntity getEnglishToVietnameseByWord(String word) {
-        return englishToVietnameseRepository.findByWord(word)
-                .orElseThrow(() -> new RuntimeException("Từ này không có trong từ điển"));
+    
+    public List<EnglishToVietnameseEntity> getEnglishToVietnameseByWord(String word) {
+        List<EnglishToVietnameseEntity> result = englishToVietnameseRepository.findByWord(word);
+        if (result.isEmpty()) {
+            throw new RuntimeException("Từ này không có trong từ điển");
+        }
+        return result;
     }
 }
