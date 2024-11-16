@@ -143,9 +143,9 @@ public class HelloController implements Initializable {
             showError("Please select a translation direction.");
             return;
         } else if (comboBox.getValue().equals("English To Vietnamese")) {
-            translatePath = "english_to_vietnamese/byWord";
+            translatePath = "english_to_vietnamese";
         } else {
-            translatePath = "vietnamese_to_english/byWord";
+            translatePath = "vietnamese_to_english";
         }
 
         outputWebView.getEngine().loadContent("<p>Translating...</p>");
@@ -178,16 +178,19 @@ public class HelloController implements Initializable {
     }
 
     private String sendApiRequest(String text, String translatePath) throws Exception {
-        String urlStr = String.format(
-                "http://localhost:8080/%s/%s",
-                translatePath, java.net.URLEncoder.encode(text, StandardCharsets.UTF_8)
-        );
+        text = text.toLowerCase();
+        // Mã hóa URL để tránh ký tự đặc biệt gây lỗi
+        String encodedText = java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
+        String urlStr = String.format("http://localhost:8080/%s/byWord/%s", translatePath, encodedText);
+
         System.out.println(urlStr);
+
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
@@ -198,6 +201,7 @@ public class HelloController implements Initializable {
             conn.disconnect();
         }
     }
+
 
     private List<String> extractWordFromJson(String jsonResponse) {
         JSONArray jsonArray = new JSONArray(jsonResponse);
@@ -222,8 +226,6 @@ public class HelloController implements Initializable {
                 htmlBuilder.append(obj.getString("html")).append("<br>");
             }
         }
-
         return htmlBuilder.toString();
     }
-
 }
