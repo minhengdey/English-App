@@ -18,12 +18,8 @@ public class EnglishToVietnameseController {
     public List<EnglishToVietnameseEntity> getEnglishToVietnamese () {
         return englishToVietnameseService.getEnglishToVietnamese();
     }
-    @GetMapping("/byId/{id}")
-    public EnglishToVietnameseEntity getEnglishToVietnameseByWord (@PathVariable("id") Integer id) {
-        return englishToVietnameseService.getEnglishToVietnameseByWord(id);
-    }
     @GetMapping("/byWord/{word}")
-    public EnglishToVietnameseEntity getEnglishToVietnameseByWord (@PathVariable("word") String word) {
+    public List<EnglishToVietnameseEntity> getEnglishToVietnameseByWord (@PathVariable("word") String word) {
         return englishToVietnameseService.getEnglishToVietnameseByWord(word);
     }
 }
