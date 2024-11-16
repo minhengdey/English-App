@@ -42,19 +42,26 @@
             </Button>
             <Text layoutX="272.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New user?" wrappingWidth="71.25578308105463" />
             <Text layoutX="209.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Or login with:" />
-            <ImageView fitHeight="40.0" fitWidth="38.0" layoutX="294.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@login_image/google_720255.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <CheckBox layoutX="106.0" layoutY="341.0" mnemonicParsing="false" text="Remember Me">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
+            <Button layoutX="280.0" layoutY="471.0" mnemonicParsing="false" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@login_image/google_720255.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
