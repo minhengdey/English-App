@@ -1,10 +1,13 @@
 package com.noface.demo.controller;
 
 import com.noface.demo.model.Card;
+import com.noface.demo.model.CardCRUD;
 import com.noface.demo.resource.ResourceLoader;
+import com.noface.demo.resource.Utilities;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -72,7 +75,17 @@ public class CardLearningInteractor {
         currentCard.setDueTime((LocalDateTime.now().plusSeconds(seconds)).toString());
         ResourceLoader.getInstance().getCardCRUD().editCard(currentCard, currentCard.getFrontContent(), currentCard.getBackContent(),
                 currentCard.getTopic(), currentCard.getName(), currentCard.getDueTime());
-        System.out.println("In add card time " + currentCard);
+    }
+    public void saveEditedCard(Card card){
+
+        int status = ResourceLoader.getInstance().getCardCRUD().editCard(card, card.getFrontContent(), card.getBackContent(),
+                card.getTopic(), card.getName(), card.getDueTime());
+        if(status == CardCRUD.CARD_EDITED_SUCCESS){
+            frontContentProperty.set(card.getFrontContent());
+            backContentProperty.set(card.getBackContent());
+        }else{
+            Utilities.getInstance().showAlert("Lưu không thành công", Alert.AlertType.WARNING);
+        }
     }
 
     public ObservableList<Card> getCardListProperty() {

@@ -8,15 +8,19 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -145,10 +149,10 @@ public class CardTopicScreen {
         Card card = new Card("new card", "This is front content", "This is back content", topic.get(), LocalDateTime.now().toString());
         cardEditingScreen.connect(card);
 
-        addCardButton.setMouseTransparent(true);
-        cardsTable.setMouseTransparent(true);
-        backButton.setMouseTransparent(true);
-        removeCardButton.setMouseTransparent(true);
+        addCardButton.setDisable(true);
+        cardsTable.setDisable(true);
+        backButton.setDisable(true);
+        removeCardButton.setDisable(true);
 
         VBox pane = ((VBox) cardEditingScreen.getRoot());
         Button saveButton = new Button("Save");
@@ -159,7 +163,17 @@ public class CardTopicScreen {
         pane.getChildren().add(bottomBar);
         bottomBar.getChildren().add(saveButton);
         bottomBar.getChildren().add(cancelButton);
+        Pane root = (Pane) this.getRoot();
 
+        ChangeListener<Parent> changeScreenListener = new ChangeListener<Parent>() {
+            @Override
+            public void changed(ObservableValue<? extends Parent> observableValue, Parent oldParent, Parent newParent) {
+                if (newParent == null) {
+                    cancelButton.fire();
+                }
+            }
+        };
+        root.parentProperty().addListener(changeScreenListener);
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -168,21 +182,24 @@ public class CardTopicScreen {
                     Utilities.getInstance().showAlert("Thẻ đã tồn tại, vui lòng nhập lại", Alert.AlertType.WARNING);
                 }else if(status == CardCRUD.CARD_ADDED_SUCCESS){
                     pane.getChildren().remove(bottomBar);
-                    addCardButton.setMouseTransparent(false);
-                    cardsTable.setMouseTransparent(false);
-                    backButton.setMouseTransparent(false);
-                    removeCardButton.setMouseTransparent(false);
+                    addCardButton.setDisable(false);
+                    cardsTable.setDisable(false);
+                    backButton.setDisable(false);
+                    removeCardButton.setDisable(false);
+                    root.parentProperty().removeListener(changeScreenListener);
                 }
             }
         });
+
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 pane.getChildren().remove(bottomBar);
-                addCardButton.setMouseTransparent(false);
-                cardsTable.setMouseTransparent(false);
-                backButton.setMouseTransparent(false);
-                removeCardButton.setMouseTransparent(false);
+                addCardButton.setDisable(false);
+                cardsTable.setDisable(false);
+                backButton.setDisable(false);
+                removeCardButton.setDisable(false);
+                root.parentProperty().removeListener(changeScreenListener);
             }
         });
     }

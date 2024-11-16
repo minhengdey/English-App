@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -51,6 +52,7 @@ public class CardLearningScreen {
     @FXML
     private Label cardNameLabel;
     private MainScreen mainScreen;
+
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
@@ -159,6 +161,7 @@ public class CardLearningScreen {
         });
     }
     public void startShowing(){
+        System.out.println("Start showing");
         if(cardToLearnAvailabled.get() == false){
             handleCardToLearnAvailabledStatusChange(cardToLearnAvailabled, false, false);
         }else{
@@ -189,6 +192,13 @@ public class CardLearningScreen {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(screen.getRoot()));
             screen.connect(interactor.getCurrentCard());
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    interactor.saveEditedCard(interactor.getCurrentCard());
+                    startShowing();
+                }
+            });
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

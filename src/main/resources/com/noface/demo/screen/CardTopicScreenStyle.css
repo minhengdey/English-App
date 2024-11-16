@@ -13,11 +13,10 @@
 .card-list-button{
     -fx-pref-height: 30px;
     -fx-pref-width: 70px;
-    -fx-background-color: #8ABFA3;
     -fx-text-fill: #fff;
-    -fx-font-family: "Work Sans SemiBold";
     -fx-background-radius: 20px;
 }
+
 .nobackground-button{
     -fx-background-color: transparent;
     -fx-font-size: 15px;
@@ -107,6 +106,11 @@
     -fx-background-color: #C492F5;
     -fx-text-fill: #F5EBFF;
 }
+.table-view .table-row-cell:cell-selection{
+    -fx-background-color: #C492F5;
+    -fx-text-fill: #F5EBFF;
+}
+
 
 .table-view .table-cell:empty {
     -fx-border-color: transparent;
