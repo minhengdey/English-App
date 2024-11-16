@@ -3,11 +3,11 @@ package com.example.apienglishapp.repository;
 import com.example.apienglishapp.entity.VietnameseToEnglishEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.util.Optional;
+import java.util.List;
 
-@Repository
 public interface VietnameseToEnglishRepository extends JpaRepository <VietnameseToEnglishEntity, String> {
-    Optional<VietnameseToEnglishEntity> findByWord(String word);
-
+    @Query(value = "SELECT * FROM va WHERE BINARY word = :word", nativeQuery = true)
+    List<VietnameseToEnglishEntity> findByWord(String word);
 }
