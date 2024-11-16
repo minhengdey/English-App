@@ -5,9 +5,10 @@
 }
 
 /* VBox */
-.custom-vbox {
+.root-vbox {
     -fx-padding: 10, 10, 10, 10;
     -fx-spacing: 10;
+    -fx-background-color: #E5E5FF;
 }
 .combo-box .list-cell:hover{
     -fx-text-fill: #333333;
@@ -22,25 +23,36 @@
 
 
 /* HBox */
-.custom-hbox {
+.top-hbox {
     -fx-alignment: center;
     -fx-spacing: 10;
     -fx-background-radius: 10;
     -fx-padding: 10px;
-    -fx-background-color: #d4bee4;
+    -fx-background-color: #E1CDF4;
 }
 
 /* ComboBox */
-#cardSideChoiceBox {
-    -fx-background-color: #ffffff;
+.side-choice-box {
+    -fx-background-color: #fff;
     -fx-background-radius: 15;
-    -fx-padding: 5px;
-    -fx-border-color: #624b6f;
-    -fx-border-width: 2;
-    -fx-border-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 10px;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
 }
 
-/* TextField chung */
+.side-choice-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+.side-choice-box .arrow-button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+}
+
+.side-choice-box .arrow-button:hover {
+    -fx-background-color: #E5E5FF;
+}
 .text-field {
     -fx-background-color: #ffffff;
     -fx-background-radius: 15;
@@ -48,26 +60,24 @@
     -fx-padding: 5px;
 }
 
-/* TextField cardNameEditor */
-#cardNameEditor {
-    -fx-background-color: #ffffff;
+.name-field {
+    -fx-background-color: #F5EBFF;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-padding: 10px;
     -fx-prompt-text-fill: #aaaaaa;
-    -fx-border-color: #624b6f;
-    -fx-border-width: 2;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
 }
 
-/* TextField cardTopicTextField */
-#cardTopicTextField {
-    -fx-background-color: #ffffff;
+.card-topic-field {
+    -fx-background-color: #F5EBFF;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-padding: 10px;
     -fx-prompt-text-fill: #aaaaaa;
-    -fx-border-color: #624b6f;
-    -fx-border-width: 2;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
 }
 
 /* HTMLEditor chỉnh toàn cục */
@@ -76,8 +86,8 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 15;
     -fx-border-radius: 15;
-    -fx-border-color: #9b7ebd;
-    -fx-border-width: 2px;
+    -fx-border-color: #C492F5;
+    -fx-border-width: 1px;
     -fx-padding: 5;
 }
 .button {
@@ -97,34 +107,32 @@
 
 /* Các nút bên trong HTMLEditor */
 .html-editor .button {
-    -fx-background-color: #cba4f8;
+    -fx-background-color: #fff;
     -fx-text-fill: white;
     -fx-background-radius: 10;
-    -fx-padding: 5px 10px;
 }
 
 .html-editor .button:hover {
-    -fx-background-color: #876ca1;
+    -fx-background-color: #E5E5FF;
 }
 
-.html-editor .button:selected {
+.html-editor .button:pressed {
     -fx-background-color: #1a1620;
 }
 
 /* ToggleButton bên trong HTMLEditor */
 .html-editor .toggle-button {
-    -fx-background-color: #000000;
+    -fx-background-color: #ffffff;
     -fx-text-fill: white;
     -fx-background-radius: 10;
-    -fx-padding: 5px 10px;
 }
 
 .html-editor .toggle-button:selected {
-    -fx-background-color: #cba4f8;
+    -fx-background-color: #E5E5FF;
 }
 
 .html-editor .toggle-button:hover {
-    -fx-background-color: #cba4f8;
+    -fx-background-color: #B8B9CA;
 }
 
 /* ChoiceBox bên trong HTMLEditor */
@@ -145,7 +153,6 @@
     -fx-text-fill: #333333;
 }
 
-/* ComboBox bên trong HTMLEditor */
 .html-editor .combo-box {
     -fx-background-color: #ffffff;
     -fx-border-color: #9b7ebd;
@@ -158,12 +165,12 @@
 }
 
 .html-editor .combo-box .arrow-button {
-    -fx-background-color: #cba4f8; /* Nền mũi tên */
+    -fx-background-color: #fff;
     -fx-background-radius: 10;
 }
 
 .html-editor .combo-box .arrow-button:hover {
-    -fx-background-color: #876ca1;
+    -fx-background-color: #E5E5FF;
 }
 
 .html-editor .combo-box .list-cell {
@@ -171,13 +178,25 @@
     -fx-text-fill: #333333;
 }
 .html-editor .content {
-    -fx-background-color: #ffffff; /* Nền trắng */
+    -fx-background-color: #E1CDF4; /* Nền trắng */
     -fx-background-radius: 15;     /* Bo tròn các góc của TextArea */
     -fx-border-radius: 15;         /* Bo tròn viền của TextArea */
     -fx-border-color: #9b7ebd;     /* Màu viền tím đậm */
     -fx-border-width: 1px;         /* Độ dày viền */
     -fx-padding: 10px;             /* Khoảng cách giữa nội dung và viền */
 }
+
+.html-editor .context-menu {
+    -fx-background-color: #fff;
+}
+.html-editor .context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.html-editor .context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}
+
 
 .html-editor .combo-box .list-cell:selected {
     /*-fx-background-color: #d4bee4;*/

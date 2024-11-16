@@ -1,14 +1,16 @@
 /* Đặt nền cho AnchorPane */
 
 .split-pane{
-    -fx-background-color: #ffffff;
+    -fx-background-color: #E5E5FF;
 }
 .split-pane > .split-pane-divider {
-    -fx-background-color: #9659D3; /* Màu nền của thanh phân tách */
+    -fx-background-color: #C492F5; /* Màu nền của thanh phân tách */
     -fx-border-width: 1px; /* Độ dày viền cho thanh phân tách */
     -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
 }
-.button{
+
+.card-list-button{
     -fx-pref-height: 30px;
     -fx-pref-width: 70px;
     -fx-background-color: #8ABFA3;
@@ -112,7 +114,7 @@
 
 .table-view .scroll-bar {
     -fx-background-color: transparent;
-    -fx-border-width: 0.5px;
+    -fx-border-width: 0.3px;
 }
 
 .table-view .scroll-bar .track {

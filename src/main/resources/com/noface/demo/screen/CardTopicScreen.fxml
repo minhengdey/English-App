@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
@@ -21,14 +22,18 @@
                         <HBox alignment="CENTER" prefHeight="27.0" prefWidth="214.0" styleClass="search-hbox">
                            <children>
                               <TextField fx:id="cardSearchBox" prefHeight="27.0" prefWidth="145.0" text="fasdf" HBox.hgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" styleClass="nobackground-button" text="Search" />
+                              <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" text="Search">
+                                 <styleClass>
+                                    <String fx:value="nobackground-button" />
+                                    <String fx:value="card-list-button" />
+                                 </styleClass></Button>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="2.0" prefWidth="203.0" styleClass="custom-hbox-2">
                            <children>
-                              <Button fx:id="backButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" text="Back" />
-                              <Button fx:id="addCardButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="255.0" text="Add" HBox.hgrow="ALWAYS" />
-                              <Button fx:id="removeCardButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Remove" />
+                              <Button fx:id="backButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="187.0" styleClass="card-list-button" text="Back" />
+                              <Button fx:id="addCardButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="255.0" styleClass="card-list-button" text="Add" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="removeCardButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" styleClass="card-list-button" text="Remove" />
                            </children>
                         </HBox>
                         <TableView fx:id="cardsTable" prefHeight="200.0" prefWidth="240.0" VBox.vgrow="ALWAYS">
