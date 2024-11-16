@@ -175,6 +175,9 @@ public class SignUpScreen implements Initializable {
                         if (code == 1000) {
                             showAlert("Username đã tồn tại, vui lòng đổi username!", Alert.AlertType.ERROR);
                             username.clear();
+                        } else if (code == 1006) {
+                            showAlert("Email không hợp lệ", Alert.AlertType.ERROR);
+                            email.clear();
                         } else showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
                     }
                 } catch (Exception e) {
