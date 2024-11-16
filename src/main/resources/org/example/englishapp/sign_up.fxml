@@ -20,7 +20,7 @@
    <children>
       <Pane id="side_signup" layoutX="440.0" prefHeight="600.0" prefWidth="566.0" style="-fx-background-color: WHITE;" styleClass="side_signup" stylesheets="@Style.css">
          <children>
-            <Text layoutX="216.0" layoutY="65.0" strokeWidth="0.0" text="Đăng ký" textAlignment="CENTER" wrappingWidth="133.00006103515625">
+            <Text layoutX="165.0" layoutY="67.0" strokeWidth="0.0" text="Create Account" textAlignment="CENTER" wrappingWidth="235.2000732421875">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -28,53 +28,56 @@
                   <Font name="Times New Roman Bold" size="34.0" />
                </font>
             </Text>
-            <Button id=".button_signup" layoutX="239.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="35.0" prefWidth="89.0" styleClass="button_signup" stylesheets="@Style.css" text="Đăng ký" textAlignment="CENTER" textFill="WHITE">
+            <Button id=".button_signup" layoutX="239.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="35.0" prefWidth="89.0" styleClass="button_signup" stylesheets="@Style.css" text="Sign up" textAlignment="CENTER" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </Button>
+            <TextField id="input_text" fx:id="name" layoutX="175.0" layoutY="100.0" prefHeight="35.0" prefWidth="218.0" promptText="Full name" styleClass="text_input" stylesheets="@Style.css">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
          </children>
       </Pane>
-      <TextField id="input_text" fx:id="name" layoutX="617.0" layoutY="99.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên" styleClass="text_input" stylesheets="@Style.css">
+      <TextField id="input_text" fx:id="username" layoutX="617.0" layoutY="150.0" prefHeight="35.0" prefWidth="218.0" promptText="Username" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextField id="input_text" fx:id="username" layoutX="617.0" layoutY="150.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập" styleClass="text_input" stylesheets="@Style.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <PasswordField id="input_text" fx:id="password" layoutX="617.0" layoutY="202.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu" styleClass="text_input">
+      <PasswordField id="input_text" fx:id="password" layoutX="617.0" layoutY="202.0" prefHeight="35.0" prefWidth="218.0" promptText="Password" styleClass="text_input">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
-      <PasswordField id="input_text" fx:id="confirmPassword" layoutX="617.0" layoutY="254.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu" styleClass="text_input" stylesheets="@Style.css">
+      <PasswordField id="input_text" fx:id="confirmPassword" layoutX="617.0" layoutY="254.0" prefHeight="35.0" prefWidth="218.0" promptText="Confirm password" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
       </PasswordField>
       <VBox layoutX="617.0" layoutY="300.0" prefHeight="47.0" prefWidth="218.0" spacing="5.0">
          <children>
-            <Label prefHeight="18.0" prefWidth="70.0" text="Ngày sinh" textFill="#878787" />
+            <Label prefHeight="18.0" prefWidth="70.0" text="Date of birth" textFill="#878787" />
             <HBox prefHeight="35.0" prefWidth="218.0" spacing="5.0">
                <children>
-                  <TextField id="input_text" fx:id="day" promptText="Ngày" styleClass="text_input">
+                  <TextField id="input_text" fx:id="day" promptText="Date" styleClass="text_input">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <TextField id="input_text" fx:id="month" promptText="Tháng" styleClass="text_input" />
-                  <TextField id="input_text" fx:id="year" promptText="Năm" styleClass="text_input" stylesheets="@Style.css" />
+                  <TextField id="input_text" fx:id="month" promptText="Month" styleClass="text_input" />
+                  <TextField id="input_text" fx:id="year" promptText="Year" styleClass="text_input" stylesheets="@Style.css" />
                </children>
             </HBox>
          </children>
       </VBox>
       <HBox layoutX="617.0" layoutY="416.0" prefHeight="27.0" prefWidth="218.0" spacing="5.0">
          <children>
-            <Label prefHeight="27.0" prefWidth="60.0" text="Giới tính" />
-            <ChoiceBox fx:id="gender" prefHeight="26.0" prefWidth="152.0" />
+            <Label prefHeight="27.0" prefWidth="25.0" text="Sex" />
+            <ChoiceBox fx:id="gender" prefHeight="26.0" prefWidth="186.0" />
          </children>
       </HBox>
       <TextField id="input_text" fx:id="email" layoutX="617.0" layoutY="363.0" prefHeight="35.0" prefWidth="218.0" promptText="Email" styleClass="text_input" stylesheets="@Style.css">
@@ -82,7 +85,7 @@
             <Cursor fx:constant="TEXT" />
          </cursor>
       </TextField>
-      <TextField id="input_text" fx:id="phone" layoutX="617.0" layoutY="457.0" prefHeight="35.0" prefWidth="218.0" promptText="Số điện thoại" styleClass="text_input" stylesheets="@Style.css">
+      <TextField id="input_text" fx:id="phone" layoutX="617.0" layoutY="457.0" prefHeight="35.0" prefWidth="218.0" promptText="Phone" styleClass="text_input" stylesheets="@Style.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
