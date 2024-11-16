@@ -47,7 +47,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <Button layoutX="280.0" layoutY="471.0" mnemonicParsing="false" style="-fx-background-color: white;">
+            <Button layoutX="280.0" layoutY="471.0" mnemonicParsing="false" onAction="#handleGoogleLogin" style="-fx-background-color: white;">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>

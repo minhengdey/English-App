@@ -16,6 +16,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -154,6 +157,39 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+        private static final String GOOGLE_AUTH_URL = "http://localhost:8080/oauth2/authorization/google";
+
+        public void handleGoogleLogin() {
+
+            WebView webView = new WebView();
+            WebEngine webEngine = webView.getEngine();
+
+
+            webEngine.load(GOOGLE_AUTH_URL);
+
+
+            webEngine.locationProperty().addListener((obs, oldUrl, newUrl) -> {
+                if (newUrl.contains("login/oauth2/code/google")) {
+
+                    System.out.println("Redirected back to: " + newUrl);
+
+                }
+            });
+
+
+            Stage stage = new Stage();
+            BorderPane root = new BorderPane();
+            root.setCenter(webView);
+
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.setTitle("Google Login");
+            stage.show();
+        }
+
+
 
     private void showAlert(String message, Alert.AlertType alertType)
     {
