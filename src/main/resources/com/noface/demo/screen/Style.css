@@ -2,7 +2,7 @@
     -fx-background-color: #ffffff;
 }
 .side_ankerpane{
-    -fx-background-color: #9b7ebd;
+    -fx-background-color: #C198EA;
     -fx-border-color: rgb(255, 255, 255);
     -fx-border-width: 2px 2px 2px 2px;
     -fx-border-radius: 20px;
@@ -30,7 +30,7 @@
 }
 
 .button_home{
-    -fx-background-color:  #9b7ebd;
+    -fx-background-color:  transparent;
     -fx-text-alignment: left;
 }
 .button_home:hover{

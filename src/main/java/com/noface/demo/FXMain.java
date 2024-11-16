@@ -3,6 +3,7 @@ package com.noface.demo;
 import com.noface.demo.controller.LoginScreenController;
 import com.noface.demo.controller.MainController;
 
+import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.UserEditScreenController;
 import com.noface.demo.screen.MainScreen;
 import javafx.application.Application;
@@ -40,6 +41,7 @@ public class FXMain extends Application{
     private void testListTopicScreen(Stage stage) throws IOException {
         MainController controller = new MainController();
         MainScreen screen = controller.getMainScreen();
+        TopicScreenController topicController = controller.getTopicScreenController();
         screen.changeToListTopicPane();
         stage.setScene(new Scene(screen.getRoot()));
         stage.show();

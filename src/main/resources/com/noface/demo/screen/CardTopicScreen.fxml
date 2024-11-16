@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,9 +18,9 @@
                <children>
                   <VBox prefHeight="631.0" prefWidth="260.0" styleClass="custom-vbox">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="27.0" prefWidth="214.0" styleClass="custom-hbox">
+                        <HBox alignment="CENTER" prefHeight="27.0" prefWidth="214.0" styleClass="search-hbox">
                            <children>
-                              <TextField fx:id="cardSearchBox" prefHeight="27.0" prefWidth="159.0" text="fasdf" />
+                              <TextField fx:id="cardSearchBox" prefHeight="27.0" prefWidth="145.0" text="fasdf" HBox.hgrow="ALWAYS" />
                               <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="105.0" styleClass="nobackground-button" text="Search" />
                            </children>
                         </HBox>
@@ -37,6 +38,10 @@
                            <padding>
                               <Insets top="5.0" />
                            </padding>
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Name" />
+                              <TableColumn prefWidth="75.0" text="Due time" />
+                           </columns>
                         </TableView>
                      </children>
                   </VBox>
