@@ -2,14 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp_callapigemini.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#handleTextInput" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp_callapigemini.HelloController">
     <children>
-        <Button fx:id="translateButton" layoutX="448.0" layoutY="212.0" mnemonicParsing="false" onAction="#generateContent" text="Dịch" />
-        <TextArea fx:id="inputTextArea" layoutX="226.0" layoutY="102.0" prefHeight="72.0" prefWidth="500.0" wrapText="true" />
-        <TextArea fx:id="outputTextArea" layoutX="226.0" layoutY="266.0" prefHeight="238.0" prefWidth="500.0" wrapText="true" />
-      <ComboBox fx:id="comboBox" layoutX="393.0" layoutY="44.0" prefWidth="150.0" />
+        <Button fx:id="translateButton" layoutX="448.0" layoutY="212.0" mnemonicParsing="false" onAction="#translateButtonClick" text="Dịch" />
+        <TextArea fx:id="inputTextArea" layoutX="226.0" layoutY="102.0" onKeyReleased="#handleTextInput" prefHeight="72.0" prefWidth="500.0" wrapText="true"/>
+        <ComboBox fx:id="comboBox" layoutX="393.0" layoutY="44.0" prefWidth="150.0" />
+        <WebView fx:id="outputWebView" layoutX="226.0" layoutY="266.0" prefHeight="238.0" prefWidth="500.0" />
     </children>
 </AnchorPane>
