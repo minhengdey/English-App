@@ -4,6 +4,7 @@ import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
 import com.example.apienglishapp.entity.UserEntity;
+import com.example.apienglishapp.enums.LoginMethod;
 import com.example.apienglishapp.enums.Role;
 import com.example.apienglishapp.exception.AppException;
 import com.example.apienglishapp.exception.ErrorCode;
@@ -13,9 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -44,11 +50,13 @@ public class UserService {
         HashSet<String> roles = new HashSet<>();
         roles.add(Role.USER.name());
         userEntity.setRoles(roles);
+        userEntity.setLoginMethod(LoginMethod.SYSTEM.name());
         return userMapper.toUserResponse(userRepository.save(userEntity));
     }
 
     public UserResponse updateRequest (Long id, UserUpdateRequest request) {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
         userMapper.updateUser(userEntity, request);
         return userMapper.toUserResponse(userRepository.save(userEntity));
     }
@@ -69,9 +77,14 @@ public class UserService {
     }
 
     public UserResponse getMyInfo () {
-        var context = SecurityContextHolder.getContext();
-        String username = context.getAuthentication().getName();
-        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
-        return userMapper.toUserResponse(userEntity);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+            Jwt jwt = jwtToken.getToken();
+            Long id = Long.parseLong(jwt.getSubject());
+            UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+            return userMapper.toUserResponse(userEntity);
+        }
+        throw new AppException(ErrorCode.UNAUTHENTICATED);
     }
 }

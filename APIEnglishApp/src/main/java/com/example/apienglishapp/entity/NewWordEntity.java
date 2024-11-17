@@ -20,17 +20,20 @@ public class NewWordEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column (name = "english")
-    String english;
+    @Column (name = "front_side", columnDefinition = "TEXT")
+    String frontSide;
 
-    @Column (name = "vietnamese")
-    String vietnamese;
+    @Column (name = "back_side", columnDefinition = "TEXT")
+    String backSide;
 
     @Column (name = "topic")
     String topic;
 
     @Column (name = "date")
     String date;
+
+    @Column (name = "name")
+    String name;
 
     @JsonIgnore
     @ManyToOne

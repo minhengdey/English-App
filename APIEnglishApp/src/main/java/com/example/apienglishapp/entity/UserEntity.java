@@ -52,6 +52,9 @@ public class UserEntity {
     @Column (name = "phone")
     String phone;
 
+    @Column (name = "login_method")
+    String loginMethod;
+
     @ElementCollection
     @Column (name = "roles")
     Set<String> roles;

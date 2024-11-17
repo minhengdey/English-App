@@ -4,12 +4,23 @@ import com.example.apienglishapp.dto.request.ApiResponse;
 import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
+import com.example.apienglishapp.exception.AppException;
+import com.example.apienglishapp.exception.ErrorCode;
 import com.example.apienglishapp.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -35,16 +46,22 @@ public class UserController {
     }
 
     @PostMapping (value = "/users")
-    public ApiResponse<UserResponse> createUser (@RequestBody UserCreationRequest request) {
+    public ApiResponse<UserResponse> createUser (@Valid @RequestBody UserCreationRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
                 .build();
     }
 
-    @PostAuthorize("#id.toString() == authentication.token.claims['sub'] or hasRole('ADMIN')")
-    @PutMapping (value = "/users/{id}")
-    public UserResponse updateUser (@PathVariable Long id, @RequestBody UserUpdateRequest request) {
-        return userService.updateRequest(id, request);
+    @PostAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PutMapping (value = "/users")
+    public UserResponse updateUser (@Valid @RequestBody UserUpdateRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+            Jwt jwt = jwtToken.getToken();
+            return userService.updateRequest(Long.parseLong(jwt.getSubject()), request);
+        }
+        throw new AppException(ErrorCode.UNAUTHENTICATED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

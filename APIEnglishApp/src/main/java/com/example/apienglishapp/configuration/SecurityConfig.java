@@ -2,6 +2,7 @@ package com.example.apienglishapp.configuration;
 
 import com.example.apienglishapp.enums.Role;
 import com.example.apienglishapp.service.AuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,31 +26,29 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/introspect", "/new_word", "/new_word/**"};
+    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/auth/logout", "/refresh", "/introspect", "/new_word", "/new_word/**"};
+    private final String[] PUBLIC_ENDPOINTS_GET = {"/vietnamese_to_english", "/vietnamese_to_english/**",
+            "/english_to_vietnamese", "/english_to_vietnamese/**", "/auth/google-login"};
 
+    @Autowired
+    private CustomJwtDeocder customJwtDeocder;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_GET).permitAll()
                 .anyRequest().authenticated()
-        );
+        ).oauth2Login(oauth2 -> oauth2 // Kích hoạt OAuth2 login
+                .loginPage("/oauth2/authorization/google")
+                .defaultSuccessUrl("/auth/google-login", true));
         http.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer ->
-                        jwtConfigurer.decoder(jwtDecoder())
+                        jwtConfigurer.decoder(customJwtDeocder)
                                 .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
         );
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
-    }
-
-    @Bean
-    protected JwtDecoder jwtDecoder() {
-        SecretKeySpec secretKeySpec = new SecretKeySpec(AuthenticationService.SIGNER_KEY.getBytes(), "HS512");
-        return NimbusJwtDecoder
-                .withSecretKey(secretKeySpec)
-                .macAlgorithm(MacAlgorithm.HS512)
-                .build();
     }
 
     @Bean
