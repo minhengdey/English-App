@@ -1,0 +1,77 @@
+.root{
+    -fx-background-color: #E5E5FF;
+
+}
+.vbox{
+    -fx-spacing: 20px;
+}
+.hbox{
+    -fx-spacing: 50px;
+}
+.text-area{
+    -fx-focus-color: transparent;
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+}
+.text-area .content {
+    -fx-padding: 10px;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Track color */
+}
+
+.text-area:selected{
+    -fx-border-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: #F5EBFF;
+    -fx-border-color: #9b7ebd;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 3px;
+}
+
+.combo-box.list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+
+.combo-box .list-cell:selected {
+    /*-fx-background-color: #d4bee4;*/
+    -fx-text-fill: #333333;
+}
+
+.button{
+    -fx-background-radius: 30px;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: F5EBFF;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-weight: bold;
+}

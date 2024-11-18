@@ -58,6 +58,7 @@ public class TranslateScreen implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Here is translate function");
         comboBox.getItems().addAll("English To Vietnamese", "Vietnamese To English");
+        comboBox.getSelectionModel().select(0);
         executorService = Executors.newSingleThreadExecutor();
         translateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

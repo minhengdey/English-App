@@ -74,7 +74,6 @@ public class ProfileScreen {
 
         dialog.getDialogPane().setContent(grid);
 
-        // Enable/Disable login button depending on whether a password was entered
         Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
         loginButton.setDisable(true);
 
@@ -82,7 +81,6 @@ public class ProfileScreen {
             loginButton.setDisable(newValue.trim().isEmpty());
         });
 
-        // Convert the result to a username-password pair when the login button is clicked
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(username.getText(), password.getText());
@@ -93,7 +91,6 @@ public class ProfileScreen {
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
         result.ifPresent(credentials -> {
-            System.out.println("Username=" + credentials.getKey() + ", Password=" + credentials.getValue());
             if(credentials.getKey().equals("1") && credentials.getValue().equals("1")){
                 try {
                     showEditUserScreen();

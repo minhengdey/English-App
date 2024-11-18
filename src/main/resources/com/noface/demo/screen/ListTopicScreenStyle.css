@@ -99,6 +99,7 @@
     -fx-pref-height: 60px;
     -fx-pref-width: 680px;
     -fx-background-color: #E1CDF4;
+    /*-fx-border-color: #EEF2BA;*/
     -fx-background-radius: 15px;
     -fx-spacing:10px;
     -fx-padding: 10px;
@@ -107,17 +108,17 @@
 .list-title-hbox .button{
     -fx-pref-width: 70px;
     -fx-pref-height: 35px;
-    -fx-background-color: #9659D3;
+    -fx-background-color: #C492F5;
     -fx-text-fill: F5EBFF;
     -fx-font-weight: bold;
 }
 .list-title-hbox .button:hover{
     -fx-text-fill: white;
-    -fx-background-color: #561696;
+    -fx-background-color: #9659D3;
     -fx-font-weight: bold;
 }
 .list-title-hbox .button:pressed{
-    -fx-background-color: #1F003D;
+    -fx-background-color: #7732BC;
     -fx-text-fill: #F5EBFF;
     -fx-font-weight: bold;
 }
