@@ -5,6 +5,9 @@ import com.example.apienglishapp.service.EnglishToVietnameseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,6 +23,12 @@ public class EnglishToVietnameseController {
     }
     @GetMapping("/byWord/{word}")
     public List<EnglishToVietnameseEntity> getEnglishToVietnameseByWord (@PathVariable("word") String word) {
-        return englishToVietnameseService.getEnglishToVietnameseByWord(word);
+        try {
+            String decodedWord = URLDecoder.decode(word, StandardCharsets.UTF_8);
+            return englishToVietnameseService.getEnglishToVietnameseByWord(decodedWord);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 }
