@@ -230,7 +230,7 @@ public class HelloController implements Initializable {
         executorService.submit(() -> {
             String result;
             try {
-                result = sendApiRequestToGGTranslate(prompt, finalTranslatePath);
+                result = sendApiRequestToDICT_HHDB(prompt, finalTranslatePath);
                 if (result.isEmpty()) {
                     result = "<p>No result returned from API.</p>";
                 }
@@ -297,7 +297,7 @@ public class HelloController implements Initializable {
         alert.showAndWait();
     }
 
-    private String sendApiRequestToGGTranslate(String text, String translatePath) throws Exception {
+    private String sendApiRequestToDICT_HHDB(String text, String translatePath) throws Exception {
         text = text.toLowerCase();
         // Mã hóa URL để tránh ký tự đặc biệt gây lỗi
         String encodedText = java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
