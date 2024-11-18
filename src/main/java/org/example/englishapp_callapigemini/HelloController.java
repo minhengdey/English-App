@@ -24,9 +24,6 @@ import org.json.JSONObject;
 import java.util.stream.Collectors;
 import javafx.scene.input.KeyEvent;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 
 public class HelloController implements Initializable {
     private ExecutorService executorService;
@@ -64,10 +61,7 @@ public class HelloController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(wordSuggestionsEng.get(i));
-        }
+        
     }
 
 
@@ -119,9 +113,6 @@ public class HelloController implements Initializable {
                     .filter(word -> word.startsWith(text))
                     .limit(10)
                     .collect(Collectors.toList());
-//            for (int i = 0; i < matches.size(); i++) {
-//                System.out.println(matches.get(i));
-//            }
         } else {
             matches = wordSuggestionsViet.stream()
                     .filter(word -> word.startsWith(text))
@@ -154,10 +145,8 @@ public class HelloController implements Initializable {
 
     private HashSet<String> sendApiRequestToDic(String text) throws Exception {
         String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-        text = text.toLowerCase();
-        urlAPI += java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
+        urlAPI += text.toLowerCase();
 
-        //System.out.println(urlAPI);
 
         URL url = new URL(urlAPI);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -262,7 +251,6 @@ public class HelloController implements Initializable {
             }
 
         }
-        System.out.println(apiAudio.get(i));
         // Đoạn này thay bằng icon cái loa j đấy đc k nhỉ :>
         if (nameButton.toString().equals("")) {
             nameButton.append("Cái này không có từ của nước nào nè");
@@ -299,12 +287,10 @@ public class HelloController implements Initializable {
 
     private String sendApiRequestToDICT_HHDB(String text, String translatePath) throws Exception {
         text = text.toLowerCase();
-        // Mã hóa URL để tránh ký tự đặc biệt gây lỗi
+        
         String encodedText = java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
         String urlStr = String.format("http://localhost:8080/%s/byWord/%s", translatePath, encodedText);
-
-        System.out.println(urlStr);
-
+        
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
