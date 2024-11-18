@@ -9,7 +9,7 @@ public class TokenManager
     {
     }
 
-    public static TokenManager getInstance()
+    public static synchronized TokenManager getInstance()
     {
         if (instance == null) instance = new TokenManager();
         return instance;
@@ -17,16 +17,17 @@ public class TokenManager
 
     public String getToken()
     {
-        return token;
+        return this.token;
     }
 
     public void setToken(String token)
     {
+        if (this.token != null) clearToken();
         this.token = token;
     }
 
     public void clearToken()
     {
-        token = null;
+        this.token = null;
     }
 }

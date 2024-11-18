@@ -17,7 +17,7 @@ public class UserInfo
 
     private HttpClient httpClient = HttpClient.newHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
-    private String token = TokenManager.getInstance().getToken(), apiUri = "http://localhost:8080/";
+    private String apiUri = "http://localhost:8080/";
 
     private String normalize_name(String s)
     {
@@ -47,6 +47,7 @@ public class UserInfo
         UserInfo userInfo = null;
         try
         {
+            String token = TokenManager.getInstance().getToken();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiUri + "myInfo"))
                     .header("Authorization", "Bearer " + token)
@@ -81,6 +82,7 @@ public class UserInfo
         UserInfo userInfo = null;
         try
         {
+            String token = TokenManager.getInstance().getToken();
             name = normalize_name(name);
             String requestBody = String.format (
                     "{" +

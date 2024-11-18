@@ -23,7 +23,7 @@ public class CardCRUD {
     public static final int CARD_EDITED_SUCCESS = 5;
     private HttpClient httpClient;
     private ObjectMapper objectMapper;
-    private String token, apiUri = "http://localhost:8080/";
+    private String apiUri = "http://localhost:8080/";
 
     private String normalize_name(String s) {
         String[] k = s.trim().split("\\s+");
@@ -37,12 +37,12 @@ public class CardCRUD {
     public CardCRUD() {
         httpClient = HttpClient.newHttpClient();
         objectMapper = new ObjectMapper();
-        token = TokenManager.getInstance().getToken();
     }
 
     public int addCard(String frontSide, String backSide, String topic, String name) {
         Card card = new Card();
         try {
+            String token = TokenManager.getInstance().getToken();
             CardRequest cardRequest = new CardRequest(frontSide, backSide, topic, LocalDateTime.now().toString(), name);
             String requestBody = objectMapper.writeValueAsString(cardRequest);
 
@@ -79,6 +79,7 @@ public class CardCRUD {
 
     public int deleteCard(Card card) {
         try {
+            String token = TokenManager.getInstance().getToken();
             long id = Long.parseLong(card.getId());
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -105,6 +106,7 @@ public class CardCRUD {
 
     public int editCard(Card card, String frontSide, String backSide, String topic, String name, String date) {
         try {
+            String token = TokenManager.getInstance().getToken();
             CardRequest cardRequest = new CardRequest(frontSide, backSide, topic, date, name);
             long id = Long.parseLong(card.getId());
             String requestBody = objectMapper.writeValueAsString(cardRequest);
@@ -130,6 +132,7 @@ public class CardCRUD {
     public ArrayList<String> getAllTopics() {
         ArrayList<String> topics = new ArrayList<>();
         try {
+            String token = TokenManager.getInstance().getToken();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiUri + "topic"))
                     .header("Authorization", "Bearer " + token)
@@ -153,6 +156,7 @@ public class CardCRUD {
     public List<Card> getAllCardsByTopic(String topic) {
         List<Card> cards = new ArrayList<>();
         try {
+            String token = TokenManager.getInstance().getToken();
             String encodedTopic = URLEncoder.encode(normalize_name(topic), StandardCharsets.UTF_8);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiUri + "new_word/topic/" + encodedTopic))

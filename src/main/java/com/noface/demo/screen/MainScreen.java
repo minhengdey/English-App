@@ -18,6 +18,10 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Optional;
 
 public class MainScreen {
@@ -149,9 +153,11 @@ public class MainScreen {
             Stage loginStage = new Stage();
             loginStage.setScene(new Scene(loginScreenController.getScreen().getRoot()));
             loginStage.setResizable(false);
+            //System.out.println (TokenManager.getInstance().getToken());
             TokenManager.getInstance().clearToken();
             loginStage.show();
             currentStage.close();
+            //System.out.println (TokenManager.getInstance().getToken());
         }
         catch (Exception e)
         {
