@@ -6,8 +6,11 @@ import com.example.apienglishapp.dto.response.IntrospectResponse;
 import com.example.apienglishapp.dto.response.RefreshResponse;
 import com.example.apienglishapp.dto.response.UserResponse;
 import com.example.apienglishapp.service.AuthenticationService;
+import com.example.apienglishapp.service.SendEmailService;
 import com.nimbusds.jose.JOSEException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -22,6 +25,9 @@ import java.text.ParseException;
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private SendEmailService sendEmailService;
 
     @PostMapping (value = "/auth/login")
     public ApiResponse<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) {
@@ -51,7 +57,7 @@ public class AuthenticationController {
                 .build();
     }
 
-    @GetMapping(value = "/auth/google-login")
+    @GetMapping (value = "/auth/google-login")
     public ApiResponse<AuthenticationResponse> googleLogin() {
         OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken)
                 SecurityContextHolder.getContext().getAuthentication();
@@ -59,5 +65,17 @@ public class AuthenticationController {
         return ApiResponse.<AuthenticationResponse>builder()
                 .result(authenticationService.createAndLoginGoogle(user))
                 .build();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping (value = "/sendOTP")
+    public String sendOTP (@RequestBody String email) {
+        try {
+            sendEmailService.sendOtp(email);
+            return "OTP sent successfully!";
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "Failed to send OTP.";
+        }
     }
 }
