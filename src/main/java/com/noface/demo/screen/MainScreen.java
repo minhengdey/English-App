@@ -1,11 +1,16 @@
 package com.noface.demo.screen;
 
+import com.noface.demo.controller.LoginScreenController;
 import com.noface.demo.controller.MainController;
+import com.noface.demo.resource.TokenManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -13,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainScreen {
     private final FXMLLoader loader;
@@ -66,6 +72,7 @@ public class MainScreen {
         translateButton.setOnAction(translateButtonClickedEventHandler());
         topicButton.setOnAction(topicButtonClickedEventHanlder());
         profileButton.setOnAction(profileButtonClickedEventHandler());
+        logoutButton.setOnAction(logoutButtonClickedEventHandler());
 
     }
 
@@ -97,6 +104,22 @@ public class MainScreen {
         };
     }
 
+    private EventHandler<ActionEvent> logoutButtonClickedEventHandler()
+    {
+        return new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Xác nhận đăng xuất");
+                alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất không?");
+                alert.setContentText("Nhấn OK để đăng xuất, hoặc Cancel để hủy.");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) changeToLoginScreen();
+            }
+        };
+    }
+
     public void changeToListTopicPane(){
         mainController.getTopicScreenController().refreshListTopicTitlesList();
         rightPane.getChildren().clear();
@@ -116,6 +139,26 @@ public class MainScreen {
         rightPane.getChildren().clear();
         rightPane.getChildren().add(profilePane);
     }
+
+    public void changeToLoginScreen()
+    {
+        try
+        {
+            Stage currentStage = (Stage)logoutButton.getScene().getWindow();
+            LoginScreenController loginScreenController = new LoginScreenController();
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(loginScreenController.getScreen().getRoot()));
+            loginStage.setResizable(false);
+            TokenManager.getInstance().clearToken();
+            loginStage.show();
+            currentStage.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void changeToMainScreen(){
 
     }
