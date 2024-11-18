@@ -152,7 +152,7 @@ public class HelloController implements Initializable {
 
     }
 
-    private HashSet<String> sendApiRequestToOxford(String text) throws Exception {
+    private HashSet<String> sendApiRequestToDic(String text) throws Exception {
         String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
         text = text.toLowerCase();
         urlAPI += java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
@@ -206,7 +206,7 @@ public class HelloController implements Initializable {
         }
 
         voiceBox.getChildren().clear();
-        HashSet<String> apiAudio = sendApiRequestToOxford(prompt);
+        HashSet<String> apiAudio = sendApiRequestToDic(prompt);
         List<String> apiAudioList = new ArrayList<>(apiAudio);
         int numberOfButtons = apiAudio.size();
 
