@@ -8,6 +8,7 @@ module org.example.englishapp_callapigemini {
     requires javafx.web;
     requires org.json;
     requires java.desktop;
+    requires javafx.media;
     opens org.example.englishapp_callapigemini to javafx.fxml;
     exports org.example.englishapp_callapigemini;
 }
