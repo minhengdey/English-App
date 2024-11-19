@@ -9,6 +9,7 @@ import com.example.apienglishapp.exception.ErrorCode;
 import com.example.apienglishapp.mapper.NewWordMapper;
 import com.example.apienglishapp.repository.NewWordRepository;
 import com.example.apienglishapp.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +34,8 @@ public class NewWordService {
     }
 
     public NewWordResponse create (NewWordRequest newWordRequest, Long userId) {
-        if (newWordRepository.existsByFrontSideAndBackSide(newWordRequest.getFrontSide(), newWordRequest.getBackSide())) {
-            throw new AppException(ErrorCode.NEW_WORD_EXISTED);
+        if (newWordRequest.getFrontSide().equals(newWordRequest.getBackSide())) {
+            throw new AppException(ErrorCode.INVALID_NEW_WORD);
         }
         return newWordMapper.toNewWordResponse(userRepository.findById(userId)
                 .map(userEntity -> {
@@ -62,6 +63,7 @@ public class NewWordService {
         set.remove(newWordEntity);
         user.setNewWords(set);
         newWordRepository.deleteById(id);
+        System.out.println(newWordRepository.existsById(id));
     }
 
     public Set<NewWordResponse> getAllNewWordByUserId (Long userId) {
@@ -80,6 +82,32 @@ public class NewWordService {
             }
         }
         return list.stream().map(newWordMapper::toNewWordResponse).toList();
+    }
+
+    public List<NewWordResponse> updateTopic (String oldTopic, String newTopic, Long userId) {
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
+        List<NewWordEntity> list = new ArrayList<>();
+        for (NewWordEntity newWord : set) {
+            if (newWord.getTopic().equals(oldTopic)) {
+                newWord.setTopic(newTopic);
+                newWordRepository.save(newWord);
+                list.add(newWord);
+            }
+        }
+        user.setNewWords(set);
+        return list.stream().map(newWordMapper::toNewWordResponse).toList();
+    }
+
+    public void deleteByTopic (String topic, Long userId) {
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        Set<NewWordEntity> set = user.getNewWords();
+        Set<NewWordEntity> newSet = set;
+        for (NewWordEntity newWord : newSet) {
+            if (newWord.getTopic().equals(topic)) {
+                deleteByUserIdAndId(userId, newWord.getId());
+            }
+        }
     }
 
     public Set<String> getAllTopic (Long userId) {

@@ -71,8 +71,7 @@ public class AuthenticationController {
     @GetMapping (value = "/sendOTP")
     public String sendOTP (@RequestBody String email) {
         try {
-            sendEmailService.sendOtp(email);
-            return "OTP sent successfully!";
+            return sendEmailService.sendOtp(email);
         } catch (MessagingException e) {
             e.printStackTrace();
             return "Failed to send OTP.";

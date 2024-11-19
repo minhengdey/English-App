@@ -16,7 +16,7 @@ public enum ErrorCode {
     INVALID_EMAIL(1006, "INVALID email address", HttpStatus.BAD_REQUEST),
     UNAUTHENTICATED(1007, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1008, "You do not have permission", HttpStatus.FORBIDDEN),
-    NEW_WORD_EXISTED(1009, "new word existed", HttpStatus.BAD_REQUEST),
+    INVALID_NEW_WORD(1009, "front side and back side must be different", HttpStatus.BAD_REQUEST),
     NEW_WORD_NOT_FOUND(1010, "new word not found", HttpStatus.NOT_FOUND)
     ;
     private int code;

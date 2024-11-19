@@ -59,6 +59,33 @@ public class NewWordController {
         throw new AppException(ErrorCode.UNAUTHENTICATED);
     }
 
+    @PostMapping (value = "/new_word/topic/{oldTopic}/{newTopic}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public List<NewWordResponse> updateTopic (@PathVariable("oldTopic") String oldTopic, @PathVariable("newTopic") String newTopic) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+            Jwt jwt = jwtToken.getToken();
+            return newWordService.updateTopic(URLDecoder.decode(oldTopic, StandardCharsets.UTF_8),
+                    URLDecoder.decode(newTopic, StandardCharsets.UTF_8),
+                    Long.parseLong(jwt.getSubject()));
+        }
+        throw new AppException(ErrorCode.UNAUTHENTICATED);
+    }
+
+    @DeleteMapping (value = "/new_word/topic/{topic}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    public void deleteByTopic (@PathVariable("topic") String topic) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof JwtAuthenticationToken) {
+            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+            Jwt jwt = jwtToken.getToken();
+            newWordService.deleteByTopic(URLDecoder.decode(topic, StandardCharsets.UTF_8), Long.parseLong(jwt.getSubject()));
+        } else {
+            throw new AppException(ErrorCode.UNAUTHENTICATED);
+        }
+    }
+
     @PostMapping (value = "/new_word")
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     public NewWordResponse create (@Valid @RequestBody NewWordRequest newWord) {

@@ -17,7 +17,7 @@ public class SendEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendOtp(String toEmail) throws MessagingException {
+    public String sendOtp(String toEmail) throws MessagingException {
         String otp = generateOtp();
 
         MimeMessage message =javaMailSender.createMimeMessage();
@@ -27,6 +27,7 @@ public class SendEmailService {
         helper.setText("Your OTP code is: " + otp);
 
         javaMailSender.send(message);
+        return otp;
     }
 
     private String generateOtp() {
