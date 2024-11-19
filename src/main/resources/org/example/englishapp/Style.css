@@ -124,3 +124,17 @@
     -fx-background-radius: 20px;
     -fx-border-style: solid;
 }
+
+.game_button {
+    -fx-background-color:  #9b7ebd;
+    -fx-font-size: 16px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.game_button:hover{
+    -fx-background-color: #d4bee4;
+}
+.game_button:pressed{
+    -fx-background-color: #3b1e54;
+}
