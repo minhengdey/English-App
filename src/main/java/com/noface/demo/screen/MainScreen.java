@@ -148,16 +148,32 @@ public class MainScreen {
     {
         try
         {
-            Stage currentStage = (Stage)logoutButton.getScene().getWindow();
-            LoginScreenController loginScreenController = new LoginScreenController();
-            Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(loginScreenController.getScreen().getRoot()));
-            loginStage.setResizable(false);
-            //System.out.println (TokenManager.getInstance().getToken());
-            TokenManager.getInstance().clearToken();
-            loginStage.show();
-            currentStage.close();
-            //System.out.println (TokenManager.getInstance().getToken());
+            HttpClient httpClient = HttpClient.newHttpClient();
+            String requestBody = String.format (
+                    "{\"token\":\"%s\"}",
+                    TokenManager.getInstance().getToken()
+            );
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/auth/logout"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200)
+            {
+                Stage currentStage = (Stage)logoutButton.getScene().getWindow();
+                LoginScreenController loginScreenController = new LoginScreenController();
+                Stage loginStage = new Stage();
+                loginStage.setScene(new Scene(loginScreenController.getScreen().getRoot()));
+                loginStage.setResizable(false);
+                //System.out.println (TokenManager.getInstance().getToken());
+                TokenManager.getInstance().clearToken();
+                loginStage.show();
+                currentStage.close();
+                //System.out.println (TokenManager.getInstance().getToken());
+            }
+            else System.out.println ("Có lỗi xảy ra");
         }
         catch (Exception e)
         {

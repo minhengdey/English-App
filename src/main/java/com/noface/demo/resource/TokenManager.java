@@ -9,7 +9,7 @@ public class TokenManager
     {
     }
 
-    public static synchronized TokenManager getInstance()
+    public static TokenManager getInstance()
     {
         if (instance == null) instance = new TokenManager();
         return instance;
