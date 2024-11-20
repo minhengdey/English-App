@@ -17,7 +17,7 @@ public class ApiEnglishAppApplication {
     }
 
     public static void transferSQLiteToMySQL() {
-        String sqliteDbPath = Objects.requireNonNull(DemoApiApplication.class.getClassLoader().getResource("db/dict_hh.db")).getPath();
+        String sqliteDbPath = Objects.requireNonNull(ApiEnglishAppApplication.class.getClassLoader().getResource("db/dict_hh.db")).getPath();
 
         try (Connection sqliteConn = DriverManager.getConnection("jdbc:sqlite:" + sqliteDbPath)) {
             String mysqlUrl = "jdbc:mysql://localhost:3306/english-app";
