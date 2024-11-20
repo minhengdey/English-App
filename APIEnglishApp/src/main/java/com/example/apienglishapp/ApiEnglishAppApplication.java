@@ -12,7 +12,7 @@ import java.util.Objects;
 public class ApiEnglishAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApiApplication.class, args);
+        SpringApplication.run(ApiEnglishAppApplication.class, args);
         transferSQLiteToMySQL();
     }
 
