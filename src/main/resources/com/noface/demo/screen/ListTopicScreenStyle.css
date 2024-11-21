@@ -10,7 +10,7 @@
     -fx-background-radius: 20;
     -fx-background-color: #9659D3;
     -fx-font-weight: bold;
-
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
 }
 .add-topic-button:hover{
     -fx-text-fill: white;
@@ -42,7 +42,7 @@
 .custom-vbox{
     -fx-background-color: #E5E5FF;
     -fx-padding: 20;
-    -fx-spacing: 10;
+    -fx-spacing: 15;
 }
 
 .text-field {
@@ -71,6 +71,7 @@
     -fx-border-color: #9659D3;
     -fx-border-radius: 30px;
     -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
 
 }
 .scroll-pane .scroll-bar:vertical {
@@ -99,7 +100,6 @@
     -fx-pref-height: 60px;
     -fx-pref-width: 680px;
     -fx-background-color: #E1CDF4;
-    /*-fx-border-color: #EEF2BA;*/
     -fx-background-radius: 15px;
     -fx-spacing:10px;
     -fx-padding: 10px;
@@ -127,7 +127,7 @@
     -fx-text-fill: #1F003D;
     -fx-wrap-text: false;
     -fx-text-overrun: ellipsis;
-    -fx-max-width: 400px;
+    -fx-max-width: 200px;
 }
 .list-title-hbox .button:selected{
     -fx-background-color: #1a1620;
@@ -151,5 +151,7 @@
     -fx-border-radius: 15;
     -fx-border-color: #9659D3;
     -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+
 }
 

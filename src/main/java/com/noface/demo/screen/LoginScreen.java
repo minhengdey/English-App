@@ -21,6 +21,8 @@ public class LoginScreen {
     private Button loginButton;
     @FXML
     private Button signUpButton;
+    @FXML
+    private Button googleLoginButton;
 
     private FXMLLoader loader;
     public LoginScreen(LoginScreenController controller) throws IOException {
@@ -40,6 +42,12 @@ public class LoginScreen {
             @Override
             public void handle(ActionEvent event) {
                 controller.handleSignUp();
+            }
+        });
+        googleLoginButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.handleGoogleLogin();
             }
         });
     }

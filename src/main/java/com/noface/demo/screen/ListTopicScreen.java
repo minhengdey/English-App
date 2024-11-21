@@ -151,4 +151,8 @@ public class ListTopicScreen {
     }
     @FXML
     private Button addTopicButton;
+    @FXML
+    public void initialize(){
+        topicBarPane.getChildren().clear();
+    }
 }

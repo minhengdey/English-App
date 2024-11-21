@@ -1,33 +1,72 @@
-.node{
-    -fx-background-color: #ffffff;
+.root{
+    -fx-background-color: #F5EBFF;
+}
+.split-pane{
+    -fx-background-color: #F5EBFF;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: #C492F5;
+    -fx-border-width: 1px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
 }
 .button{
-    -fx-text-fill: "white";
-    -fx-background-color: #9b7ebd;
-    -fx-background-radius: 15;
+    -fx-text-fill: #F5EBFF;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
 }
-
 .button:hover{
-    -fx-background-color: #876ca1;
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
 }
-.button:selected{
-    -fx-background-color: #1a1620;
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
 }
-.hbox{
-    -fx-spacing: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 30;
-    -fx-background-color: #d4bee4;
-}
-
-#searchHBox{
-    -fx-background-color: #d4bee4;  /* Màu nền của HBox */
-    -fx-background-radius: 15;      /* Bo tròn các góc của HBox */
-    -fx-border-radius: 15;
-    -fx-padding: 10px;
-    -fx-pref-height: 30px;
-}
-#topHBox{
+.web-view{
     -fx-padding: 20px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #9659D3   ;
+}
+.web-view-vbox{
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+.text-area{
+    -fx-focus-color: transparent;
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+    -fx-background-color: white;
+}
+.text-area .content {
+    -fx-padding: 10px;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Track color */
+}
+
+.text-area:selected{
+    -fx-border-color: transparent;
+}

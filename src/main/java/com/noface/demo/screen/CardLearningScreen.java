@@ -49,8 +49,6 @@ public class CardLearningScreen {
     private Button showAnswerButton;
     @FXML
     private HBox doneButtonBar;
-    @FXML
-    private Label cardNameLabel;
     private MainScreen mainScreen;
 
 

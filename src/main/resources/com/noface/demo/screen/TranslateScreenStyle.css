@@ -9,13 +9,13 @@
     -fx-spacing: 50px;
 }
 .text-area{
-    -fx-focus-color: transparent;
     -fx-font-size: 16;
     -fx-text-fill: #1F003D;
     -fx-padding: 20 10 20 10;
     -fx-background-radius: 30;
     -fx-border-radius: 30;
     -fx-border-color: #C198EA;
+    -fx-background-color: white;
 }
 .text-area .content {
     -fx-padding: 10px;
@@ -28,17 +28,17 @@
     -fx-background-color: #C492F5;
     -fx-background-radius: 5px;
 }
-.text-area:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-}
 
 .text-area .scroll-bar:vertical .track {
-    -fx-background-color: transparent; /* Track color */
+    -fx-background-color: transparent;
 }
 
 .text-area:selected{
     -fx-border-color: transparent;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .combo-box {
@@ -55,7 +55,6 @@
 }
 
 .combo-box .list-cell:selected {
-    /*-fx-background-color: #d4bee4;*/
     -fx-text-fill: #333333;
 }
 

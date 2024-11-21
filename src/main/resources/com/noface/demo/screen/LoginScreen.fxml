@@ -1,81 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane prefHeight="600.0" prefWidth="561.0" style="-fx-background-color: white;">
-         <children>
-            <TextField id="input_text" fx:id="usernameField" layoutX="144.0" layoutY="240.0" prefHeight="35.0" prefWidth="257.0" promptText="Tên người dùng" styleClass="text_input" stylesheets="@Style.css">
-
-            </TextField>
-            <PasswordField id="input_text" fx:id="passwordField" layoutX="144.0" layoutY="291.0" prefHeight="35.0" prefWidth="258.0" promptText="Mật khẩu" styleClass="text_input" stylesheets="@Style.css" />
-            <Text fontSmoothingType="LCD" layoutX="195.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Đăng nhập" wrappingWidth="154.4557342529297" AnchorPane.bottomAnchor="408.470703125">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <Button id=".button_login" fx:id="loginButton" alignment="CENTER" layoutX="245.0" layoutY="386.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="54.0" styleClass="button_signup" stylesheets="@Style.css" text="→" textFill="WHITE">
-               <font>
-                  <Font name="Calibri" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <CheckBox layoutX="151.0" layoutY="337.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Ghi nhớ đăng nhập">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </CheckBox>
-            <Button id="login_button" fx:id="signUpButton" layoutX="299.0" layoutY="507.0" mnemonicParsing="false" style="-fx-background-color: white;" styleClass="button_login" stylesheets="@Style.css" text="Tạo tài khoản" textOverrun="CENTER_WORD_ELLIPSIS">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="System Bold Italic" size="14.0" />
-               </font>
-            </Button>
-            <Text layoutX="160.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bạn chưa có tài khoản?" wrappingWidth="154.45573425292963">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Text>
-         </children>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </AnchorPane>
-      <Pane id=".side_login" layoutX="562.0" prefHeight="600.0" prefWidth="454.0" style="-fx-background-color: #9b7ebd;" styleClass="side_signup" stylesheets="@Style.css">
-         <children>
-            <ImageView fitHeight="271.0" fitWidth="447.0" layoutX="33.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@login_image/rb_2150172748.png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="92.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello,">
-               <font>
-                  <Font name="Times New Roman" size="56.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="92.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome!">
-               <font>
-                  <Font name="System Bold" size="60.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@LoginScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
    </cursor>
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="501.0" styleClass="root-control" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="login-title" text="Sign In " />
+                  <TextField id="input_text" fx:id="usernameField" promptText="Username" styleClass="text-field" />
+                  <PasswordField id="input_text" fx:id="passwordField" promptText="Password" styleClass="text-field" />
+                  <HBox styleClass="bottom-bar">
+                     <children>
+                        <CheckBox mnemonicParsing="false" prefHeight="26.0" prefWidth="153.0" styleClass="remember-box" text="Remember me">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                        <Region prefHeight="26.0" prefWidth="98.0" />
+                        <Label prefHeight="22.0" prefWidth="97.0" styleClass="new-user-label" text="New user?" />
+                        <Button id="login_button" fx:id="signUpButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="134.0" styleClass="signup-button" text="Create account" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Button id=".button_login" fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" prefHeight="56.0" prefWidth="54.0" text="→" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="22.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="button_signup" />
+                        <String fx:value="login-button" />
+                     </styleClass>
+                  </Button>
+                  <HBox prefHeight="51.0" prefWidth="386.0" styleClass="google-login-bar">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="95.0" text="Or login with " />
+                        <Button fx:id="googleLoginButton" mnemonicParsing="false" prefHeight="46.0" prefWidth="0.0" text="Button">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@login_image/google_720255.png" />
+                                 </image></ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane id=".side_login" prefHeight="600.0" prefWidth="454.0" style="-fx-background-color: #9b7ebd;" styleClass="side_signup" stylesheets="@Style.css">
+               <children>
+                  <ImageView fitHeight="271.0" fitWidth="447.0" layoutX="33.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@login_image/rb_2150172748.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="92.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello,">
+                     <font>
+                        <Font name="Times New Roman" size="56.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="92.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome!">
+                     <font>
+                        <Font name="System Bold" size="60.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
