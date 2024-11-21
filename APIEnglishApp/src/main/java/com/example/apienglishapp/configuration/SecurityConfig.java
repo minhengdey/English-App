@@ -36,11 +36,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-                .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS_GET).permitAll()
+                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS_GET).permitAll()
                 .anyRequest().authenticated()
         ).oauth2Login(oauth2 -> oauth2 // Kích hoạt OAuth2 login
                 .loginPage("/oauth2/authorization/google")
-                .defaultSuccessUrl("/auth/google-login", true));
+                .defaultSuccessUrl("/auth/google_facebook-login", true));
         http.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer ->
                         jwtConfigurer.decoder(customJwtDeocder)

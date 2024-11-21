@@ -57,7 +57,7 @@ public class AuthenticationController {
                 .build();
     }
 
-    @GetMapping (value = "/auth/google-login")
+    @GetMapping (value = "/auth/google_facebook-login")
     public ApiResponse<AuthenticationResponse> googleLogin() {
         OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken)
                 SecurityContextHolder.getContext().getAuthentication();

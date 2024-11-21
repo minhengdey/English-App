@@ -10,7 +10,7 @@ mysql_conn = mysql.connector.connect(
     host='localhost',
     user='root',
     password='minhanh2722004',
-    database='english-app'
+    database='english_app'
 )
 mysql_cursor = mysql_conn.cursor()
 

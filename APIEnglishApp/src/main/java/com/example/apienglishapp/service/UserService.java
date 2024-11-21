@@ -4,7 +4,6 @@ import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
 import com.example.apienglishapp.entity.UserEntity;
-import com.example.apienglishapp.enums.LoginMethod;
 import com.example.apienglishapp.enums.Role;
 import com.example.apienglishapp.exception.AppException;
 import com.example.apienglishapp.exception.ErrorCode;
@@ -12,14 +11,9 @@ import com.example.apienglishapp.mapper.UserMapper;
 import com.example.apienglishapp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -50,7 +44,6 @@ public class UserService {
         HashSet<String> roles = new HashSet<>();
         roles.add(Role.USER.name());
         userEntity.setRoles(roles);
-        userEntity.setLoginMethod(LoginMethod.SYSTEM.name());
         return userMapper.toUserResponse(userRepository.save(userEntity));
     }
 
@@ -78,8 +71,7 @@ public class UserService {
 
     public UserResponse getMyInfo () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof JwtAuthenticationToken) {
-            JwtAuthenticationToken jwtToken = (JwtAuthenticationToken) authentication;
+        if (authentication instanceof JwtAuthenticationToken jwtToken) {
             Jwt jwt = jwtToken.getToken();
             Long id = Long.parseLong(jwt.getSubject());
             UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));

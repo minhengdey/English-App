@@ -1,6 +1,8 @@
 package com.example.apienglishapp.service;
 
 import com.example.apienglishapp.entity.VietnameseToEnglishEntity;
+import com.example.apienglishapp.exception.AppException;
+import com.example.apienglishapp.exception.ErrorCode;
 import com.example.apienglishapp.repository.VietnameseToEnglishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class VietnameseToEnglishService {
     public List<VietnameseToEnglishEntity> getVietnameseToEnglishByWord(String word) {
         List<VietnameseToEnglishEntity> result = vietnameseToEnglishRepository.findByWord(word);
         if (result.isEmpty()) {
-            throw new RuntimeException("Từ này không có trong từ điển");
+            throw new AppException(ErrorCode.NEW_WORD_NOT_FOUND);
         }
         return result;
     }

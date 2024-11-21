@@ -7,10 +7,8 @@ import com.example.apienglishapp.dto.request.RefreshRequest;
 import com.example.apienglishapp.dto.response.AuthenticationResponse;
 import com.example.apienglishapp.dto.response.IntrospectResponse;
 import com.example.apienglishapp.dto.response.RefreshResponse;
-import com.example.apienglishapp.dto.response.UserResponse;
 import com.example.apienglishapp.entity.InvalidatedTokenEntity;
 import com.example.apienglishapp.entity.UserEntity;
-import com.example.apienglishapp.enums.LoginMethod;
 import com.example.apienglishapp.enums.Role;
 import com.example.apienglishapp.exception.AppException;
 import com.example.apienglishapp.exception.ErrorCode;
@@ -131,7 +129,6 @@ public class AuthenticationService {
                     .builder()
                     .email(email)
                     .name(user.getAttribute("name"))
-                    .loginMethod(LoginMethod.GOOGLE.name())
                     .roles(roles)
                     .build());
             String token = generateToken(userEntity);

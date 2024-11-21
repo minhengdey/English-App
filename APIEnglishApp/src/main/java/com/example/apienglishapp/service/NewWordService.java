@@ -99,16 +99,20 @@ public class NewWordService {
         return list.stream().map(newWordMapper::toNewWordResponse).toList();
     }
 
-    public void deleteByTopic (String topic, Long userId) {
+    public void deleteByTopic(String topic, Long userId) {
         UserEntity user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         Set<NewWordEntity> set = user.getNewWords();
-        Set<NewWordEntity> newSet = set;
-        for (NewWordEntity newWord : newSet) {
+        Set<NewWordEntity> toRemove = new HashSet<>();
+        for (NewWordEntity newWord : set) {
             if (newWord.getTopic().equals(topic)) {
-                deleteByUserIdAndId(userId, newWord.getId());
+                toRemove.add(newWord);
             }
         }
+        set.removeAll(toRemove);
+        newWordRepository.deleteAll(toRemove);
+        user.setNewWords(set);
     }
+
 
     public Set<String> getAllTopic (Long userId) {
         Set<String> setTopic = new TreeSet<>();
