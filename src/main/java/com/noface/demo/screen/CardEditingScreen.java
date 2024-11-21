@@ -65,6 +65,7 @@ public class CardEditingScreen {
         cardSideChoiceBox.setValue("Front");
     }
     public void connect(Card card) {
+        cardSideChoiceBox.setValue("Front");
 
         frontContent = new SimpleStringProperty();
         backContent = new SimpleStringProperty();
