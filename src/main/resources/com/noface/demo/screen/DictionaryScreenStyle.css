@@ -1,0 +1,63 @@
+.root-vbox{
+    -fx-padding: 50 70 50 70;
+    -fx-spacing: 20px;
+    -fx-background-color: #F5EBFF;
+}
+.top-bar{
+    -fx-spacing: 10px;
+    -fx-padding: 0;
+}
+
+.button:pressed{
+    -fx-background-color: #561696;
+    -fx-text-fill: #F5EBFF;
+}
+.button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #7732BC;
+    -fx-font-weight: bold;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+}
+.web-view-hbox{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.combo-box {
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 0 0 0 10;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+.combo-box-box .arrow-button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #E5E5FF;
+}
