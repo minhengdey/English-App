@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -151,6 +152,55 @@ public class CardCRUD {
             e.printStackTrace();
         }
         return topics;
+    }
+
+    public ArrayList<String> updateTopic(String oldTopic, String newTopic)
+    {
+        ArrayList<String> topics = new ArrayList<>();
+        try
+        {
+            String token = TokenManager.getInstance().getToken();
+            String encodedOldTopic = URLEncoder.encode(oldTopic, StandardCharsets.UTF_8);
+            String encodedNewTopic = URLEncoder.encode(normalize_name(newTopic), StandardCharsets.UTF_8);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "new_word/topic/" + encodedOldTopic + "/" + encodedNewTopic))
+                    .header("Authorization", "Bearer " + token)
+                    .POST(HttpRequest.BodyPublishers.noBody())
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) topics = getAllTopics();
+            else System.out.println ("Có lỗi xảy ra");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return topics;
+    }
+
+    public void deleteTopic(String topic)
+    {
+        try
+        {
+            String token = TokenManager.getInstance().getToken();
+            String encodedTopic = URLEncoder.encode(topic, StandardCharsets.UTF_8);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "new_word/topic/" + encodedTopic))
+                    .header("Authorization", "Bearer " + token)
+                    .DELETE()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) System.out.println ("Thành công");
+            else System.out.println ("Có lỗi xảy ra");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public List<Card> getAllCardsByTopic(String topic) {
