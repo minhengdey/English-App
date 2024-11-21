@@ -7,9 +7,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.englishapp_callapigemini.HelloController">
     <children>
-        <Button fx:id="translateButton" layoutX="448.0" layoutY="212.0" mnemonicParsing="false" onAction="#generateContent" text="Dịch" />
+        <Button fx:id="pronunciation" layoutX="438.0" layoutY="49.0" mnemonicParsing="false" onAction="#pronunciationButtonClick" text="Phát âm" />
         <TextArea fx:id="inputTextArea" layoutX="226.0" layoutY="102.0" prefHeight="72.0" prefWidth="500.0" wrapText="true" />
-        <TextArea fx:id="outputTextArea" layoutX="226.0" layoutY="266.0" prefHeight="238.0" prefWidth="500.0" wrapText="true" />
-      <ComboBox fx:id="comboBox" layoutX="393.0" layoutY="44.0" prefWidth="150.0" />
+        <ComboBox fx:id="topicBox" layoutX="100.0" layoutY="49.0" prefWidth="150.0" />
+        <TextArea fx:id="outputTextArea" layoutX="226.0" layoutY="284.0" prefHeight="134.0" prefWidth="500.0" />
+        <Button fx:id="checkAns" layoutX="438.0" layoutY="207.0" mnemonicParsing="false" onAction="#checkSpeakAndWriteButtonClick" text="Kiểm tra" />
+        <Button fx:id="nextWord" layoutX="775.0" layoutY="207.0" mnemonicParsing="false" onAction="#clearForNextWord" text="Từ tiếp theo" />
+        <Button fx:id="displayAnswer" layoutX="93.0" layoutY="301.0" mnemonicParsing="false" onAction="#displayAnswer" text="Hiển thị đáp án" />
     </children>
 </AnchorPane>

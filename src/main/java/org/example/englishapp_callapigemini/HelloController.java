@@ -4,208 +4,197 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class HelloController implements Initializable {
     private ExecutorService executorService;
-
+    private String currentWord;
+    private HashMap<String, String> words;
+    private List<String> keys;
+    private int count = 0;
     @FXML
     private TextArea inputTextArea;
-
-    @FXML
-    private Button translateButton;
 
     @FXML
     private TextArea outputTextArea;
 
     @FXML
-    private ComboBox<String> comboBox;
+    private ComboBox<String> topicBox;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputTextArea.setStyle("-fx-border-color: red;");
 
-        outputTextArea.setStyle("-fx-border-color: red;");
-        comboBox.getItems().addAll("English To Vietnamese", "Vietnamese To English");
+        words = new HashMap<>();
+        keys = new ArrayList<>();
+
+        URL resourceUrl = getClass().getResource("/org/example/englishapp_callapigemini/speak_and_write/topic");
+
+        File folder = null;
+        try {
+            assert resourceUrl != null;
+            folder = new File(resourceUrl.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".txt"));
+
+        assert files != null;
+        for (File file : files) {
+            topicBox.getItems().add(file.getName().replace(".txt", ""));
+        }
+
+        topicBox.setOnAction(event -> {
+            try {
+                loadWordsFromSelectedTopic();
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        });
         executorService = Executors.newSingleThreadExecutor();
     }
-    public List<String> splitTextBySentences(String text) {
-        List<String> sentences = new ArrayList<>();
-        int start = 0;
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == '.') {
-                sentences.add(text.substring(start, i + 1).trim());
-                start = i + 1;
+    private void loadWordsFromSelectedTopic() throws URISyntaxException {
+        String selectedTopic = topicBox.getValue();
+        if (selectedTopic == null || selectedTopic.isEmpty()) return;
+
+        words.clear();
+        keys.clear();
+        URL resourceUrl = getClass().getResource("/org/example/englishapp_callapigemini/speak_and_write/topic/" + selectedTopic + ".txt");
+        if (resourceUrl == null) {
+            throw new RuntimeException("Resource not found: " + selectedTopic);
+        }
+        File topicFile = new File(resourceUrl.toURI());
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(topicFile), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";", 3);
+                if (parts.length == 3) {
+                    words.put(parts[0].trim(), parts[1].trim() + "\n" + parts[2].trim());
+                }
             }
+        } catch (Exception ignored) {
         }
-        if (start < text.length()) {
-            sentences.add(text.substring(start).trim());
+        keys.addAll(words.keySet());
+        Collections.shuffle(keys);
+        currentWord = keys.getFirst();
+        outputTextArea.setText("");
+        count = 0;
+        genNextWord();
+    }
+    private void genNextWord() {
+        if (count < keys.size()) {
+            currentWord = keys.get(count);
+            count++;
+        } else {
+            outputTextArea.setText("Hết từ trong chủ đề này. Hãy chọn lại chủ đề hoặc làm lại.");
+            currentWord = null;
         }
-        return sentences;
     }
 
-    private String sendApiRequest(String text, String sourceLang, String targetLang) throws Exception {
-        String urlStr = String.format(
-                "https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&q=%s",
-                sourceLang, targetLang, java.net.URLEncoder.encode(text, StandardCharsets.UTF_8)
-        );
+    @FXML
+    private void pronunciationButtonClick(ActionEvent event) {
+        String audioUrl = "";
+        try {
+            audioUrl = sendApiRequestToDicToGetFirstAudio(currentWord);
+        } catch (Exception e) {
+            System.err.println("Error fetching audio URL: " + e.getMessage());
+        }
 
-        URL url = new URL(urlStr);
+        if (!audioUrl.isEmpty()) {
+            playAudio(audioUrl);
+        } else {
+            System.out.println("No audio found for the given word.");
+        }
+    }
+    @FXML
+    private void checkSpeakAndWriteButtonClick(ActionEvent event) {
+        String text = inputTextArea.getText().toLowerCase();
+        String ans;
+        if (text.equals(currentWord)) {
+            ans = "Đúng rồi\n" + currentWord + "\n" + words.get(currentWord);
+        } else {
+            ans = "Sai rồi\n";
+        }
+        outputTextArea.setText(ans);
+
+    }
+    @FXML
+    private void clearForNextWord(ActionEvent event) {
+        inputTextArea.clear();
+        outputTextArea.clear();
+        genNextWord();
+    }
+
+    @FXML
+    private void displayAnswer(ActionEvent event) {
+        String ans = "Đáp án: \n" + currentWord + "\n" + words.get(currentWord);
+        outputTextArea.setText(ans);
+    }
+    private String sendApiRequestToDicToGetFirstAudio(String text) throws Exception {
+        String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+        urlAPI += text.toLowerCase();
+
+        URL url = new URL(urlAPI);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
                 response.append(line.trim());
             }
-            return parseResponse(response.toString());
+            return extractAudioUrlsFromJson(response.toString());
+        } finally {
+            conn.disconnect();
         }
     }
 
-    private String parseResponse(String response) {
-        response = response.substring(4, response.indexOf("\",\"")); 
-        return response;
-    }
+    private String extractAudioUrlsFromJson(String jsonResponse) {
+        String result = "";
+        JSONArray jsonArray = new JSONArray(jsonResponse);
 
-    @FXML
-    private void generateContent(ActionEvent actionEvent) {
-        String prompt = inputTextArea.getText();
-        List<String> sentences = splitTextBySentences(prompt);
-
-        String sourceLang, targetLang;
-        if (comboBox.getValue().equals("English To Vietnamese")) {
-            sourceLang = "en";
-            targetLang = "vi";
-        } else {
-            sourceLang = "vi";
-            targetLang = "en";
-        }
-
-        executorService.submit(() -> {
-            StringBuilder translatedText = new StringBuilder();
-            for (String sentence : sentences) {
-                try {
-                    String translatedSentence = sendApiRequest(sentence, sourceLang, targetLang);
-                    translatedText.append(translatedSentence).append(" ");
-                } catch (Exception e) {
-                    e.printStackTrace();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            if (obj.has("phonetics")) {
+                JSONArray phoneticsArray = obj.getJSONArray("phonetics");
+                for (int j = 0; j < phoneticsArray.length(); j++) {
+                    JSONObject phonetic = phoneticsArray.getJSONObject(j);
+                    if (phonetic.has("audio") && !phonetic.getString("audio").isEmpty()) {
+                        result = phonetic.getString("audio");
+                    }
                 }
             }
-            String finalTranslatedText = translatedText.toString().trim();
-            javafx.application.Platform.runLater(() -> outputTextArea.setText(finalTranslatedText));
-        });
-
-        //Call API Gemini
-        //private static final String API_KEY = "AIzaSyBeampUMDA65ov5E_UO5XqrR1vZFlssaJI";
-        //private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
-
-
-//        private String sendApiRequest(String prompt) throws IOException {
-//            URL url = new URL(API_URL + "?key=" + API_KEY);
-//            HttpURLConnection conn = getHttpURLConnection(prompt, url);
-//
-//            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
-//                StringBuilder response = new StringBuilder();
-//                String responseLine;
-//                while ((responseLine = br.readLine()) != null) {
-//                    response.append(responseLine.trim());
-//                }
-//                return response.toString();
-//            }
-//        }
-//        private static HttpURLConnection getHttpURLConnection(String prompt, URL url) throws IOException {
-//            HttpURLConnection conn = (HttpURLConnection) url.openconn();
-//            conn.setRequestMethod("POST");
-//            conn.setRequestProperty("Content-Type", "application/json");
-//            conn.setDoOutput(true);
-//
-//            String jsonInputString = "{ \"contents\": [{ \"parts\": [{ \"text\": \"" + prompt + "\" }] }] }";
-//            try (OutputStream os = conn.getOutputStream()) {
-//                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-//                os.write(input, 0, input.length);
-//            }
-//            return conn;
-//        }
-//
-//        private String parseResponse(String response) throws IOException {
-//            // Json
-////        {
-////            "candidates": [
-////            {
-////                "content": {
-////                "parts": [
-////                {
-////                    "text": "Vào cuối tuần, gia đình tôi rất thích dành thời gian bên nhau. Buổi sáng thứ bảy thường bắt đầu với bữa sáng thịnh soạn tại nhà. Mẹ tôi làm bánh kếp hoặc bánh quế, và tất cả chúng tôi ngồi quanh bàn, trò chuyện về kế hoạch trong ngày. Đôi khi chúng tôi quyết định đi bộ đường dài trong khu rừng gần đó. Nơi đó thật yên bình và xinh đẹp, với những cây cao và tiếng chim hót líu lo. \n"
-////                }
-////                ],
-////                "role": "model"
-////            },
-////                "finishReason": "STOP",
-////                    "index": 0,
-////                    "safetyRatings": [
-////                {
-////                    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-////                        "probability": "NEGLIGIBLE"
-////                },
-////                {
-////                    "category": "HARM_CATEGORY_HATE_SPEECH",
-////                        "probability": "NEGLIGIBLE"
-////                },
-////                {
-////                    "category": "HARM_CATEGORY_HARASSMENT",
-////                        "probability": "NEGLIGIBLE"
-////                },
-////                {
-////                    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-////                        "probability": "NEGLIGIBLE"
-////                }
-////            ]
-////            }
-////    ],
-////            "usageMetadata": {
-////            "promptTokenCount": 77,
-////                    "candidatesTokenCount": 104,
-////                    "totalTokenCount": 181
-////        },
-////            "modelVersion": "gemini-1.5-flash-001"
-////        }
-//
-//            int startIndex = response.indexOf("\"text\": \"") + 9;
-//            int endIndex = response.indexOf("\"", startIndex);
-//            return response.substring(startIndex, endIndex - 3);
-//
-//        }
-//        @FXML
-//        private void generateContent(ActionEvent actionEvent) {
-//            String prompt = inputTextArea.getText();
-//            if (comboBox.getValue().equals("English To Vietnamese")) {
-//                prompt = "Dịch sang Tiếng Việt " + prompt;
-//            } else {
-//                prompt = "Dịch sang Tiếng Anh " + prompt;
-//            }
-//            String finalPrompt = prompt;
-//            executorService.submit(() -> {
-//                try {
-//                    String response = sendApiRequest(finalPrompt);
-//
-//                    String generatedText = parseResponse(response);
-//                    javafx.application.Platform.runLater(() -> outputTextArea.setText(generatedText));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            });
-
+        }
+        return result;
     }
+
+    private void playAudio(String audioUrl) {
+        try {
+            Media media = new Media(audioUrl);
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
+        } catch (Exception ignored) {
+        }
+    }
+
+
 }
