@@ -9,16 +9,37 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 public class User {
-    private StringProperty username, password, gender, name, phone, dob, email;
+    private StringProperty username, gender, name, phone, dob, email;
 
     public User() {
         username = new SimpleStringProperty();
-        password = new SimpleStringProperty();
         gender = new SimpleStringProperty();
         name = new SimpleStringProperty();
         phone = new SimpleStringProperty();
         dob = new SimpleStringProperty();
         email = new SimpleStringProperty();
+    }
+
+    public User(String username, String gender, String name, String phone, String dob, String email){
+        this();
+        this.username.set(username);
+        this.gender.set(gender);
+        this.name.set(name);
+        this.phone.set(phone);
+        this.dob.set(dob);
+        this.email.set(email);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username=" + username +
+                ", gender=" + gender +
+                ", name=" + name +
+                ", phone=" + phone +
+                ", dob=" + dob +
+                ", email=" + email +
+                '}';
     }
 
     public String getUsername() {
@@ -27,14 +48,6 @@ public class User {
 
     public StringProperty usernameProperty() {
         return username;
-    }
-
-    public String getPassword() {
-        return password.get();
-    }
-
-    public StringProperty passwordProperty() {
-        return password;
     }
 
     public String getGender() {

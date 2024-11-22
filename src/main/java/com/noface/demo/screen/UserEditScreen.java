@@ -2,23 +2,21 @@ package com.noface.demo.screen;
 
 import com.noface.demo.controller.UserEditScreenController;
 import com.noface.demo.model.User;
+import com.noface.demo.model.UserCRUD;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class UserEditScreen {
     private FXMLLoader loader;
@@ -28,6 +26,7 @@ public class UserEditScreen {
         loader = new FXMLLoader(this.getClass().getResource("UserEditScreen.fxml"));
         loader.setController(this);
         loader.load();
+        this.user = user;
     }
     @FXML
     private TextField confirmPasswordTF;
@@ -82,6 +81,28 @@ public class UserEditScreen {
     public UserEditScreen(UserEditScreenController controller) throws IOException {
         this();
         this.controller = controller;
+        this.user = controller.getUser();
+
+        nameTF.setText(user.getName());
+        emailTF.setText(user.getEmail());
+        phoneTF.setText(user.getPhone());
+        LocalDate date = LocalDate.parse(user.getDob());
+        dayTF.setText(String.valueOf(date.getDayOfMonth()));
+        monthTF.setText(String.valueOf(date.getMonth().getValue()));
+        yearTF.setText(String.valueOf(date.getYear()));
+        genderChoiceBox.setValue(user.getGender());
+
+        user.nameProperty().bind(nameTF.textProperty());
+        user.phoneProperty().bind(phoneTF.textProperty());
+        user.emailProperty().bind(emailTF.textProperty());
+        user.genderProperty().bind(genderChoiceBox.valueProperty());
+        user.dobProperty().bind(Bindings.createStringBinding(() -> {
+            return LocalDate.of(
+                    Integer.parseInt(yearTF.getText()),
+                    Integer.parseInt(monthTF.getText()),
+                    Integer.parseInt(dayTF.getText())
+            ).toString();
+        }, yearTF.textProperty(), dayTF.textProperty(), monthTF.textProperty()));
     }
 
 
@@ -90,7 +111,7 @@ public class UserEditScreen {
     }
 
     public void handleCancelButtonClicked(ActionEvent event){
-        Stage stage = (Stage) ((Node) (loader.getRoot())).getScene().getWindow();
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
     protected void handleSaveButton(ActionEvent event) {
@@ -130,7 +151,13 @@ public class UserEditScreen {
                     return;
                 }
             }
-            controller.saveUser();
+            int status = controller.editUser(passwordTF.getText());
+            if(status == UserCRUD.USER_EDITED_SUCCESSFUL){
+                Stage stage = (Stage) saveButton.getScene().getWindow();
+                stage.close();
+            }else{
+                showAlert("Thong tin khong hop le, vui long thu lai", Alert.AlertType.WARNING);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

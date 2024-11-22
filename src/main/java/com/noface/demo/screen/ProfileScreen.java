@@ -1,28 +1,46 @@
 package com.noface.demo.screen;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noface.demo.controller.ProfileScreenController;
 import com.noface.demo.controller.UserEditScreenController;
+import com.noface.demo.model.User;
+import com.noface.demo.resource.ResourceLoader;
+import com.noface.demo.resource.TokenManager;
+import com.noface.demo.resource.Utilities;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class ProfileScreen {
     private FXMLLoader loader;
     private MainScreen mainScreen;
+    private ProfileScreenController profileScreenController;
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
-    public ProfileScreen() throws IOException {
+    public ProfileScreen(ProfileScreenController profileScreenController) throws IOException {
         loader = new FXMLLoader(this.getClass().getResource("ProfileScreen.fxml"));
         loader.setController(this);
         loader.load();
@@ -37,7 +55,24 @@ public class ProfileScreen {
                 }
             }
         });
+        this.profileScreenController = profileScreenController;
+        loadUserInfo(profileScreenController.getUser());
+
     }
+    public void loadUserInfo(User user){
+        this.username.setText(user.getUsername());
+        this.name.setText(user.getName());
+        this.phone.setText(user.getPhone());
+        this.gender.setText(user.getGender());
+        this.email.setText(user.getEmail());
+        LocalDate date = LocalDate.parse(user.getDob());
+        this.day.setText(String.valueOf(date.getDayOfMonth()));
+        this.month.setText(String.valueOf(date.getMonth().getValue()));
+        this.year.setText(String.valueOf(date.getYear()));
+    }
+    @FXML
+    private TextField name, phone, gender, email, day, month, year;
+    private TextField  username = new TextField();
 
     private void handleEditButtonClicked(ActionEvent event) throws IOException {
         showTypePassworDialog();
@@ -48,10 +83,11 @@ public class ProfileScreen {
         UserEditScreenController controller = new UserEditScreenController();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(controller.getScreen().getRoot()));
-        stage.show();
+        stage.showAndWait();
+        loadUserInfo(profileScreenController.getUser());
     }
     public void showTypePassworDialog(){
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Login");
         dialog.setHeaderText("Enter your credentials");
 
@@ -62,15 +98,11 @@ public class ProfileScreen {
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField username = new TextField();
-        username.setPromptText("Username");
         PasswordField password = new PasswordField();
         password.setPromptText("Password");
 
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(username, 1, 0);
-        grid.add(new Label("Password:"), 0, 1);
-        grid.add(password, 1, 1);
+        grid.add(new Label("Password:"), 0, 0);
+        grid.add(password, 1, 0);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -83,23 +115,47 @@ public class ProfileScreen {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
-                return new Pair<>(username.getText(), password.getText());
+                return String.valueOf(dialogButton);
             }
             return null;
         });
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(s -> {
+            try {
+                String requestBody = String.format (
+                        "{" +
+                                "\"username\":\"%s\"," +
+                                "\"password\":\"%s\"" +
+                                "}",
+                        username.getText(),
+                        password.getText()
+                );
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(new URI("http://localhost:8080/auth/login"))
+                        .header("Content-Type", "application/json")
+                        .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                        .build();
 
-        result.ifPresent(credentials -> {
-            if(credentials.getKey().equals("1") && credentials.getValue().equals("1")){
-                try {
+                HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() == 200)
+                {
+                    String jsonResponse = response.body();
+                    JsonNode jsonNode = new ObjectMapper().readTree(jsonResponse);
+                    String token = jsonNode.path("result").path("token").asText();
+                    System.out.println (token);
+                    TokenManager.getInstance().setToken(token);
                     showEditUserScreen();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                }else{
+                    Utilities.getInstance().showAlert("Không hợp lệ, vui lòng nhập lại", Alert.AlertType.WARNING);
+                    showTypePassworDialog();
                 }
-            }else{
-                showAlert("Tài khoản hoặc mật khẩu không hợp lệ, vui lòng thử lại", Alert.AlertType.WARNING);
-                showTypePassworDialog();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
             }
         });
     }

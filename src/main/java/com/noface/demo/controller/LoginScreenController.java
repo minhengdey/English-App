@@ -25,6 +25,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class LoginScreenController {
+    public static final int LOGIN_SUCCESSFUL = 1;
+    public static final int LOGIN_ERROR = 2;
     private LoginScreen screen;
     private StringProperty username = new SimpleStringProperty();
     private StringProperty password =  new SimpleStringProperty();
@@ -41,16 +43,19 @@ public class LoginScreenController {
     private HttpClient httpClient = HttpClient.newHttpClient();
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    public void handleLogin() {
+    public int handleLogin() {
+        return handleLogin(username.get(), password.get());
+    }
+    public int handleLogin(String username, String password){
         try
         {
             String requestBody = String.format (
                     "{" +
                             "\"username\":\"%s\"," +
                             "\"password\":\"%s\"" +
-                    "}",
-                    username.get(),
-                    password.get()
+                            "}",
+                    username,
+                    password
             );
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -69,7 +74,7 @@ public class LoginScreenController {
                 String token = jsonNode.path("result").path("token").asText();
                 System.out.println (token);
                 TokenManager.getInstance().setToken(token);
-                handleLoginInterface();
+                return LOGIN_SUCCESSFUL;
             }
             else
             {
@@ -78,6 +83,7 @@ public class LoginScreenController {
                 int code = jsonNode.get("code").asInt();
                 if (code == 1002 || code == 1007) showAlert("Thông tin đăng nhập không hợp lệ, vui lòng kiểm tra lại!", Alert.AlertType.ERROR);
                 else showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
+
             }
         }
         catch (Exception e)
@@ -85,6 +91,7 @@ public class LoginScreenController {
             e.printStackTrace();
             showAlert("Có lỗi xảy ra, vui lòng thử lại sau!", Alert.AlertType.ERROR);
         }
+        return LOGIN_ERROR;
     }
     public void handleSignUp() {
         try {
@@ -121,38 +128,7 @@ public class LoginScreenController {
         }
     }
 
-    protected void handleLoginInterface() {
-        try {
 
-            MainController controller = new MainController();
-
-            Stage stage = (Stage) ((Node) screen.getRoot()).getScene().getWindow();
-            stage.setTitle("Trang chủ");
-
-
-            Scene scene = new Scene(controller.getMainScreen().getRoot());
-            stage.setScene(scene);
-
-
-
-            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            double screenWidth = screenBounds.getWidth();
-            double screenHeight = screenBounds.getHeight();
-
-
-            stage.setWidth(1000);
-            stage.setHeight(637);
-
-
-            stage.setX((screenWidth - stage.getWidth()) / 2);
-            stage.setY((screenHeight - stage.getHeight()) / 2);
-
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     private static final String GOOGLE_AUTH_URL = "http://localhost:8080/oauth2/authorization/google";
 
     public void handleGoogleLogin() {
@@ -182,7 +158,7 @@ public class LoginScreenController {
         stage.setTitle("Google Login");
         stage.show();
     }
-//
+
     private void showAlert(String message, Alert.AlertType alertType)
     {
         Alert alert = new Alert(alertType);
@@ -193,6 +169,15 @@ public class LoginScreenController {
 //    @Override
 //    public void initialize(URL url, ResourceBundle resourceBundle) {
 //    }
+
+    public void setUsername(String username) {
+        this.username.set(username);
+    }
+
+    public void setPassword(String password) {
+        this.password.set(password);
+    }
+
 }
 
 

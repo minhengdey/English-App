@@ -29,13 +29,13 @@ public class MainScreen {
     private MainController mainController;
     private Stage stage;
 
-    private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane, profilePane;
+    private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane, profilePane, dictionaryPane;
 
     public MainScreen(MainController mainController, Pane listTopicPane,
                       Pane cardTopicPane, Pane cardLearningPane, Pane translatePane,
-                      Pane profilePane) throws IOException {
+                      Pane profilePane, Pane dictionaryPane) throws IOException {
         this.mainController = mainController;
-
+        this.dictionaryPane = dictionaryPane;
         this.listTopicPane = listTopicPane;
         this.cardTopicPane = cardTopicPane;
         this.cardLearningPane = cardLearningPane;
@@ -77,7 +77,21 @@ public class MainScreen {
         topicButton.setOnAction(topicButtonClickedEventHanlder());
         profileButton.setOnAction(profileButtonClickedEventHandler());
         logoutButton.setOnAction(logoutButtonClickedEventHandler());
+        dictionaryButton.setOnAction(dictionaryButtonClickedEventHandler());
+    }
 
+    private EventHandler<ActionEvent> dictionaryButtonClickedEventHandler() {
+        return new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                changeToDictionaryScreen();
+            }
+        };
+    }
+
+    private void changeToDictionaryScreen() {
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(dictionaryPane);
     }
 
     private EventHandler<ActionEvent> profileButtonClickedEventHandler() {

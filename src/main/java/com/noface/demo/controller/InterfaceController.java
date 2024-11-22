@@ -1,7 +1,7 @@
 package com.noface.demo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.noface.demo.HelloApplication;
+import com.noface.demo.FXMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +39,7 @@ public class InterfaceController implements Initializable {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
 
-            Parent root = FXMLLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("LoginScreen.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(FXMain.class.getResource("LoginScreen.fxml")));
 
             Stage logOutStage = new Stage();
             logOutStage.setTitle("English App");

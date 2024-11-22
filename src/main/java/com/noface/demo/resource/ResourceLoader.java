@@ -2,15 +2,18 @@ package com.noface.demo.resource;
 
 import com.noface.demo.model.CardCRUD;
 import com.noface.demo.model.Card;
+import com.noface.demo.model.UserCRUD;
+import com.noface.demo.screen.CardTopicScreen;
+import com.noface.demo.screen.ListTopicScreen;
+import javafx.fxml.FXMLLoader;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceLoader {
     private static ResourceLoader resourceLoader;
     private List<Card> cards;
     private CardCRUD cardCRUD = new CardCRUD();
+    public UserCRUD userCRUD = new UserCRUD();
 
     public static ResourceLoader getInstance(){
         if(resourceLoader == null){
@@ -24,17 +27,7 @@ public class ResourceLoader {
     public CardCRUD getCardCRUD(){
         return cardCRUD;
     }
-    public List<String> getTopicTitles(){
-        List<String> titles = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            titles.add(String.format("Topic %d", i + 1));
-        }
-        return titles;
+    public UserCRUD userCRUD(){
+        return userCRUD;
     }
-    public List<Card> getCardsSampleData(){
-
-        return cards;
-    }
-
-
 }
