@@ -8,6 +8,7 @@ import com.noface.demo.model.User;
 import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.resource.TokenManager;
 import com.noface.demo.resource.Utilities;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -56,27 +58,40 @@ public class ProfileScreen {
             }
         });
         this.profileScreenController = profileScreenController;
-        loadUserInfo(profileScreenController.getUser());
-
+        bindToControllerProperty();
     }
-    public void loadUserInfo(User user){
-        this.username.setText(user.getUsername());
-        this.name.setText(user.getName());
-        this.phone.setText(user.getPhone());
-        this.gender.setText(user.getGender());
-        this.email.setText(user.getEmail());
-        LocalDate date = LocalDate.parse(user.getDob());
-        this.day.setText(String.valueOf(date.getDayOfMonth()));
-        this.month.setText(String.valueOf(date.getMonth().getValue()));
-        this.year.setText(String.valueOf(date.getYear()));
+    @FXML
+    public void initialize(){
+
     }
     @FXML
     private TextField name, phone, gender, email, day, month, year;
     private TextField  username = new TextField();
 
+    private void bindToControllerProperty() {
+        name.textProperty().bind(profileScreenController.nameProperty());
+        phone.textProperty().bind(profileScreenController.phoneProperty());
+        gender.textProperty().bind(profileScreenController.genderProperty());
+        email.textProperty().bind(profileScreenController.emailProperty());
+        username.textProperty().bind(profileScreenController.usernameProperty());
+        day.textProperty().bind(profileScreenController.dayProperty());
+        month.textProperty().bind(profileScreenController.monthProperty());
+        year.textProperty().bind(profileScreenController.yearProperty());
+//        day.textProperty().bind(Bindings.createStringBinding(() -> {
+//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getDayOfMonth());
+//        }, profileScreenController.dobProperty()));
+//        month.textProperty().bind(Bindings.createStringBinding(() -> {
+//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getMonth().getValue());
+//        }, profileScreenController.dobProperty()));
+//        year.textProperty().bind(Bindings.createStringBinding(() -> {
+//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getYear());
+//        }, profileScreenController.dobProperty()));
+
+    }
+
+
     private void handleEditButtonClicked(ActionEvent event) throws IOException {
         showTypePassworDialog();
-
     }
     public void showEditUserScreen() throws IOException {
         Stage stage = new Stage();
@@ -84,7 +99,7 @@ public class ProfileScreen {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(controller.getScreen().getRoot()));
         stage.showAndWait();
-        loadUserInfo(profileScreenController.getUser());
+        profileScreenController.refreshUserInfo();
     }
     public void showTypePassworDialog(){
         Dialog<String> dialog = new Dialog<>();

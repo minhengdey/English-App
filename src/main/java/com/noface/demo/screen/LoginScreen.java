@@ -2,12 +2,15 @@ package com.noface.demo.screen;
 
 import com.noface.demo.controller.LoginScreenController;
 import com.noface.demo.controller.MainController;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -36,7 +39,14 @@ public class LoginScreen {
         loader.setController(this);
         loader.load();
         configureScreenComponentEventHandler(controller);
+
     }
+
+    public void refreshData() {
+        usernameField.setText("");
+        passwordField.setText("");
+    }
+
     public void configureScreenComponentEventHandler(LoginScreenController controller){
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -44,7 +54,7 @@ public class LoginScreen {
 
                 int loginStatus = controller.handleLogin();
                 if(loginStatus == LoginScreenController.LOGIN_SUCCESSFUL){
-                    showMainScreen();
+                    showMainScreen(controller.getMainController().getMainScreen());
                 }
             }
         });
@@ -75,16 +85,21 @@ public class LoginScreen {
     public <T> T getRoot(){
         return loader.getRoot();
     }
-    protected void showMainScreen() {
+    protected void showMainScreen(MainScreen mainScreen) {
         try {
-
-            MainController controller = new MainController();
 
             Stage stage = (Stage) ((Node) this.getRoot()).getScene().getWindow();
             stage.setTitle("Trang chủ");
+            mainScreen.changeToListTopicPane();
+            mainScreen.setLoginScreen(this);
 
-
-            Scene scene = new Scene(controller.getMainScreen().getRoot());
+            Parent root = mainScreen.getRoot();
+            Scene scene;
+            if(root.getScene() == null){
+                scene = new Scene(root);
+            }else{
+                scene = root.getScene();
+            }
             stage.setScene(scene);
 
 

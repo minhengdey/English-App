@@ -9,8 +9,10 @@ import com.noface.demo.model.UserCRUD;
 import com.noface.demo.screen.DictionaryScreen;
 import com.noface.demo.screen.MainScreen;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -40,12 +42,6 @@ public class FXMain extends Application{
         userCRUD.getUserInfo();
     }
 
-    private void testDictionaryScreen(Stage stage) throws IOException {
-        DictionaryScreen screen = new DictionaryScreen();
-        Scene scene = new Scene(screen.getRoot());
-        stage.setScene(scene);
-        stage.show();
-    }
 
     private void testTranslateMainScreen(Stage stage) throws IOException {
         MainController controller = new MainController();
@@ -74,8 +70,8 @@ public class FXMain extends Application{
         LoginScreenController loginScreenController = new LoginScreenController();
         Scene scene = new Scene(loginScreenController.getScreen().getRoot());
         stage.setScene(scene);
-
         stage.show();
+        loginScreenController.setMainController(new MainController());
     }
 
     public void testMainScreen(Stage stage) throws IOException {

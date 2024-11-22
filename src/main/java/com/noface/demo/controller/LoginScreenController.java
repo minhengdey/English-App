@@ -30,10 +30,15 @@ public class LoginScreenController {
     private LoginScreen screen;
     private StringProperty username = new SimpleStringProperty();
     private StringProperty password =  new SimpleStringProperty();
+    private MainController mainController;
     public LoginScreenController() throws IOException {
         screen = new LoginScreen(this);
         username.bind(screen.getUsernameField().textProperty());
         password.bind(screen.getPasswordField().textProperty());
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     public LoginScreen getScreen() {
@@ -172,6 +177,10 @@ public class LoginScreenController {
 
     public void setUsername(String username) {
         this.username.set(username);
+    }
+
+    public MainController getMainController() {
+        return mainController;
     }
 
     public void setPassword(String password) {

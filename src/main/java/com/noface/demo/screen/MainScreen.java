@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,6 +31,9 @@ public class MainScreen {
     private Stage stage;
 
     private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane, profilePane, dictionaryPane;
+    private LoginScreen loginScreen;
+
+
 
     public MainScreen(MainController mainController, Pane listTopicPane,
                       Pane cardTopicPane, Pane cardLearningPane, Pane translatePane,
@@ -154,6 +158,7 @@ public class MainScreen {
         rightPane.getChildren().add(translatePane);
     }
     public void changeToProfilePane(){
+        mainController.getProfileScreenController().refreshUserInfo();
         rightPane.getChildren().clear();
         rightPane.getChildren().add(profilePane);
     }
@@ -163,9 +168,16 @@ public class MainScreen {
         try
         {
             Stage currentStage = (Stage)logoutButton.getScene().getWindow();
-            LoginScreenController loginScreenController = new LoginScreenController();
             Stage loginStage = new Stage();
-            loginStage.setScene(new Scene(loginScreenController.getScreen().getRoot()));
+            loginScreen.refreshData();
+            Parent loginRoot = loginScreen.getRoot();
+            Scene scene;
+            if(loginRoot.getScene() == null){
+                scene = new Scene(loginRoot);
+            }else{
+                scene = loginRoot.getScene();
+            }
+            loginStage.setScene(scene);
             loginStage.setResizable(false);
             //System.out.println (TokenManager.getInstance().getToken());
             TokenManager.getInstance().clearToken();
@@ -179,8 +191,8 @@ public class MainScreen {
         }
     }
 
-    public void changeToMainScreen(){
 
+    public void setLoginScreen(LoginScreen loginScreen) {
+        this.loginScreen = loginScreen;
     }
-
 }

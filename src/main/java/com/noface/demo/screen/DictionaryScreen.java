@@ -3,7 +3,10 @@ package com.noface.demo.screen;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noface.demo.controller.DictionaryScreenController;
 import com.noface.demo.resource.TokenManager;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -38,24 +41,27 @@ import java.util.stream.Collectors;
 public class DictionaryScreen {
     private FXMLLoader loader;
     private MainScreen mainScreen;
+    private DictionaryScreenController controller;
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
 
-    public DictionaryScreen() throws IOException {
+    public DictionaryScreen(DictionaryScreenController controller) throws IOException {
         loader = new FXMLLoader(this.getClass().getResource("DictionaryScreen.fxml"));
         loader.setController(this);
         loader.load();
+        wordSuggestionsEng.bind(controller.wordSuggestionsEngProperty());
+        wordSuggestionsViet.bind(controller.wordSuggestionsVietProperty());
+        this.controller = controller;
     }
 
     public <T> T getRoot() {
         return loader.getRoot();
     }
 
-    private ExecutorService executorService;
-    private List<String> wordSuggestionsEng;
-    private List<String> wordSuggestionsViet;
+    private ListProperty<String> wordSuggestionsEng = new SimpleListProperty<>();
+    private ListProperty<String> wordSuggestionsViet = new SimpleListProperty<>();
     private ContextMenu suggestionMenu;
 
     @FXML
@@ -75,17 +81,8 @@ public class DictionaryScreen {
 
     public void initialize() {
         comboBox.getItems().addAll("English To Vietnamese", "Vietnamese To English");
-        executorService = Executors.newSingleThreadExecutor();
-        try {
-            wordSuggestionsEng = loadWordSuggestions("english_to_vietnamese");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            wordSuggestionsViet = loadWordSuggestions("vietnamese_to_english");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        comboBox.setValue(comboBox.getItems().get(0));
+
 
         inputTextArea.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -105,41 +102,13 @@ public class DictionaryScreen {
             }
         });
 
+
+
     }
 
 
-    private List<String> loadWordSuggestions(String language) throws IOException {
-        URL urlEng = new URL("http://localhost:8080/" + language);
 
-        HttpURLConnection connEng = (HttpURLConnection) urlEng.openConnection();
-        connEng.setRequestMethod("GET");
-        connEng.setRequestProperty("Authorization", "Bearer " + TokenManager.getInstance().getToken());
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(connEng.getInputStream(), StandardCharsets.UTF_8))) {
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
-            return extractWordFromJson(response.toString());
-        } finally {
-            connEng.disconnect();
-        }
-    }
-
-    private List<String> extractWordFromJson(String jsonResponse) {
-        JSONArray jsonArray = new JSONArray(jsonResponse);
-        List<String> words = new ArrayList<String>();
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            if (obj.has("word")) {
-                words.add(obj.getString("word"));
-            }
-        }
-
-        return words;
-    }
 
     private void handleTextInput(KeyEvent event) {
         if (suggestionMenu == null) {
@@ -152,12 +121,12 @@ public class DictionaryScreen {
         }
         List<String> matches;
         if (comboBox.getValue().equals("English To Vietnamese")) {
-            matches = wordSuggestionsEng.stream()
+            matches = wordSuggestionsEng.get().stream()
                     .filter(word -> word.startsWith(text))
                     .limit(10)
                     .collect(Collectors.toList());
         } else {
-            matches = wordSuggestionsViet.stream()
+            matches = wordSuggestionsViet.get().stream()
                     .filter(word -> word.startsWith(text))
                     .limit(10)
                     .collect(Collectors.toList());
@@ -167,6 +136,7 @@ public class DictionaryScreen {
             suggestionMenu.hide();
         } else {
             suggestionMenu.getItems().clear();
+            System.out.println(suggestionMenu.getX() + " " + suggestionMenu.getY());
             for (String match : matches) {
                 MenuItem item = new MenuItem(match);
                 item.setOnAction(e -> {
@@ -177,10 +147,12 @@ public class DictionaryScreen {
                 suggestionMenu.getItems().add(item);
             }
 
-            Point2D point = inputTextArea.localToScene(0, inputTextArea.getHeight());
 
             if (!suggestionMenu.isShowing()) {
-                suggestionMenu.show(inputTextArea, point.getX(), point.getY());
+                suggestionMenu.show(inputTextArea, inputTextArea.localToScreen(0, 0).getX() +
+                                inputTextArea.getPadding().getLeft(),
+                        inputTextArea.localToScreen(0, 0).getY() + inputTextArea.getHeight());
+
             }
         }
 
@@ -260,23 +232,11 @@ public class DictionaryScreen {
         outputWebView.getEngine().loadContent("<p>Translating...</p>");
 
         String finalTranslatePath = translatePath;
-        executorService.submit(() -> {
-            String result;
-            try {
-                result = sendApiRequestToDICT_HHDB(prompt, finalTranslatePath);
-                if (result.isEmpty()) {
-                    result = "<p>No result returned from API.</p>";
-                }
-            } catch (Exception e) {
-                result = "<p>Error: Unable to connect to the API.</p>";
-                e.printStackTrace();
-            }
-
-            String finalResult = result.replaceAll("\\/\\/", "");
-            javafx.application.Platform.runLater(() -> {
-                outputWebView.getEngine().loadContent(finalResult);
-            });
+        String finalResult = controller.getWordDictionaryData(prompt, translatePath);
+        javafx.application.Platform.runLater(() -> {
+            outputWebView.getEngine().loadContent(finalResult);
         });
+
     }
 
     private Button getButton(List<String> apiAudio, int i) {
@@ -332,42 +292,6 @@ public class DictionaryScreen {
 
     private HttpClient httpClient = HttpClient.newHttpClient();
 
-    private String sendApiRequestToDICT_HHDB(String text, String translatePath) throws Exception {
-        text = text.toLowerCase();
 
-        String encodedText = java.net.URLEncoder.encode(text, StandardCharsets.UTF_8);
-        String urlStr = String.format("http://localhost:8080/%s/byWord/%s", translatePath, encodedText);
-
-        URL url = new URL(urlStr);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Authorization", "Bearer " + TokenManager.getInstance().getToken());
-
-
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
-            return extractHtmlFromJson(response.toString());
-        } finally {
-            conn.disconnect();
-        }
-    }
-
-    private String extractHtmlFromJson(String jsonResponse) {
-        JSONArray jsonArray = new JSONArray(jsonResponse);
-        StringBuilder htmlBuilder = new StringBuilder();
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            if (obj.has("html")) {
-                htmlBuilder.append(obj.getString("html")).append("<br>");
-            }
-        }
-        return htmlBuilder.toString();
-    }
 
 }

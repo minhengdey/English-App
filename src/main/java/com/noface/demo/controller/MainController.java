@@ -79,4 +79,5 @@ public class MainController {
     public ListProperty<Card> cardsProperty() {
         return cards;
     }
+
 }
