@@ -5,12 +5,11 @@ import com.noface.demo.controller.MainController;
 
 import com.noface.demo.controller.TopicScreenController;
 import com.noface.demo.controller.UserEditScreenController;
+import com.noface.demo.model.UserCRUD;
+import com.noface.demo.screen.DictionaryScreen;
 import com.noface.demo.screen.MainScreen;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.web.HTMLEditorSkin;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +27,24 @@ public class FXMain extends Application{
 //        testEditProfile(stage);
 //        testListTopicScreen(stage);
 //        testTranslateMainScreen(stage);
+//        testDictionaryScreen(stage);
+//        testRandom();
+    }
+    public void testRandom() throws IOException {
+        LoginScreenController controller = new LoginScreenController();
+        controller.setUsername("hiepbonls");
+        controller.setPassword("Hh852124");
+        controller.handleLogin();
+
+        UserCRUD userCRUD = new UserCRUD();
+        userCRUD.getUserInfo();
+    }
+
+    private void testDictionaryScreen(Stage stage) throws IOException {
+        DictionaryScreen screen = new DictionaryScreen();
+        Scene scene = new Scene(screen.getRoot());
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void testTranslateMainScreen(Stage stage) throws IOException {

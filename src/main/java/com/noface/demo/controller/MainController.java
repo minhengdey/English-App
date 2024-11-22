@@ -1,7 +1,6 @@
 package com.noface.demo.controller;
 
 import com.noface.demo.model.Card;
-import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.screen.MainScreen;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -9,8 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainController {
     private ListProperty<String> topics = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -20,26 +17,31 @@ public class MainController {
     private CardLearningController cardLearningController;
     private TranslateScreenController translateScreenController;
     private ProfileScreenController profileScreenController;
+    private DictionaryScreenController dictionaryScreenController;
     public MainController() throws IOException {
         topicScreenController = new TopicScreenController();
         cardLearningController = new CardLearningController();
         translateScreenController = new TranslateScreenController();
         profileScreenController = new ProfileScreenController();
-        mainScreen =  new MainScreen(this, topicScreenController.getTopicScreen().getRoot(),
+        dictionaryScreenController = new DictionaryScreenController();
+        mainScreen =  new MainScreen(this, topicScreenController.setMainScreen().getRoot(),
                 topicScreenController.getScreen().getRoot(),
                 cardLearningController.getScreen().getRoot(),
                 translateScreenController.getScreen().getRoot(),
-                profileScreenController.getScreen().getRoot());
+                profileScreenController.getScreen().getRoot(),
+                dictionaryScreenController.getScreen().getRoot()
+        );
         setMainScreenForSubScreen(mainScreen);
         mainScreen.changeToListTopicPane();
     }
 
     private void setMainScreenForSubScreen(MainScreen mainScreen) {
-        topicScreenController.getTopicScreen().setMainScreen(mainScreen);
+        topicScreenController.setMainScreen().setMainScreen(mainScreen);
         topicScreenController.getScreen().setMainScreen(mainScreen);
         cardLearningController.getScreen().setMainScreen(mainScreen);
         translateScreenController.getScreen().setMainScreen(mainScreen);
         profileScreenController.getScreen().setMainScreen(mainScreen);
+        dictionaryScreenController.getScreen().setMainScreen(mainScreen);
     }
 
     public TopicScreenController getTopicScreenController() {
