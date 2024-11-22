@@ -16,6 +16,22 @@
     -fx-background-radius: 20px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
 }
+.button:pressed{
+    -fx-background-color: #561696;
+    -fx-text-fill: #F5EBFF;
+}
+.button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #7732BC;
+    -fx-font-weight: bold;
+}
 
 .nobackground-button{
     -fx-background-color: transparent;
@@ -155,21 +171,6 @@
     -fx-font-weight: bold;
 }
 .search-hbox .button:hover{
-    -fx-text-fill: white;
-    -fx-background-color: #561696;
-    -fx-font-weight: bold;
-}
-.button:pressed{
-    -fx-background-color: #1F003D;
-    -fx-text-fill: #F5EBFF;
-}
-.button{
-    -fx-font-size: 12;
-    -fx-background-radius: 20;
-    -fx-background-color: #9659D3;
-    -fx-font-weight: bold;
-}
-.button:hover{
     -fx-text-fill: white;
     -fx-background-color: #561696;
     -fx-font-weight: bold;

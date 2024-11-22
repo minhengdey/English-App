@@ -1,13 +1,15 @@
 
 .text{
-    -fx-text-fill: #8E8EA9;
+    -fx-text-fill: #030315;
     -fx-font-weight: bold;
-    -fx-font-size: x-large;
+}
+.dob{
+    -fx-text-alignment: center;
 }
 .button{
     -fx-background-color: #9659D3;
     -fx-text-fill: #F5EBFF;
-    -fx-font-size: 12px;
+    -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-background-radius: 20;
 }
@@ -18,10 +20,15 @@
     -fx-background-color: #1F003D;
 }
 .text-field{
-    -fx-text-fill: #1F003D;
-    -fx-background-color: #E1CDF4;
+    /*-fx-font-size: 20px;*/
+    -fx-text-fill: #030315;
+    -fx-background-color: white;
     -fx-background-radius: 20;
-    -fx-border-color: transparent;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #9659D3;
+    -fx-font-size: 15px;
+
 }
 .big-vbox{
     -fx-alignment: center;
@@ -29,7 +36,7 @@
 
 }
 .title{
-    -fx-text-fill: #8E8EA9;
+    -fx-text-fill: #030315;
     -fx-font-weight: bold;
     -fx-font-size: 20px;
 }
@@ -37,8 +44,9 @@
     -fx-alignment: center;
 }
 .root-vbox{
-    -fx-background-color: #E5E5FF;
+    -fx-background-color: #F5EBFF;
     -fx-padding: 100 160 100 160;
     -fx-alignment: center;
     -fx-spacing: 20px;
 }
+

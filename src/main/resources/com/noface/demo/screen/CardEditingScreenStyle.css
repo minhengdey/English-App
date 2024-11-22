@@ -33,7 +33,6 @@
 
 }
 
-/* ComboBox */
 .side-choice-box {
     -fx-background-color: #fff;
     -fx-background-radius: 15;
@@ -148,7 +147,6 @@
     -fx-background-color: #B8B9CA;
 }
 
-/* ChoiceBox bên trong HTMLEditor */
 .html-editor .choice-box {
     -fx-background-color: #ffffff;
     -fx-border-color: #9b7ebd;

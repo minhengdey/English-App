@@ -21,14 +21,22 @@
                      <items>
                         <VBox fx:id="cardViewContainer" alignment="TOP_CENTER" prefHeight="326.0" prefWidth="600.0" styleClass="web-view-vbox">
                            <children>
-                              <WebView fx:id="frontView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <VBox alignment="CENTER" styleClass="vbox-web-view" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
                                     <Insets />
-                                 </VBox.margin></WebView>
-                              <WebView fx:id="backView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 </VBox.margin>
+                                 <children>
+                                    <WebView fx:id="frontView" prefHeight="200.0" prefWidth="200.0" styleClass="custom-web-view" />
+                                 </children>
+                              </VBox>
+                              <VBox styleClass="vbox-web-view" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
                                     <Insets />
-                                 </VBox.margin></WebView>
+                                 </VBox.margin>
+                                 <children>
+                                    <WebView fx:id="backView" prefHeight="200.0" prefWidth="200.0" />
+                                 </children>
+                              </VBox>
                            </children>
                         </VBox>
                         <VBox styleClass="web-view-vbox">
