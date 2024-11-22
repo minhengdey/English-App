@@ -56,7 +56,7 @@ public class TopicScreenController {
         return cardScreen;
     }
 
-    public ListTopicScreen getTopicScreen() {
+    public ListTopicScreen setMainScreen() {
         return topicScreen;
     }
 
@@ -106,5 +106,10 @@ public class TopicScreenController {
         if(status == CardCRUD.ERROR){
             Utilities.getInstance().showAlert("Lỗi xảy ra khi lưu", Alert.AlertType.WARNING);
         }
+    }
+    public int deleteTopic(String topic){
+        this.topic.set(topic);
+        int status = ResourceLoader.getInstance().getCardCRUD().deleteCardByTopic(topic);
+        return status;
     }
 }

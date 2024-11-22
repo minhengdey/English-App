@@ -3,7 +3,9 @@ package com.noface.demo.model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -21,6 +23,7 @@ public class CardCRUD {
     public static final int CARD_ADDED_SUCCESS = 3;
     public static final int CARD_DELETED_SUCCESS = 4;
     public static final int CARD_EDITED_SUCCESS = 5;
+    public static final int TOPIC_DELETED_SUCCESS = 6;
     private HttpClient httpClient;
     private ObjectMapper objectMapper;
     private String apiUri = "http://localhost:8080/";
@@ -140,7 +143,9 @@ public class CardCRUD {
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("get all topics");
             System.out.println(response);
+            System.out.println(token);
             if (response.statusCode() == 200) {
                 JSONArray jsonArray = new JSONArray(response.body());
                 for (int i = 0; i < jsonArray.length(); ++i) {
@@ -181,5 +186,28 @@ public class CardCRUD {
             e.printStackTrace();
         }
         return cards;
+    }
+
+    public int deleteCardByTopic(String topic){
+        String token = TokenManager.getInstance().getToken();
+        try {
+            String encodedTopic = URLEncoder.encode(normalize_name(topic), StandardCharsets.UTF_8);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "new_word/topic/" + encodedTopic))
+                    .header("Authorization", "Bearer " + token)
+                    .DELETE()
+                    .build();
+            HttpResponse<Void> response = httpClient.send(request, HttpResponse.BodyHandlers.discarding());
+            System.out.println("Delete topic response code: " + response.statusCode());
+            System.out.println(response.uri());
+            if(response.statusCode() == 200){
+                System.out.println("delete success fully");
+                return TOPIC_DELETED_SUCCESS;
+            }
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ERROR;
+
     }
 }

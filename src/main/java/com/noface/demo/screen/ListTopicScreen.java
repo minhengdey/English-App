@@ -12,6 +12,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,7 @@ public class ListTopicScreen {
     private  FXMLLoader loader;
     private MainScreen mainScreen;
     private ListProperty<String> topicTitles =  new SimpleListProperty<>();
+    private TopicScreenController topicScreenController;
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
@@ -40,6 +42,7 @@ public class ListTopicScreen {
         loader.setController(this);
         loader.load();
         topicTitles.bind(controller.topicTitlesProperty());
+        this.topicScreenController = controller;
         configureScreenComponent(controller);
         controller.refreshListTopicTitlesList();
     }
@@ -54,12 +57,16 @@ public class ListTopicScreen {
                 }
             }
         });
+
+
         topicTitles.addListener(new ChangeListener<ObservableList<String>>() {
             @Override
             public void changed(ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) {
                 addTopicBarToScreen();
             }
         });
+
+
     }
 
     private void handleAddTopicButtonClicked(ActionEvent actionEvent, TopicScreenController controller) throws IOException {
@@ -119,8 +126,22 @@ public class ListTopicScreen {
             topicBarPane.getChildren().add(topicBar);
             topicBar.setOnEditButtonClicked(editButtonClickedEventHandler(topicBar));
             topicBar.setOnLearnButtonClicked(learnButtonClickedEventHandler(topicBar));
+            topicBar.setOnRemoveButtonClicked(removeButtonClickedEventHandler(topicBar));
         }
     }
+
+    private EventHandler removeButtonClickedEventHandler(TopicBar topicBar) {
+        return new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                int status = topicScreenController.deleteTopic(topicBar.getTopicName());
+                if(status == CardCRUD.TOPIC_DELETED_SUCCESS){
+                    topicBarPane.getChildren().remove(topicBar);
+                }
+            }
+        };
+    }
+
     private EventHandler<ActionEvent> learnButtonClickedEventHandler(TopicBar topicBar) {
         return new EventHandler<ActionEvent>() {
             @Override
