@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="root" alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20" styleClass="root-vbox" stylesheets="@WordCombineGameStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="promptText" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Ghép lại từ: _ _ _ _ _" />
+      <HBox fx:id="lettersBox" alignment="CENTER" spacing="10">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+               </children>
+            </StackPane>
+         </children></HBox>
+      <Separator prefWidth="200.0" />
+      <HBox fx:id="emptySlotsBox" alignment="CENTER" spacing="10">
+         <children>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+            <StackPane styleClass="empty-letter-pane">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+               </children>
+            </StackPane>
+         </children></HBox>
+      <Text fx:id="resultText" styleClass="result-text" text="Chúc mừng, bạn đã hoàn thành" />
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="899.0" spacing="20.0">
+         <children>
+            <Button fx:id="checkButton" prefHeight="18.0" prefWidth="95.0" styleClass="game_button" text="Check" textFill="WHITE" />
+            <Button fx:id="nextButton" prefHeight="18.0" prefWidth="106.0" styleClass="game_button" text="Next word" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
