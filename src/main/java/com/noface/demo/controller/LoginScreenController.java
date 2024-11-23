@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -146,10 +147,10 @@ public class LoginScreenController {
 
 
         webEngine.locationProperty().addListener((obs, oldUrl, newUrl) -> {
-            if (newUrl.contains("login/oauth2/code/google")) {
-
+            if (newUrl.contains("http://localhost:8080/auth/google_facebook-login")) {
                 System.out.println("Redirected back to: " + newUrl);
-
+                String htmlContent = (String) webEngine.executeScript("document.body.innerHTML");
+                System.out.println(htmlContent);
             }
         });
 

@@ -3,7 +3,9 @@ package com.noface.demo.controller;
 import com.noface.demo.resource.TokenManager;
 import com.noface.demo.screen.DictionaryScreen;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.SetProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleSetProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.JSONArray;
@@ -16,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +27,7 @@ public class DictionaryScreenController {
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private ListProperty<String> wordSuggestionsEng = new SimpleListProperty<>(FXCollections.observableArrayList());
     private ListProperty<String> wordSuggestionsViet = new SimpleListProperty<>(FXCollections.observableArrayList());
+//    private SetProperty<String> apiAudioList = new SimpleSetProperty<>(FXCollections.emptyObservableSet());
     private DictionaryScreen screen;
     public DictionaryScreenController() throws IOException {
         screen = new DictionaryScreen(this);
@@ -32,7 +36,6 @@ public class DictionaryScreenController {
         return screen;
     }
     public void refresh(){
-        executorService = Executors.newSingleThreadExecutor();
         try {
             wordSuggestionsEng.clear();
             wordSuggestionsEng.addAll(loadWordSuggestions("english_to_vietnamese"));
@@ -40,7 +43,7 @@ public class DictionaryScreenController {
             throw new RuntimeException(e);
         }
         try {
-            wordSuggestionsEng.clear();
+            wordSuggestionsViet.clear();
             wordSuggestionsViet.addAll(loadWordSuggestions("vietnamese_to_english"));
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -65,8 +68,8 @@ public class DictionaryScreenController {
             connEng.disconnect();
         }
     }
+
     public String getWordDictionaryData(String prompt, String finalTranslatePath){
-        executorService.submit(() -> {
             String result;
             try {
                 result = sendApiRequestToDICT_HHDB(prompt, finalTranslatePath);
@@ -79,10 +82,9 @@ public class DictionaryScreenController {
             }
 
             String finalResult = result.replaceAll("\\/\\/", "");
+            System.out.println("In get word by dictionary data");
+            System.out.println(finalResult);
             return finalResult;
-
-        });
-        return "";
     }
     private String sendApiRequestToDICT_HHDB(String text, String translatePath) throws Exception {
         text = text.toLowerCase();
@@ -135,6 +137,49 @@ public class DictionaryScreenController {
 
         return words;
     }
+    public HashSet<String> sendApiRequestToDic(String text) throws Exception {
+        String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+        urlAPI += text.toLowerCase();
+
+
+        URL url = new URL(urlAPI);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Authorization", "Bearer " + TokenManager.getInstance().getToken());
+        conn.setRequestMethod("GET");
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                response.append(line.trim());
+            }
+            return extractAudioUrlsFromJson(response.toString());
+        } finally {
+            conn.disconnect();
+        }
+    }
+    private HashSet<String> extractAudioUrlsFromJson(String jsonResponse) {
+        HashSet<String> audioUrls = new HashSet<>();
+
+        JSONArray jsonArray = new JSONArray(jsonResponse);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            if (obj.has("phonetics")) {
+                JSONArray phoneticsArray = obj.getJSONArray("phonetics");
+                for (int j = 0; j < phoneticsArray.length(); j++) {
+                    JSONObject phonetic = phoneticsArray.getJSONObject(j);
+                    if (phonetic.has("audio") && !phonetic.getString("audio").isEmpty()) {
+                        audioUrls.add(phonetic.getString("audio"));
+                    }
+                }
+            }
+        }
+        return audioUrls;
+    }
+
+
 
     public ObservableList<String> getWordSuggestionsEng() {
         return wordSuggestionsEng.get();
