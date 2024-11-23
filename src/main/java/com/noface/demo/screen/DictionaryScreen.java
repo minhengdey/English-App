@@ -201,6 +201,9 @@ public class DictionaryScreen {
             }
             voiceBox.getItems().add(itemToAdd.toString());
         }
+        if(apiAudioList.size() != 0){
+            voiceBox.setValue(voiceBox.getItems().get(0));
+        }
 
 
         audioButton.setOnAction(new EventHandler<ActionEvent>() {
