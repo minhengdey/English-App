@@ -110,12 +110,12 @@ public class HelloController implements Initializable {
         List<String> matches;
         if (comboBox.getValue().equals("English To Vietnamese")) {
             matches = wordSuggestionsEng.stream()
-                    .filter(word -> word.startsWith(text))
+                    .filter(word -> word.toLowerCase().startsWith(text.toLowerCase()))
                     .limit(10)
                     .collect(Collectors.toList());
         } else {
             matches = wordSuggestionsViet.stream()
-                    .filter(word -> word.startsWith(text))
+                    .filter(word -> word.toLowerCase().startsWith(text.toLowerCase()))
                     .limit(10)
                     .collect(Collectors.toList());
         }
