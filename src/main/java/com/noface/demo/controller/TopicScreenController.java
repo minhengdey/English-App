@@ -112,4 +112,8 @@ public class TopicScreenController {
         int status = ResourceLoader.getInstance().getCardCRUD().deleteCardByTopic(topic);
         return status;
     }
+    public int renameTopic(String oldTopic, String newTopic){
+        int status = ResourceLoader.getInstance().getCardCRUD().renameTopic(oldTopic, newTopic);
+        return status;
+    }
 }

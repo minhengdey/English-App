@@ -24,6 +24,7 @@ public class CardCRUD {
     public static final int CARD_DELETED_SUCCESS = 4;
     public static final int CARD_EDITED_SUCCESS = 5;
     public static final int TOPIC_DELETED_SUCCESS = 6;
+    public static final int TOPIC_RENAME_SUCCESS = 7;
     private HttpClient httpClient;
     private ObjectMapper objectMapper;
     private String apiUri = "http://localhost:8080/";
@@ -209,5 +210,28 @@ public class CardCRUD {
         }
         return ERROR;
 
+    }
+    public int renameTopic(String oldTopic, String newTopic){
+        oldTopic = URLEncoder.encode(oldTopic, StandardCharsets.UTF_8);
+        newTopic = URLEncoder.encode(newTopic, StandardCharsets.UTF_8);
+        String token = TokenManager.getInstance().getToken();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "new_word/topic/" + oldTopic + "/" + newTopic))
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + token)
+                    .POST(HttpRequest.BodyPublishers.noBody()).build();
+            HttpResponse response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if(response.statusCode() == 200){
+                return TOPIC_RENAME_SUCCESS;
+            }
+            return ERROR;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

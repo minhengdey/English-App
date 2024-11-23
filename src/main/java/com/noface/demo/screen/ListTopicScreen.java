@@ -20,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class ListTopicScreen {
     private  FXMLLoader loader;
@@ -127,7 +129,31 @@ public class ListTopicScreen {
             topicBar.setOnEditButtonClicked(editButtonClickedEventHandler(topicBar));
             topicBar.setOnLearnButtonClicked(learnButtonClickedEventHandler(topicBar));
             topicBar.setOnRemoveButtonClicked(removeButtonClickedEventHandler(topicBar));
+            topicBar.setOnRenameButtonClicked(renameButtonClickedEventHandler(topicBar));
         }
+    }
+
+    private EventHandler renameButtonClickedEventHandler(TopicBar topicBar) {
+        return new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Change topic name");
+                dialog.setHeaderText("Enter your new topic name");
+                dialog.setContentText("Name:");
+
+                Optional<String> result = dialog.showAndWait();
+                result.ifPresent(name -> {
+                    int status = topicScreenController.renameTopic(topicBar.getTopicName(), name);
+                    if(status == CardCRUD.TOPIC_RENAME_SUCCESS){
+                        dialog.close();
+                        topicBar.updateTopicTitle(name);
+                    }else{
+                        dialog.showAndWait();
+                    }
+                });
+            }
+        };
     }
 
     private EventHandler removeButtonClickedEventHandler(TopicBar topicBar) {
