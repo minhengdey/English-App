@@ -167,23 +167,39 @@ public class MainScreen {
     {
         try
         {
-            Stage currentStage = (Stage)logoutButton.getScene().getWindow();
-            Stage loginStage = new Stage();
-            loginScreen.refreshData();
-            Parent loginRoot = loginScreen.getRoot();
-            Scene scene;
-            if(loginRoot.getScene() == null){
-                scene = new Scene(loginRoot);
-            }else{
-                scene = loginRoot.getScene();
+            HttpClient httpClient = HttpClient.newHttpClient();
+            String requestBody = String.format (
+                    "{\"token\":\"%s\"}",
+                    TokenManager.getInstance().getToken()
+            );
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/auth/logout"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200)
+            {
+                Stage currentStage = (Stage)logoutButton.getScene().getWindow();
+                Stage loginStage = new Stage();
+                loginScreen.refreshData();
+                Parent loginRoot = loginScreen.getRoot();
+                Scene scene;
+                if(loginRoot.getScene() == null){
+                    scene = new Scene(loginRoot);
+                }else{
+                    scene = loginRoot.getScene();
+                }
+                loginStage.setScene(scene);
+                loginStage.setResizable(false);
+                //System.out.println (TokenManager.getInstance().getToken());
+                TokenManager.getInstance().clearToken();
+                loginStage.show();
+                currentStage.close();
+                //System.out.println (TokenManager.getInstance().getToken());
             }
-            loginStage.setScene(scene);
-            loginStage.setResizable(false);
-            //System.out.println (TokenManager.getInstance().getToken());
-            TokenManager.getInstance().clearToken();
-            loginStage.show();
-            currentStage.close();
-            //System.out.println (TokenManager.getInstance().getToken());
+            else System.out.println ("Có lỗi xảy ra");
         }
         catch (Exception e)
         {
