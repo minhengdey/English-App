@@ -30,7 +30,7 @@ public class CardCRUD {
     private ObjectMapper objectMapper;
     private String apiUri = "http://localhost:8080/";
 
-    private String normalize_name(String s) {
+    public static String normalize_name(String s) {
         String[] k = s.trim().split("\\s+");
         StringBuilder sb = new StringBuilder();
         for (String i : k) {
@@ -98,7 +98,6 @@ public class CardCRUD {
 
             if (response.statusCode() == 200) {
                 // Xóa thành công
-                System.out.println("Thành công");
                 return CARD_DELETED_SUCCESS;
             }
             System.out.println("Delete status code " + response.statusCode());
@@ -203,7 +202,7 @@ public class CardCRUD {
             System.out.println("Delete topic response code: " + response.statusCode());
             System.out.println(response.uri());
             if(response.statusCode() == 200){
-                System.out.println("delete success fully");
+                System.out.println("delete successfully");
                 return TOPIC_DELETED_SUCCESS;
             }
         } catch (URISyntaxException | IOException | InterruptedException e) {
@@ -214,7 +213,7 @@ public class CardCRUD {
     }
     public int renameTopic(String oldTopic, String newTopic){
         oldTopic = URLEncoder.encode(oldTopic, StandardCharsets.UTF_8);
-        newTopic = URLEncoder.encode(newTopic, StandardCharsets.UTF_8);
+        newTopic = URLEncoder.encode(normalize_name(newTopic), StandardCharsets.UTF_8);
         String token = TokenManager.getInstance().getToken();
         try {
             HttpRequest request = HttpRequest.newBuilder()

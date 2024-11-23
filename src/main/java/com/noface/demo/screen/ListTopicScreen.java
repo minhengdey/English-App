@@ -147,7 +147,7 @@ public class ListTopicScreen {
                     int status = topicScreenController.renameTopic(topicBar.getTopicName(), name);
                     if(status == CardCRUD.TOPIC_RENAME_SUCCESS){
                         dialog.close();
-                        topicBar.updateTopicTitle(name);
+                        topicBar.updateTopicTitle(CardCRUD.normalize_name(name));
                     }else{
                         dialog.showAndWait();
                     }
