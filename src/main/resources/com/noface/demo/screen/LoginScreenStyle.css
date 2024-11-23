@@ -17,6 +17,7 @@
     -fx-border-radius: 30px;
     -fx-border-color: #9659D3;
     -fx-border-width: 2px;
+    -fx-padding: 0 10 0 10;
 }
 .bottom-bar{
     -fx-alignment: center;

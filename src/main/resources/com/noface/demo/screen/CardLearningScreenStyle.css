@@ -70,9 +70,6 @@
 .text-area:selected{
     -fx-border-color: transparent;
 }
-.vbox-web-view {
-
-}
 .vbox-web-view .scroll-bar:vertical {
     -fx-pref-width: 15px;
     -fx-background-color: transparent;
