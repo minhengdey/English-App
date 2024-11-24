@@ -24,7 +24,16 @@ public class FXMain extends Application{
 //        stage.resizableProperty().set(false);
         testLogin(stage);
 //        testGame(stage);
+//        testListenGame(stage);
     }
+
+    private void testListenGame(Stage stage) throws IOException {
+        WordListenGameController controller = new WordListenGameController();
+        Scene scene = new Scene(controller.getScreen().getRoot());
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void testRandom(Stage stage) throws IOException {
         WordCombineGameController controller = new WordCombineGameController();
         Parent root = controller.getScreen().getRoot();

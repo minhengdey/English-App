@@ -1,0 +1,121 @@
+.root-vbox{
+    -fx-padding: 50;
+    -fx-spacing: 10;
+    -fx-alignment: center top;
+    -fx-background-color: #F5EBFF;
+}
+
+.button{
+    -fx-wrap-text: true;
+    -fx-text-fill: #F5EBFF;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+
+.mid-bottom-bar{
+    -fx-alignment: center;
+    -fx-spacing: 20px
+}
+
+
+.combo-box .list-cell:hover{
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+
+}
+.combo-box .list-cell{
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+}
+.combo-box {
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 10px;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+.combo-box .arrow-button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #E5E5FF;
+}
+
+.small-vbox{
+    -fx-spacing: 10;
+    -fx-alignment: center top;
+}
+
+.split-pane{
+    -fx-background-color: #F5EBFF;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: #C492F5;
+    -fx-border-width: 1px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
+}
+
+.context-menu {
+    -fx-background-color: #fff;
+}
+ .context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}
+
+.text-area{
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+    -fx-background-color: white;
+
+}
+.text-area .content {
+    -fx-padding: 10px;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.text-area:selected{
+    -fx-border-color: transparent;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}

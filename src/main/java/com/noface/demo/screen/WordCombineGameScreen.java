@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class WordCombineGameScreen {
-    private static final Logger log = LoggerFactory.getLogger(WordCombineGameScreen.class);
+    private MainScreen mainScreen;
     @FXML
     private Text promptText;
     @FXML
@@ -229,5 +229,9 @@ public class WordCombineGameScreen {
             restoreDraggedLetters();
 
         }
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
     }
 }

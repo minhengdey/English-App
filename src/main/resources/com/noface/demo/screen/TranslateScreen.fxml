@@ -21,7 +21,7 @@
                         <Font size="20.0" />
                      </font>
                   </TextArea>
-                  <TextArea id="output_area" fx:id="outputTextArea" editable="false" prefHeight="332.0" prefWidth="289.0" style="-fx-background-color: white;" styleClass="text-area" wrapText="true" HBox.hgrow="ALWAYS">
+                  <TextArea id="output_area" fx:id="outputTextArea" editable="false" prefHeight="332.0" prefWidth="289.0" styleClass="text-area" wrapText="true" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="20.0" />
                      </font>

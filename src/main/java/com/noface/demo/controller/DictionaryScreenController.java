@@ -55,7 +55,8 @@ public class DictionaryScreenController {
 
         HttpURLConnection connEng = (HttpURLConnection) urlEng.openConnection();
         connEng.setRequestMethod("GET");
-        connEng.setRequestProperty("Authorization", "Bearer " + TokenManager.getInstance().getToken());
+        connEng.setRequestProperty("Accept", "application/json");
+//        connEng.setRequestProperty("Authorization", "Bearer " + TokenManager.getInstance().getToken());
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(connEng.getInputStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();

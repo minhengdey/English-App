@@ -11,6 +11,7 @@
     -fx-text-fill: #F5EBFF;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-padding: 5 10 5 10;
     -fx-background-radius: 20;
 }
 .button:hover{

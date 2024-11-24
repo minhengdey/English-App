@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="754.0" stylesheets="@WordListenGameScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <VBox layoutX="127.0" layoutY="49.0" styleClass="root-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+               <items>
+                  <VBox styleClass="small-vbox">
+                     <children>
+                        <HBox>
+                           <children>
+                                <ComboBox fx:id="topicBox" prefWidth="150.0" />
+                              <Region prefHeight="0.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                <Button fx:id="pronunciation" mnemonicParsing="false" onAction="#pronunciationButtonClick" prefHeight="25.0" prefWidth="103.0" text="Phát âm" />
+                           </children>
+                        </HBox>
+                          <TextArea fx:id="inputTextArea" prefHeight="66.0" prefWidth="654.0" styleClass="text-area" wrapText="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox styleClass="small-vbox">
+                     <children>
+                        <HBox styleClass="mid-bottom-bar">
+                           <children>
+                                <Button fx:id="displayAnswer" mnemonicParsing="false" onAction="#displayAnswer" text="Hiển thị đáp án" />
+                                <Button fx:id="checkAns" mnemonicParsing="false" onAction="#checkSpeakAndWriteButtonClick" text="Kiểm tra" />
+                                <Button fx:id="nextWord" mnemonicParsing="false" onAction="#clearForNextWord" text="Từ tiếp theo" />
+                           </children>
+                        </HBox>
+                          <TextArea fx:id="outputTextArea" editable="false" prefHeight="134.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

@@ -10,7 +10,7 @@
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="754.0" styleClass="root-vbox" stylesheets="@ProfileScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label styleClass="title" text="PERSONAL DETAIL" />
-      <VBox prefHeight="370.0" prefWidth="434.0" spacing="20.0" styleClass="big-vbox">
+      <VBox prefHeight="370.0" prefWidth="434.0" spacing="20.0" styleClass="big-vbox" VBox.vgrow="NEVER">
          <children>
             <VBox prefHeight="110.0" prefWidth="164.0" spacing="10.0">
                <children>
@@ -50,7 +50,7 @@
             </VBox>
          </children>
       </VBox>
-      <Button fx:id="editButton" mnemonicParsing="false" prefHeight="69.0" prefWidth="79.0" styleClass="button_edit" text="Edit">
+      <Button fx:id="editButton" mnemonicParsing="false" prefHeight="69.0" prefWidth="79.0" styleClass="button_edit" text="Edit" VBox.vgrow="NEVER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
