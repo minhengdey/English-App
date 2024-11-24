@@ -1,5 +1,6 @@
 .root{
     -fx-background-color: #F5EBFF;
+
 }
 .split-pane{
     -fx-background-color: #F5EBFF;
@@ -32,7 +33,7 @@
     -fx-border-width: 2;
     -fx-border-color: #9659D3   ;
 }
-.web-view-vbox{
+.left-vbox{
     -fx-padding: 10px;
     -fx-spacing: 10px;
     -fx-alignment: center;

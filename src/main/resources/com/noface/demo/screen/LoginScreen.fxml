@@ -72,7 +72,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Pane id=".side_login" prefHeight="600.0" prefWidth="454.0" style="-fx-background-color: #9b7ebd;" styleClass="side_signup" stylesheets="@Style.css">
+            <Pane id=".side_login" prefHeight="600.0" prefWidth="454.0" style="-fx-background-color: #9b7ebd;" styleClass="side_signup" stylesheets="@MainScreenStyle.css">
                <children>
                   <ImageView fitHeight="271.0" fitWidth="447.0" layoutX="33.0" layoutY="232.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -6,6 +6,7 @@ module com.noface.demo {
     requires javafx.media;
     requires com.fasterxml.jackson.databind;
     requires org.json;
+    requires org.slf4j;
 
 
     opens com.noface.demo;

@@ -6,132 +6,127 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F5EBFF;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F5EBFF;" stylesheets="@MainScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox style="-fx-background-color: #E5E5FF;">
+        <VBox alignment="CENTER" prefHeight="600.0" prefWidth="217.0" styleClass="side-vbox">
             <children>
-                <AnchorPane id="side_ankerpane" prefHeight="600.0" prefWidth="222.0" styleClass="side_ankerpane" stylesheets="@Style.css">
-                    <children>
-                        <Pane id="inner_pane" layoutX="19.0" layoutY="21.0" prefHeight="60.0" prefWidth="207.0" styleClass="inner_pane" stylesheets="@Style.css" AnchorPane.bottomAnchor="519.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="19.0">
-                            <children>
-                                <Pane id="most_inner_pane" layoutX="117.0" layoutY="6.0" prefHeight="47.0" prefWidth="49.0" styleClass="most_inner_pane">
-                           <children>
-                                        <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="6.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@login_image/menu.png" />
-                                            </image>
-                                        </ImageView>
-                           </children>
-                                </Pane>
-                                <ImageView fitHeight="49.0" fitWidth="50.0" layoutX="24.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <VBox alignment="TOP_CENTER" prefHeight="240.0" prefWidth="140.0" spacing="25.0" styleClass="left-side-vbox" VBox.vgrow="ALWAYS">
+                      <children>
+                  <HBox styleClass="top-bar-hbox">
+                     <children>
+                                <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@login_image/kitty.png" />
                                     </image>
                                 </ImageView>
-                            </children>
-                        </Pane>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="36.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@login_image/keep.png" />
-                            </image>
+                                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="@login_image/menu.png" />
+                                      </image>
+                                  </ImageView>
+                     </children>
+                  </HBox>
+                          <HBox prefHeight="45.0" prefWidth="100.0" styleClass="button-hbox">
+                              <children>
+                                  <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="@login_image/user.png" />
+                                      </image>
+                                  </ImageView>
+                                  <Button id="button_home" fx:id="profileButton" mnemonicParsing="false" styleClass="button_home" text="Profile" textFill="WHITE">
+                                      <font>
+                                          <Font name="Century Gothic Bold" size="15.0" />
+                                      </font>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                      </cursor>
+                                  </Button>
+                              </children>
+                          </HBox>
+                          <HBox prefHeight="46.0" prefWidth="100.0" styleClass="button-hbox">
+                              <children>
+                                  <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="@login_image/to-do-list.png" />
+                                      </image>
+                                  </ImageView>
+                                  <Button id="button_home" fx:id="topicButton" mnemonicParsing="false" styleClass="button_home" text="Topic" textFill="WHITE">
+                                      <font>
+                                          <Font name="Century Gothic Bold" size="14.0" />
+                                      </font>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                      </cursor>
+                                  </Button>
+                              </children>
+                          </HBox>
+                          <HBox prefHeight="43.0" prefWidth="100.0" styleClass="button-hbox">
+                              <children>
+                                  <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="@login_image/grammar.png" />
+                                      </image>
+                                  </ImageView>
+                                  <Button id="button_home" fx:id="translateButton" mnemonicParsing="false" styleClass="button_home" text="Translate" textFill="WHITE">
+                                      <font>
+                                          <Font name="Century Gothic Bold" size="14.0" />
+                                      </font>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                      </cursor>
+                                  </Button>
+                              </children>
+                          </HBox>
+                          <HBox styleClass="button-hbox">
+                              <children>
+                        <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login_image/magnifying-glass.png" />
+                           </image>
                         </ImageView>
-                        <VBox alignment="CENTER" layoutX="53.0" layoutY="121.0" prefHeight="240.0" prefWidth="140.0" spacing="25.0">
-                            <children>
-                                <HBox prefHeight="45.0" prefWidth="100.0">
-                                    <children>
-                                        <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@login_image/user.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Button id="button_home" fx:id="profileButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Profile" textFill="WHITE">
-                                            <font>
-                                                <Font name="Century Gothic Bold" size="15.0" />
-                                            </font>
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="46.0" prefWidth="100.0">
-                                    <children>
-                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@login_image/to-do-list.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Button id="button_home" fx:id="topicButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Topic" textFill="WHITE">
-                                            <font>
-                                                <Font name="Century Gothic Bold" size="14.0" />
-                                            </font>
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="43.0" prefWidth="100.0">
-                                    <children>
-                                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@login_image/grammar.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Button id="button_home" fx:id="translateButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Translate" textFill="WHITE">
-                                            <font>
-                                                <Font name="Century Gothic Bold" size="14.0" />
-                                            </font>
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                              <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@login_image/magnifying-glass.png" />
-                                 </image>
+                                  <Button id="button_home" fx:id="dictionaryButton" mnemonicParsing="false" styleClass="button_home" text="Dictionary" textFill="WHITE">
+                                      <font>
+                                          <Font name="Century Gothic Bold" size="14.0" />
+                                      </font>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                      </cursor>
+                                  </Button>
+                              </children>
+                          </HBox>
+                  <HBox styleClass="button-hbox">
+                     <children>
+                        <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login_image/log-out.png" />
+                           </image>
+                        </ImageView>
+                        <Button id="button_home" fx:id="logoutButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
+                           <font>
+                              <Font name="Century Gothic Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="89.0" styleClass="keep-learning-image">
+                     <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@login_image/keep.png" />
+                                  </image>
                               </ImageView>
-                                        <Button id="button_home" fx:id="dictionaryButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Dictionary" textFill="WHITE">
-                                            <font>
-                                                <Font name="Century Gothic Bold" size="14.0" />
-                                            </font>
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
-                                    </children>
-                                </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ImageView fitHeight="33.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@login_image/log-out.png" />
-                                 </image>
-                              </ImageView>
-                              <Button id="button_home" fx:id="logoutButton" minWidth="0.0" mnemonicParsing="false" prefHeight="28.0" styleClass="button_home" text="Logout" textFill="WHITE">
-                                 <font>
-                                    <Font name="Century Gothic Bold" size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
-                           </children>
-                        </HBox>
-                            </children>
-                        </VBox>
-                    </children>
-                </AnchorPane>
+                     </children>
+                  </VBox>
+                      </children>
+                  </VBox>
             </children>
         </VBox>
-      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #E5E5FF;" HBox.hgrow="ALWAYS" />
+      <AnchorPane fx:id="rightPane" prefHeight="600.0" prefWidth="500.0" HBox.hgrow="ALWAYS" />
     </children>
 </HBox>

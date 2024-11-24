@@ -46,7 +46,6 @@ public class ListTopicScreen {
         topicTitles.bind(controller.topicTitlesProperty());
         this.topicScreenController = controller;
         configureScreenComponent(controller);
-        controller.refreshListTopicTitlesList();
     }
     public void configureScreenComponent(TopicScreenController controller){
         addTopicButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,7 +73,7 @@ public class ListTopicScreen {
     private void handleAddTopicButtonClicked(ActionEvent actionEvent, TopicScreenController controller) throws IOException {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        Card newCard = new Card(0, "new name", "new name", "new name", "new name", LocalDateTime.now().toString());
+        Card newCard = new Card(0, "Card #1", "This is front content", "This is back content", "Default", LocalDateTime.now().toString());
         CardEditingScreen screen = new CardEditingScreen();
         screen.connect(newCard);
         VBox root = screen.getRoot();
@@ -88,6 +87,7 @@ public class ListTopicScreen {
                 stage.close();
             }
         });
+
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

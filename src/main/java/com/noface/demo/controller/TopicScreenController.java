@@ -28,16 +28,6 @@ public class TopicScreenController {
 
         topicScreen = new ListTopicScreen(this);
         cardScreen = new CardTopicScreen(this);
-        topic.addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                handleTopicChange(observable, oldValue, newValue);
-            }
-        });
-
-    }
-    public void handleTopicChange(ObservableValue<? extends String> observable, String oldValue, String newValue){
-        // SU DUNG DE LAY DATA TU DATABASE VOI TOPIC TITLES CHO TRUOC
 
     }
 
@@ -77,11 +67,7 @@ public class TopicScreenController {
         return cards;
     }
 
-    public void saveDataToDatabase() {
-        // METHOD DUOC SU DUNG DE LUU ListProperty<Card> VAO DATABASE
-    }
     public void removeCardFromDatabase(Card card){
-        System.out.println(card);
         ResourceLoader.getInstance().getCardCRUD().deleteCard(card);
     }
     public int addCardToDatabase(Card card){

@@ -1,12 +1,13 @@
 .root{
     -fx-background-color: #E5E5FF;
-
+    -fx-padding: 60;
 }
 .vbox{
     -fx-spacing: 20px;
 }
 .hbox{
     -fx-spacing: 50px;
+    -fx-padding: 0;
 }
 .text-area{
     -fx-font-size: 16;

@@ -36,14 +36,14 @@ public class CardEditingScreen {
     private TextField cardTopicTextField;
     public CardEditingScreen(Card card) throws IOException {
 
-        loader = new FXMLLoader(this.getClass().getResource("CardEditingUI.fxml"));
+        loader = new FXMLLoader(this.getClass().getResource("CardEditingScreen.fxml"));
         loader.setController(this);
         loader.load();
         connect(card);
     }
     public CardEditingScreen() throws IOException {
         System.out.println("Here");
-        loader = new FXMLLoader(this.getClass().getResource("CardEditingUI.fxml"));
+        loader = new FXMLLoader(this.getClass().getResource("CardEditingScreen.fxml"));
         loader.setController(this);
         loader.load();
     }
@@ -56,8 +56,8 @@ public class CardEditingScreen {
 
     @FXML
     void initialize() {
-        assert cardSideChoiceBox != null : "fx:id=\"cardSideChoiceBox\" was not injected: check your FXML file 'CardEditingUI.fxml'.";
-        assert contentEditor != null : "fx:id=\"contentEditor\" was not injected: check your FXML file 'CardEditingUI.fxml'.";
+        assert cardSideChoiceBox != null : "fx:id=\"cardSideChoiceBox\" was not injected: check your FXML file 'CardEditingScreen.fxml'.";
+        assert contentEditor != null : "fx:id=\"contentEditor\" was not injected: check your FXML file 'CardEditingScreen.fxml'.";
         initScreenComponent();
     }
     public void initScreenComponent(){

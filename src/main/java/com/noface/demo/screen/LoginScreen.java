@@ -89,6 +89,7 @@ public class LoginScreen {
         try {
 
             Stage stage = (Stage) ((Node) this.getRoot()).getScene().getWindow();
+            stage.setResizable(true);
             stage.setTitle("Trang chủ");
             mainScreen.changeToListTopicPane();
             mainScreen.setLoginScreen(this);
@@ -116,7 +117,6 @@ public class LoginScreen {
             stage.setX((screenWidth - stage.getWidth()) / 2);
             stage.setY((screenHeight - stage.getHeight()) / 2);
 
-            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

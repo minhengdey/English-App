@@ -1,15 +1,13 @@
 package com.noface.demo;
 
-import com.noface.demo.controller.LoginScreenController;
-import com.noface.demo.controller.MainController;
+import com.noface.demo.controller.*;
 
-import com.noface.demo.controller.TopicScreenController;
-import com.noface.demo.controller.UserEditScreenController;
 import com.noface.demo.model.UserCRUD;
 import com.noface.demo.screen.DictionaryScreen;
 import com.noface.demo.screen.MainScreen;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -23,23 +21,16 @@ public class FXMain extends Application{
         // context = new SpringApplicationBuilder(SpringMain.class).run();
     }
     public void start(Stage stage) throws Exception {
-        stage.resizableProperty().set(false);
-//        testMainScreen(stage);
+//        stage.resizableProperty().set(false);
         testLogin(stage);
-//        testEditProfile(stage);
-//        testListTopicScreen(stage);
-//        testTranslateMainScreen(stage);
-//        testDictionaryScreen(stage);
-//        testRandom();
+//        testGame(stage);
     }
-    public void testRandom() throws IOException {
-        LoginScreenController controller = new LoginScreenController();
-        controller.setUsername("hiepbonls");
-        controller.setPassword("Hh852124");
-        controller.handleLogin();
-
-        UserCRUD userCRUD = new UserCRUD();
-        userCRUD.getUserInfo();
+    public void testRandom(Stage stage) throws IOException {
+        WordCombineGameController controller = new WordCombineGameController();
+        Parent root = controller.getScreen().getRoot();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

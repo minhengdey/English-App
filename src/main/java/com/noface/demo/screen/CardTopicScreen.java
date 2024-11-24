@@ -113,7 +113,6 @@ public class CardTopicScreen {
             public void handle(ActionEvent event) {
                 handleBackButtonClicked(event, topicScreenController);
                 topicScreenController.refreshListTopicTitlesList();
-                topicScreenController.saveDataToDatabase();
             }
         });
 

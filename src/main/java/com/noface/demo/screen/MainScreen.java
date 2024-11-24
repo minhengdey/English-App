@@ -46,6 +46,13 @@ public class MainScreen {
         this.translatePane = translatePane;
         this.profilePane = profilePane;
 
+        setAnchor(listTopicPane);
+        setAnchor(cardLearningPane);
+        setAnchor(cardTopicPane);
+        setAnchor(translatePane);
+        setAnchor(profilePane);
+        setAnchor(dictionaryPane);
+
         loader = new FXMLLoader(this.getClass().getResource("MainScreen.fxml"));
         loader.setController(this);
         loader.load();
@@ -159,8 +166,15 @@ public class MainScreen {
     }
     public void changeToProfilePane(){
         mainController.getProfileScreenController().refreshUserInfo();
+
         rightPane.getChildren().clear();
         rightPane.getChildren().add(profilePane);
+    }
+    public void setAnchor(Pane pane){
+        AnchorPane.setTopAnchor(pane, 0.0);
+        AnchorPane.setRightAnchor(pane, 0.0);
+        AnchorPane.setLeftAnchor(pane, 0.0);
+        AnchorPane.setBottomAnchor(pane, 0.0);
     }
 
     public void changeToLoginScreen()
