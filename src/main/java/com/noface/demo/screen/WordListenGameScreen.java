@@ -156,8 +156,10 @@ public class WordListenGameScreen {
 
     @FXML
     private void displayAnswer(ActionEvent event) {
-        String ans = "Đáp án: \n" + currentWord + "\n" + words.get(currentWord);
-        outputTextArea.setText(ans);
+        if(currentWord != null){
+            String ans = "Đáp án: \n" + currentWord + "\n" + words.get(currentWord);
+            outputTextArea.setText(ans);
+        }
     }
     private String sendApiRequestToDicToGetFirstAudio(String text) throws Exception {
         String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";

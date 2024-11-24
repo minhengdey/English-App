@@ -2,41 +2,93 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="754.0" stylesheets="@WordListenGameScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <VBox layoutX="127.0" layoutY="49.0" styleClass="root-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.36947791164658633" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                <items>
                   <VBox styleClass="small-vbox">
                      <children>
-                        <HBox>
+                        <HBox alignment="TOP_CENTER" styleClass="hbox-2">
                            <children>
-                                <ComboBox fx:id="topicBox" prefWidth="150.0" />
-                              <Region prefHeight="0.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                <Button fx:id="pronunciation" mnemonicParsing="false" onAction="#pronunciationButtonClick" prefHeight="25.0" prefWidth="103.0" text="Phát âm" />
+                                <ComboBox fx:id="topicBox" prefHeight="47.0" prefWidth="104.0" />
+                              <StackPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Label prefHeight="17.0" prefWidth="335.0" styleClass="game-title" text="Hear and Guess" />
+                                 </children>
+                              </StackPane>
+                              <Label prefHeight="45.0" prefWidth="139.0" styleClass="status-label" text="Input " textAlignment="CENTER" />
                            </children>
                         </HBox>
-                          <TextArea fx:id="inputTextArea" prefHeight="66.0" prefWidth="654.0" styleClass="text-area" wrapText="true" VBox.vgrow="ALWAYS" />
+                          <TextArea fx:id="inputTextArea" prefHeight="187.0" prefWidth="652.0" styleClass="input-text-area" wrapText="true" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox styleClass="small-vbox">
                      <children>
-                        <HBox styleClass="mid-bottom-bar">
+                        <HBox styleClass="mid-bottom-bar" />
+                        <HBox VBox.vgrow="ALWAYS">
                            <children>
-                                <Button fx:id="displayAnswer" mnemonicParsing="false" onAction="#displayAnswer" text="Hiển thị đáp án" />
-                                <Button fx:id="checkAns" mnemonicParsing="false" onAction="#checkSpeakAndWriteButtonClick" text="Kiểm tra" />
-                                <Button fx:id="nextWord" mnemonicParsing="false" onAction="#clearForNextWord" text="Từ tiếp theo" />
+                              <VBox prefHeight="248.0" prefWidth="0.0" styleClass="button-vbox">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="72.0" styleClass="result-label" text="Result:" />
+                                      <Button fx:id="pronunciation" alignment="CENTER" mnemonicParsing="false" onAction="#pronunciationButtonClick" prefHeight="25.0" prefWidth="103.0">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/volume.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="checkAns" mnemonicParsing="false" onAction="#checkSpeakAndWriteButtonClick">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/check.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="displayAnswer" mnemonicParsing="false" onAction="#displayAnswer">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/show.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="nextWord" mnemonicParsing="false" onAction="#clearForNextWord">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/next.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                      <TextArea fx:id="outputTextArea" editable="false" prefHeight="134.0" prefWidth="500.0" styleClass="result-text-area" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
-                          <TextArea fx:id="outputTextArea" editable="false" prefHeight="134.0" prefWidth="500.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </items>

@@ -6,25 +6,37 @@
 }
 
 .button{
+    -fx-font-size: 0px;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-min-width: 50;
     -fx-wrap-text: true;
-    -fx-text-fill: #F5EBFF;
+    -fx-text-fill: transparent;
     -fx-background-radius: 20;
-    -fx-background-color: #9659D3;
+    -fx-background-color: #E5E5FF;
+    -fx-border-color: #9659D3;
+    -fx-border-radius: 20;
+    -fx-border-width: 2px;
     -fx-font-weight: bold;
 }
 .button:hover{
-    -fx-text-fill: white;
-    -fx-background-color: #561696;
-    -fx-font-weight: bold;
+    -fx-background-color: #E1CDF4;
 }
 .button:pressed{
-    -fx-background-color: #1F003D;
-    -fx-text-fill: #F5EBFF;
+    -fx-background-color: #C198EA;
 }
 
 .mid-bottom-bar{
     -fx-alignment: center;
     -fx-spacing: 20px
+}
+.hbox-1{
+    -fx-spacing: 20px;
+}
+.hbox-2{
+    -fx-alignment: center;
 }
 
 
@@ -61,7 +73,7 @@
 }
 
 .small-vbox{
-    -fx-spacing: 10;
+    -fx-spacing: 5;
     -fx-alignment: center top;
 }
 
@@ -94,7 +106,14 @@
     -fx-border-radius: 30;
     -fx-border-color: #C198EA;
     -fx-background-color: white;
-
+}
+.input-text-area{
+    -fx-border-color: #40406D;
+    -fx-border-width: 2px;
+}
+.result-text-area{
+    -fx-border-color: #EB5B00;
+    -fx-border-width: 2px;
 }
 .text-area .content {
     -fx-padding: 10px;
@@ -118,4 +137,39 @@
 .text-area:focused {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+}
+.button-vbox{
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 0 10 0 10;
+}
+
+.status-label{
+    -fx-wrap-text: false;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-padding:  10 10 10 10;
+    -fx-text-alignment: center;
+    -fx-spacing: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+    -fx-border-radius: 15;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.game-title{
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}
+.result-label{
+    -fx-text-fill: #1F003D;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-padding: 20 0 20 0;
 }
