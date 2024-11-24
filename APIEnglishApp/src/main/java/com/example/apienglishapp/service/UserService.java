@@ -38,7 +38,6 @@ public class UserService {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
-
         UserEntity userEntity = userMapper.toUserEntity(request);
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         HashSet<String> roles = new HashSet<>();

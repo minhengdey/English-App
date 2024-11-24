@@ -28,7 +28,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
     private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/auth/logout", "/refresh", "/introspect", "/new_word", "/new_word/**"};
     private final String[] PUBLIC_ENDPOINTS_GET = {"/vietnamese_to_english", "/vietnamese_to_english/**",
-            "/english_to_vietnamese", "/english_to_vietnamese/**", "/auth/google-login"};
+            "/english_to_vietnamese", "/english_to_vietnamese/**", "/auth/google-login", "/auth/success"};
 
     @Autowired
     private CustomJwtDeocder customJwtDeocder;
@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         ).oauth2Login(oauth2 -> oauth2 // Kích hoạt OAuth2 login
                 .loginPage("/oauth2/authorization/google")
-                .defaultSuccessUrl("/auth/google_facebook-login", true));
+                .defaultSuccessUrl("/auth/google-login", true));
         http.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer ->
                         jwtConfigurer.decoder(customJwtDeocder)

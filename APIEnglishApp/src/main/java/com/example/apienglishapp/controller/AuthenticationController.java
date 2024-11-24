@@ -9,7 +9,9 @@ import com.example.apienglishapp.service.AuthenticationService;
 import com.example.apienglishapp.service.SendEmailService;
 import com.nimbusds.jose.JOSEException;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -19,7 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class AuthenticationController {
@@ -57,14 +62,14 @@ public class AuthenticationController {
                 .build();
     }
 
-    @GetMapping (value = "/auth/google_facebook-login")
-    public ApiResponse<AuthenticationResponse> googleLogin() {
+    @GetMapping (value = "/auth/google-login")
+    public void googleLogin(HttpServletResponse response) throws IOException {
         OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken)
                 SecurityContextHolder.getContext().getAuthentication();
         OAuth2User user = authentication.getPrincipal();
-        return ApiResponse.<AuthenticationResponse>builder()
-                .result(authenticationService.createAndLoginGoogle(user))
-                .build();
+        AuthenticationResponse authenticationResponse = authenticationService.createAndLoginGoogle(user);
+        String redirectUrl = "http://localhost:8080/token=" + authenticationResponse.getToken();
+        response.sendRedirect(redirectUrl);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

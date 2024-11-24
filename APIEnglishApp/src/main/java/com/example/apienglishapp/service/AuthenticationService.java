@@ -128,7 +128,7 @@ public class AuthenticationService {
             UserEntity userEntity = userRepository.save(UserEntity
                     .builder()
                     .email(email)
-                    .name(user.getAttribute("name"))
+                    .username(user.getAttribute("name"))
                     .roles(roles)
                     .build());
             String token = generateToken(userEntity);

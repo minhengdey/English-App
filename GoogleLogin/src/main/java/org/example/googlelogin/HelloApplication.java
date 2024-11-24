@@ -21,6 +21,11 @@ public class HelloApplication extends Application {
 
         // Xử lý sự kiện khi URL thay đổi
         webEngine.locationProperty().addListener((obs, oldUrl, newUrl) -> {
+            if (newUrl.startsWith("http://localhost:8080/token=")) {
+                String token = newUrl.substring("http://localhost:8080/token=".length());
+                System.out.println(token);
+                primaryStage.close();
+            }
             if (newUrl.contains("login/oauth2/code/google")) {
                 // Xử lý mã Authorization Code nếu cần thiết
                 System.out.println("Redirected back to: " + newUrl);
@@ -35,6 +40,7 @@ public class HelloApplication extends Application {
         primaryStage.setTitle("Google Login");
         primaryStage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);
