@@ -59,14 +59,6 @@ public class DictionaryScreen {
         wordSuggestionsViet.bind(controller.wordSuggestionsVietProperty());
         this.controller = controller;
         Parent root = loader.getRoot();
-        root.parentProperty().addListener(new ChangeListener<Parent>() {
-            @Override
-            public void changed(ObservableValue<? extends Parent> observableValue, Parent parent, Parent t1) {
-                if(t1 != null) {
-                    controller.refresh();
-                }
-            }
-        });
     }
 
     public <T> T getRoot() {

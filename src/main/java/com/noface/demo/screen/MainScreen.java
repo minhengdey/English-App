@@ -30,14 +30,17 @@ public class MainScreen {
     private MainController mainController;
     private Stage stage;
 
-    private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane, profilePane, dictionaryPane;
+    private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane,
+            profilePane, dictionaryPane, wordCombinGamePane, wordListenGamePane,
+            gameScreenPane;
     private LoginScreen loginScreen;
 
 
 
     public MainScreen(MainController mainController, Pane listTopicPane,
                       Pane cardTopicPane, Pane cardLearningPane, Pane translatePane,
-                      Pane profilePane, Pane dictionaryPane) throws IOException {
+                      Pane profilePane, Pane dictionaryPane, Pane wordCombineGamePane,
+                      Pane wordListenGamePane, Pane gameScreenPane) throws IOException {
         this.mainController = mainController;
         this.dictionaryPane = dictionaryPane;
         this.listTopicPane = listTopicPane;
@@ -45,6 +48,10 @@ public class MainScreen {
         this.cardLearningPane = cardLearningPane;
         this.translatePane = translatePane;
         this.profilePane = profilePane;
+        this.wordCombinGamePane = wordCombineGamePane;
+        this.wordListenGamePane = wordListenGamePane;
+        this.gameScreenPane = gameScreenPane;
+
 
         setAnchor(listTopicPane);
         setAnchor(cardLearningPane);
@@ -52,6 +59,11 @@ public class MainScreen {
         setAnchor(translatePane);
         setAnchor(profilePane);
         setAnchor(dictionaryPane);
+        setAnchor(wordCombinGamePane);
+        setAnchor(wordListenGamePane);
+        setAnchor(gameScreenPane);
+
+        mainController.getDictionaryScreenController().refresh();
 
         loader = new FXMLLoader(this.getClass().getResource("MainScreen.fxml"));
         loader.setController(this);
@@ -78,6 +90,9 @@ public class MainScreen {
 
     @FXML
     private Button translateButton;
+
+    @FXML
+    private Button gameButton;
     @FXML
     public void initialize() throws IOException {
         configureScreenComponentEvent();
@@ -89,6 +104,16 @@ public class MainScreen {
         profileButton.setOnAction(profileButtonClickedEventHandler());
         logoutButton.setOnAction(logoutButtonClickedEventHandler());
         dictionaryButton.setOnAction(dictionaryButtonClickedEventHandler());
+        gameButton.setOnAction(gameButtonClickedEventHandler());
+    }
+
+    private EventHandler<ActionEvent> gameButtonClickedEventHandler() {
+        return new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                changeToGameScreen();
+            }
+        };
     }
 
     private EventHandler<ActionEvent> dictionaryButtonClickedEventHandler() {
@@ -98,6 +123,11 @@ public class MainScreen {
                 changeToDictionaryScreen();
             }
         };
+    }
+
+    private void changeToGameScreen() {
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(gameScreenPane);
     }
 
     private void changeToDictionaryScreen() {
@@ -175,6 +205,16 @@ public class MainScreen {
         AnchorPane.setRightAnchor(pane, 0.0);
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setBottomAnchor(pane, 0.0);
+    }
+
+    public void changeToListenGamePane(){
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(wordListenGamePane);
+    }
+
+    public void changeToWordGamePane(){
+        rightPane.getChildren().clear();
+        rightPane.getChildren().add(wordCombinGamePane);
     }
 
     public void changeToLoginScreen()

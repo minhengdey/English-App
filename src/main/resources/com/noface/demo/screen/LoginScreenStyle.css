@@ -67,8 +67,6 @@
 .google-login-bar .label{
     -fx-font-size: 15px;
     -fx-alignment: center;
-    -fx-min-width: -fx-pref-width;
-    -fx-min-height: -fx-pref-height;
 }
 .google-login-bar .button{
     -fx-background-color: transparent;

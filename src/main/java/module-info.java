@@ -13,4 +13,5 @@ module com.noface.demo {
     opens com.noface.demo.model;
     opens com.noface.demo.controller;
     opens com.noface.demo.screen;
+    opens com.noface.demo.topic;
 }
