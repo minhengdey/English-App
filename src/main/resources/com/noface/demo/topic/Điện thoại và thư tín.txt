@@ -1,0 +1,9 @@
+answer;/'ɑ:nsə/;trả lời
+call;/kɔ:l/;gọi điện thoại
+communicate;/kə'mju:nikeit/;giao tiếp
+contact;/kɔntækt/;liên hệ
+message;/'mesidʤ/;tin nhắn
+receive;/ri'si:v/nhận được
+send;/send/;gửi
+stamp;/stæmp/;tem
+text;/tekst/;nhắn tin

@@ -1,0 +1,25 @@
+dog;/dɔg/;con chó
+cat;/kæt/;con mèo
+goldfish;/'gouldfiʃ/;cá vàng
+hamster;/'hæmstə/;chuột Hamster
+kitten;/'kitn/;mèo con
+parrot;/'pærət/;con vẹt
+puppy;/'pʌpi/;chó con, cún con
+rabbit;/'ræbit/;con thỏ
+squirrel;/'skwirəl/;con sóc
+turtle;/'tə:tl/;rùa
+cow;/kau/;con bò
+bee;/bi:/;con ong
+chicken;/'tʃikin/;con gà
+crab;/kræb/;cua
+deer;/diə/;con nai
+dove;/dʌv/;chim bồ câu
+duck;/dʌk/;con vịt
+fish;/fiʃ/;cá
+goat;/gout/;con dê
+horse;/hɔ:s/;con ngựa
+pig;/pig/;con lợn
+rabbit;/'ræbit/;con thỏ
+sheep;/ʃi:p/;cừu
+shrimp;/ʃrimp/;con tôm
+turkey;/'tə:ki/;gà tây

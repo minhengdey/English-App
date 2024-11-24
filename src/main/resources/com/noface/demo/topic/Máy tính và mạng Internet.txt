@@ -1,0 +1,24 @@
+access;/'ækses/;sự truy cập
+application;/,æpli'keiʃn/;ứng dụng trên điện thoại di động, máy tính bảng
+browser;/ˈbraʊzər/;trình duyệt
+click;/klik/;nhấp chuột
+computer;/kəm'pju:tə/;máy tính để bàn
+connection;/kə'nekʃn/;kết nối
+data;/'deitə/;dữ liệu
+delete;/di'li:t/;xóa bỏ
+download;/ˈdaʊnˌloʊd/;tải về, tải xuống
+email;/i-meɪl/;thư điện tử
+error;/'erə/;lỗi
+file;/fail/;tập tin
+folder;/'fouldə/;thư mục
+hardware;/'hɑ:dweə/;phần cứng
+internet;/ˈɪntərˌnɛt/;mạng internet
+keyboard;/'ki:bɔ:d/;bàn phím máy tính
+link;/liɳk/;đường dẫn
+program;/program/;chương trình máy tính
+software;/ˈsɔfˌtwɛr/;phần mềm
+speaker;/'spi:kə/;loa
+surf;/sə:f/;lướt web
+system;/'sistim/;hệ thống
+virus;/'vaiərəs/;vi rút
+wireless;/'wai lis/;không dây

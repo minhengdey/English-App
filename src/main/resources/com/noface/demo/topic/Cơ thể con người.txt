@@ -1,0 +1,30 @@
+arm;/ɑ:m/;cánh tay
+back;/bæk/;lưng
+belly;/'beli/;bụng
+blood;/blʌd/;máu
+body;/'bɔdi/;cơ thể
+bone;/boun/;xương
+bottom;/'bɔtəm/;mông
+brain;/brein/;não
+chest;/tʃest/;ngực, lồng ngực
+ear;/iə/;tai
+eye;/ai/;mắt
+face;/feis/;khuôn mặt
+finger;/'fiɳgə/;ngón tay
+foot;/fut/;bàn chân
+hair;/heə/;tóc
+hand;/hænd/;bàn tay
+head;/hed/;đầu
+heart;/hɑ:t/;trái tim
+hip;/hip/;hông
+leg;/leg/;chân
+lip;/lip/;môi
+mouth;/mauθ - mauð/;miệng
+neck;/nek/;cổ
+nose;/nouz/;mũi
+shoulder;/'ʃouldə/;vai
+skin;/skin/;làn da
+thigh;/θai/;đùi
+toe;/tou/;ngón chân
+tongue;/tʌɳ/;lưỡi
+tooth;/tu:θ/;răng

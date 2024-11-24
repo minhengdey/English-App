@@ -1,0 +1,18 @@
+brave;/breiv/;can đảm, dũng cảm
+cheerful;/'tʃjəful/;sôi nổi, vui tươi
+clever;/'klevə/;thông minh, khôn khéo
+confident;/'kɔnfidənt/;tự tin
+energetic;/,enə'dʤetik/;tràn đầy năng lượng
+friendly;/'frendli/;thân thiện
+funny;/'fʌni/;hài hước, vui tính
+generous;/'dʤenərəs/;hào phóng
+grumpy;/'grʌmpiʃ/;cáu kỉnh, khó chịu
+honest;/'ɔnist/;thật thà, trung thực
+kind;/kaind/;tử tế, tốt bụng
+lazy;/'leizi/;lười biếng
+loyal;/'lɔiəl/;trung thành
+nice;/nais/;tốt
+polite;/pə'lait/;lịch sự, lễ phép
+quiet;/'kwaiət/;im lặng, trầm tính
+selfish;/'selfiʃ/;ích kỷ
+shy;/ʃai/;nhút nhát, rụt rè
