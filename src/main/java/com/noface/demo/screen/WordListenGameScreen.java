@@ -78,8 +78,9 @@ public class WordListenGameScreen {
                 throw new RuntimeException(e);
             }
         });
-        executorService = Executors.newSingleThreadExecutor();
     }
+
+
     private void loadWordsFromSelectedTopic() throws URISyntaxException {
         String selectedTopic = topicBox.getValue();
         if (selectedTopic == null || selectedTopic.isEmpty()) return;

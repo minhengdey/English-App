@@ -79,6 +79,7 @@ public class TopicScreenController {
     public void refreshListTopicTitlesList(){
         topicTitles.clear();
         topicTitles.addAll(ResourceLoader.getInstance().getCardCRUD().getAllTopics());
+        topicScreen.initialize();
     }
     public void loadCardByTopic(String topic){
         this.topic.set(topic);

@@ -90,7 +90,7 @@ public class WordCombineGameScreen {
     }
 
     private void startNextWord() {
-        if (currentWordIndex < 2) {
+        if (currentWordIndex < words.get().size()) {
             letterPanes.clear();
             emptyPanes.clear();
 

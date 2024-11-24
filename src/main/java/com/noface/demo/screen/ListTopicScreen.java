@@ -6,10 +6,12 @@ import com.noface.demo.model.Card;
 import com.noface.demo.model.CardCRUD;
 import com.noface.demo.resource.Utilities;
 import com.noface.demo.screen.component.TopicBar;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -20,15 +22,22 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.stream.Collectors;
+import java.util.TimerTask;
 
 public class ListTopicScreen {
     private  FXMLLoader loader;
@@ -38,6 +47,7 @@ public class ListTopicScreen {
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
+    private PauseTransition pause = new PauseTransition(Duration.millis(300));
 
     public ListTopicScreen(TopicScreenController controller) throws IOException {
         loader = new FXMLLoader(this.getClass().getResource("ListTopicScreen.fxml"));
@@ -47,6 +57,7 @@ public class ListTopicScreen {
         this.topicScreenController = controller;
         configureScreenComponent(controller);
     }
+
     public void configureScreenComponent(TopicScreenController controller){
         addTopicButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -60,15 +71,27 @@ public class ListTopicScreen {
         });
 
 
-        topicTitles.addListener(new ChangeListener<ObservableList<String>>() {
+        filterTopicTitles.addListener(new ChangeListener<ObservableList<String>>() {
             @Override
             public void changed(ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) {
                 addTopicBarToScreen();
             }
         });
 
+        searchButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleSearchButtonClicked();
+            }
+        });
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            pause.setOnFinished(event -> handleSearchButtonClicked());
+            pause.playFromStart();
+        });
     }
+
+
 
     private void handleAddTopicButtonClicked(ActionEvent actionEvent, TopicScreenController controller) throws IOException {
         Stage stage = new Stage();
@@ -123,7 +146,7 @@ public class ListTopicScreen {
 
     public void addTopicBarToScreen(){
         topicBarPane.getChildren().clear();
-        for(String title : topicTitles.get()){
+        for(String title : filterTopicTitles.get()){
             TopicBar topicBar = new TopicBar(title);
             topicBarPane.getChildren().add(topicBar);
             topicBar.setOnEditButtonClicked(editButtonClickedEventHandler(topicBar));
@@ -201,5 +224,26 @@ public class ListTopicScreen {
     @FXML
     public void initialize(){
         topicBarPane.getChildren().clear();
+        searchButton.fire();
+    }
+
+    @FXML
+    private Button searchButton;
+    @FXML
+    private TextField searchField;
+    private ListProperty<String> filterTopicTitles = new SimpleListProperty<>(FXCollections.observableArrayList());
+    private void handleSearchButtonClicked() {
+        System.out.println("Search button clicked");
+        String filter = searchField.getText();
+        if(filter != ""){
+            filter = CardCRUD.normalize_name(filter);
+        }
+        filterTopicTitles.clear();
+        String finalFilter = filter;
+        filterTopicTitles.addAll(topicTitles.get().stream()
+                .filter(word -> word.startsWith(finalFilter))
+                .collect(Collectors.toList()));
+        System.out.println(filterTopicTitles.get());
+
     }
 }

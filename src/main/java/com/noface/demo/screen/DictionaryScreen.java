@@ -225,38 +225,6 @@ public class DictionaryScreen {
             outputWebView.getEngine().loadContent(finalResult);
     }
 
-    private Button getButton(List<String> apiAudio, int i) {
-        String str = apiAudio.get(i);
-        StringBuilder nameButton = new StringBuilder();
-        boolean check = false;
-        for (int j = 0; j < str.length(); j++) {
-            if (str.charAt(j) == '.') {
-                check = false;
-            }
-            if (check) {
-                nameButton.append(str.charAt(j));
-            }
-            if (str.charAt(j) == '-') {
-                check = true;
-            }
-
-        }
-        // Đoạn này thay bằng icon cái loa j đấy đc k nhỉ :>
-        if (nameButton.toString().equals("")) {
-            nameButton.append("Cái này không có từ của nước nào nè");
-        }
-        Button button = new Button(nameButton.toString().toUpperCase());
-        button.setPrefHeight(translateButton.getPrefHeight());
-        button.setPrefWidth(translateButton.getPrefWidth());
-        button.setOnAction(e -> {
-            try {
-                playAudio(apiAudio.get(i));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        return button;
-    }
 
     private void playAudio(String audioUrl) {
         try {
@@ -275,9 +243,4 @@ public class DictionaryScreen {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    private HttpClient httpClient = HttpClient.newHttpClient();
-
-
-
 }

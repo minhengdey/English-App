@@ -18,7 +18,7 @@
                <children>
                   <HBox fx:id="searchHBox" alignment="CENTER" prefHeight="51.0" prefWidth="451.0" spacing="10.0" styleClass="search-hbox">
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="464.0" promptText="Type your topic" styleClass="text-field" />
+                        <TextField fx:id="searchField" prefHeight="25.0" prefWidth="464.0" promptText="Type your topic" styleClass="text-field" />
                         <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="166.0" styleClass="search-button" text="Search" />
                      </children>
                   </HBox>
