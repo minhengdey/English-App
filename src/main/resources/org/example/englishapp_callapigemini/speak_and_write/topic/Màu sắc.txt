@@ -1,0 +1,12 @@
+black;/blæk/;màu đen
+white;/wait/;màu trắng
+red;/red/;màu đỏ
+yellow;/'jelou/;màu vàng
+purple;/'pə:pl/;màu tím
+blue;/blu:/;màu xanh
+green;/gri:n/;màu xanh lá
+brown;/braun/;màu nâu
+gray;/grei/;màu xám
+pink;/piɳk/;màu hồng
+turquoise;/'tə:kwɑ:z/;màu lam
+navy;/'neivi/;xanh da trời đậm

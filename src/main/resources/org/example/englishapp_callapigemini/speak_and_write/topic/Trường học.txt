@@ -1,0 +1,19 @@
+ruler;/'ru:lə/;thước kẻ
+blackboard;/'blækbɔ:k/;bảng đen
+chair;/tʃeə/;ghế
+desk;/desk/;bàn học
+clock;/klɔk/;đồng hồ
+pen;/pen/;cái bút
+pencil;/'pensl/;bút chì
+backpack;/ˈbækˌpæk/;cặp sách
+scissors;/ˈsɪzəz/;kéo
+compass;/'kʌmpəs/;com-pa
+library;/ˈlaɪbrəri/;thư viện
+club;/klʌb/;câu lạc bộ
+subject;/'sʌbdʤikt/;môn học
+english;/'iɳgliʃ/;tiếng Anh
+mathematics;/,mæθi'mætiks/;môn toán
+science;/'saiəns/;môn khoa học
+history;/'histəri/;môn lịch sử
+geography;/dʤi'ɔgrəfi/;môn địa lý
+physics;/'fiziks/;môn vật lý

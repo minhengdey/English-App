@@ -1,0 +1,9 @@
+beer;/bi:n/;bia
+cocoa;/'koukou/;ca cao
+coffee;/'kɔfi/;cà phê
+juice;/dʤu:s/;nước ép
+lemonade;/,lemə'neid/;nước chanh
+milk;/milk/;sữa
+tea;/ti:/;trà
+water;/'wɔ:tə/;nước uống
+wine;/wain/;rượu
