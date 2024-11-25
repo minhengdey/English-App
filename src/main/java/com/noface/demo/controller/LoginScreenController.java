@@ -180,8 +180,8 @@ public class LoginScreenController {
         try
         {
             TextInputDialog emailDialog = new TextInputDialog();
-            emailDialog.setTitle("Quên mật khẩu");
-            emailDialog.setHeaderText("Nhập địa chỉ email của bạn");
+            emailDialog.setTitle("Forgot password");
+            emailDialog.setHeaderText("Enter your email");
             emailDialog.setContentText("Email:");
 
             Optional<String> emailResult = emailDialog.showAndWait();
@@ -191,14 +191,14 @@ public class LoginScreenController {
             String OTP = ResourceLoader.getInstance().userCRUD.getOTP(email);
             if (OTP == null || OTP.startsWith("Failed"))
             {
-                showAlert("Gửi OTP thất bại. Vui lòng thử lại!", Alert.AlertType.ERROR);
+                showAlert("Failed to send OTP. Please try again!", Alert.AlertType.ERROR);
                 return;
             }
             System.out.println (OTP);
 
             TextInputDialog otpDialog = new TextInputDialog();
-            otpDialog.setTitle("Xác thực OTP");
-            otpDialog.setHeaderText("Nhập mã OTP đã được gửi đến email của bạn");
+            otpDialog.setTitle("OTP Verification");
+            otpDialog.setHeaderText("Enter the OTP sent to your email");
             otpDialog.setContentText("OTP:");
 
             Optional<String> otpResult = otpDialog.showAndWait();
@@ -207,25 +207,25 @@ public class LoginScreenController {
             String otp = otpResult.get();
             if (!otp.trim().equals(OTP.trim()))
             {
-                showAlert("OTP không chính xác!", Alert.AlertType.ERROR);
+                showAlert("Incorrect OTP!", Alert.AlertType.ERROR);
                 return;
             }
 
             Dialog<String> passwordDialog = new Dialog<>();
-            passwordDialog.setTitle("Đổi mật khẩu");
-            passwordDialog.setHeaderText("Nhập mật khẩu mới của bạn");
+            passwordDialog.setTitle("Change password");
+            passwordDialog.setHeaderText("Enter your new password");
 
             PasswordField newPasswordField = new PasswordField();
-            newPasswordField.setPromptText("Mật khẩu mới");
+            newPasswordField.setPromptText("New password");
 
             PasswordField confirmPasswordField = new PasswordField();
-            confirmPasswordField.setPromptText("Xác nhận mật khẩu");
+            confirmPasswordField.setPromptText("Confirm new password");
 
             VBox passwordBox = new VBox(10, newPasswordField, confirmPasswordField);
             passwordBox.setPadding(new Insets(10));
             passwordDialog.getDialogPane().setContent(passwordBox);
 
-            ButtonType updateButtonType = new ButtonType("Cập nhật", ButtonBar.ButtonData.OK_DONE);
+            ButtonType updateButtonType = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
             passwordDialog.getDialogPane().getButtonTypes().addAll(updateButtonType, ButtonType.CANCEL);
 
             passwordDialog.setResultConverter(dialogButton ->
@@ -234,12 +234,12 @@ public class LoginScreenController {
                 {
                     if (!newPasswordField.getText().equals(confirmPasswordField.getText()))
                     {
-                        showAlert("Mật khẩu xác nhận không khớp!", Alert.AlertType.ERROR);
+                        showAlert("Confirmation password does not match!", Alert.AlertType.ERROR);
                         return null;
                     }
                     if (newPasswordField.getText().length() < 8)
                     {
-                        showAlert("Mật khẩu phải chứa ít nhất 8 ký tự!", Alert.AlertType.ERROR);
+                        showAlert("Password must contain at least 8 characters!", Alert.AlertType.ERROR);
                         return null;
                     }
                     return newPasswordField.getText();
@@ -253,14 +253,14 @@ public class LoginScreenController {
             String newPassword = passwordResult.get();
             int status = ResourceLoader.getInstance().userCRUD.forgotPassword(email, newPassword);
 
-            if (status == 1) showAlert("Cập nhật mật khẩu thành công!", Alert.AlertType.INFORMATION);
-            else showAlert("Có lỗi xảy ra. Vui lòng thử lại!", Alert.AlertType.ERROR);
+            if (status == 1) showAlert("Password updated successfully!", Alert.AlertType.INFORMATION);
+            else showAlert("An error occurred. Please try again!", Alert.AlertType.ERROR);
 
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            showAlert("Có lỗi xảy ra. Vui lòng thử lại!", Alert.AlertType.ERROR);
+            showAlert("An error occurred. Please try again!", Alert.AlertType.ERROR);
         }
     }
 
