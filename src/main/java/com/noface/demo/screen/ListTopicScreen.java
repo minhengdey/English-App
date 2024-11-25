@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -115,9 +116,6 @@ public class ListTopicScreen {
             @Override
             public void handle(ActionEvent event) {
                 int status = controller.addCardToDatabase(newCard);
-                if(status == CardCRUD.CARD_IS_AVAILABLED){
-                    Utilities.getInstance().showAlert("Card đã tồn tại", Alert.AlertType.WARNING);
-                }
                 if(status == CardCRUD.CARD_ADDED_SUCCESS){
                     controller.refreshListTopicTitlesList();
                     stage.close();
@@ -171,6 +169,7 @@ public class ListTopicScreen {
                     if(status == CardCRUD.TOPIC_RENAME_SUCCESS){
                         dialog.close();
                         topicBar.updateTopicTitle(CardCRUD.normalize_name(name));
+                        topicScreenController.refreshListTopicTitlesList();
                     }else{
                         dialog.showAndWait();
                     }
@@ -240,10 +239,19 @@ public class ListTopicScreen {
         }
         filterTopicTitles.clear();
         String finalFilter = filter;
-        filterTopicTitles.addAll(topicTitles.get().stream()
-                .filter(word -> word.startsWith(finalFilter))
-                .collect(Collectors.toList()));
-        System.out.println(filterTopicTitles.get());
+        filterTopicTitles.addAll(
+                topicTitles.get().stream()
+                        .filter(word -> removeDiacritics(word).startsWith(removeDiacritics(finalFilter)))
+                        .collect(Collectors.toList())
+        );
 
+    }
+
+    public static String removeDiacritics(String input) {
+        if (input == null) return "";
+        return Normalizer.normalize(input, Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .replaceAll("đ", "d")
+                .replaceAll("Đ", "D");
     }
 }

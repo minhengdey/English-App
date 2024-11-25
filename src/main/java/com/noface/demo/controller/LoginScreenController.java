@@ -159,8 +159,7 @@ public class LoginScreenController {
                 Stage stage = (Stage) webView.getScene().getWindow();
                 stage.close();
                 screen.showMainScreen(mainController.getMainScreen());
-//                String htmlContent = (String) webEngine.executeScript("document.body.innerHTML");
-//                System.out.println(htmlContent);
+
             }
         });
 

@@ -38,6 +38,8 @@ public class UserCRUD {
                     userNode.get("email").asText(),
                     userNode.get("phone").asText()
                     );
+
+            System.out.println(userRequest);
             User user = new User(
                userRequest.getUsername(),
                userRequest.getGender(),

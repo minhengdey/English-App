@@ -10,8 +10,6 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -73,7 +71,9 @@ public class TopicScreenController {
     public int addCardToDatabase(Card card){
 
         int status = ResourceLoader.getInstance().getCardCRUD().addCard(card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName());
-        loadCardByTopic(topic.get());
+        if(status == CardCRUD.CARD_ADDED_SUCCESS){
+            refreshCardInTopic(card.getTopic());
+        }
         return status;
     }
     public void refreshListTopicTitlesList(){
@@ -81,7 +81,7 @@ public class TopicScreenController {
         topicTitles.addAll(ResourceLoader.getInstance().getCardCRUD().getAllTopics());
         topicScreen.initialize();
     }
-    public void loadCardByTopic(String topic){
+    public void refreshCardInTopic(String topic){
         this.topic.set(topic);
         cards.clear();
         cards.setAll(ResourceLoader.getInstance().getCardCRUD().getAllCardsByTopic(topic));

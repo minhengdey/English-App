@@ -210,7 +210,7 @@ public class CardTopicScreen {
         if(selectedCard != null){
             cardsTable.getSelectionModel().select(null);
             topicScreenController.removeCardFromDatabase(selectedCard);
-            topicScreenController.loadCardByTopic(topic.get());
+            topicScreenController.refreshCardInTopic(topic.get());
             cardsTable.getSelectionModel().select(cardData.size() - 1);
         }
         return selectedCard;

@@ -1,6 +1,5 @@
 package com.noface.demo.screen;
 
-import com.noface.demo.controller.LoginScreenController;
 import com.noface.demo.controller.MainController;
 import com.noface.demo.resource.TokenManager;
 import javafx.event.ActionEvent;
@@ -185,7 +184,7 @@ public class MainScreen {
         rightPane.getChildren().add(listTopicPane);
     }
     public void changeToCardTopicPane(String topic){
-        mainController.getTopicScreenController().loadCardByTopic(topic);
+        mainController.getTopicScreenController().refreshCardInTopic(topic);
         rightPane.getChildren().clear();
         rightPane.getChildren().add(cardTopicPane);
     }

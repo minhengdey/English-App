@@ -59,7 +59,6 @@ public class WordListenGameScreen {
 
         File folder = null;
         try {
-            assert resourceUrl != null;
             folder = new File(resourceUrl.toURI());
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

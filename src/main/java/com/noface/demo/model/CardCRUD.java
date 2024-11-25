@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import com.noface.demo.resource.TokenManager;
+import com.noface.demo.resource.Utilities;
+import javafx.scene.control.Alert;
 import org.json.*;
 
 public class CardCRUD {
@@ -70,9 +72,10 @@ public class CardCRUD {
                 JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                 int code = jsonNode.get("code").asInt();
                 if (code == 1009) {
+                    Utilities.getInstance().showAlert("Card đã tồn tại, không thể thêm card", Alert.AlertType.WARNING);
                     return CardCRUD.CARD_IS_AVAILABLED;
                 } else {
-                    System.out.println("Có lỗi xảy ra");
+                    Utilities.getInstance().showAlert("Có lỗi xảy ra, không thể thêm card", Alert.AlertType.WARNING);
                     return CardCRUD.ERROR;
                 }
             }
