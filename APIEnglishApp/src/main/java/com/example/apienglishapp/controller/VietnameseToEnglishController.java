@@ -22,10 +22,11 @@ public class VietnameseToEnglishController {
     }
 
     @GetMapping("/byWord/{word}")
-    public List<VietnameseToEnglishEntity> getVietnameseToEnglishByWord (@PathVariable("word") String word) {
+    public List<VietnameseToEnglishEntity> getVietnameseToEnglishByWord(@PathVariable("word") String word) {
+        word = word.replace("+", " ");
         try {
-            String decodedWord = URLDecoder.decode(word, StandardCharsets.UTF_8);
-            return vietnameseToEnglishService.getVietnameseToEnglishByWord(decodedWord);
+            String encodedWord = URLEncoder.encode(word, StandardCharsets.UTF_8);
+            return vietnameseToEnglishService.getVietnameseToEnglishByWord(encodedWord);
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();
