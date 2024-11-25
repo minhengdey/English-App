@@ -1,5 +1,6 @@
 package com.example.apienglishapp.service;
 
+import com.example.apienglishapp.dto.request.ForgotPasswordRequest;
 import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
@@ -50,6 +51,13 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         userMapper.updateUser(userEntity, request);
+        return userMapper.toUserResponse(userRepository.save(userEntity));
+    }
+
+    public UserResponse forgotPassword (ForgotPasswordRequest forgotPassword) {
+        UserEntity userEntity = userRepository.findByEmail(forgotPassword.getEmail())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        userEntity.setPassword(passwordEncoder.encode(forgotPassword.getNewPassword()));
         return userMapper.toUserResponse(userRepository.save(userEntity));
     }
 

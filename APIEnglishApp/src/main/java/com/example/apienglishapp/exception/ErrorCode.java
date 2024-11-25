@@ -17,7 +17,8 @@ public enum ErrorCode {
     UNAUTHENTICATED(1007, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(1008, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_NEW_WORD(1009, "front side and back side must be different", HttpStatus.BAD_REQUEST),
-    NEW_WORD_NOT_FOUND(1010, "new word not found", HttpStatus.NOT_FOUND)
+    NEW_WORD_NOT_FOUND(1010, "new word not found", HttpStatus.NOT_FOUND),
+    INVALID_NAME_NEW_WORD(1011, "invalid new word's name", HttpStatus.BAD_REQUEST)
     ;
     private int code;
     private String message;

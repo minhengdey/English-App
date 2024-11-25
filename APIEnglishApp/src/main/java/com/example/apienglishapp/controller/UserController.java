@@ -1,6 +1,7 @@
 package com.example.apienglishapp.controller;
 
 import com.example.apienglishapp.dto.request.ApiResponse;
+import com.example.apienglishapp.dto.request.ForgotPasswordRequest;
 import com.example.apienglishapp.dto.request.UserCreationRequest;
 import com.example.apienglishapp.dto.request.UserUpdateRequest;
 import com.example.apienglishapp.dto.response.UserResponse;
@@ -75,5 +76,10 @@ public class UserController {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getMyInfo())
                 .build();
+    }
+
+    @PutMapping (value = "/users/forgot_password")
+    public UserResponse forgotPassword (@Valid @RequestBody ForgotPasswordRequest request) {
+        return userService.forgotPassword(request);
     }
 }

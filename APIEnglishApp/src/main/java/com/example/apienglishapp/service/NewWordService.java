@@ -37,6 +37,12 @@ public class NewWordService {
         if (newWordRequest.getFrontSide().equals(newWordRequest.getBackSide())) {
             throw new AppException(ErrorCode.INVALID_NEW_WORD);
         }
+        List<NewWordResponse> newWordsByTopic = getAllByTopicAndUserId(newWordRequest.getTopic(), userId);
+        for (NewWordResponse newWordResponse : newWordsByTopic) {
+            if (newWordResponse.getName().equals(newWordRequest.getName())) {
+                throw new AppException(ErrorCode.INVALID_NAME_NEW_WORD);
+            }
+        }
         return newWordMapper.toNewWordResponse(userRepository.findById(userId)
                 .map(userEntity -> {
                     newWordRequest.setUser(userEntity);

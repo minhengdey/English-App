@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SendOTPRequest {
+public class ForgotPasswordRequest {
     String email;
     String newPassword;
 }

@@ -72,8 +72,7 @@ public class AuthenticationController {
         response.sendRedirect(redirectUrl);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping (value = "/sendOTP")
+    @PostMapping (value = "/sendOTP")
     public String sendOTP (@RequestBody String email) {
         try {
             return sendEmailService.sendOtp(email);

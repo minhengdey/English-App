@@ -26,7 +26,7 @@ import javax.crypto.spec.SecretKeySpec;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/auth/logout", "/refresh", "/introspect", "/new_word", "/new_word/**"};
+    private final String[] PUBLIC_ENDPOINTS = {"/users", "/auth/login", "/auth/logout", "/refresh", "/introspect", "/new_word", "/new_word/**", "/sendOTP"};
     private final String[] PUBLIC_ENDPOINTS_GET = {"/vietnamese_to_english", "/vietnamese_to_english/**",
             "/english_to_vietnamese", "/english_to_vietnamese/**", "/auth/google-login", "/auth/success"};
 
@@ -37,6 +37,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
                 .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS_GET).permitAll()
+                .requestMatchers("/users/forgot_password").permitAll()
                 .anyRequest().authenticated()
         ).oauth2Login(oauth2 -> oauth2 // Kích hoạt OAuth2 login
                 .loginPage("/oauth2/authorization/google")
