@@ -29,6 +29,8 @@ public class LoginScreen {
     @FXML
     private Button loginButton;
     @FXML
+    private Button forgetPasswordButton;
+    @FXML
     private Button signUpButton;
     @FXML
     private Button googleLoginButton;
@@ -70,6 +72,12 @@ public class LoginScreen {
                 controller.handleGoogleLogin();
             }
         });
+        forgetPasswordButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                controller.handleForgetPassword();
+            }
+        });
     }
 
 
@@ -85,7 +93,7 @@ public class LoginScreen {
     public <T> T getRoot(){
         return loader.getRoot();
     }
-    protected void showMainScreen(MainScreen mainScreen) {
+    public void showMainScreen(MainScreen mainScreen) {
         try {
 
             Stage stage = (Stage) ((Node) this.getRoot()).getScene().getWindow();

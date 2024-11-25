@@ -30,6 +30,11 @@
                   <PasswordField id="input_text" fx:id="passwordField" promptText="Password" styleClass="text-field" />
                   <HBox alignment="CENTER_RIGHT" styleClass="bottom-bar">
                      <children>
+                        <Button id="forgetpassword_button" fx:id="forgetPasswordButton" mnemonicParsing="false" styleClass="forgetpassword-button" text="Forgot password?" textOverrun="CLIP">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                         <Region prefHeight="26.0" prefWidth="98.0" HBox.hgrow="ALWAYS" />
                         <Label prefHeight="22.0" prefWidth="76.0" styleClass="new-user-label" text="New user?" />
                         <Button id="login_button" fx:id="signUpButton" mnemonicParsing="false" prefHeight="22.0" prefWidth="97.0" styleClass="signup-button" text="Create account" textOverrun="CENTER_WORD_ELLIPSIS">

@@ -2,16 +2,19 @@ package com.noface.demo.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noface.demo.resource.ResourceLoader;
 import com.noface.demo.screen.LoginScreen;
 import com.noface.demo.resource.TokenManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
@@ -24,6 +27,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LoginScreenController {
     public static final int LOGIN_SUCCESSFUL = 1;
@@ -59,7 +64,7 @@ public class LoginScreenController {
                     "{" +
                             "\"username\":\"%s\"," +
                             "\"password\":\"%s\"" +
-                            "}",
+                    "}",
                     username,
                     password
             );
@@ -142,15 +147,20 @@ public class LoginScreenController {
         WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
 
-
         webEngine.load(GOOGLE_AUTH_URL);
 
 
         webEngine.locationProperty().addListener((obs, oldUrl, newUrl) -> {
-            if (newUrl.contains("http://localhost:8080/auth/google_facebook-login")) {
+            if (newUrl.startsWith("http://localhost:8080/token=")) {
                 System.out.println("Redirected back to: " + newUrl);
-                String htmlContent = (String) webEngine.executeScript("document.body.innerHTML");
-                System.out.println(htmlContent);
+                String token = newUrl.substring("http://localhost:8080/token=".length());
+                System.out.println(token);
+                TokenManager.getInstance().setToken(token);
+                Stage stage = (Stage) webView.getScene().getWindow();
+                stage.close();
+                screen.showMainScreen(mainController.getMainScreen());
+//                String htmlContent = (String) webEngine.executeScript("document.body.innerHTML");
+//                System.out.println(htmlContent);
             }
         });
 
@@ -165,16 +175,101 @@ public class LoginScreenController {
         stage.show();
     }
 
+    public void handleForgetPassword()
+    {
+        try
+        {
+            TextInputDialog emailDialog = new TextInputDialog();
+            emailDialog.setTitle("Quên mật khẩu");
+            emailDialog.setHeaderText("Nhập địa chỉ email của bạn");
+            emailDialog.setContentText("Email:");
+
+            Optional<String> emailResult = emailDialog.showAndWait();
+            if (emailResult.isEmpty()) return;
+
+            String email = emailResult.get().trim();
+            String OTP = ResourceLoader.getInstance().userCRUD.getOTP(email);
+            if (OTP == null || OTP.startsWith("Failed"))
+            {
+                showAlert("Gửi OTP thất bại. Vui lòng thử lại!", Alert.AlertType.ERROR);
+                return;
+            }
+            System.out.println (OTP);
+
+            TextInputDialog otpDialog = new TextInputDialog();
+            otpDialog.setTitle("Xác thực OTP");
+            otpDialog.setHeaderText("Nhập mã OTP đã được gửi đến email của bạn");
+            otpDialog.setContentText("OTP:");
+
+            Optional<String> otpResult = otpDialog.showAndWait();
+            if (otpResult.isEmpty()) return;
+
+            String otp = otpResult.get();
+            if (!otp.trim().equals(OTP.trim()))
+            {
+                showAlert("OTP không chính xác!", Alert.AlertType.ERROR);
+                return;
+            }
+
+            Dialog<String> passwordDialog = new Dialog<>();
+            passwordDialog.setTitle("Đổi mật khẩu");
+            passwordDialog.setHeaderText("Nhập mật khẩu mới của bạn");
+
+            PasswordField newPasswordField = new PasswordField();
+            newPasswordField.setPromptText("Mật khẩu mới");
+
+            PasswordField confirmPasswordField = new PasswordField();
+            confirmPasswordField.setPromptText("Xác nhận mật khẩu");
+
+            VBox passwordBox = new VBox(10, newPasswordField, confirmPasswordField);
+            passwordBox.setPadding(new Insets(10));
+            passwordDialog.getDialogPane().setContent(passwordBox);
+
+            ButtonType updateButtonType = new ButtonType("Cập nhật", ButtonBar.ButtonData.OK_DONE);
+            passwordDialog.getDialogPane().getButtonTypes().addAll(updateButtonType, ButtonType.CANCEL);
+
+            passwordDialog.setResultConverter(dialogButton ->
+            {
+                if (dialogButton == updateButtonType)
+                {
+                    if (!newPasswordField.getText().equals(confirmPasswordField.getText()))
+                    {
+                        showAlert("Mật khẩu xác nhận không khớp!", Alert.AlertType.ERROR);
+                        return null;
+                    }
+                    if (newPasswordField.getText().length() < 8)
+                    {
+                        showAlert("Mật khẩu phải chứa ít nhất 8 ký tự!", Alert.AlertType.ERROR);
+                        return null;
+                    }
+                    return newPasswordField.getText();
+                }
+                return null;
+            });
+
+            Optional<String> passwordResult = passwordDialog.showAndWait();
+            if (passwordResult.isEmpty()) return;
+
+            String newPassword = passwordResult.get();
+            int status = ResourceLoader.getInstance().userCRUD.forgotPassword(email, newPassword);
+
+            if (status == 1) showAlert("Cập nhật mật khẩu thành công!", Alert.AlertType.INFORMATION);
+            else showAlert("Có lỗi xảy ra. Vui lòng thử lại!", Alert.AlertType.ERROR);
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            showAlert("Có lỗi xảy ra. Vui lòng thử lại!", Alert.AlertType.ERROR);
+        }
+    }
+
     private void showAlert(String message, Alert.AlertType alertType)
     {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
     }
-//
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//    }
 
     public void setUsername(String username) {
         this.username.set(username);
@@ -189,5 +284,3 @@ public class LoginScreenController {
     }
 
 }
-
-

@@ -32,15 +32,11 @@
     -fx-font-size: 13px;
 
 }
-.remember-box{
+.forgetpassword-button{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-padding: 1;
     -fx-font-size: 13px;
-}
-.remember-box .box{
-    -fx-border-color: #9659D3;
-    -fx-border-width: 1px;
-    -fx-background-color: #E1CDF4;
-    -fx-pref-height: 13px;
-    -fx-pref-width: 13px;
 }
 .new-user-label{
     -fx-font-size: 15;

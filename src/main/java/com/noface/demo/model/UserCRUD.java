@@ -57,17 +57,34 @@ public class UserCRUD {
         try {
             String token = TokenManager.getInstance().getToken();
             LocalDate date = LocalDate.parse(user.getDob());
-            UserRequest userRequest = new UserRequest(
-                    user.getUsername(),
-                    user.getName(),
-                    (date.getDayOfMonth()),
-                    (date.getMonth().getValue()),
-                    (date.getYear()),
-                    user.getGender(),
-                    user.getEmail(),
-                    user.getPhone(),
-                    password
-            );
+            UserRequest userRequest;
+            if (password != null)
+            {
+                userRequest = new UserRequest(
+                        user.getUsername(),
+                        password,
+                        user.getName(),
+                        (date.getDayOfMonth()),
+                        (date.getMonth().getValue()),
+                        (date.getYear()),
+                        user.getGender(),
+                        user.getEmail(),
+                        user.getPhone()
+                );
+            }
+            else
+            {
+                userRequest = new UserRequest(
+                        user.getUsername(),
+                        user.getName(),
+                        (date.getDayOfMonth()),
+                        (date.getMonth().getValue()),
+                        (date.getYear()),
+                        user.getGender(),
+                        user.getEmail(),
+                        user.getPhone()
+                );
+            }
 
             String requestBody = objectMapper.writeValueAsString(userRequest);
             HttpRequest request = HttpRequest.newBuilder()
@@ -89,6 +106,54 @@ public class UserCRUD {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String getOTP(String email)
+    {
+        try
+        {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "sendOTP"))
+                    .header("Content-Type", "text/plain")
+                    .POST(HttpRequest.BodyPublishers.ofString(email))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) return response.body();
+            else return null;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public int forgotPassword(String email, String newPassword)
+    {
+        try
+        {
+            String requestBody = String.format (
+                    "{" +
+                            "\"email\":\"%s\"," +
+                            "\"newPassword\":\"%s\"" +
+                    "}",
+                    email,
+                    newPassword
+            );
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiUri + "users/forgot_password"))
+                    .header("Content-Type", "application/json")
+                    .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) return USER_EDITED_SUCCESSFUL;
+            return ERROR;
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
     }

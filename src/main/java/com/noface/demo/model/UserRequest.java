@@ -12,6 +12,7 @@ public class UserRequest {
     private IntegerProperty day, month, year;
     public UserRequest(){
         username = new SimpleStringProperty();
+        password = new SimpleStringProperty();
         name = new SimpleStringProperty();
         day = new SimpleIntegerProperty();
         month = new SimpleIntegerProperty();
@@ -19,11 +20,10 @@ public class UserRequest {
         gender = new SimpleStringProperty();
         email = new SimpleStringProperty();
         phone = new SimpleStringProperty();
-        password = new SimpleStringProperty();
     }
 
 
-    public UserRequest(String username,  String name, int day, int month, int year, String gender, String email, String phone, String password) {
+    public UserRequest(String username, String password, String name, int day, int month, int year, String gender, String email, String phone) {
         this();
         this.username.set(username);
         this.name.set(name);
@@ -64,20 +64,20 @@ public class UserRequest {
         return username;
     }
 
-    public String getName() {
-        return name.get();
-    }
-
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public String getPassword() {
         return password.get();
     }
 
     public StringProperty passwordProperty() {
         return password;
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
+        return name;
     }
 
     public int getDay() {
