@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface VietnameseToEnglishRepository extends JpaRepository <VietnameseToEnglishEntity, String> {
-    @Query(value = "SELECT * FROM va WHERE BINARY word = :word", nativeQuery = true)
-    List<VietnameseToEnglishEntity> findByWord(String word);
+    @Query("SELECT e FROM VietnameseToEnglishEntity e")
+    List<VietnameseToEnglishEntity> findAllWords();
 }
