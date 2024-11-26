@@ -129,6 +129,11 @@ public class AuthenticationService {
                     .builder()
                     .email(email)
                     .username(user.getAttribute("name"))
+                    .day(1)
+                    .month(1)
+                    .year(1)
+                    .password("12345678")
+                    .phone(user.getAttribute("phone"))
                     .roles(roles)
                     .build());
             String token = generateToken(userEntity);

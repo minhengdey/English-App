@@ -36,7 +36,8 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
     public UserResponse createUser (UserCreationRequest request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
+        if (userRepository.existsByUsername(request.getUsername()) ||
+                userRepository.existsByEmail(request.getEmail())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
         UserEntity userEntity = userMapper.toUserEntity(request);

@@ -1,5 +1,8 @@
 package com.example.apienglishapp.service;
 
+import com.example.apienglishapp.exception.AppException;
+import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,13 @@ import java.util.Random;
 public class SendEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private UserRepository userRepository;
 
     public String sendOtp(String toEmail) throws MessagingException {
+        if (!userRepository.existsByEmail(toEmail)) {
+            throw new AppException(ErrorCode.USER_NOT_FOUND);
+        }
         String otp = generateOtp();
 
         MimeMessage message =javaMailSender.createMimeMessage();
