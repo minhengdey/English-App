@@ -62,7 +62,6 @@ public class MainScreen {
         setAnchor(wordListenGamePane);
         setAnchor(gameScreenPane);
 
-        mainController.getDictionaryScreenController().refresh();
 
         loader = new FXMLLoader(this.getClass().getResource("MainScreen.fxml"));
         loader.setController(this);

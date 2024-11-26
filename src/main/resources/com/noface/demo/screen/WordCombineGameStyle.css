@@ -1,12 +1,13 @@
 .root-vbox{
-    -fx-padding: 50;
+    -fx-padding: 10 50 10 50;
     -fx-background-color: #F5EBFF;
-    -fx-alignment: center;
+    -fx-spacing: 5px;
+    -fx-alignment: top center;
 }
 .empty-letter-pane{
     -fx-font-size: 20px;
-    -fx-pref-height: 60px;
-    -fx-pref-width: 50px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
     -fx-background-color: white;
     -fx-border-width: 2px;
     -fx-border-color: #9659D3;
@@ -57,3 +58,39 @@
     -fx-border-color: 20px;
     -fx-pref-height: 5px;
 }
+
+.vbox-web-view{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.vbox-web-view .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.vbox-web-view .scroll-bar:horizontal {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.web-view-hbox{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+

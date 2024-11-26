@@ -55,61 +55,34 @@ public class WordListenGameScreen {
         words = new HashMap<>();
         keys = new ArrayList<>();
 
-        URL resourceUrl = FXMain.class.getResource("topic");
-
-        File folder = null;
-        try {
-            folder = new File(resourceUrl.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        File[] files = folder.listFiles((dir, name) -> name.endsWith(".txt"));
+        File[] files = controller.getTopics();
 
         assert files != null;
+        topicBox.getItems().clear();
         for (File file : files) {
             topicBox.getItems().add(file.getName().replace(".txt", ""));
         }
 
         topicBox.setOnAction(event -> {
             try {
-                loadWordsFromSelectedTopic();
+                controller.loadWordsFromSelectedTopic(words, keys,
+                        topicBox.getSelectionModel().getSelectedItem());
+                currentWord = keys.get(0);
+                outputTextArea.setText("");
+                count = 0;
+                genNextWord();
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             }
         });
+
+
     }
 
 
-    private void loadWordsFromSelectedTopic() throws URISyntaxException {
-        String selectedTopic = topicBox.getValue();
-        if (selectedTopic == null || selectedTopic.isEmpty()) return;
 
-        words.clear();
-        keys.clear();
-        URL resourceUrl = FXMain.class.getResource("topic/" + selectedTopic + ".txt");
-        if (resourceUrl == null) {
-            throw new RuntimeException("Resource not found: " + selectedTopic);
-        }
-        File topicFile = new File(resourceUrl.toURI());
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(topicFile), StandardCharsets.UTF_8))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(";", 3);
-                if (parts.length == 3) {
-                    words.put(parts[0].trim(), parts[1].trim() + "\n" + parts[2].trim());
-                }
-            }
-        } catch (Exception ignored) {
-        }
-        keys.addAll(words.keySet());
-        Collections.shuffle(keys);
-        currentWord = keys.get(0);
-        outputTextArea.setText("");
-        count = 0;
-        genNextWord();
-    }
     private void genNextWord() {
+
         if (count < keys.size()) {
             currentWord = keys.get(count);
             count++;
@@ -123,7 +96,7 @@ public class WordListenGameScreen {
     private void pronunciationButtonClick(ActionEvent event) {
         String audioUrl = "";
         try {
-            audioUrl = sendApiRequestToDicToGetFirstAudio(currentWord);
+            audioUrl = controller.sendApiRequestToDicToGetFirstAudio(currentWord);
         } catch (Exception e) {
             System.err.println("Error fetching audio URL: " + e.getMessage());
         }
@@ -139,9 +112,9 @@ public class WordListenGameScreen {
         String text = inputTextArea.getText().toLowerCase();
         String ans;
         if (text.equals(currentWord)) {
-            ans = "Đúng rồi\n" + currentWord + "\n" + words.get(currentWord);
+            ans = "Correct\n" + currentWord + "\n" + words.get(currentWord);
         } else {
-            ans = "Sai rồi\n";
+            ans = "Incorrect\n";
         }
         outputTextArea.setText(ans);
 
@@ -156,49 +129,11 @@ public class WordListenGameScreen {
     @FXML
     private void displayAnswer(ActionEvent event) {
         if(currentWord != null){
-            String ans = "Đáp án: \n" + currentWord + "\n" + words.get(currentWord);
+            String ans = "Answer: \n" + currentWord + "\n" + words.get(currentWord);
             outputTextArea.setText(ans);
         }
     }
-    private String sendApiRequestToDicToGetFirstAudio(String text) throws Exception {
-        String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-        urlAPI += text.toLowerCase();
 
-        URL url = new URL(urlAPI);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
-            return extractAudioUrlsFromJson(response.toString());
-        } finally {
-            conn.disconnect();
-        }
-    }
-
-    private String extractAudioUrlsFromJson(String jsonResponse) {
-        String result = "";
-        JSONArray jsonArray = new JSONArray(jsonResponse);
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-            if (obj.has("phonetics")) {
-                JSONArray phoneticsArray = obj.getJSONArray("phonetics");
-                for (int j = 0; j < phoneticsArray.length(); j++) {
-                    JSONObject phonetic = phoneticsArray.getJSONObject(j);
-                    if (phonetic.has("audio") && !phonetic.getString("audio").isEmpty()) {
-                        result = phonetic.getString("audio");
-                    }
-                }
-            }
-        }
-        return result;
-    }
 
     private void playAudio(String audioUrl) {
         try {

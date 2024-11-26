@@ -6,23 +6,26 @@ import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WordCombineGameScreen {
     private MainScreen mainScreen;
@@ -40,14 +43,51 @@ public class WordCombineGameScreen {
     private Button checkButton;
     @FXML
     private VBox root;
-    FXMLLoader loader;
+
+    @FXML
+    private WebView inforOutput;
+    @FXML
+    private Button showAnswerButton;
+
+    private ExecutorService executorService;
+
+    private FXMLLoader loader;
+
+    private WordCombineGameController controller;
 
     public WordCombineGameScreen(WordCombineGameController controller) throws IOException {
+        this.controller = controller;
         words.bind(controller.wordsProperty());
         loader = new FXMLLoader(this.getClass().getResource("WordCombineGameScreen.fxml"));
         loader.setController(this);
         loader.load();
 
+    }
+    public void showCurrentWordInfo() throws Exception {
+        String prompt = shuffledWordList.get(currentWordIndex);
+
+
+
+        String translatePath = "english_to_vietnamese";
+        inforOutput.getEngine().loadContent("<p>Translating...</p>");
+        String finalTranslatePath = translatePath;
+        executorService.submit(() -> {
+            String result;
+            try {
+                result = controller.sendApiRequestToDICT_HHDB(prompt, finalTranslatePath);
+                if (result.isEmpty()) {
+                    result = "<p>No result returned from API.</p>";
+                }
+            } catch (Exception e) {
+                result = "<p>Error: Unable to connect to the API.</p>";
+                e.printStackTrace();
+            }
+
+            String finalResult = result.replaceAll("\\/\\/", "");
+            javafx.application.Platform.runLater(() -> {
+                inforOutput.getEngine().loadContent(finalResult);
+            });
+        });
     }
 
     public <T> T getRoot() {
@@ -65,10 +105,13 @@ public class WordCombineGameScreen {
         shuffledWordList.addAll(words.get());
         Collections.shuffle(shuffledWordList);
 
-        nextButton.setOnAction(e -> startNextWord());
+        nextButton.setOnAction(e -> {
+            currentWordIndex = (currentWordIndex + 1) % shuffledWordList.size();
+            initWord();
+        });
+        initWord();
 
         checkButton.setOnAction(e -> checkWord());
-        startNextWord();
         root.setOnDragOver(e -> {
             Dragboard db = e.getDragboard();
             System.out.println("root drag over");
@@ -87,18 +130,28 @@ public class WordCombineGameScreen {
             }
             e.setDropCompleted(true);
         });
+
+        showAnswerButton.setOnAction(e -> {
+            try {
+                showCurrentWordInfo();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        executorService = Executors.newSingleThreadExecutor();
     }
 
-    private void startNextWord() {
+    private void initWord() {
         if (currentWordIndex < words.get().size()) {
             letterPanes.clear();
             emptyPanes.clear();
+            inforOutput.getEngine().loadContent("");
 
             lettersBox.getChildren().clear();
             emptySlotsBox.getChildren().clear();
 
             String currentWord = shuffledWordList.get(currentWordIndex);
-            promptText.setText("Rearrange the word: " + "_ ".repeat(currentWord.length()));
+            promptText.setText("Rearrange the word");
 
             List<String> letters = new ArrayList<>();
             for (char c : currentWord.toCharArray()) {
@@ -117,6 +170,22 @@ public class WordCombineGameScreen {
                     Dragboard db = letterPane.startDragAndDrop(TransferMode.ANY);
                     db.setContent(Collections.singletonMap(DataFormat.PLAIN_TEXT, String.valueOf(letterPane.hashCode())));
                     e.consume();
+                });
+                letterPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        for(Node node : emptySlotsBox.getChildren()){
+                            Pane pane = (Pane) node;
+                            if(letterPanes.containsValue(pane) == false){
+                                emptySlotsBox.getChildren().set(
+                                        emptySlotsBox.getChildren().indexOf(pane),
+                                        letterPanes.get(Integer.valueOf(letterPane.hashCode()))
+                                );
+                                break;
+                            }
+                        }
+                        event.consume();
+                    }
                 });
 
             }
@@ -163,26 +232,7 @@ public class WordCombineGameScreen {
 
             resultText.setText("");
             checkButton.setDisable(false);
-        } else {
-
-            promptText.setText("You've done the game!");
-            checkButton.setDisable(true);
-
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                    Platform.exit();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
         }
-    }
-
-
-    private void removeDraggedLetterOnEmptyBox(String letter) {
-
     }
 
     private void restoreDraggedLetters() {
@@ -205,23 +255,15 @@ public class WordCombineGameScreen {
 
             userInput.append(letterPane.getLetter());
         }
-
         String correctWord = shuffledWordList.get(currentWordIndex);
+        System.out.println(userInput + " " + correctWord);
         if (userInput.toString().equals(correctWord)) {
             resultText.setText("Congratulations, you have unscrambled the word correctly!");
-
-            new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-
-                    Platform.runLater(() -> {
-                        currentWordIndex++;
-                        startNextWord();
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }).start();
+            try {
+                showCurrentWordInfo();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
             resultText.setText("The word is not correct, please try again!");
 
@@ -229,6 +271,7 @@ public class WordCombineGameScreen {
         }
 
     }
+
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;

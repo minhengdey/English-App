@@ -1,73 +1,53 @@
 package com.noface.demo.screen;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.noface.demo.controller.DictionaryScreenController;
-import com.noface.demo.resource.TokenManager;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.web.WebView;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.util.stream.Collectors;
+import javafx.scene.input.KeyEvent;
 
-public class DictionaryScreen {
+
+public class DictionaryScreen implements Initializable {
+    private ExecutorService executorService;
+    private List<String> wordSuggestionsEng;
+    private List<String> wordSuggestionsViet;
+    private ContextMenu suggestionMenu;
     private FXMLLoader loader;
     private MainScreen mainScreen;
     private DictionaryScreenController controller;
 
-    public void setMainScreen(MainScreen mainScreen) {
-        this.mainScreen = mainScreen;
-    }
-
     public DictionaryScreen(DictionaryScreenController controller) throws IOException {
-        loader = new FXMLLoader(this.getClass().getResource("DictionaryScreen.fxml"));
+        this.controller = controller;
+        loader = new FXMLLoader(getClass().getResource("DictionaryScreen.fxml"));
         loader.setController(this);
         loader.load();
-        wordSuggestionsEng.bind(controller.wordSuggestionsEngProperty());
-        wordSuggestionsViet.bind(controller.wordSuggestionsVietProperty());
-        this.controller = controller;
-        Parent root = loader.getRoot();
     }
-
-    public <T> T getRoot() {
+    public <T> T getRoot(){
         return loader.getRoot();
     }
-
-    private ListProperty<String> wordSuggestionsEng = new SimpleListProperty<>(FXCollections.observableArrayList());
-    private ListProperty<String> wordSuggestionsViet = new SimpleListProperty<>(FXCollections.observableArrayList());
-    private ContextMenu suggestionMenu;
 
     @FXML
     private TextField inputTextArea;
@@ -82,33 +62,51 @@ public class DictionaryScreen {
     private ComboBox<String> comboBox;
 
     @FXML
-    private ComboBox<String> voiceBox;
+    private ComboBox voiceBox;
+
     @FXML
     private Button audioButton;
 
-    public void initialize() {
+    private List<String> apiAudioList;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
         comboBox.getItems().addAll("English", "Vietnamese");
         comboBox.setValue(comboBox.getItems().get(0));
+        executorService = Executors.newSingleThreadExecutor();
+        try {
+            wordSuggestionsEng = controller.loadWordSuggestions("english_to_vietnamese");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-
+        try {
+            wordSuggestionsViet = controller.loadWordSuggestions("vietnamese_to_english");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         inputTextArea.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(KeyEvent keyEvent) {
-                handleTextInput(keyEvent);
+            public void handle(KeyEvent event) {
+                handleTextInput(event);
             }
         });
-
         translateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    handleTranslateButtonClicked(event);
+                    translateButtonClick(event);
                 } catch (Exception e) {
+                    System.out.println("Translate error");
                     throw new RuntimeException(e);
                 }
             }
         });
     }
+
+
+
 
     private void handleTextInput(KeyEvent event) {
         if (suggestionMenu == null) {
@@ -119,20 +117,20 @@ public class DictionaryScreen {
             suggestionMenu.hide();
             return;
         }
-        System.out.println(wordSuggestionsEng.get());
         List<String> matches;
-        if (comboBox.getValue().equals("English")) {
-            matches = wordSuggestionsEng.get().stream()
-                    .filter(word -> word.startsWith(text))
+
+        if (comboBox.getSelectionModel().getSelectedItem().equals("English")) {
+            matches = wordSuggestionsEng.stream()
+                    .filter(word -> word.toLowerCase().startsWith(text.toLowerCase()))
                     .limit(10)
                     .collect(Collectors.toList());
         } else {
-            matches = wordSuggestionsViet.get().stream()
-                    .filter(word -> word.startsWith(text))
+            matches = wordSuggestionsViet.stream()
+                    .filter(word -> word.toLowerCase().startsWith(text.toLowerCase()))
                     .limit(10)
                     .collect(Collectors.toList());
         }
-        System.out.println(matches);
+
         if (matches.isEmpty()) {
             suggestionMenu.hide();
         } else {
@@ -147,7 +145,6 @@ public class DictionaryScreen {
                 suggestionMenu.getItems().add(item);
             }
 
-
             if (!suggestionMenu.isShowing()) {
                 suggestionMenu.show(inputTextArea, inputTextArea.localToScreen(0, 0).getX() +
                                 inputTextArea.getPadding().getLeft(),
@@ -158,12 +155,50 @@ public class DictionaryScreen {
 
     }
 
+    private HashSet<String> sendApiRequestToDic(String text) throws Exception {
+        String urlAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+        urlAPI += text.toLowerCase();
 
 
+        URL url = new URL(urlAPI);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                response.append(line.trim());
+            }
+            return extractAudioUrlsFromJson(response.toString());
+        } finally {
+            conn.disconnect();
+        }
+    }
+
+    private HashSet<String> extractAudioUrlsFromJson(String jsonResponse) {
+        HashSet<String> audioUrls = new HashSet<>();
+
+        JSONArray jsonArray = new JSONArray(jsonResponse);
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            if (obj.has("phonetics")) {
+                JSONArray phoneticsArray = obj.getJSONArray("phonetics");
+                for (int j = 0; j < phoneticsArray.length(); j++) {
+                    JSONObject phonetic = phoneticsArray.getJSONObject(j);
+                    if (phonetic.has("audio") && !phonetic.getString("audio").isEmpty()) {
+                        audioUrls.add(phonetic.getString("audio"));
+                    }
+                }
+            }
+        }
+        return audioUrls;
+    }
 
 
-    @FXML
-    private void handleTranslateButtonClicked(ActionEvent actionEvent) throws Exception {
+    private void translateButtonClick(ActionEvent actionEvent) throws Exception {
         String prompt = inputTextArea.getText();
 
         if (prompt.isEmpty()) {
@@ -172,36 +207,29 @@ public class DictionaryScreen {
         }
 
         voiceBox.getItems().clear();
-        HashSet<String> apiAudio = controller.sendApiRequestToDic(prompt);
-        List<String> apiAudioList = new ArrayList<>(apiAudio);
-        for(String item : apiAudioList){
-            StringBuffer itemToAdd = new StringBuffer();
-            boolean check = false;
-            for (int j = 0; j < item.length(); j++) {
-                if (item.charAt(j) == '.') {
-                    check = false;
+        if (comboBox.getValue().equals("English")) {
+            HashSet<String> apiAudio = sendApiRequestToDic(prompt);
+            apiAudioList = new ArrayList<>(apiAudio);
+
+            for(String audio : apiAudioList) {
+                StringBuilder nameButton = new StringBuilder();
+                boolean check = false;
+                for (int j = 0; j < audio.length(); j++) {
+                    if (audio.charAt(j) == '.') {
+                        check = false;
+                    }
+                    if (check) {
+                        nameButton.append(audio.charAt(j));
+                    }
+                    if (audio.charAt(j) == '-') {
+                        check = true;
+                    }
+
                 }
-                if (check) {
-                    itemToAdd.append(item.charAt(j));
-                }
-                if (item.charAt(j) == '-') {
-                    check = true;
-                }
+                voiceBox.getItems().add(nameButton);
             }
-            voiceBox.getItems().add(itemToAdd.toString());
+            voiceBox.getSelectionModel().select(0);
         }
-        if(apiAudioList.size() != 0){
-            voiceBox.setValue(voiceBox.getItems().get(0));
-        }
-
-
-        audioButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                playAudio(apiAudioList.get(voiceBox.getSelectionModel().getSelectedIndex()));
-            }
-        });
-
         String translatePath = "";
         if (comboBox.getValue() == null) {
             showError("Please select a translation direction.");
@@ -214,12 +242,33 @@ public class DictionaryScreen {
 
         outputWebView.getEngine().loadContent("<p>Translating...</p>");
 
-        String finalResult = controller.getWordDictionaryData(prompt, translatePath);
-        System.out.println("Transalte result: ");
+        String finalTranslatePath = translatePath;
+        executorService.submit(() -> {
+            String result;
+            try {
+                result = controller.sendApiRequestToDICT_HHDB(prompt, finalTranslatePath);
+                if (result.isEmpty()) {
+                    result = "<p>No result returned from API.</p>";
+                }
+            } catch (Exception e) {
+                result = "<p>Error: Unable to connect to the API.</p>";
+                e.printStackTrace();
+            }
 
-            System.out.println("In platform run later");
-            System.out.println(finalResult);
-            outputWebView.getEngine().loadContent(finalResult);
+            String finalResult = result.replaceAll("\\/\\/", "");
+            Platform.runLater(() -> {
+                outputWebView.getEngine().loadContent(finalResult);
+            });
+        });
+    }
+
+    @FXML
+    void audioButtonClicked(ActionEvent event) {
+        try{
+            playAudio(apiAudioList.get(voiceBox.getSelectionModel().getSelectedIndex()));
+        }catch(Exception e){
+            System.out.println("Audio not selected");
+        }
     }
 
 
@@ -233,11 +282,14 @@ public class DictionaryScreen {
             showError("Unable to play audio. Please check the format or URL.");
         }
     }
-
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
     }
 }

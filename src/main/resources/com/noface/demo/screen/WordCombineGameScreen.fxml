@@ -7,38 +7,39 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
-<VBox fx:id="root" alignment="CENTER" spacing="20" styleClass="root-vbox" stylesheets="@WordCombineGameStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" alignment="CENTER" prefHeight="600.0" prefWidth="760.0" spacing="20" styleClass="root-vbox" stylesheets="@WordCombineGameStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fx:id="promptText" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Ghép lại từ: _ _ _ _ _" />
+      <Text fx:id="promptText" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Rearrange the words" />
       <HBox fx:id="lettersBox" alignment="CENTER" spacing="10">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
             </StackPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="letter-pane">
+            <StackPane styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
                </children>
@@ -72,15 +73,21 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
                </children>
             </StackPane>
-            <StackPane styleClass="empty-letter-pane">
+            <StackPane prefWidth="30.0" styleClass="empty-letter-pane">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
                </children>
             </StackPane>
          </children></HBox>
       <Text fx:id="resultText" styleClass="result-text" text="Chúc mừng, bạn đã hoàn thành" />
+      <HBox prefHeight="281.0" prefWidth="660.0" styleClass="web-view-hbox" VBox.vgrow="ALWAYS">
+         <children>
+            <WebView fx:id="inforOutput" prefHeight="200.0" prefWidth="200.0" styleClass="vbox-web-view" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="899.0" spacing="20.0">
          <children>
+            <Button fx:id="showAnswerButton" mnemonicParsing="false" text="Show" />
             <Button fx:id="checkButton" prefHeight="18.0" prefWidth="95.0" styleClass="game_button" text="Check" textFill="WHITE" />
             <Button fx:id="nextButton" prefHeight="18.0" prefWidth="106.0" styleClass="game_button" text="Next word" textFill="WHITE">
                <cursor>

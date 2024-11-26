@@ -27,7 +27,7 @@
                      </graphic></Button>
                   <ComboBox fx:id="comboBox" prefHeight="49.0" prefWidth="111.0" promptText="Vietnamese" HBox.hgrow="ALWAYS" />
                   <ComboBox fx:id="voiceBox" prefHeight="80.0" prefWidth="62.0" />
-                  <Button fx:id="audioButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Audio">
+                  <Button fx:id="audioButton" mnemonicParsing="false" onAction="#audioButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Audio">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
