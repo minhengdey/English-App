@@ -2,7 +2,6 @@ package com.noface.demo.screen;
 
 import com.noface.demo.controller.WordCombineGameController;
 import com.noface.demo.screen.component.LetterPane;
-import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -11,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -19,8 +19,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
@@ -30,7 +32,7 @@ import java.util.concurrent.Executors;
 public class WordCombineGameScreen {
     private MainScreen mainScreen;
     @FXML
-    private Text promptText;
+    private Label promptText;
     @FXML
     private HBox lettersBox;
     @FXML
@@ -48,6 +50,8 @@ public class WordCombineGameScreen {
     private WebView inforOutput;
     @FXML
     private Button showAnswerButton;
+    @FXML
+    private Label topicHintLabel;
 
     private ExecutorService executorService;
 
@@ -64,7 +68,8 @@ public class WordCombineGameScreen {
 
     }
     public void showCurrentWordInfo() throws Exception {
-        String prompt = shuffledWordList.get(currentWordIndex);
+        String prompt = shuffledWordList.get(currentWordIndex).getKey();
+        topicHintLabel.setVisible(false);
 
 
 
@@ -94,15 +99,17 @@ public class WordCombineGameScreen {
         return loader.getRoot();
     }
 
-    private ListProperty<String> words = new SimpleListProperty<>(FXCollections.observableArrayList());
+    private ListProperty<Pair<String, String>> words = new SimpleListProperty<>(FXCollections.observableArrayList());
     private int currentWordIndex = 0;
     private Map<Integer, StackPane> letterPanes = new HashMap<>();
     private List<StackPane> emptyPanes = new ArrayList<>();
-    private List<String> shuffledWordList = new ArrayList<>();
+    private List<Pair<String, String>> shuffledWordList = new ArrayList<>();
 
     public void initialize() {
 
-        shuffledWordList.addAll(words.get());
+        for(Pair<String, String> word : words){
+            shuffledWordList.add(new Pair<>(word.getKey(), word.getValue()));
+        }
         Collections.shuffle(shuffledWordList);
 
         nextButton.setOnAction(e -> {
@@ -143,6 +150,7 @@ public class WordCombineGameScreen {
 
     private void initWord() {
         if (currentWordIndex < words.get().size()) {
+            topicHintLabel.setVisible(true);
             letterPanes.clear();
             emptyPanes.clear();
             inforOutput.getEngine().loadContent("");
@@ -150,7 +158,8 @@ public class WordCombineGameScreen {
             lettersBox.getChildren().clear();
             emptySlotsBox.getChildren().clear();
 
-            String currentWord = shuffledWordList.get(currentWordIndex);
+            String currentWord = shuffledWordList.get(currentWordIndex).getKey();
+            topicHintLabel.setText(shuffledWordList.get(currentWordIndex).getValue());
             promptText.setText("Rearrange the word");
 
             List<String> letters = new ArrayList<>();
@@ -174,15 +183,30 @@ public class WordCombineGameScreen {
                 letterPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        for(Node node : emptySlotsBox.getChildren()){
-                            Pane pane = (Pane) node;
-                            if(letterPanes.containsValue(pane) == false){
-                                emptySlotsBox.getChildren().set(
-                                        emptySlotsBox.getChildren().indexOf(pane),
-                                        letterPanes.get(Integer.valueOf(letterPane.hashCode()))
-                                );
-                                break;
+                        LetterPane letterPane = (LetterPane) event.getSource();
+                        boolean moveValid = false;
+                        if(emptySlotsBox.getChildren().contains(letterPane) == false) {
+                            for(Node node : emptyPanes){
+                                Pane pane = (Pane) node;
+                                System.out.println("Log letter pane");
+                                if(emptySlotsBox.getChildren().contains(pane)){
+
+                                    emptySlotsBox.getChildren().set(
+                                            emptyPanes.indexOf(pane),
+                                            letterPane
+                                    );
+                                    moveValid = true;
+                                    break;
+                                }
                             }
+                        }
+                        System.out.println(emptySlotsBox.getChildren());
+
+                        if(moveValid == false && emptySlotsBox.getChildren().contains(letterPane)){
+                            System.out.println("Move failed");
+                            int emptySlotIndex = emptySlotsBox.getChildren().indexOf(letterPane);
+                            emptySlotsBox.getChildren().set(emptySlotIndex, emptyPanes.get(emptySlotIndex));
+                            lettersBox.getChildren().add(letterPane);
                         }
                         event.consume();
                     }
@@ -255,10 +279,11 @@ public class WordCombineGameScreen {
 
             userInput.append(letterPane.getLetter());
         }
-        String correctWord = shuffledWordList.get(currentWordIndex);
+        String correctWord = shuffledWordList.get(currentWordIndex).getKey();
         System.out.println(userInput + " " + correctWord);
         if (userInput.toString().equals(correctWord)) {
             resultText.setText("Congratulations, you have unscrambled the word correctly!");
+            resultText.setStyle("-fx-text-fill: #1F003D");
             try {
                 showCurrentWordInfo();
             } catch (Exception e) {
@@ -266,7 +291,7 @@ public class WordCombineGameScreen {
             }
         } else {
             resultText.setText("The word is not correct, please try again!");
-
+            resultText.setStyle("-fx-text-fill: red;");
             restoreDraggedLetters();
         }
 

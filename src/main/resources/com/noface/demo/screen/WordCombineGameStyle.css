@@ -2,7 +2,7 @@
     -fx-padding: 10 50 10 50;
     -fx-background-color: #F5EBFF;
     -fx-spacing: 5px;
-    -fx-alignment: top center;
+    -fx-alignment: top-center;
 }
 .empty-letter-pane{
     -fx-font-size: 20px;
@@ -94,3 +94,19 @@
     -fx-border-width: 2px;
 }
 
+.topic-label{
+    -fx-wrap-text: true;
+    -fx-alignment: center;
+    -fx-font-size: 15px;
+    -fx-background-color: white;
+    -fx-border-color: #9659D3;
+    -fx-background-radius: 10 30 10 30;
+    -fx-border-radius: 10 30 10 30;
+    -fx-padding: 10px;
+    -fx-border-width: 2px;
+}
+.title{
+    -fx-padding: 10px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}

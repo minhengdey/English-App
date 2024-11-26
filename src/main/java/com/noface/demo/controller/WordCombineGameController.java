@@ -1,48 +1,38 @@
 package com.noface.demo.controller;
 
+import com.noface.demo.FXMain;
 import com.noface.demo.screen.WordCombineGameScreen;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class WordCombineGameController {
     private WordCombineGameScreen screen;
-    private ListProperty<String> words = new SimpleListProperty(FXCollections.observableArrayList());
+    private ListProperty<Pair<String, String>> words = new SimpleListProperty(FXCollections.observableArrayList());
     public WordCombineGameController() throws IOException {
-        words.get().clear();
-        words.get().addAll(getWordsData());
-        screen = new WordCombineGameScreen(this);
-    }
-    public List<String> getWordsData() throws IOException {
-        String language = "english_to_vietnamese";
-        URL urlEng = new URL("http://localhost:8080/" + language);
 
-        HttpURLConnection connEng = (HttpURLConnection) urlEng.openConnection();
-        connEng.setRequestMethod("GET");
-        System.out.println("Load word suggestion " + language);
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(connEng.getInputStream(), StandardCharsets.UTF_8))) {
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                response.append(line.trim());
-            }
-            return extractWordFromJson(response.toString());
-        } finally {
-            connEng.disconnect();
+        try {
+            words.get().clear();
+            words.get().addAll(getWordsData());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
+        screen = new WordCombineGameScreen(this);
     }
     public List<String> extractWordFromJson(String jsonResponse) {
         JSONArray jsonArray = new JSONArray(jsonResponse);
@@ -101,11 +91,47 @@ public class WordCombineGameController {
         return screen;
     }
 
-    public ObservableList<String> getWords() {
+
+    public List<Pair<String, String>> getWordsData() throws URISyntaxException {
+
+        URL resourceUrl = FXMain.class.getResource("topic");
+        List<Pair<String, String>> words = new ArrayList<>();
+        File folder = null;
+        try {
+            folder = new File(resourceUrl.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".txt"));
+        List<String> topics = new ArrayList<>();
+        for (File file : files) {
+            String topic = file.getName().replace(".txt", "");
+
+            URL topicUrl = FXMain.class.getResource("topic/" + topic + ".txt");
+            if (topicUrl == null) {
+                throw new RuntimeException("Resource not found: " + topic);
+            }
+            File topicFile = new File(topicUrl.toURI());
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(topicFile), StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(";", 3);
+                    if (parts.length == 3) {
+                        words.add(new Pair<>(parts[0].trim(), topic));
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return words;
+    }
+
+    public ObservableList<Pair<String, String>> getWords() {
         return words.get();
     }
 
-    public ListProperty<String> wordsProperty() {
+    public ListProperty<Pair<String, String>> wordsProperty() {
         return words;
     }
 }
