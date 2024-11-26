@@ -11,96 +11,100 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="side_signup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #9b7ebd;" stylesheets="@MainScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="root" stylesheets="@SignupScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane id="side_signup" layoutX="440.0" prefHeight="600.0" prefWidth="566.0" style="-fx-background-color: WHITE;" styleClass="side_signup" stylesheets="@MainScreenStyle.css">
+      <HBox layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text layoutX="216.0" layoutY="65.0" strokeWidth="0.0" text="Đăng ký" textAlignment="CENTER" wrappingWidth="133.00006103515625">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <font>
-                  <Font name="Times New Roman Bold" size="34.0" />
-               </font>
-            </Text>
-            <Button id=".button_signup" fx:id="registerButton" layoutX="239.0" layoutY="523.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" styleClass="button_signup" stylesheets="@MainScreenStyle.css" text="Đăng ký" textAlignment="CENTER" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-      <TextField id="input_text" fx:id="name" layoutX="617.0" layoutY="99.0" prefHeight="35.0" prefWidth="218.0" promptText="Họ tên" styleClass="text_input" stylesheets="@MainScreenStyle.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <TextField id="input_text" fx:id="username" layoutX="617.0" layoutY="150.0" prefHeight="35.0" prefWidth="218.0" promptText="Tên đăng nhập" styleClass="text_input" stylesheets="@MainScreenStyle.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <PasswordField id="input_text" fx:id="password" layoutX="617.0" layoutY="202.0" prefHeight="35.0" prefWidth="218.0" promptText="Mật khẩu" styleClass="text_input">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </PasswordField>
-      <PasswordField id="input_text" fx:id="confirmPassword" layoutX="617.0" layoutY="254.0" prefHeight="35.0" prefWidth="218.0" promptText="Xác nhận mật khẩu" styleClass="text_input" stylesheets="@MainScreenStyle.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </PasswordField>
-      <VBox layoutX="617.0" layoutY="300.0" prefHeight="47.0" prefWidth="218.0" spacing="5.0">
-         <children>
-            <Label prefHeight="18.0" prefWidth="70.0" text="Ngày sinh" textFill="#878787" />
-            <HBox prefHeight="35.0" prefWidth="218.0" spacing="5.0">
+            <VBox prefHeight="600.0" prefWidth="410.0" styleClass="left-pane">
                <children>
-                  <TextField id="input_text" fx:id="day" promptText="Ngày" styleClass="text_input">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-                  <TextField id="input_text" fx:id="month" promptText="Tháng" styleClass="text_input" />
-                  <TextField id="input_text" fx:id="year" promptText="Năm" styleClass="text_input" stylesheets="@MainScreenStyle.css" />
+                  <VBox prefHeight="74.0" prefWidth="316.0" styleClass="vbox">
+                     <children>
+                        <Text fill="#fafafa" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," wrappingWidth="205.33668518066406">
+                           <font>
+                              <Font name="Times New Roman Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="We are glad to see you:)" wrappingWidth="327.73670959472656">
+                           <font>
+                              <Font name="Times New Roman Bold" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <ImageView id="image_signup" fitHeight="366.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" styleClass="button_signup">
+                     <image>
+                        <Image url="@login_image/rb_4782.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </HBox>
-         </children>
-      </VBox>
-      <HBox layoutX="617.0" layoutY="416.0" prefHeight="27.0" prefWidth="218.0" spacing="5.0">
-         <children>
-            <Label prefHeight="27.0" prefWidth="60.0" text="Giới tính" />
-            <ChoiceBox fx:id="gender" prefHeight="26.0" prefWidth="152.0" />
+            </VBox>
+            <VBox prefHeight="618.0" prefWidth="584.0" styleClass="right-pane" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="title" text="Create account" />
+                  <TextField id="input_text" fx:id="name" prefHeight="35.0" prefWidth="218.0" promptText="Name">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField id="input_text" fx:id="username" prefHeight="35.0" prefWidth="218.0" promptText="Username" stylesheets="@MainScreenStyle.css">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <PasswordField id="input_text" fx:id="password" prefHeight="35.0" prefWidth="218.0" promptText="Password" styleClass="text_input">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </PasswordField>
+                  <PasswordField id="input_text" fx:id="confirmPassword" prefHeight="35.0" prefWidth="218.0" promptText="Confirm password">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </PasswordField>
+                  <VBox prefHeight="26.0" prefWidth="284.0" spacing="5.0">
+                     <children>
+                        <HBox prefHeight="35.0" prefWidth="218.0" spacing="5.0" styleClass="gender-hbox">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="106.0" text="Dob:" textFill="#878787" />
+                              <TextField id="input_text" fx:id="day" promptText="Day" styleClass="text_input">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField id="input_text" fx:id="month" promptText="Month" styleClass="text_input" />
+                              <TextField id="input_text" fx:id="year" promptText="Year" styleClass="text_input" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <TextField id="input_text" fx:id="email" prefHeight="35.0" prefWidth="218.0" promptText="Email">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <HBox prefHeight="27.0" prefWidth="218.0" spacing="5.0" styleClass="gender-hbox">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="66.0" text="Gender:" />
+                        <ChoiceBox fx:id="gender" prefHeight="1.0" prefWidth="222.0" styleClass="combo-box" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <TextField id="input_text" fx:id="phone" prefHeight="35.0" prefWidth="218.0" promptText="Phone number">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Sign up" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </HBox>
-      <TextField id="input_text" fx:id="email" layoutX="617.0" layoutY="363.0" prefHeight="35.0" prefWidth="218.0" promptText="Email" styleClass="text_input" stylesheets="@MainScreenStyle.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <TextField id="input_text" fx:id="phone" layoutX="617.0" layoutY="457.0" prefHeight="35.0" prefWidth="218.0" promptText="Số điện thoại" styleClass="text_input" stylesheets="@MainScreenStyle.css">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor>
-      </TextField>
-      <ImageView id="image_signup" fitHeight="366.0" fitWidth="374.0" layoutX="49.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" styleClass="button_signup">
-         <image>
-            <Image url="@login_image/rb_4782.png" />
-         </image>
-      </ImageView>
-      <Text fill="#fafafa" layoutX="74.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," wrappingWidth="205.33668518066406">
-         <font>
-            <Font name="Times New Roman Bold" size="36.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="74.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We are glad to see you:)" wrappingWidth="327.73670959472656">
-         <font>
-            <Font name="Times New Roman Bold" size="30.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>

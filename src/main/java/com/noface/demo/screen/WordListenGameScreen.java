@@ -114,7 +114,7 @@ public class WordListenGameScreen {
             currentWord = keys.get(count);
             count++;
         } else {
-            outputTextArea.setText("Hết từ trong chủ đề này. Hãy chọn lại chủ đề hoặc làm lại.");
+            outputTextArea.setText("No more words in this topic. Please choose a new topic or try again.");
             currentWord = null;
         }
     }

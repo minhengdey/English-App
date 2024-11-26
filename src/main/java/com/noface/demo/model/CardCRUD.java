@@ -72,10 +72,10 @@ public class CardCRUD {
                 JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                 int code = jsonNode.get("code").asInt();
                 if (code == 1009) {
-                    Utilities.getInstance().showAlert("Card đã tồn tại, không thể thêm card", Alert.AlertType.WARNING);
+                    Utilities.getInstance().showAlert("Card already exists, cannot add card.", Alert.AlertType.WARNING);
                     return CardCRUD.CARD_IS_AVAILABLED;
                 } else {
-                    Utilities.getInstance().showAlert("Có lỗi xảy ra, không thể thêm card", Alert.AlertType.WARNING);
+                    Utilities.getInstance().showAlert("An error occurred, cannot add card.", Alert.AlertType.WARNING);
                     return CardCRUD.ERROR;
                 }
             }
@@ -100,7 +100,7 @@ public class CardCRUD {
             System.out.println("Delete status code " + response.statusCode());
 
             if (response.statusCode() == 200) {
-                // Xóa thành công
+                // Successfully deleted
                 return CARD_DELETED_SUCCESS;
             }
             System.out.println("Delete status code " + response.statusCode());
@@ -129,7 +129,7 @@ public class CardCRUD {
             if (response.statusCode() == 200) {
                 card = new Card(id, frontSide, backSide, topic, name, date);
                 return CARD_EDITED_SUCCESS;
-            } else System.out.println("Có lỗi xảy ra");
+            } else System.out.println("An error occurred.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,7 +147,7 @@ public class CardCRUD {
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("get all topics");
+            System.out.println("Get all topics");
             System.out.println(response);
             System.out.println(token);
             if (response.statusCode() == 200) {
@@ -155,7 +155,7 @@ public class CardCRUD {
                 for (int i = 0; i < jsonArray.length(); ++i) {
                     topics.add(jsonArray.getString(i));
                 }
-            } else System.out.println("Có lỗi xảy ra");
+            } else System.out.println("An error occurred.");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -185,14 +185,14 @@ public class CardCRUD {
                     String date = node.get("date").asText();
                     cards.add(new Card(id, name, frontSide, backSide, topic, date));
                 }
-            } else System.out.println("Có lỗi xảy ra");
+            } else System.out.println("An error occurred.");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return cards;
     }
 
-    public int deleteCardByTopic(String topic){
+    public int deleteCardByTopic(String topic) {
         String token = TokenManager.getInstance().getToken();
         try {
             String encodedTopic = URLEncoder.encode(normalize_name(topic), StandardCharsets.UTF_8);
@@ -204,17 +204,17 @@ public class CardCRUD {
             HttpResponse<Void> response = httpClient.send(request, HttpResponse.BodyHandlers.discarding());
             System.out.println("Delete topic response code: " + response.statusCode());
             System.out.println(response.uri());
-            if(response.statusCode() == 200){
-                System.out.println("delete successfully");
+            if (response.statusCode() == 200) {
+                System.out.println("Deleted successfully.");
                 return TOPIC_DELETED_SUCCESS;
             }
         } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         return ERROR;
-
     }
-    public int renameTopic(String oldTopic, String newTopic){
+
+    public int renameTopic(String oldTopic, String newTopic) {
         oldTopic = URLEncoder.encode(oldTopic, StandardCharsets.UTF_8);
         newTopic = URLEncoder.encode(normalize_name(newTopic), StandardCharsets.UTF_8);
         String token = TokenManager.getInstance().getToken();
@@ -225,7 +225,7 @@ public class CardCRUD {
                     .header("Authorization", "Bearer " + token)
                     .POST(HttpRequest.BodyPublishers.noBody()).build();
             HttpResponse response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            if(response.statusCode() == 200){
+            if (response.statusCode() == 200) {
                 return TOPIC_RENAME_SUCCESS;
             }
             return ERROR;

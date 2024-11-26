@@ -7,18 +7,21 @@
     -fx-background-radius: 15;
 }
 .add-topic-button{
+    -fx-padding: 0;
+    -fx-border-color: transparent;
     -fx-background-radius: 20;
-    -fx-background-color: #9659D3;
+    -fx-border-radius: 30;
+    -fx-border-width: 2px;
+    -fx-background-color: transparent;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
 }
 .add-topic-button:hover{
     -fx-text-fill: white;
-    -fx-background-color: #561696;
+    -fx-border-color: #9659D3;
     -fx-font-weight: bold;
 }
 .add-topic-button:pressed{
-    -fx-background-color: #1F003D;
+    -fx-border-color: #1F003D;
     -fx-text-fill: #F5EBFF;
 }
 

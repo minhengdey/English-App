@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -22,7 +24,14 @@
                         <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="166.0" styleClass="search-button" text="Search" />
                      </children>
                   </HBox>
-                  <Button fx:id="addTopicButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="55.0" styleClass="add-topic-button" text="Add" />
+                  <Button fx:id="addTopicButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="21.0" styleClass="add-topic-button">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login_image/add_8206304.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">

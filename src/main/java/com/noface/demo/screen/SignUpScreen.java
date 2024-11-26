@@ -83,7 +83,7 @@ public class SignUpScreen implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        gender.getItems().addAll("Nam", "Nữ", "Khác");
+        gender.getItems().addAll("Male", "Female", "Other");
     }
 
     @FXML
@@ -100,29 +100,29 @@ public class SignUpScreen implements Initializable {
             String mail = email.getText();
             String phoneNumber = phone.getText();
 
-            if (fullName.isEmpty()) showAlert("Vui lòng điền họ tên đầy đủ!", Alert.AlertType.WARNING);
-            else if (user.isEmpty()) showAlert("Vui lòng điền username!", Alert.AlertType.WARNING);
+            if (fullName.isEmpty()) showAlert("Please enter your full name!", Alert.AlertType.WARNING);
+            else if (user.isEmpty()) showAlert("Please enter a username!", Alert.AlertType.WARNING);
             else if (user.length() < 3) {
-                showAlert("Username phải chứa ít nhất 3 ký tự!", Alert.AlertType.WARNING);
+                showAlert("Username must be at least 3 characters long!", Alert.AlertType.WARNING);
                 username.clear();
             } else if (pass.length() < 8) {
-                showAlert("Mật khẩu phải chứa ít nhất 8 ký tự!", Alert.AlertType.WARNING);
+                showAlert("Password must be at least 8 characters long!", Alert.AlertType.WARNING);
                 password.clear();
                 confirmPassword.clear();
             } else if (!pass.equals(confirmPass)) {
-                showAlert("Mật khẩu không khớp!", Alert.AlertType.WARNING);
+                showAlert("Passwords do not match!", Alert.AlertType.WARNING);
                 password.clear();
                 confirmPassword.clear();
             } else if (d.isEmpty() || m.isEmpty() || y.isEmpty())
-                showAlert("Vui lòng điền đầy đủ ngày sinh!", Alert.AlertType.WARNING);
-            else if (userGender == null) showAlert("Vui lòng chọn giới tính!", Alert.AlertType.WARNING);
-            else if (mail.isEmpty()) showAlert("Vui lòng điền email!", Alert.AlertType.WARNING);
-            else if (phoneNumber.isEmpty()) showAlert("Vui lòng điền số điện thoại!", Alert.AlertType.WARNING);
+                showAlert("Please enter a valid date of birth!", Alert.AlertType.WARNING);
+            else if (userGender == null) showAlert("Please select your gender!", Alert.AlertType.WARNING);
+            else if (mail.isEmpty()) showAlert("Please enter your email address!", Alert.AlertType.WARNING);
+            else if (phoneNumber.isEmpty()) showAlert("Please enter your phone number!", Alert.AlertType.WARNING);
             else {
                 try {
                     LocalDate.of(Integer.parseInt(y), Integer.parseInt(m), Integer.parseInt(d));
                 } catch (Exception e) {
-                    showAlert("Vui lòng điền ngày sinh hợp lệ!", Alert.AlertType.ERROR);
+                    showAlert("Please enter a valid date of birth!", Alert.AlertType.ERROR);
                     day.clear();
                     month.clear();
                     year.clear();
@@ -140,7 +140,7 @@ public class SignUpScreen implements Initializable {
                                 "\"gender\":\"%s\"," +
                                 "\"email\":\"%s\"," +
                                 "\"phone\":\"%s\"" +
-                        "}",
+                                "}",
                         user,
                         pass,
                         normalize_name(fullName),
@@ -165,7 +165,7 @@ public class SignUpScreen implements Initializable {
                     System.out.println(response.body());
 
                     if (response.statusCode() == 200) {
-                        showAlert("Đăng ký thành công!", Alert.AlertType.INFORMATION);
+                        showAlert("Registration successful!", Alert.AlertType.INFORMATION);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.close();
                     } else {
@@ -173,22 +173,23 @@ public class SignUpScreen implements Initializable {
                         JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                         int code = jsonNode.get("code").asInt();
                         if (code == 1000) {
-                            showAlert("Username đã tồn tại, vui lòng đổi username!", Alert.AlertType.ERROR);
+                            showAlert("Username already exists, please choose another username!", Alert.AlertType.ERROR);
                             username.clear();
                         } else if (code == 1006) {
-                            showAlert("Email không hợp lệ", Alert.AlertType.ERROR);
+                            showAlert("Invalid email!", Alert.AlertType.ERROR);
                             email.clear();
-                        } else showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
+                        } else showAlert("An error occurred!", Alert.AlertType.ERROR);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    showAlert("Có lỗi xảy ra!", Alert.AlertType.ERROR);
+                    showAlert("An error occurred!", Alert.AlertType.ERROR);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

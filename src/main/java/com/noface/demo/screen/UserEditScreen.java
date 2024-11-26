@@ -62,7 +62,7 @@ public class UserEditScreen {
 
     @FXML
     void initialize() {
-        genderChoiceBox.getItems().addAll("Nam", "Nữ", "Khác");
+        genderChoiceBox.getItems().addAll("Male", "Female", "other");
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -126,43 +126,48 @@ public class UserEditScreen {
             String mail = emailTF.getText();
             String phoneNumber = phoneTF.getText();
 
-            if (fullName.isEmpty()) showAlert("Vui lòng điền họ tên đầy đủ!", Alert.AlertType.WARNING);
-            else if (pass.length() < 8) {
-                showAlert("Mật khẩu phải chứa ít nhất 8 ký tự!", Alert.AlertType.WARNING);
+            if (fullName.isEmpty()) {
+                showAlert("Please enter your full name!", Alert.AlertType.WARNING);
+            } else if (pass.length() < 8) {
+                showAlert("Password must be at least 8 characters long!", Alert.AlertType.WARNING);
                 passwordTF.clear();
                 confirmPasswordTF.clear();
             } else if (!pass.equals(confirmPass)) {
-                showAlert("Mật khẩu không khớp!", Alert.AlertType.WARNING);
+                showAlert("Passwords do not match!", Alert.AlertType.WARNING);
                 passwordTF.clear();
                 confirmPasswordTF.clear();
-            } else if (d.isEmpty() || m.isEmpty() || y.isEmpty())
-                showAlert("Vui lòng điền đầy đủ ngày sinh!", Alert.AlertType.WARNING);
-            else if (userGender == null) showAlert("Vui lòng chọn giới tính!", Alert.AlertType.WARNING);
-            else if (mail.isEmpty()) showAlert("Vui lòng điền email!", Alert.AlertType.WARNING);
-            else if (phoneNumber.isEmpty()) showAlert("Vui lòng điền số điện thoại!", Alert.AlertType.WARNING);
-            else {
+            } else if (d.isEmpty() || m.isEmpty() || y.isEmpty()) {
+                showAlert("Please enter your complete date of birth!", Alert.AlertType.WARNING);
+            } else if (userGender == null) {
+                showAlert("Please select a gender!", Alert.AlertType.WARNING);
+            } else if (mail.isEmpty()) {
+                showAlert("Please enter your email!", Alert.AlertType.WARNING);
+            } else if (phoneNumber.isEmpty()) {
+                showAlert("Please enter your phone number!", Alert.AlertType.WARNING);
+            } else {
                 try {
                     LocalDate.of(Integer.parseInt(y), Integer.parseInt(m), Integer.parseInt(d));
                 } catch (Exception e) {
-                    showAlert("Vui lòng điền ngày sinh hợp lệ!", Alert.AlertType.ERROR);
+                    showAlert("Please enter a valid date of birth!", Alert.AlertType.ERROR);
                     dayTF.clear();
                     monthTF.clear();
                     yearTF.clear();
                     return;
                 }
             }
+
             int status = controller.editUser(passwordTF.getText());
-            if(status == UserCRUD.USER_EDITED_SUCCESSFUL){
+            if (status == UserCRUD.USER_EDITED_SUCCESSFUL) {
                 Stage stage = (Stage) saveButton.getScene().getWindow();
                 stage.close();
-            }else{
-                showAlert("Thong tin khong hop le, vui long thu lai", Alert.AlertType.WARNING);
+            } else {
+                showAlert("Invalid information, please try again!", Alert.AlertType.WARNING);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
 
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

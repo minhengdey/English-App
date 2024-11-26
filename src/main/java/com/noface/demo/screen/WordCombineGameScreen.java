@@ -98,8 +98,7 @@ public class WordCombineGameScreen {
             emptySlotsBox.getChildren().clear();
 
             String currentWord = shuffledWordList.get(currentWordIndex);
-            promptText.setText("Ghép lại từ: " + "_ ".repeat(currentWord.length()));
-
+            promptText.setText("Rearrange the word: " + "_ ".repeat(currentWord.length()));
 
             List<String> letters = new ArrayList<>();
             for (char c : currentWord.toCharArray()) {
@@ -166,7 +165,7 @@ public class WordCombineGameScreen {
             checkButton.setDisable(false);
         } else {
 
-            promptText.setText("Bạn đã hoàn thành trò chơi!");
+            promptText.setText("You've done the game!");
             checkButton.setDisable(true);
 
 
@@ -209,7 +208,7 @@ public class WordCombineGameScreen {
 
         String correctWord = shuffledWordList.get(currentWordIndex);
         if (userInput.toString().equals(correctWord)) {
-            resultText.setText("Chúc mừng, bạn đã ghép đúng từ!");
+            resultText.setText("Congratulations, you have unscrambled the word correctly!");
 
             new Thread(() -> {
                 try {
@@ -224,11 +223,11 @@ public class WordCombineGameScreen {
                 }
             }).start();
         } else {
-            resultText.setText("Từ ghép chưa đúng, vui lòng thử lại!");
+            resultText.setText("The word is not correct, please try again!");
 
             restoreDraggedLetters();
-
         }
+
     }
 
     public void setMainScreen(MainScreen mainScreen) {

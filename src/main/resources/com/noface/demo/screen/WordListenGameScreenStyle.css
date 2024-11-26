@@ -39,34 +39,42 @@
     -fx-alignment: center;
 }
 
-
-.combo-box {
+.topic-selected-hbox {
+    -fx-alignment: center;
     -fx-background-color: #fff;
     -fx-background-radius: 15;
     -fx-border-radius: 15px;
-    -fx-padding: 0 0 0 0;
     -fx-border-color: #9659D3;
     -fx-border-width: 2;
 }
-.combo-box>.list-cell {
-    -fx-alignment: center;
+.combo-box {
+    -fx-alignment: left;
+    -fx-text-alignment: left;
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
 }
+
+.combo-box >.list-cell {
+    -fx-alignment: left;
+    -fx-text-alignment: left;
+}
+
 .combo-box .arrow-button
 {
     -fx-background-color: null;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
-    -fx-padding: 0.0em 0em 0.0em 0.0em; /* 0 3 0 0 */
 }
 
 .combo-box .arrow-button .arrow
 {
     -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
     -fx-background-insets: 0 0 0 0, 0;
-    -fx-padding: 0em 0em 0em 0em; /* 3 3.75 3 3.75 */
-    /*
-        -fx-shape: "M 0 0 h 7 l -3.5 4 z";
-    */
+    -fx-padding: 0em 0em 0em 0em;
     -fx-shape: null;
 }
 

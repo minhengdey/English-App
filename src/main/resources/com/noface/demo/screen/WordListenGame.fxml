@@ -17,20 +17,25 @@
     <children>
       <VBox layoutX="127.0" layoutY="49.0" styleClass="root-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <SplitPane dividerPositions="0.36947791164658633" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.3192771084337349" orientation="VERTICAL" VBox.vgrow="ALWAYS">
                <items>
-                  <VBox styleClass="small-vbox">
+                  <VBox prefHeight="229.0" prefWidth="652.0" styleClass="small-vbox">
                      <children>
-                        <HBox alignment="TOP_CENTER" styleClass="hbox-2">
+                        <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="652.0" styleClass="hbox-2">
                            <children>
-                                <ComboBox fx:id="topicBox" prefHeight="47.0" prefWidth="104.0" />
+                              <Label prefHeight="45.0" prefWidth="139.0" styleClass="status-label" text="Input " textAlignment="CENTER" />
                               <StackPane HBox.hgrow="ALWAYS">
                                  <children>
                                     <Region prefHeight="200.0" prefWidth="200.0" />
                                     <Label prefHeight="17.0" prefWidth="335.0" styleClass="game-title" text="Hear and Guess" />
                                  </children>
                               </StackPane>
-                              <Label prefHeight="45.0" prefWidth="139.0" styleClass="status-label" text="Input " textAlignment="CENTER" />
+                              <HBox prefHeight="578.0" prefWidth="169.0" styleClass="topic-selected-hbox">
+                                 <children>
+                                    <Label text="Topic:" />
+                                      <ComboBox fx:id="topicBox" prefHeight="29.0" prefWidth="122.0" promptText="Gia đình" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
                           <TextArea fx:id="inputTextArea" prefHeight="187.0" prefWidth="652.0" styleClass="input-text-area" wrapText="true" VBox.vgrow="ALWAYS" />

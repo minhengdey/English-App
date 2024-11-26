@@ -177,9 +177,7 @@ public class CardTopicScreen {
             @Override
             public void handle(ActionEvent event) {
                 int status = topicScreenController.addCardToDatabase(card);
-                if(status == CardCRUD.CARD_IS_AVAILABLED){
-                    Utilities.getInstance().showAlert("Thẻ đã tồn tại, vui lòng nhập lại", Alert.AlertType.WARNING);
-                }else if(status == CardCRUD.CARD_ADDED_SUCCESS){
+                if(status == CardCRUD.CARD_ADDED_SUCCESS){
                     pane.getChildren().remove(bottomBar);
                     addCardButton.setDisable(false);
                     cardsTable.setDisable(false);

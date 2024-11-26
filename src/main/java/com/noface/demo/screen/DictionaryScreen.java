@@ -87,7 +87,7 @@ public class DictionaryScreen {
     private Button audioButton;
 
     public void initialize() {
-        comboBox.getItems().addAll("English To Vietnamese", "Vietnamese To English");
+        comboBox.getItems().addAll("English", "Vietnamese");
         comboBox.setValue(comboBox.getItems().get(0));
 
 
@@ -108,9 +108,6 @@ public class DictionaryScreen {
                 }
             }
         });
-
-
-
     }
 
     private void handleTextInput(KeyEvent event) {
@@ -124,7 +121,7 @@ public class DictionaryScreen {
         }
         System.out.println(wordSuggestionsEng.get());
         List<String> matches;
-        if (comboBox.getValue().equals("English To Vietnamese")) {
+        if (comboBox.getValue().equals("English")) {
             matches = wordSuggestionsEng.get().stream()
                     .filter(word -> word.startsWith(text))
                     .limit(10)
@@ -209,7 +206,7 @@ public class DictionaryScreen {
         if (comboBox.getValue() == null) {
             showError("Please select a translation direction.");
             return;
-        } else if (comboBox.getValue().equals("English To Vietnamese")) {
+        } else if (comboBox.getValue().equals("English")) {
             translatePath = "english_to_vietnamese";
         } else {
             translatePath = "vietnamese_to_english";

@@ -77,16 +77,6 @@ public class ProfileScreen {
         day.textProperty().bind(profileScreenController.dayProperty());
         month.textProperty().bind(profileScreenController.monthProperty());
         year.textProperty().bind(profileScreenController.yearProperty());
-//        day.textProperty().bind(Bindings.createStringBinding(() -> {
-//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getDayOfMonth());
-//        }, profileScreenController.dobProperty()));
-//        month.textProperty().bind(Bindings.createStringBinding(() -> {
-//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getMonth().getValue());
-//        }, profileScreenController.dobProperty()));
-//        year.textProperty().bind(Bindings.createStringBinding(() -> {
-//            return String.valueOf(LocalDate.parse(profileScreenController.dobProperty().get()).getYear());
-//        }, profileScreenController.dobProperty()));
-
     }
 
 

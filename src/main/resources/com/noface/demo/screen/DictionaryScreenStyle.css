@@ -8,21 +8,27 @@
     -fx-padding: 0;
 }
 
-.button:pressed{
-    -fx-background-color: #561696;
-    -fx-text-fill: #F5EBFF;
-}
 .button{
-    -fx-font-size: 12;
+    -fx-font-size: 0px;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-min-width: 50;
+    -fx-wrap-text: true;
+    -fx-text-fill: transparent;
     -fx-background-radius: 20;
-    -fx-background-color: #9659D3;
-    -fx-text-fill: #F5EBFF;
+    -fx-background-color: #E5E5FF;
+    -fx-border-color: #9659D3;
+    -fx-border-radius: 20;
+    -fx-border-width: 2px;
     -fx-font-weight: bold;
 }
 .button:hover{
-    -fx-text-fill: white;
-    -fx-background-color: #7732BC;
-    -fx-font-weight: bold;
+    -fx-background-color: #E1CDF4;
+}
+.button:pressed{
+    -fx-background-color: #C198EA;
 }
 .text-field {
     -fx-background-color: #ffffff;
@@ -31,6 +37,7 @@
     -fx-border-color: #9659D3;
     -fx-border-width: 2px;
     -fx-padding: 0 10 0 10px;
+    -fx-font-size: 16px;
 }
 .web-view-hbox{
     -fx-background-color: white;
@@ -41,6 +48,7 @@
     -fx-border-width: 2px;
 }
 .combo-box {
+    -fx-font-size: 16px;
     -fx-background-color: #fff;
     -fx-background-radius: 15;
     -fx-border-radius: 15px;

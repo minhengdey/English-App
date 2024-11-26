@@ -48,6 +48,9 @@ public class DictionaryScreenController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Danh sach tu dien");
+        System.out.println(wordSuggestionsEng.get().size());
+        System.out.println(wordSuggestionsViet.get().size());
     }
 
     private List<String> loadWordSuggestions(String language) throws IOException {

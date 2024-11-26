@@ -162,21 +162,21 @@ public class MainScreen {
         };
     }
 
-    private EventHandler<ActionEvent> logoutButtonClickedEventHandler()
-    {
+    private EventHandler<ActionEvent> logoutButtonClickedEventHandler() {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Xác nhận đăng xuất");
-                alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất không?");
-                alert.setContentText("Nhấn OK để đăng xuất, hoặc Cancel để hủy.");
+                alert.setTitle("Logout Confirmation");
+                alert.setHeaderText("Are you sure you want to log out?");
+                alert.setContentText("Click OK to log out, or Cancel to cancel.");
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) changeToLoginScreen();
             }
         };
     }
+
 
     public void changeToListTopicPane(){
         mainController.getTopicScreenController().refreshListTopicTitlesList();
@@ -246,13 +246,10 @@ public class MainScreen {
                 }
                 loginStage.setScene(scene);
                 loginStage.setResizable(false);
-                //System.out.println (TokenManager.getInstance().getToken());
                 TokenManager.getInstance().clearToken();
                 loginStage.show();
                 currentStage.close();
-                //System.out.println (TokenManager.getInstance().getToken());
             }
-            else System.out.println ("Có lỗi xảy ra");
         }
         catch (Exception e)
         {
