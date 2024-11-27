@@ -69,3 +69,15 @@
 .hbox-bar{
     -fx-spacing: 30px;
 }
+
+.context-menu {
+    -fx-background-color: #fff;
+}
+.context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}
+

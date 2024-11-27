@@ -91,3 +91,14 @@
     -fx-font-size: 30px;
     -fx-font-weight: bold;
 }
+
+.context-menu {
+    -fx-background-color: #fff;
+}
+.context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}

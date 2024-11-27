@@ -52,3 +52,11 @@
 .keep-learning-image{
     -fx-padding: 0 0 0 0;
 }
+.context-menu .menu-item:focused{
+    -fx-background-color: #E1CDF4;
+}
+.menu-item:focused .label {
+    -fx-text-fill: #1F003D;
+}
+
+
