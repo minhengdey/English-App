@@ -12,85 +12,106 @@
 
 <VBox fx:id="root" alignment="CENTER" prefHeight="600.0" prefWidth="760.0" spacing="20" styleClass="root-vbox" stylesheets="@WordCombineGameStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="promptText" styleClass="title" text="Rearrange the words" />
-      <HBox fx:id="lettersBox" alignment="CENTER" spacing="10">
+      <HBox prefHeight="26.0" prefWidth="659.0" styleClass="top-bar">
          <children>
-            <StackPane styleClass="empty-letter-pane">
+            <VBox alignment="CENTER" styleClass="corner-vbox">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                  <Label styleClass="custom-label" text="WORD COUNT" />
+                  <Label fx:id="wordCountLabel" prefHeight="11.0" prefWidth="123.0" styleClass="topic-label" text="0" />
+               </children>
+            </VBox>
+            <StackPane prefHeight="46.0" prefWidth="342.0">
+               <children>
+                  <Label fx:id="promptText" prefHeight="46.0" prefWidth="242.0" styleClass="title" text="Rearrange the words" textAlignment="CENTER" />
                </children>
             </StackPane>
-            <StackPane styleClass="empty-letter-pane">
+            <VBox alignment="CENTER" styleClass="corner-vbox">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                  <Label styleClass="custom-label" text="TOPIC" />
+                  <Label fx:id="topicHintLabel" prefHeight="42.0" prefWidth="128.0" styleClass="topic-label" wrapText="true" />
                </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
-               </children>
-            </StackPane>
-         </children></HBox>
-      <Separator prefHeight="10.0" prefWidth="623.0" />
-      <HBox fx:id="emptySlotsBox" alignment="CENTER" spacing="10">
+            </VBox>
+         </children>
+      </HBox>
+      <VBox prefWidth="659.0" styleClass="word-vbox">
          <children>
-            <StackPane styleClass="empty-letter-pane">
+            <HBox fx:id="lettersBox" alignment="CENTER" prefWidth="659.0" spacing="10">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-            <StackPane styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-            <StackPane prefWidth="30.0" styleClass="empty-letter-pane">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
-               </children>
-            </StackPane>
-         </children></HBox>
-      <Text fx:id="resultText" styleClass="result-text" text="Chúc mừng, bạn đã hoàn thành" />
-      <StackPane prefHeight="333.0" prefWidth="660.0" VBox.vgrow="ALWAYS">
-         <children>
-            <HBox prefHeight="281.0" prefWidth="660.0" styleClass="vbox-web-view">
-               <children>
-                  <WebView fx:id="inforOutput" prefHeight="200.0" prefWidth="200.0" styleClass="vbox-web-view" HBox.hgrow="ALWAYS" />
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A" />
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
-            <Label fx:id="topicHintLabel" prefHeight="162.0" prefWidth="660.0" styleClass="topic-label" text="Con vật" wrapText="true" StackPane.alignment="CENTER" />
+            <Separator prefHeight="10.0" prefWidth="623.0" />
+            <HBox fx:id="emptySlotsBox" alignment="CENTER" prefWidth="659.0" spacing="10">
+               <children>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+                  <StackPane styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefWidth="30.0" styleClass="empty-letter-pane">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="_" />
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
          </children>
-      </StackPane>
+      </VBox>
+      <Label fx:id="resultText" styleClass="result-text" text="Chúc mừng, bạn đã hoàn thành" />
+      <HBox prefHeight="139.0" prefWidth="659.0" styleClass="vbox-web-view" VBox.vgrow="ALWAYS">
+         <children>
+            <WebView fx:id="inforOutput" prefHeight="200.0" prefWidth="200.0" styleClass="vbox-web-view" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="899.0" spacing="20.0">
          <children>
             <Button fx:id="showAnswerButton" mnemonicParsing="false" text="Show" />

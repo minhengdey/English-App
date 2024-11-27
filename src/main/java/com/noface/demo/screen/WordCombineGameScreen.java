@@ -38,7 +38,7 @@ public class WordCombineGameScreen {
     @FXML
     private HBox emptySlotsBox;
     @FXML
-    private Text resultText;
+    private Label resultText;
     @FXML
     private Button nextButton;
     @FXML
@@ -52,6 +52,8 @@ public class WordCombineGameScreen {
     private Button showAnswerButton;
     @FXML
     private Label topicHintLabel;
+    @FXML
+    private Label wordCountLabel;
 
     private ExecutorService executorService;
 
@@ -69,7 +71,6 @@ public class WordCombineGameScreen {
     }
     public void showCurrentWordInfo() throws Exception {
         String prompt = shuffledWordList.get(currentWordIndex).getKey();
-        topicHintLabel.setVisible(false);
 
 
 
@@ -113,6 +114,10 @@ public class WordCombineGameScreen {
         Collections.shuffle(shuffledWordList);
 
         nextButton.setOnAction(e -> {
+            makeDisappear(resultText, true);
+            makeDisappear(showAnswerButton, false);
+            makeDisappear(checkButton, false);
+
             currentWordIndex = (currentWordIndex + 1) % shuffledWordList.size();
             initWord();
         });
@@ -141,6 +146,9 @@ public class WordCombineGameScreen {
         showAnswerButton.setOnAction(e -> {
             try {
                 showCurrentWordInfo();
+                makeDisappear(resultText, true);
+                makeDisappear(showAnswerButton, true);
+                makeDisappear(checkButton, true);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -150,7 +158,6 @@ public class WordCombineGameScreen {
 
     private void initWord() {
         if (currentWordIndex < words.get().size()) {
-            topicHintLabel.setVisible(true);
             letterPanes.clear();
             emptyPanes.clear();
             inforOutput.getEngine().loadContent("");
@@ -255,7 +262,8 @@ public class WordCombineGameScreen {
             }
 
             resultText.setText("");
-            checkButton.setDisable(false);
+            makeDisappear(checkButton, false);
+            makeDisappear(showAnswerButton, false);
         }
     }
 
@@ -282,16 +290,21 @@ public class WordCombineGameScreen {
         String correctWord = shuffledWordList.get(currentWordIndex).getKey();
         System.out.println(userInput + " " + correctWord);
         if (userInput.toString().equals(correctWord)) {
+            makeDisappear(resultText, false);
+            resultText.setStyle("-fx-text-fill: #22af13");
             resultText.setText("Congratulations, you have unscrambled the word correctly!");
-            resultText.setStyle("-fx-text-fill: #1F003D");
+            makeDisappear(checkButton, true);
+            makeDisappear(showAnswerButton, true);
+            wordCountLabel.setText(String.valueOf(Integer.parseInt(wordCountLabel.getText()) + 1));
             try {
                 showCurrentWordInfo();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            resultText.setText("The word is not correct, please try again!");
+            makeDisappear(resultText, false);
             resultText.setStyle("-fx-text-fill: red;");
+            resultText.setText("The word is not correct, please try again!");
             restoreDraggedLetters();
         }
 
@@ -300,7 +313,16 @@ public class WordCombineGameScreen {
     public void refresh(){
         Collections.shuffle(shuffledWordList);
         currentWordIndex = 0;
+        wordCountLabel.setText("0");
+        makeDisappear(resultText, true);
+        makeDisappear(showAnswerButton, false);
+        makeDisappear(checkButton, false);
+        makeDisappear(nextButton, false);
         initWord();
+    }
+    public void makeDisappear(Node node, boolean b){
+        node.setVisible(!b);
+        node.setManaged(!b);
     }
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;

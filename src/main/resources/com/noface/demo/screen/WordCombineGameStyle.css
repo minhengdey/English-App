@@ -1,5 +1,5 @@
 .root-vbox{
-    -fx-padding: 10 50 10 50;
+    -fx-padding: 30 50 10 50;
     -fx-background-color: #F5EBFF;
     -fx-spacing: 5px;
     -fx-alignment: top-center;
@@ -14,6 +14,12 @@
     -fx-border-radius: 15px;
     -fx-background-radius: 15px;
     -fx-font-weight: bold;
+}
+.empty-letter-pane:hover{
+    -fx-background-color: #E5E5FF;
+}
+.empty-letter-pane:pressed{
+    -fx-background-color: #B8B9CA;
 }
 .letter-pane{
     -fx-font-size: 30px;
@@ -47,7 +53,7 @@
 }
 
 .result-text{
-    -fx-text-fill: #561696;
+    /*-fx-text-fill: #561696;*/
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
@@ -95,11 +101,9 @@
 }
 
 .topic-label{
-    -fx-pref-height: 10000;
-    -fx-pref-width: 10000;
-    -fx-wrap-text: true;
     -fx-alignment: center;
-    -fx-font-size: 30px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
     -fx-background-color: white;
     -fx-border-color: #9659D3;
     -fx-background-radius: 30;
@@ -108,7 +112,25 @@
     -fx-border-width: 2px;
 }
 .title{
+    -fx-font-size: 50px;
     -fx-padding: 10px;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+.top-bar{
+    -fx-alignment: center;
+}
+.corner-vbox{
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+.corner-vbox .custom-label{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+.word-vbox{
+    -fx-spacing: 5px;
+    -fx-alignment: center;
 }
