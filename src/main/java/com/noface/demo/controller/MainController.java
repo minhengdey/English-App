@@ -46,6 +46,11 @@ public class MainController {
         setMainScreenForSubScreen(mainScreen);
         mainScreen.changeToListTopicPane();
     }
+    public void refresh(){
+        wordCombineGameController.getScreen().refresh();
+        wordListenGameController.getScreen().refresh();
+        translateScreenController.getScreen().refresh();
+    }
 
     private void setMainScreenForSubScreen(MainScreen mainScreen) {
         topicScreenController.setMainScreen().setMainScreen(mainScreen);

@@ -260,4 +260,8 @@ public class MainScreen {
     public void setLoginScreen(LoginScreen loginScreen) {
         this.loginScreen = loginScreen;
     }
+
+    public void refresh() {
+        mainController.refresh();
+    }
 }

@@ -134,4 +134,7 @@ public class WordCombineGameController {
     public ListProperty<Pair<String, String>> wordsProperty() {
         return words;
     }
+
+    public void refresh() {
+    }
 }

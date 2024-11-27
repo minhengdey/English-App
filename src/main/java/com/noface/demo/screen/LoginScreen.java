@@ -99,6 +99,7 @@ public class LoginScreen {
             Stage stage = (Stage) ((Node) this.getRoot()).getScene().getWindow();
             stage.setResizable(true);
             stage.setTitle("Homepage");
+            mainScreen.refresh();
             mainScreen.changeToListTopicPane();
             mainScreen.setLoginScreen(this);
 

@@ -135,4 +135,9 @@ public class TranslateScreen implements Initializable {
         });
 
     }
+
+    public void refresh(){
+        inputTextArea.setText("");
+        outputTextArea.setText("");
+    }
 }

@@ -95,13 +95,15 @@
 }
 
 .topic-label{
+    -fx-pref-height: 10000;
+    -fx-pref-width: 10000;
     -fx-wrap-text: true;
     -fx-alignment: center;
-    -fx-font-size: 15px;
+    -fx-font-size: 30px;
     -fx-background-color: white;
     -fx-border-color: #9659D3;
-    -fx-background-radius: 10 30 10 30;
-    -fx-border-radius: 10 30 10 30;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30px;
     -fx-padding: 10px;
     -fx-border-width: 2px;
 }

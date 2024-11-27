@@ -5,6 +5,7 @@ import com.noface.demo.FXMain;
 import com.noface.demo.controller.WordCombineGameController;
 import com.noface.demo.controller.WordListenGameController;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -21,6 +22,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javax.swing.*;
 
 
 public class WordListenGameScreen {
@@ -151,5 +154,10 @@ public class WordListenGameScreen {
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
+    }
+
+    public void refresh() {
+        topicBox.getSelectionModel().select(0);
+        topicBox.fireEvent(new ActionEvent());
     }
 }

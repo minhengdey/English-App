@@ -297,7 +297,11 @@ public class WordCombineGameScreen {
 
     }
 
-
+    public void refresh(){
+        Collections.shuffle(shuffledWordList);
+        currentWordIndex = 0;
+        initWord();
+    }
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }

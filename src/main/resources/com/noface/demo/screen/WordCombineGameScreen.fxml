@@ -81,14 +81,14 @@
             </StackPane>
          </children></HBox>
       <Text fx:id="resultText" styleClass="result-text" text="Chúc mừng, bạn đã hoàn thành" />
-      <StackPane VBox.vgrow="ALWAYS">
+      <StackPane prefHeight="333.0" prefWidth="660.0" VBox.vgrow="ALWAYS">
          <children>
             <HBox prefHeight="281.0" prefWidth="660.0" styleClass="vbox-web-view">
                <children>
                   <WebView fx:id="inforOutput" prefHeight="200.0" prefWidth="200.0" styleClass="vbox-web-view" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <Label fx:id="topicHintLabel" prefHeight="69.0" prefWidth="175.0" styleClass="topic-label" text="Con vậtfffffffffffffffffffffffffffffffffffffffffff" wrapText="true" StackPane.alignment="TOP_RIGHT" />
+            <Label fx:id="topicHintLabel" prefHeight="162.0" prefWidth="660.0" styleClass="topic-label" text="Con vật" wrapText="true" StackPane.alignment="CENTER" />
          </children>
       </StackPane>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="899.0" spacing="20.0">
