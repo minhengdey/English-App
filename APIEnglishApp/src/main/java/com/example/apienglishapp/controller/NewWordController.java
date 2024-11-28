@@ -3,7 +3,7 @@ package com.example.apienglishapp.controller;
 import com.example.apienglishapp.dto.request.NewWordRequest;
 import com.example.apienglishapp.dto.response.NewWordResponse;
 import com.example.apienglishapp.exception.AppException;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.example.apienglishapp.service.NewWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;

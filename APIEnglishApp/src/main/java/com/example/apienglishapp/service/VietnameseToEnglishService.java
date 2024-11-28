@@ -2,7 +2,7 @@ package com.example.apienglishapp.service;
 
 import com.example.apienglishapp.entity.VietnameseToEnglishEntity;
 import com.example.apienglishapp.exception.AppException;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.example.apienglishapp.repository.VietnameseToEnglishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.example.apienglishapp.service;
 
 import com.example.apienglishapp.exception.AppException;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.example.apienglishapp.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

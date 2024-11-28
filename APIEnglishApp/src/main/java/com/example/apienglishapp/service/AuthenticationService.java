@@ -11,7 +11,7 @@ import com.example.apienglishapp.entity.InvalidatedTokenEntity;
 import com.example.apienglishapp.entity.UserEntity;
 import com.example.apienglishapp.enums.Role;
 import com.example.apienglishapp.exception.AppException;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.example.apienglishapp.repository.InvalidatedTokenRepository;
 import com.example.apienglishapp.repository.UserRepository;
 import com.nimbusds.jose.*;

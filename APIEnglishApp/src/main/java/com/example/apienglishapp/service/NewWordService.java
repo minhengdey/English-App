@@ -5,11 +5,10 @@ import com.example.apienglishapp.dto.response.NewWordResponse;
 import com.example.apienglishapp.entity.NewWordEntity;
 import com.example.apienglishapp.entity.UserEntity;
 import com.example.apienglishapp.exception.AppException;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.example.apienglishapp.mapper.NewWordMapper;
 import com.example.apienglishapp.repository.NewWordRepository;
 import com.example.apienglishapp.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

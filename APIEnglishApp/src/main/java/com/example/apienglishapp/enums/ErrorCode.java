@@ -1,4 +1,4 @@
-package com.example.apienglishapp.exception;
+package com.example.apienglishapp.enums;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

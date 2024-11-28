@@ -1,7 +1,7 @@
 package com.example.apienglishapp.configuration;
 
 import com.example.apienglishapp.dto.request.ApiResponse;
-import com.example.apienglishapp.exception.ErrorCode;
+import com.example.apienglishapp.enums.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
