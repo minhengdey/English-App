@@ -1,0 +1,233 @@
+/* Đặt nền cho AnchorPane */
+
+.anchor-pane {
+    -fx-background-color: #ffffff;
+
+}
+
+/* VBox */
+.root-vbox {
+    -fx-padding: 10, 10, 10, 10;
+    -fx-spacing: 10;
+    -fx-background-color: #E5E5FF;
+}
+.combo-box .list-cell:hover{
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+
+}
+.combo-box .list-cell{
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+}
+
+
+/* HBox */
+.top-hbox {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10px;
+    -fx-background-color: #E1CDF4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+
+}
+
+.side-choice-box {
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 10px;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
+}
+
+.side-choice-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+.side-choice-box .arrow-button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+}
+
+.side-choice-box .arrow-button:hover {
+    -fx-background-color: #E5E5FF;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 5px;
+}
+
+.name-field {
+    -fx-background-color: #F5EBFF;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 10px;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
+}
+
+.card-topic-field {
+    -fx-background-color: #F5EBFF;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 10px;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #1F003D;
+    -fx-border-width: 1;
+}
+
+.html-editor {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #C492F5;
+    -fx-border-width: 1px;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.html-editor .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.html-editor .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+.button {
+    -fx-font-size: 16px;
+    -fx-background-color: #cba4f8;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5px 10px;
+}
+
+.button:hover {
+    -fx-background-color: #876ca1;
+}
+.button:selected {
+    -fx-background-color: #1a1620;
+}
+
+/* Các nút bên trong HTMLEditor */
+.html-editor .button {
+    -fx-background-color: #fff;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+
+.html-editor .button:hover {
+    -fx-background-color: #E5E5FF;
+}
+
+.html-editor .button:pressed {
+    -fx-background-color: #1a1620;
+}
+
+/* ToggleButton bên trong HTMLEditor */
+.html-editor .toggle-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+}
+
+.html-editor .toggle-button:selected {
+    -fx-background-color: #E5E5FF;
+}
+
+.html-editor .toggle-button:hover {
+    -fx-background-color: #B8B9CA;
+}
+
+.html-editor .choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b7ebd;
+    -fx-border-radius: 10;
+    -fx-padding: 3px;
+}
+
+.html-editor .choice-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+
+.html-editor .choice-box .list-cell:selected {
+    /*-fx-background-color: #d4bee4;*/
+    -fx-text-fill: #333333;
+}
+
+.html-editor .combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9b7ebd;
+    -fx-border-radius: 10;
+    -fx-padding: 5px;
+}
+
+.html-editor .combo-box:hover {
+    -fx-border-color: #876ca1;
+}
+
+.html-editor .combo-box .arrow-button {
+    -fx-background-color: #fff;
+    -fx-background-radius: 10;
+}
+
+.html-editor .combo-box .arrow-button:hover {
+    -fx-background-color: #E5E5FF;
+}
+
+.html-editor .combo-box .list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #333333;
+}
+.html-editor .content {
+    -fx-background-color: #E1CDF4; /* Nền trắng */
+    -fx-background-radius: 15;     /* Bo tròn các góc của TextArea */
+    -fx-border-radius: 15;         /* Bo tròn viền của TextArea */
+    -fx-border-color: #9b7ebd;     /* Màu viền tím đậm */
+    -fx-border-width: 1px;         /* Độ dày viền */
+    -fx-padding: 10px;             /* Khoảng cách giữa nội dung và viền */
+}
+
+.html-editor .context-menu {
+    -fx-background-color: #fff;
+}
+.html-editor .context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.html-editor .context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}
+
+
+.html-editor .combo-box .list-cell:selected {
+    /*-fx-background-color: #d4bee4;*/
+    -fx-text-fill: #333333;
+    -fx-background-color: #fff;
+}
+.html-editor .combo-box .list-cell:hover{
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+}
+.html-editor .tool-bar{
+
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
+    -fx-background-color: #fff;
+    -fx-border-color: #cba4f8 ;
+
+}
+.html-editor .grid-pane {
+    -fx-hgap: 10px;  /* Khoảng cách ngang giữa các cột */
+    -fx-vgap: 10px;  /* Khoảng cách dọc giữa các hàng */
+}

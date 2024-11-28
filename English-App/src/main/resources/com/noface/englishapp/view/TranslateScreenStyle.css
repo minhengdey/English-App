@@ -1,0 +1,97 @@
+.root{
+    -fx-background-color: #F5EBFF;
+    -fx-padding: 60;
+}
+.vbox{
+    -fx-spacing: 20px;
+}
+.hbox{
+    -fx-spacing: 50px;
+    -fx-padding: 0;
+}
+.text-area{
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+    -fx-background-color: white;
+}
+.text-area .content {
+    -fx-padding: 10px;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.text-area:selected{
+    -fx-border-color: transparent;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #9b7ebd;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 3px;
+}
+
+.list-cell:selected {
+    -fx-text-fill: #333333;
+    -fx-background-color: #fff;
+}
+
+.list-cell:hover {
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+}
+
+.button{
+    -fx-background-radius: 30px;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: F5EBFF;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-weight: bold;
+}
+
+.list-cell:hover {
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+}
+.scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+

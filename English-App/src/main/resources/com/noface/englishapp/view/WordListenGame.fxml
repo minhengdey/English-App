@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="754.0" stylesheets="@WordListenGameScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <VBox layoutX="127.0" layoutY="49.0" styleClass="root-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <SplitPane dividerPositions="0.3192771084337349" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+               <items>
+                  <VBox prefHeight="229.0" prefWidth="652.0" styleClass="small-vbox">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="652.0" styleClass="hbox-2">
+                           <children>
+                              <Label prefHeight="45.0" prefWidth="139.0" styleClass="status-label" text="Input " textAlignment="CENTER" />
+                              <StackPane HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Label prefHeight="17.0" prefWidth="335.0" styleClass="game-title" text="Hear and Guess" />
+                                 </children>
+                              </StackPane>
+                              <HBox prefHeight="578.0" prefWidth="169.0" styleClass="topic-selected-hbox">
+                                 <children>
+                                    <Label text="Topic:" />
+                                      <ComboBox fx:id="topicBox" prefHeight="29.0" prefWidth="122.0" promptText="Gia đình" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                          <TextArea fx:id="inputTextArea" prefHeight="187.0" prefWidth="652.0" styleClass="input-text-area" wrapText="true" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox styleClass="small-vbox">
+                     <children>
+                        <HBox styleClass="mid-bottom-bar" />
+                        <HBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="248.0" prefWidth="0.0" styleClass="button-vbox">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="72.0" styleClass="result-label" text="Result:" />
+                                      <Button fx:id="pronunciation" alignment="CENTER" mnemonicParsing="false" onAction="#pronunciationButtonClick" prefHeight="25.0" prefWidth="103.0">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/volume.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="checkAns" mnemonicParsing="false" onAction="#checkSpeakAndWriteButtonClick">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/check.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="displayAnswer" mnemonicParsing="false" onAction="#displayAnswer">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/show.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                      <Button fx:id="nextWord" mnemonicParsing="false" onAction="#clearForNextWord">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@login_image/next.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                      <TextArea fx:id="outputTextArea" editable="false" prefHeight="134.0" prefWidth="500.0" styleClass="result-text-area" VBox.vgrow="ALWAYS" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

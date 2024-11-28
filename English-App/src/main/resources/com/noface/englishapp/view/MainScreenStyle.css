@@ -1,0 +1,78 @@
+.node{
+    -fx-background-color: #ffffff;
+    -fx-alignment: center;
+
+}
+.left-side-vbox{
+    -fx-max-width: 70px;
+    -fx-min-width: 70px;
+    -fx-border-color: white;
+    -fx-border-width: 4 4 4 0;
+    -fx-background-color: #E5E5FF;
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-radius: 0 20 20 0;
+    -fx-padding:  20 10 10 10;
+    -fx-alignment: top center;
+    -fx-spacing: 20;
+}
+.left-side-vbox .button{
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 0;
+    -fx-text-fill: transparent;
+}
+
+.left-side-vbox:hover{
+    -fx-max-width: 200px;
+    -fx-min-width: 200px;
+    -fx-border-color: white;
+    -fx-border-width: 4 4 4 0;
+    -fx-background-color: #E5E5FF;
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-radius: 0 20 20 0;
+    -fx-padding:  20 10 10 10;
+    -fx-alignment: top center;
+    -fx-spacing: 20;
+}
+.left-side-vbox .button-vbox{
+    -fx-alignment: left;
+    -fx-spacing: 20;
+    -fx-padding: 0 0 0 15;
+}
+
+.left-side-vbox:hover .button{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 16;
+}
+.left-side-vbox:hover .button:hover{
+    -fx-border-width:  0 0 0 4;
+    -fx-border-color: #9659D3;
+    -fx-border-insets: 0 0 0 -10;
+}
+
+
+/*.left-side-vbox:hover .keep-learning-image{*/
+/*    -fx-padding: 0 0 0 0;*/
+/*}*/
+
+
+
+
+
+
+
+
+.context-menu .menu-item:focused{
+    -fx-background-color: #E1CDF4;
+}
+.menu-item:focused .label {
+    -fx-text-fill: #1F003D;
+}
+.custom-image-view {
+    -fx-fit-width: 100%;  /* Make width 100% of the parent */
+    -fx-fit-height: 100%; /* Make height 100% of the parent */
+    -fx-preserve-ratio: true;  /* Optional: maintain the aspect ratio */
+    -fx-background-size: contain; /* Ensures the image fits inside its container */
+}
+

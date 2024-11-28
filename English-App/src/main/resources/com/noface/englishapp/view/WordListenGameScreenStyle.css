@@ -1,0 +1,206 @@
+.root-vbox {
+    -fx-padding: 50;
+    -fx-spacing: 10;
+    -fx-alignment: center top;
+    -fx-background-color: #F5EBFF;
+}
+
+.button {
+    -fx-font-size: 0px;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-min-width: 50;
+    -fx-wrap-text: true;
+    -fx-text-fill: transparent;
+    -fx-background-radius: 20;
+    -fx-background-color: #E5E5FF;
+    -fx-border-color: #9659D3;
+    -fx-border-radius: 20;
+    -fx-border-width: 2px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #E1CDF4;
+}
+
+.button:pressed {
+    -fx-background-color: #C198EA;
+}
+
+.mid-bottom-bar {
+    -fx-alignment: center;
+    -fx-spacing: 20px
+}
+
+.hbox-1 {
+    -fx-spacing: 20px;
+}
+
+.hbox-2 {
+    -fx-alignment: center;
+}
+
+.topic-selected-hbox {
+    -fx-alignment: center;
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2;
+}
+
+.combo-box {
+    -fx-alignment: left;
+    -fx-text-alignment: left;
+    -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 0 0 0 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+}
+
+.combo-box > .list-cell {
+    -fx-alignment: left;
+    -fx-text-alignment: left;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.combo-box .arrow-button .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0 0 0 0, 0;
+    -fx-padding: 0em 0em 0em 0em;
+    -fx-shape: null;
+}
+
+.small-vbox {
+    -fx-spacing: 5;
+    -fx-alignment: center top;
+}
+
+.split-pane {
+    -fx-background-color: #F5EBFF;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: #C492F5;
+    -fx-border-width: 1px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
+}
+
+
+.text-area {
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+    -fx-background-color: white;
+}
+
+.input-text-area {
+    -fx-border-color: #40406D;
+    -fx-border-width: 2px;
+}
+
+.result-text-area {
+    -fx-border-color: #EB5B00;
+    -fx-border-width: 2px;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+}
+
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+.text-area:selected {
+    -fx-border-color: transparent;
+}
+
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.button-vbox {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+    -fx-padding: 0 10 0 10;
+}
+
+.status-label {
+    -fx-wrap-text: false;
+    -fx-alignment: center;
+    -fx-font-size: 15;
+    -fx-padding: 10 10 10 10;
+    -fx-text-alignment: center;
+    -fx-spacing: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+    -fx-border-radius: 15;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+
+.game-title {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}
+
+.result-label {
+    -fx-text-fill: #1F003D;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-padding: 20 0 20 0;
+}
+
+.list-cell:selected {
+    -fx-text-fill: #333333;
+    -fx-background-color: #fff;
+}
+
+.list-cell:hover {
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+}
+.scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+ .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}

@@ -1,0 +1,11 @@
+shop;/ʃɔp/;cửa tiệm
+aisle;/ail/;quầy hàng
+trolley;/'trɔli/;xe đẩy mua sắm
+counter;/'kauntə/;quầy tính tiền
+price;/prais/;giá cả
+queue;/kju:/;xếp hàng
+brand;/brænd/;thương hiệu
+complaint;/kəm'pleint/;phàn nàn
+order;/'ɔ:də/;đặt hàng
+sell;/sel/;bán
+buy;/bai/;mua

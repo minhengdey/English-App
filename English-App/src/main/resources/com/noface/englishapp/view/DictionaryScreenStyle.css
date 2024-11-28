@@ -1,0 +1,103 @@
+.root-vbox{
+    -fx-padding: 50 70 50 70;
+    -fx-spacing: 20px;
+    -fx-background-color: #F5EBFF;
+}
+.top-bar{
+    -fx-spacing: 10px;
+    -fx-padding: 0;
+}
+
+.button{
+    -fx-font-size: 0px;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-min-width: 50;
+    -fx-wrap-text: true;
+    -fx-text-fill: transparent;
+    -fx-background-radius: 20;
+    -fx-background-color: #E5E5FF;
+    -fx-border-color: #9659D3;
+    -fx-border-radius: 20;
+    -fx-border-width: 2px;
+}
+.button:hover{
+    -fx-background-color: #E1CDF4;
+}
+.button:pressed{
+    -fx-background-color: #C198EA;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+    -fx-padding: 0 10 0 10px;
+    -fx-font-size: 16px;
+}
+.web-view-hbox{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.combo-box {
+    -fx-font-size: 16px;
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15px;
+    -fx-padding: 0 0 0 0;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2;
+}
+.combo-box>.list-cell {
+    -fx-alignment: center;
+}
+.combo-box .arrow-button
+{
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+.combo-box .arrow-button .arrow
+{
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0 0 0 0, 0;
+    -fx-padding: 0em 0em 0em 0em; /* 3 3.75 3 3.75 */
+    -fx-shape: null;
+}
+.text-area:selected{
+    -fx-border-color: transparent;
+}
+.vbox-web-view{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.vbox-web-view .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.vbox-web-view .scroll-bar:horizontal {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}

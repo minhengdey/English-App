@@ -1,0 +1,10 @@
+dry;/drai/;hanh khô
+humid;/'hju:mid/;ẩm
+sunny;/'sʌni/;nắng
+cold;/kould/;lạnh
+warm;/wɔ:m/;ấm áp
+drizzle;/'drizl/;cơn mưa phùn
+flood;/flood/;lũ lụt
+hail;/heil/;mưa đá
+gale;/geil/;gió giật
+rain;/rein/;mưa

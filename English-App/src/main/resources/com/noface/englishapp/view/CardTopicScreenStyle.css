@@ -1,0 +1,179 @@
+
+.split-pane{
+    -fx-background-color: #E5E5FF;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: #C492F5; /* Màu nền của thanh phân tách */
+    -fx-border-width: 1px; /* Độ dày viền cho thanh phân tách */
+    -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
+}
+
+.card-list-button{
+    -fx-pref-height: 30px;
+    -fx-pref-width: 70px;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.button:pressed{
+    -fx-background-color: #561696;
+    -fx-text-fill: #F5EBFF;
+}
+.button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #7732BC;
+    -fx-font-weight: bold;
+}
+
+.nobackground-button{
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-font-family: "Work Sans SemiBold";
+    -fx-padding: 0px;
+}
+.custom-hbox-2{
+    -fx-pref-height: 40px;
+    -fx-spacing: 10px;
+}
+/* VBox */
+.custom-vbox {
+    -fx-padding: 7;
+    -fx-spacing: 5px;
+}
+.combo-box .list-cell:hover{
+    -fx-text-fill: #333333;
+    -fx-background-color: #cba4f8;
+
+}
+.combo-box .list-cell{
+    -fx-text-fill: #333333;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+}
+
+
+/* HBox */
+.custom-hbox {
+    -fx-alignment: center;
+    -fx-spacing: 5;
+    -fx-background-radius: 20;
+    -fx-background-color: #605678;
+    -fx-padding: 10;
+}
+
+/* ComboBox */
+#cardSideChoiceBox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-padding: 5px;
+    -fx-border-color: #624b6f;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-padding: 5px;
+}
+
+.table-view{
+    -fx-border-color: #C492F5;
+    -fx-border-radius: 20px;
+    -fx-border-width: 1px;
+    -fx-background-color: #E1CDF4;
+    -fx-background-radius: 20px;
+    -fx-padding: 15 10 10 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+
+.table-view .column-header {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F5EBFF;
+    -fx-background-color: #9659D3  ;
+}
+.table-view .column-header-background {
+    -fx-background-color: #9659D3;   ;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #F5EBFF;
+}
+
+.table-view .table-row-cell{
+    -fx-background-color: #F5EBFF;
+}
+.table-view .table-cell {
+    -fx-border-color: #C492F5;  /* Màu viền */
+    -fx-border-width: 0 1 1 0;    /* Độ dày viền */
+    -fx-border-style: solid;  /* Kiểu viền (solid, dotted, dashed, etc.) */
+    -fx-padding: 5;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: #C492F5;
+    -fx-text-fill: #F5EBFF;
+}
+.table-view .table-row-cell:cell-selection{
+    -fx-background-color: #C492F5;
+    -fx-text-fill: #F5EBFF;
+}
+
+
+.table-view .table-cell:empty {
+    -fx-border-color: transparent;
+}
+
+.table-view .scroll-bar {
+    -fx-background-color: transparent;
+    -fx-border-width: 0.3px;
+}
+
+.table-view .scroll-bar .track {
+    -fx-background-color: transparent; /* Màu nền track */
+    -fx-background-radius: 10px;  /* Bo cong góc track */
+}
+
+/* Phần kéo (thumb) của thanh cuộn */
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 10px;  /* Bo cong góc thumb */
+}
+
+.search-hbox{
+    -fx-spacing: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+    -fx-background-color: #F5EBFF;
+    -fx-background-radius: 25;      /* Bo tròn các góc của HBox */
+    -fx-border-radius: 15;
+    -fx-border-color: #C492F5;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.search-hbox .button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+.search-hbox .button{
+    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
+}
+.search-hbox .button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+
+

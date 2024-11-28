@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="754.0" styleClass="root-vbox" stylesheets="@ProfileScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="title" text="PERSONAL DETAIL" />
+      <VBox prefHeight="370.0" prefWidth="434.0" spacing="20.0" styleClass="big-vbox" VBox.vgrow="NEVER">
+         <children>
+            <VBox prefHeight="110.0" prefWidth="164.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text" text="FULL NAME:" />
+                  <TextField fx:id="name" editable="false" styleClass="text-field" />
+               </children>
+            </VBox>
+            <VBox prefHeight="64.0" prefWidth="498.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text" text="PHONE:" />
+                  <TextField fx:id="phone" editable="false" styleClass="text-field" />
+               </children>
+            </VBox>
+            <VBox prefHeight="106.0" prefWidth="164.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text" text="GENDER:" />
+                  <TextField fx:id="gender" editable="false" prefHeight="26.0" prefWidth="382.0" styleClass="text-field" />
+               </children>
+            </VBox>
+            <VBox prefHeight="240.0" prefWidth="498.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text" text="EMAIL:" />
+                  <TextField fx:id="email" editable="false" styleClass="text-field" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <Label styleClass="text" text="DATE OF BIRTH:" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="day" editable="false" prefWidth="156.0" styleClass="dob" />
+                        <TextField fx:id="month" editable="false" prefWidth="152.0" styleClass="dob" />
+                        <TextField fx:id="year" editable="false" prefHeight="46.0" prefWidth="156.0" styleClass="dob" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Button fx:id="editButton" mnemonicParsing="false" prefHeight="69.0" prefWidth="79.0" styleClass="button_edit" text="Edit" VBox.vgrow="NEVER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</VBox>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="root" stylesheets="@SignupScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="-1.0" layoutY="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="410.0" styleClass="left-pane">
+               <children>
+                  <VBox prefHeight="74.0" prefWidth="316.0" styleClass="vbox">
+                     <children>
+                        <Text fill="#fafafa" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello," wrappingWidth="205.33668518066406">
+                           <font>
+                              <Font name="Times New Roman Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="We are glad to see you:)" wrappingWidth="327.73670959472656">
+                           <font>
+                              <Font name="Times New Roman Bold" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <ImageView id="image_signup" fitHeight="366.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true" styleClass="button_signup">
+                     <image>
+                        <Image url="@login_image/rb_4782.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox prefHeight="618.0" prefWidth="584.0" styleClass="right-pane" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="title" text="Create account" />
+                  <TextField id="input_text" fx:id="name" prefHeight="35.0" prefWidth="218.0" promptText="Name">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <TextField id="input_text" fx:id="username" prefHeight="35.0" prefWidth="218.0" promptText="Username" stylesheets="@MainScreenStyle.css">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <PasswordField id="input_text" fx:id="password" prefHeight="35.0" prefWidth="218.0" promptText="Password" styleClass="text_input">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </PasswordField>
+                  <PasswordField id="input_text" fx:id="confirmPassword" prefHeight="35.0" prefWidth="218.0" promptText="Confirm password">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </PasswordField>
+                  <VBox prefHeight="26.0" prefWidth="284.0" spacing="5.0">
+                     <children>
+                        <HBox prefHeight="35.0" prefWidth="218.0" spacing="5.0" styleClass="gender-hbox">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="106.0" text="Dob:" textFill="#878787" />
+                              <TextField id="input_text" fx:id="day" promptText="Day" styleClass="text_input">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </TextField>
+                              <TextField id="input_text" fx:id="month" promptText="Month" styleClass="text_input" />
+                              <TextField id="input_text" fx:id="year" promptText="Year" styleClass="text_input" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <TextField id="input_text" fx:id="email" prefHeight="35.0" prefWidth="218.0" promptText="Email">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <HBox prefHeight="27.0" prefWidth="218.0" spacing="5.0" styleClass="gender-hbox">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="66.0" text="Gender:" />
+                        <ChoiceBox fx:id="gender" prefHeight="1.0" prefWidth="222.0" styleClass="combo-box" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <TextField id="input_text" fx:id="phone" prefHeight="35.0" prefWidth="218.0" promptText="Phone number">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+                  <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="89.0" text="Sign up" textAlignment="CENTER" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

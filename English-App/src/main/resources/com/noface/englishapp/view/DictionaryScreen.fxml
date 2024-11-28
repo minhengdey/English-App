@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="600.0" prefWidth="754.0" stylesheets="@DictionaryScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="93.0" layoutY="-42.0" styleClass="root-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="7.0" prefWidth="5000.0" styleClass="top-bar">
+               <children>
+                  <TextField fx:id="inputTextArea" prefHeight="52.0" prefWidth="241.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="translateButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login_image/magnifier.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ComboBox fx:id="comboBox" prefHeight="49.0" prefWidth="111.0" promptText="Vietnamese" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="voiceBox" prefHeight="80.0" prefWidth="62.0" />
+                  <Button fx:id="audioButton" mnemonicParsing="false" onAction="#audioButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Audio">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@login_image/volume.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+               </children>
+            </HBox>
+            <VBox styleClass="vbox-web-view" VBox.vgrow="ALWAYS">
+               <children>
+                  <WebView fx:id="outputWebView" prefHeight="410.0" prefWidth="600.0" styleClass="vbox-web-view" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

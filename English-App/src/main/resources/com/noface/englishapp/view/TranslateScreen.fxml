@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="760.0" styleClass="root" stylesheets="@TranslateScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutX="81.0" layoutY="132.0" styleClass="vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ComboBox fx:id="comboBox" prefHeight="33.0" prefWidth="234.0" />
+            <HBox alignment="CENTER" styleClass="hbox" VBox.vgrow="ALWAYS">
+               <children>
+                  <TextArea id="input_area" fx:id="inputTextArea" prefHeight="332.0" prefWidth="289.0" style="-fx-background-color: white;" styleClass="text-area" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextArea>
+                  <TextArea id="output_area" fx:id="outputTextArea" editable="false" prefHeight="332.0" prefWidth="289.0" styleClass="text-area" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </HBox>
+            <Button id="trans_button" fx:id="translateButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="103.0" text="Translate" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

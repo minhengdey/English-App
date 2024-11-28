@@ -1,0 +1,6 @@
+company;/'kʌmpəni/;công ty
+enterprise;/'entəpraiz/;tổ chức kinh doanh, xí nghiệp, hãng
+corporation;/,kɔ:pə'reiʃn/;tập đoàn
+subsidiary;/səb'saidəns/;công ty con
+affiliate;/ə'filieit/;công ty liên kết
+partnership;/'pɑ:tnəʃip/;công ty hợp doanh

@@ -1,0 +1,17 @@
+afraid;/ə'freid/;lo sợ, sợ hãi
+angry;/'æɳgri/;tức giận, giận dữ
+confused;/kən'fju:zd/;bối rối, lúng túng
+disappointed;/ˌdɪsəˈpɔɪntɪd/;thất vọng
+excited;/ik'saitid/;hứng thú, hào hứng
+fear;/fiə/;nỗi sợ hãi
+guilty;/ˈgɪlti/;cảm thấy tội lỗi
+happy;/'hæpi/;vui vẻ, hạnh phúc
+hungry;/'hʌɳgri/;đói
+lonely;/'lounli/;cô đơn
+nervous;/'nə:vəs/;lo lắng
+sad;/sæd/;buồn bã
+sick;/sik/;ốm yếu, ốm
+surprised;/sərˈpraɪzd/;ngạc nhiên
+thirsty;/'θə:sti/;khát
+tired;/'taiəd/;mệt mỏi
+worried;/ˈwɜrid/;lo lắng

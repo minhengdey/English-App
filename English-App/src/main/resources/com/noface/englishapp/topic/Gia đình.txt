@@ -1,0 +1,11 @@
+mother;/'mʌðə/;mẹ
+father;/'fɑ:ðə/;bố
+husband;/'hʌzbənd/;chồng
+wife;/waif/;vợ
+daughter;/'dɔ:tə/;con gái
+son;/sʌn/;con trai
+parent;/'peərənt/;bố mẹ
+uncle;/'ʌɳkl/;bác trai/cậu/chú
+aunt;/ɑ:nt/;bác gái/cô/dì
+mother-in-law;/'mʌðərinlɔ:/;mẹ chồng/mẹ vợ
+son-in-law;/'sʌninlɔ:/;con rể

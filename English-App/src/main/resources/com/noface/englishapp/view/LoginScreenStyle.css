@@ -1,0 +1,80 @@
+.root-control{
+    -fx-padding: 100 80 100 80;
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+    -fx-background-color: #F5EBFF;
+}
+.login-title{
+    -fx-text-alignment: center;
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+    -fx-padding: 20 0 20 0;
+}
+.text-field{
+    -fx-pref-height: 50px;
+    -fx-font-size: 15;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+    -fx-padding: 0 10 0 10;
+}
+.bottom-bar{
+    -fx-alignment: center;
+    -fx-spacing: 1px;
+    -fx-padding: 0 5 0 5;
+}
+.signup-button{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-padding: 1;
+    -fx-font-size: 13px;
+
+}
+.forgetpassword-button{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+    -fx-padding: 1;
+    -fx-font-size: 13px;
+}
+.new-user-label{
+    -fx-font-size: 15;
+}
+.login-button{
+    -fx-background-radius: 30px;
+    -fx-background-color: #9659D3;
+    -fx-text-fill: #F5EBFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+}
+.login-button:hover{
+    -fx-background-radius: 30px;
+    -fx-background-color: #561696;
+    -fx-text-fill: #F5EBFF;
+}
+.login-button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+.google-login-bar{
+    -fx-alignment: center;
+
+}
+.google-login-bar .label{
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+.google-login-bar .button{
+    -fx-background-color: transparent;
+    -fx-text-fill: transparent;
+    -fx-padding: 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 2, 3);
+    -fx-effect: brightness(1);
+
+}
+.google-login-bar .button:hover .graphic{
+    -fx-effect: brightness(0.7);
+
+}
+
+

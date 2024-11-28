@@ -1,0 +1,101 @@
+.root{
+    -fx-background-color: #F5EBFF;
+
+}
+.split-pane{
+    -fx-background-color: #F5EBFF;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: #C492F5;
+    -fx-border-width: 1px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 10 0 10 0;
+}
+.button{
+    -fx-text-fill: #F5EBFF;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+    -fx-font-weight: bold;
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+.web-view{
+    -fx-padding: 20px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #9659D3   ;
+}
+.left-vbox{
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+.text-area{
+    -fx-focus-color: transparent;
+    -fx-font-size: 16;
+    -fx-text-fill: #1F003D;
+    -fx-padding: 20 10 20 10;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: #C198EA;
+    -fx-background-color: white;
+}
+.text-area .content {
+    -fx-padding: 10px;
+}
+.text-area .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+.text-area:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.text-area .scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Track color */
+}
+
+.text-area:selected{
+    -fx-border-color: transparent;
+}
+.vbox-web-view .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.vbox-web-view .scroll-bar:horizontal {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.vbox-web-view{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 1px;
+}
+
+

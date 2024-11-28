@@ -1,0 +1,34 @@
+applaud;/ə'plɔ:d/;vỗ tay, tán thưởng
+art;/ɑ:t/;nghệ thuật
+artist;/'ɑ:tist/;nghệ sĩ
+audience;/'ɔ:djəns/;khán giả
+author;/'ɔ:θə/;tác giả
+band;/bænd/;ban nhạc
+brush;/brʌʃ/;cọ vẽ
+camera;/'kæmərə/;máy ảnh
+canvas;/'kænvəs/;tấm vải vẽ tranh sơn dầu
+choir;/'kwaiə/;dàn hợp xướng
+clap;/klæp/;vỗ tay
+collection;/kə'lekʃn/;bộ sưu tập
+composer;/kəm'pouzə/;nhà soạn nhạc
+concert;/kən'sə:t/;buổi trình diễn âm nhạc
+culture;/'kʌltʃə/;văn hóa
+design;/di'zain/;thiết kế
+drawing;/'drɔ:iɳ/;bức tranh vẽ
+exhibition;/,eksi'biʃn/;triển lãm
+illustration;/,iləs'treiʃn/;hình minh họa
+image;/'imidʤ/;bức ảnh
+inspiration;/,inspə'reiʃn/;nguồn cảm hứng
+inspire;/in'spaiə/;truyền cảm hứng
+model;/moud/;người mẫu
+movie;/'mu:vi/;bộ phim
+music;/'mju:zik/;âm nhạc
+novel;/'nɔvəl/;tiểu thuyết
+performance;/pə'fɔ:məns/;phần trình diễn, tiết mục
+photo;/'foutou/;bức ảnh
+poem;/'pouim/;bài thơ
+portrait;/'pɔ:trit/;tranh chân dung
+show;/ʃou/;buổi biểu diễn
+singer;/'siɳə/;ca sĩ
+sketch;/sketʃ/;bản thảo, bản nháp
+studio;/'stju:diou/;xưởng (vẽ, chụp ảnh, làm nhạc, làm phim…)

@@ -1,0 +1,17 @@
+attractive;/ə'træktiv/;quyến rũ, hấp dẫn
+beautiful;/'bju:təful/;xinh đẹp, đẹp
+charming;/'tʃɑ:miɳ/;quyến rũ, thu hút
+cute;/kju:t/;đáng yêu, dễ thương
+fat;/fæt/;thừa cân, béo
+feature;/'fi:tʃə/;đặc điểm, nét nổi bật
+fit;/fit/;cân đối, gọn gàng
+handsome;/'hænsəm/;đẹp trai
+height;/hait/;chiều cao
+lovely;/'lʌvli/;đáng yêu
+muscular;/'mʌskjulə/;cơ bắp, lực lưỡng
+pretty;/'priti/;xinh xắn
+short;/ʃɔ:t/;thấp
+tall;/tɔ:l/;cao
+thin;/θin/;gầy
+ugly;/'ʌgli/;xấu xí
+weight;/'weit/;cân nặng

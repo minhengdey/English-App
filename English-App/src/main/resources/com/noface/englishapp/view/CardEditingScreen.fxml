@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<VBox prefHeight="600.0" prefWidth="600.0" styleClass="root-vbox" stylesheets="@CardEditingScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="19.0" prefWidth="600.0" styleClass="top-hbox">
+         <children>
+            <ComboBox fx:id="cardSideChoiceBox" prefHeight="25.0" prefWidth="169.0" styleClass="side-choice-box" />
+            <TextField fx:id="cardNameEditor" prefHeight="47.0" prefWidth="224.0" promptText="Enter your card name" styleClass="name-field" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="cardTopicTextField" prefHeight="45.0" prefWidth="248.0" promptText="Enter your topic here" styleClass="card-topic-field" />
+         </children>
+      </HBox>
+      <HTMLEditor fx:id="contentEditor" prefHeight="600.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

@@ -1,0 +1,148 @@
+.root-vbox{
+    -fx-padding: 30 50 10 50;
+    -fx-background-color: #F5EBFF;
+    -fx-spacing: 5px;
+    -fx-alignment: top-center;
+}
+.empty-letter-pane{
+    -fx-font-size: 20px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-color: #9659D3;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+}
+.empty-letter-pane:hover{
+    -fx-background-color: #E5E5FF;
+}
+.empty-letter-pane:pressed{
+    -fx-background-color: #B8B9CA;
+}
+.letter-pane{
+    -fx-font-size: 30px;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 50px;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
+.button {
+
+}
+.button{
+    -fx-pref-width: 120px;
+    -fx-pref-height: 50px;
+    -fx-background-radius: 20;
+    -fx-background-color: #9659D3;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: "white";
+}
+.button:hover{
+    -fx-text-fill: white;
+    -fx-background-color: #561696;
+    -fx-font-weight: bold;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+    -fx-text-fill: #F5EBFF;
+}
+
+.result-text{
+    /*-fx-text-fill: #561696;*/
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+.separator{
+    -fx-background-color: #9659D3;
+    -fx-border-color: #9659D3;
+    -fx-background-radius: 20px;
+    -fx-border-color: 20px;
+    -fx-pref-height: 5px;
+}
+
+.vbox-web-view{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+.vbox-web-view .scroll-bar:vertical {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.vbox-web-view .scroll-bar:horizontal {
+    -fx-pref-width: 15px;
+    -fx-background-color: transparent;
+}
+.vbox-web-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #C492F5;
+    -fx-background-radius: 5px;
+}
+
+.web-view-hbox{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #9659D3;
+    -fx-border-width: 2px;
+}
+
+.topic-label{
+    -fx-alignment: center;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-border-color: #9659D3;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30px;
+    -fx-padding: 10px;
+    -fx-border-width: 2px;
+}
+.title{
+    -fx-font-size: 50px;
+    -fx-padding: 10px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+.top-bar{
+    -fx-alignment: center;
+}
+.corner-vbox{
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+.corner-vbox .custom-label{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+.word-vbox{
+    -fx-spacing: 5px;
+    -fx-alignment: center;
+}
+
+.context-menu {
+    -fx-background-color: #fff;
+}
+.context-menu .menu-item{
+    -fx-background-color: #fff;
+
+}
+.context-menu .menu-item:hover{
+    -fx-background-color: #fff;
+}
+

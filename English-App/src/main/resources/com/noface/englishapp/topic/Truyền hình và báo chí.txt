@@ -1,0 +1,17 @@
+advertisement;/əd'və:tismənt/;quảng cáo
+article;/'ɑ:tikl/;bài báo
+broadcast;/'brɔ:dkɑ:st/;phát sóng
+cable;/'keibl/;dây cáp, truyền hình cáp
+channel;/'tʃænl/;kênh truyền hình
+character;/'kæriktə/;nhân vật
+column;/'kɔləm/;chuyên mục
+commercial;/kə'mə:ʃl/;quảng cáo
+daily;/'deili/;hàng ngày
+editor;/'editə/;biên tập viên
+episode;/,episoud/;phần, tập (phim, chương trình)
+issue;/'isju:/;số, kỳ phát hành
+live;/liv/;truyền hình trực tiếp
+newspaper;/'nju:z,peipə/;báo giấy
+publisher;/'pʌbliʃə/;nhà xuất bản
+reporter;/ri'pɔ:tə/;phóng viên
+script;/skript/;kịch bản

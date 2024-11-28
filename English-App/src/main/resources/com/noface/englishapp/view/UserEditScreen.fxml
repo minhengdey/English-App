@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="499.0" stylesheets="@UserEditScreenStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="FULL NAME" wrappingWidth="245.048828125" />
+                  <TextField fx:id="nameTF" prefHeight="25.0" prefWidth="472.0" />
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="DATE OF BIRTH" wrappingWidth="229.921875" />
+                  <HBox prefHeight="26.0" prefWidth="472.0" spacing="40.0">
+                     <children>
+                        <TextField fx:id="dayTF" prefHeight="26.0" prefWidth="130.0" />
+                        <TextField fx:id="monthTF" prefHeight="26.0" prefWidth="130.0" />
+                        <TextField fx:id="yearTF" prefWidth="130.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="GENDER" wrappingWidth="237.3779296875" />
+                  <ChoiceBox fx:id="genderChoiceBox" prefHeight="17.0" prefWidth="150.0" styleClass="side-choice-box" />
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="PHONE" wrappingWidth="238.453125" />
+                  <TextField fx:id="phoneTF" prefHeight="25.0" prefWidth="472.0" />
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="EMAIL" wrappingWidth="180.8896484375" />
+                  <TextField fx:id="emailTF" prefHeight="25.0" prefWidth="472.0" />
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="NEW PASSWORD" wrappingWidth="210.7275390625" />
+                  <PasswordField fx:id="passwordTF" />
+               </children>
+            </VBox>
+            <VBox styleClass="vbox-bar">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="CONFIRM PASSWORD" wrappingWidth="297.8154296875" />
+                  <PasswordField fx:id="confirmPasswordTF" />
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" styleClass="hbox-bar">
+               <children>
+                  <Button fx:id="saveButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="79.0" text="Save">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Cancel">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

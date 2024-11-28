@@ -1,0 +1,53 @@
+
+.text{
+    -fx-text-fill: #030315;
+    -fx-font-weight: bold;
+}
+.dob{
+    -fx-text-alignment: center;
+}
+.button{
+    -fx-background-color: #9659D3;
+    -fx-text-fill: #F5EBFF;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 10 5 10;
+    -fx-background-radius: 20;
+}
+.button:hover{
+    -fx-background-color: #561696;
+}
+.button:pressed{
+    -fx-background-color: #1F003D;
+}
+.text-field{
+    /*-fx-font-size: 20px;*/
+    -fx-text-fill: #030315;
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20px;
+    -fx-border-width: 2;
+    -fx-border-color: #9659D3;
+    -fx-font-size: 15px;
+
+}
+.big-vbox{
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+
+}
+.title{
+    -fx-text-fill: #030315;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+.small-vbox{
+    -fx-alignment: center;
+}
+.root-vbox{
+    -fx-background-color: #F5EBFF;
+    -fx-padding: 100 160 100 160;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
