@@ -119,10 +119,6 @@ public class LoginScreen {
             double screenHeight = screenBounds.getHeight();
 
 
-            stage.setWidth(1000);
-            stage.setHeight(637);
-
-
             stage.setX((screenWidth - stage.getWidth()) / 2);
             stage.setY((screenHeight - stage.getHeight()) / 2);
 
