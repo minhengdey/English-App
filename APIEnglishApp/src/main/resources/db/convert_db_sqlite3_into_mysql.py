@@ -2,15 +2,15 @@ import sqlite3
 import mysql.connector # type: ignore
 
 # Kết nối tới SQLite
-sqlite_conn = sqlite3.connect(r'D:\English-App-MA\English-App\APIEnglishApp\src\main\resources\db\dict_hh.db')
+sqlite_conn = sqlite3.connect(r"dict_hh.db")
 sqlite_cursor = sqlite_conn.cursor()
 
 # Kết nối tới MySQL
 mysql_conn = mysql.connector.connect(
     host='localhost',
     user='root',
-    password='123456',
-    database='test'
+    password='minhanh2722004',
+    database='english_app'
 )
 mysql_cursor = mysql_conn.cursor()
 
