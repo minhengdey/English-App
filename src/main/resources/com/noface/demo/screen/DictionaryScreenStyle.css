@@ -22,7 +22,6 @@
     -fx-border-color: #9659D3;
     -fx-border-radius: 20;
     -fx-border-width: 2px;
-    -fx-font-weight: bold;
 }
 .button:hover{
     -fx-background-color: #E1CDF4;

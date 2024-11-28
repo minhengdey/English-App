@@ -3,60 +3,76 @@
     -fx-alignment: center;
 
 }
-
-
-.button_home{
-    -fx-background-color:  transparent;
-    -fx-text-alignment: left;
-}
-.button_home:hover{
-    -fx-underline: true;
-}
-
-.text_input {
-    -fx-border-color: #a3a1a1;
-    -fx-border-width: 2px 2px 2px 2px;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
-    -fx-border-style: solid;
-}
-
-
-.button_login:hover{
-    -fx-underline: true;
-}
-
-
 .left-side-vbox{
+    -fx-max-width: 100px;
+    -fx-min-width: 70px;
     -fx-border-color: white;
-    -fx-border-width: 2px;
-    -fx-background-color: #C198EA;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+    -fx-border-width: 4 4 4 0;
+    -fx-background-color: #E5E5FF;
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-radius: 0 20 20 0;
     -fx-padding:  20 10 10 10;
     -fx-alignment: top center;
     -fx-spacing: 20;
 }
-.button-hbox{
+.left-side-vbox .button{
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 0;
+    -fx-text-fill: transparent;
+}
+
+.left-side-vbox:hover{
+    -fx-max-width: 200px;
+    -fx-min-width: 200px;
+    -fx-border-color: white;
+    -fx-border-width: 4 4 4 0;
+    -fx-background-color: #E5E5FF;
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-radius: 0 20 20 0;
+    -fx-padding:  20 10 10 10;
+    -fx-alignment: top center;
+    -fx-spacing: 20;
+}
+.left-side-vbox .button-vbox{
     -fx-alignment: left;
-    -fx-padding: 0 0 0 40;
+    -fx-spacing: 20;
+    -fx-padding: 0 0 0 15;
 }
-.top-bar-hbox{
-    -fx-background-color: #9659D3;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-padding: 10;
-    -fx-alignment: center;
-    -fx-spacing: 50px
+
+.left-side-vbox:hover .button{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 16;
 }
-.keep-learning-image{
-    -fx-padding: 0 0 0 0;
+.left-side-vbox:hover .button:hover{
+    -fx-border-width:  0 0 0 4;
+    -fx-border-color: #9659D3;
+    -fx-border-insets: 0 0 0 -10;
 }
+
+
+/*.left-side-vbox:hover .keep-learning-image{*/
+/*    -fx-padding: 0 0 0 0;*/
+/*}*/
+
+
+
+
+
+
+
+
 .context-menu .menu-item:focused{
     -fx-background-color: #E1CDF4;
 }
 .menu-item:focused .label {
     -fx-text-fill: #1F003D;
 }
-
+.custom-image-view {
+    -fx-fit-width: 100%;  /* Make width 100% of the parent */
+    -fx-fit-height: 100%; /* Make height 100% of the parent */
+    -fx-preserve-ratio: true;  /* Optional: maintain the aspect ratio */
+    -fx-background-size: contain; /* Ensures the image fits inside its container */
+}
 

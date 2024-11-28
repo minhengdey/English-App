@@ -54,6 +54,8 @@ public class WordCombineGameScreen {
     private Label topicHintLabel;
     @FXML
     private Label wordCountLabel;
+    private int wordPlayed = 0;
+    private int wordCorrect = 0;
 
     private ExecutorService executorService;
 
@@ -114,6 +116,8 @@ public class WordCombineGameScreen {
         Collections.shuffle(shuffledWordList);
 
         nextButton.setOnAction(e -> {
+            wordPlayed++;
+            updateWordCountLabel();
             makeDisappear(resultText, true);
             makeDisappear(showAnswerButton, false);
             makeDisappear(checkButton, false);
@@ -295,7 +299,7 @@ public class WordCombineGameScreen {
             resultText.setText("Congratulations, you have unscrambled the word correctly!");
             makeDisappear(checkButton, true);
             makeDisappear(showAnswerButton, true);
-            wordCountLabel.setText(String.valueOf(Integer.parseInt(wordCountLabel.getText()) + 1));
+            wordCorrect++;
             try {
                 showCurrentWordInfo();
             } catch (Exception e) {
@@ -311,9 +315,11 @@ public class WordCombineGameScreen {
     }
 
     public void refresh(){
+        wordPlayed = 0;
+        wordCorrect = 0;
+        updateWordCountLabel();
         Collections.shuffle(shuffledWordList);
         currentWordIndex = 0;
-        wordCountLabel.setText("0");
         makeDisappear(resultText, true);
         makeDisappear(showAnswerButton, false);
         makeDisappear(checkButton, false);
@@ -326,5 +332,8 @@ public class WordCombineGameScreen {
     }
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
+    }
+    public void updateWordCountLabel(){
+        wordCountLabel.setText(String.format("%d/%d", wordCorrect, wordPlayed));
     }
 }

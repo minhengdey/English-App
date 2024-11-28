@@ -3,18 +3,20 @@ package com.noface.demo.screen;
 import com.noface.demo.controller.MainController;
 import com.noface.demo.resource.TokenManager;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MainScreen {
@@ -32,7 +35,11 @@ public class MainScreen {
     private Pane listTopicPane, cardLearningPane, cardTopicPane, translatePane,
             profilePane, dictionaryPane, wordCombinGamePane, wordListenGamePane,
             gameScreenPane;
+    @FXML
+    private StackPane imageContainer;
     private LoginScreen loginScreen;
+    @FXML
+    private VBox leftVBox;
 
 
 
@@ -66,12 +73,31 @@ public class MainScreen {
         loader = new FXMLLoader(this.getClass().getResource("MainScreen.fxml"));
         loader.setController(this);
         loader.load();
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("keep.png")));
+        ImageView imageView = new ImageView(image);
+        imageContainer.getChildren().add(imageView);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(50);
+        leftVBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                imageView.setFitWidth(150);
+            }
+        });
+        leftVBox.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                imageView.setFitWidth(50);
+            }
+        });
     }
 
     public <T> T getRoot(){
         return loader.getRoot();
     }
-
+    private Button currentButton;
     @FXML
     private Button dictionaryButton;
 
@@ -109,6 +135,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                resetButton(event);
                 changeToGameScreen();
             }
         };
@@ -118,6 +145,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                resetButton(event);
                 changeToDictionaryScreen();
             }
         };
@@ -137,6 +165,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                resetButton(event);
                 changeToProfilePane();
             }
         };
@@ -147,6 +176,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                resetButton(event);
                 changeToListTopicPane();
             }
         };
@@ -156,6 +186,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                resetButton(event);
                 changeToTranslatePane();
             }
         };
@@ -165,6 +196,7 @@ public class MainScreen {
         return new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                resetButton(actionEvent);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Logout Confirmation");
                 alert.setHeaderText("Are you sure you want to log out?");
@@ -263,5 +295,13 @@ public class MainScreen {
 
     public void refresh() {
         mainController.refresh();
+    }
+    public void resetButton(Event event){
+        if(currentButton != null) currentButton.setStyle("");
+        Node node = (Node) event.getSource();
+        currentButton = (Button) node;
+        node.setStyle("    -fx-border-width:  0 0 0 4;\n" +
+                "    -fx-border-color: #9659D3;\n" +
+                "    -fx-border-insets: 0 0 0 -10;");
     }
 }

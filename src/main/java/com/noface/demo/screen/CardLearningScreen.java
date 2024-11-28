@@ -32,7 +32,6 @@ import java.util.Queue;
 
 public class CardLearningScreen {
 
-    // Component list.
     @FXML
     private VBox root;
     @FXML
@@ -159,7 +158,6 @@ public class CardLearningScreen {
         });
     }
     public void startShowing(){
-        System.out.println("Start showing");
         if(cardToLearnAvailabled.get() == false){
             handleCardToLearnAvailabledStatusChange(cardToLearnAvailabled, false, false);
         }else{
@@ -172,13 +170,11 @@ public class CardLearningScreen {
         if(newValue.equals(true)){
             showAnswerButton.setVisible(false);
             doneButtonBar.setVisible(true);
-            System.out.println(frontContent.get() + " " + backContent.get());
             frontView.getEngine().loadContent(frontContent.get());
             backView.getEngine().loadContent(backContent.get());
         }else{
             showAnswerButton.setVisible(true);
             doneButtonBar.setVisible(false);
-            System.out.println(frontContent.get() + " " + backContent.get());
             frontView.getEngine().loadContent(frontContent.get());
             backView.getEngine().loadContent("");
         }

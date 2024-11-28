@@ -91,7 +91,7 @@ public class TopicScreenController {
         int status = ResourceLoader.getInstance().getCardCRUD().editCard(card,
                 card.getFrontContent(), card.getBackContent(), card.getTopic(), card.getName(), card.getDueTime());
         if(status == CardCRUD.ERROR){
-            Utilities.getInstance().showAlert("Lỗi xảy ra khi lưu", Alert.AlertType.WARNING);
+            Utilities.getInstance().showAlert("Error occured", Alert.AlertType.WARNING);
         }
     }
     public int deleteTopic(String topic){

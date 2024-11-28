@@ -17,7 +17,7 @@
             <HBox alignment="CENTER" prefHeight="7.0" prefWidth="5000.0" styleClass="top-bar">
                <children>
                   <TextField fx:id="inputTextArea" prefHeight="52.0" prefWidth="241.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="translateButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0" styleClass="search-button">
+                  <Button fx:id="translateButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
