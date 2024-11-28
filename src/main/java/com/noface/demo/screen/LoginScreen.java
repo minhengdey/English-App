@@ -102,7 +102,7 @@ public class LoginScreen {
             mainScreen.refresh();
             mainScreen.changeToListTopicPane();
             mainScreen.setLoginScreen(this);
-
+            mainScreen.changeToDictionaryScreen();
             Parent root = mainScreen.getRoot();
             Scene scene;
             if(root.getScene() == null){

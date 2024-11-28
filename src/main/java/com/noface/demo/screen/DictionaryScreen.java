@@ -292,4 +292,9 @@ public class DictionaryScreen implements Initializable {
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
+    public void refresh(){
+        outputWebView.getEngine().loadContent("");
+        inputTextArea.setText("");
+        voiceBox.getItems().clear();
+    }
 }

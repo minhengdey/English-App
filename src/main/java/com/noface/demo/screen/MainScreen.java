@@ -156,7 +156,7 @@ public class MainScreen {
         rightPane.getChildren().add(gameScreenPane);
     }
 
-    private void changeToDictionaryScreen() {
+    public void changeToDictionaryScreen() {
         rightPane.getChildren().clear();
         rightPane.getChildren().add(dictionaryPane);
     }

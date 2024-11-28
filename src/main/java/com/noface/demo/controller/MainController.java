@@ -50,6 +50,7 @@ public class MainController {
         wordCombineGameController.getScreen().refresh();
         wordListenGameController.getScreen().refresh();
         translateScreenController.getScreen().refresh();
+        dictionaryScreenController.getScreen().refresh();
     }
 
     private void setMainScreenForSubScreen(MainScreen mainScreen) {
