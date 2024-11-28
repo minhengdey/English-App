@@ -1,4 +1,4 @@
-module com.noface.demo {
+module com.noface.englishapp {
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.web;
@@ -10,9 +10,10 @@ module com.noface.demo {
     requires java.desktop;
 
 
-    opens com.noface.demo;
-    opens com.noface.demo.model;
-    opens com.noface.demo.controller;
-    opens com.noface.demo.screen;
-    opens com.noface.demo.topic;
+    opens com.noface.englishapp;
+    opens com.noface.englishapp.model;
+    opens com.noface.englishapp.controller;
+    opens com.noface.englishapp.view;
+    opens com.noface.englishapp.topic;
+    opens com.noface.englishapp.utils;
 }
